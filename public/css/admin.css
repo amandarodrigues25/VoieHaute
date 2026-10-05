@@ -1,0 +1,2263 @@
+/* =====================================================
+   VOIEHAUTE - ÁREA ADMINISTRATIVA
+===================================================== */
+
+
+/* =====================================================
+   1. CORES DO PROJETO
+===================================================== */
+
+:root {
+    --azul: #07152D;
+    --azul-hover: #102344;
+
+    --dourado: #FAE17A;
+    --dourado-escuro: #CFA84E;
+
+    --creme: #F7F2ED;
+
+    --cinza-escuro: #4A4A4A;
+    --cinza: #8A8A8A;
+
+    --azul-secundario: #111B34;
+    --azul-intenso: #071A4D;
+
+    --branco: #FFFFFF;
+}
+
+
+/* =====================================================
+   2. ESTRUTURA GERAL
+===================================================== */
+
+body {
+    min-height: 100vh;
+    margin: 0;
+}
+
+.admin-body {
+    min-height: 100vh;
+    background-color: var(--creme);
+}
+
+
+/* TÍTULOS */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--azul);
+}
+
+
+/* CARDS BOOTSTRAP */
+
+.card {
+    border: none;
+}
+
+
+/* TABELAS BOOTSTRAP */
+
+.table {
+    margin-bottom: 0;
+}
+
+
+/* BOTÃO PADRÃO VOIEHAUTE */
+
+.btn-voiehaute {
+    background-color: var(--azul);
+    color: var(--dourado);
+    border: 1px solid var(--azul);
+}
+
+.btn-voiehaute:hover {
+    background-color: var(--dourado);
+    color: var(--azul);
+    border-color: var(--dourado);
+}
+
+
+/* FORMULÁRIOS BOOTSTRAP */
+
+.form-control,
+.form-select {
+    border-radius: 2px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--dourado);
+    box-shadow: 0 0 0 0.15rem rgba(250, 225, 122, 0.25);
+}
+
+
+/* =====================================================
+   3. SIDEBAR ADMIN
+===================================================== */
+
+.sidebar-admin {
+    width: 230px;
+    height: 100vh;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 25px 20px 20px;
+
+    background-color: var(--azul);
+
+    overflow: hidden;
+
+    z-index: 1000;
+}
+
+
+/* LOGO */
+
+.sidebar-logo-img {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+
+    margin-bottom: 22px;
+
+    z-index: 2;
+}
+
+.logo-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.logo-link img {
+    width: 145px;
+    height: auto;
+
+    object-fit: contain;
+}
+
+.logo-link span {
+    margin-top: 3px;
+
+    color: var(--dourado);
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 11px;
+
+    letter-spacing: 5px;
+}
+
+
+/* LINHA ABAIXO DA LOGO */
+
+.sidebar-linha {
+    width: 100%;
+    height: 1px;
+
+    position: relative;
+
+    margin-bottom: 25px;
+
+    background-color: rgba(250, 225, 122, 0.55);
+
+    z-index: 2;
+}
+
+
+/* LINKS */
+
+.sidebar-link {
+    width: calc(100% - 8px);
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    gap: 14px;
+
+    position: relative;
+
+    margin-left: 4px;
+    margin-bottom: 4px;
+
+    padding: 10px 12px;
+
+    border-radius: 7px;
+
+    color: var(--branco);
+
+    font-size: 14px;
+    text-decoration: none;
+
+    transition: background-color 0.2s;
+
+    z-index: 2;
+}
+
+.sidebar-link:hover {
+    background-color: var(--azul-hover);
+    color: var(--branco);
+}
+
+.sidebar-link:hover::before {
+    content: "";
+
+    position: absolute;
+
+    left: -4px;
+    top: 0;
+
+    width: 5px;
+    height: 100%;
+
+    background-color: var(--dourado);
+
+    border-radius: 5px 0 0 5px;
+}
+
+
+/* ÍCONES */
+
+.menu-icone {
+    width: 18px;
+    height: 18px;
+
+    object-fit: contain;
+
+    flex-shrink: 0;
+}
+
+
+/* PENA DECORATIVA */
+
+.sidebar-pena {
+    position: absolute;
+
+    width: 210px;
+    height: auto;
+
+    left: -38px;
+    bottom: 55px;
+
+    opacity: 0.95;
+
+    pointer-events: none;
+
+    z-index: 1;
+}
+
+
+/* SAIR */
+
+.sidebar-sair {
+    position: relative;
+
+    margin-top: auto;
+
+    padding-top: 17px;
+
+    border-top: 1px solid rgba(250, 225, 122, 0.55);
+
+    z-index: 2;
+}
+
+.sidebar-sair a {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 7px 0;
+
+    color: var(--branco);
+
+    font-size: 14px;
+    text-decoration: none;
+
+    transition: color 0.2s;
+}
+
+.sidebar-sair a:hover {
+    color: var(--dourado);
+}
+
+
+/* CONTEÚDO AO LADO DA SIDEBAR */
+
+.sidebar-admin + main {
+    margin-left: 230px;
+}
+
+
+/* =====================================================
+   4. FOOTER ADMIN
+===================================================== */
+
+.footer-admin {
+    margin-left: 230px;
+
+    padding: 18px 35px 16px;
+
+    background-color: var(--creme);
+
+    text-align: center;
+}
+
+
+/* LINHAS + BRILHO */
+
+.footer-admin-detalhe {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 16px;
+
+    margin-bottom: 16px;
+}
+
+.footer-linha {
+    height: 1px;
+
+    background-color: var(--dourado);
+
+    flex: 1;
+}
+
+.footer-brilho {
+    color: var(--dourado);
+
+    font-size: 22px;
+    line-height: 1;
+}
+
+
+/* TEXTO */
+
+.footer-admin p {
+    margin: 0;
+
+    color: var(--cinza-escuro);
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 11px;
+    font-weight: 400;
+}
+
+
+/* =====================================================
+   5. HOME ADMIN
+===================================================== */
+
+.admin-home {
+    min-height: 100vh;
+
+    margin-left: 230px;
+
+    padding: 25px 40px 35px;
+
+    background-color: var(--creme);
+}
+
+
+/* =====================================================
+   5.1 BANNER HOME
+===================================================== */
+
+.home-banner {
+    width: 100%;
+    height: 250px;
+
+    display: flex;
+
+    background-color: var(--creme);
+
+    border: 1px solid var(--dourado);
+    border-radius: 7px;
+
+    overflow: hidden;
+}
+
+
+/* TEXTO DO BANNER */
+
+.home-banner-texto {
+    width: 45%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    position: relative;
+
+    padding: 30px 40px;
+
+    z-index: 2;
+}
+
+
+/* ÁREA ADMINISTRATIVA */
+
+.home-area {
+    color: var(--dourado-escuro);
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 11px;
+
+    letter-spacing: 2.5px;
+}
+
+
+/* LINHAS + BRILHO */
+
+.home-area-detalhe {
+    width: 210px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    margin-top: 9px;
+    margin-bottom: 27px;
+}
+
+.home-area-detalhe span {
+    height: 1px;
+
+    background-color: var(--dourado);
+
+    flex: 1;
+}
+
+/* BRILHO CENTRALIZADO */
+
+.home-area-detalhe b {
+    width: 18px;
+    height: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--dourado);
+
+    font-size: 15px;
+    font-weight: normal;
+    line-height: 18px;
+
+    transform: translateY(1px);
+}
+
+
+/* TÍTULO */
+
+.home-banner-texto h1 {
+    margin: 0 0 17px;
+
+    color: var(--azul);
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 34px;
+    font-weight: 400;
+
+    line-height: 1.12;
+}
+
+.home-banner-texto h1 em {
+    color: var(--dourado-escuro);
+
+    font-weight: 400;
+}
+
+
+/* DESCRIÇÃO */
+
+.home-banner-texto p {
+    max-width: 340px;
+
+    margin: 0;
+
+    color: var(--cinza-escuro);
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+/* =====================================================
+   5.2 IMAGEM DO BANNER
+===================================================== */
+
+.home-banner-imagem {
+    width: 55%;
+    height: 100%;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.banner-foto {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+
+/* RECORTE CURVO CREME */
+
+.home-banner-imagem::before {
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+    height: 380px;
+
+    left: -125px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    background-color: var(--creme);
+
+    border-right: 1px solid var(--dourado);
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    z-index: 3;
+}
+
+
+/* BRILHO DA CURVA */
+
+.banner-brilho-img {
+    position: absolute;
+
+    left: 55px;
+    top: 50%;
+
+    width: 30px;
+    height: auto;
+
+    transform: translate(-50%, -50%);
+
+    object-fit: contain;
+
+    z-index: 5;
+}
+
+
+/* =====================================================
+   5.3 CARDS DA HOME
+===================================================== */
+
+.home-cards {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 14px;
+
+    margin-top: 30px;
+}
+
+.home-card {
+    height: 145px;
+
+    display: flex;
+
+    position: relative;
+
+    background-color: var(--creme);
+
+    border: 1px solid var(--dourado);
+    border-radius: 6px;
+
+    overflow: hidden;
+
+    text-decoration: none;
+
+    transition: 0.2s;
+}
+
+.home-card:hover {
+    transform: translateY(-1px);
+
+    box-shadow: 0 3px 8px rgba(7, 21, 45, 0.06);
+}
+
+
+/* TEXTO DO CARD */
+
+.home-card-texto {
+    width: 58%;
+    height: 100%;
+
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    padding: 20px 10px 20px 22px;
+
+    background-color: var(--creme);
+
+    z-index: 3;
+}
+
+.home-card-texto h3 {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    margin: 0 0 12px;
+
+    color: var(--azul);
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 17px;
+    font-weight: 400;
+
+    letter-spacing: 2px;
+}
+
+.home-card-texto p {
+    margin: 0;
+
+    color: var(--cinza-escuro);
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 11px;
+
+    line-height: 1.4;
+}
+
+
+/* ÍCONE DO CARD */
+
+.card-icone {
+    width: 19px;
+    height: 19px;
+
+    object-fit: contain;
+
+    flex-shrink: 0;
+}
+
+
+/* IMAGEM DO CARD */
+
+.home-card-imagem {
+    width: 42%;
+    height: 100%;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.home-card-imagem img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+
+/* CURVA DO CARD */
+
+.home-card-imagem::before {
+    content: "";
+
+    position: absolute;
+
+    width: 85px;
+    height: 185px;
+
+    left: -56px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    background-color: var(--creme);
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    z-index: 2;
+}
+
+
+/* =====================================================
+   6. LISTAS ADMIN
+===================================================== */
+
+.admin-lista {
+    min-height: 100vh;
+
+    margin-left: 230px;
+
+    padding: 70px 70px 50px;
+
+    background-color: var(--creme);
+}
+
+
+/* CABEÇALHO */
+
+.lista-cabecalho {
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 55px;
+}
+
+.lista-titulo-area {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.lista-titulo-icone {
+    width: 58px;
+    height: 58px;
+    object-fit: contain;
+
+    margin-top: 20px;
+}
+
+.lista-superior {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: var(--dourado-escuro);
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 13px;
+    font-weight: 400;
+
+    letter-spacing: 4px;
+}
+
+.lista-titulo-area h1 {
+    margin: 0;
+
+    color: var(--azul) !important;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 46px;
+    font-weight: 400;
+
+    line-height: 1;
+}
+
+.lista-titulo-area p {
+    margin: 30px 0 0;
+
+    color: var(--cinza-escuro);
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 13px;
+}
+
+
+/* BOTÃO NOVO */
+
+.btn-novo-admin {
+    width: 170px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    background-color: transparent;
+
+    border: 1px solid var(--dourado-escuro);
+    border-radius: 7px;
+
+    color: var(--dourado-escuro);
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 15px;
+    font-weight: 400;
+
+    letter-spacing: 4px;
+
+    text-decoration: none;
+
+    transition: 0.2s;
+}
+
+.btn-novo-admin:hover {
+    background-color: var(--dourado-escuro);
+    border-color: var(--dourado-escuro);
+
+    color: var(--creme);
+}
+
+
+/* =====================================================
+   6.1 TABELAS ADMIN
+===================================================== */
+
+.tabela-admin {
+    width: 100%;
+
+    background-color: var(--creme);
+
+    border: 1px solid var(--dourado-escuro);
+    border-radius: 9px;
+
+    overflow: hidden;
+}
+
+.tabela-admin .table-responsive {
+    width: 100%;
+
+    overflow: visible;
+}
+
+.tabela-admin table {
+    width: 100%;
+
+    margin: 0;
+
+    table-layout: fixed;
+    border-collapse: collapse;
+
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+
+/* CABEÇALHO */
+
+.tabela-admin thead {
+    background-color: rgba(250, 225, 122, 0.14);
+
+    border-bottom: 2px solid var(--dourado-escuro);
+}
+
+.tabela-admin th {
+    padding: 13px 8px;
+
+    color: var(--azul) !important;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 14px;
+    font-weight: 400;
+
+    letter-spacing: 1.5px;
+
+    text-align: left;
+    vertical-align: middle;
+
+    white-space: normal;
+
+    overflow-wrap: break-word;
+}
+
+
+/* DADOS */
+
+.tabela-admin td {
+    padding: 12px 8px;
+
+    color: var(--cinza-escuro);
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 12px;
+    font-weight: 400;
+
+    line-height: 1.4;
+
+    vertical-align: middle;
+
+    white-space: normal;
+
+    overflow-wrap: anywhere;
+    word-break: normal;
+}
+
+.tabela-admin tbody tr:not(:last-child) {
+    border-bottom: 1px solid rgba(250, 225, 122, 0.45);
+}
+
+
+/* =====================================================
+   6.2 COLUNAS - PRODUTOS
+===================================================== */
+
+.tabela-produtos th:nth-child(1),
+.tabela-produtos td:nth-child(1) {
+    width: 4%;
+}
+
+.tabela-produtos th:nth-child(2),
+.tabela-produtos td:nth-child(2) {
+    width: 9%;
+}
+
+.tabela-produtos th:nth-child(3),
+.tabela-produtos td:nth-child(3) {
+    width: 13%;
+}
+
+.tabela-produtos th:nth-child(4),
+.tabela-produtos td:nth-child(4) {
+    width: 9%;
+}
+
+.tabela-produtos th:nth-child(5),
+.tabela-produtos td:nth-child(5) {
+    width: 11%;
+}
+
+.tabela-produtos th:nth-child(6),
+.tabela-produtos td:nth-child(6) {
+    width: 8%;
+}
+
+.tabela-produtos th:nth-child(7),
+.tabela-produtos td:nth-child(7) {
+    width: 10%;
+}
+
+.tabela-produtos th:nth-child(8),
+.tabela-produtos td:nth-child(8) {
+    width: 9%;
+}
+
+.tabela-produtos th:nth-child(9),
+.tabela-produtos td:nth-child(9) {
+    width: 7%;
+}
+
+.tabela-produtos th:nth-child(10),
+.tabela-produtos td:nth-child(10) {
+    width: 12%;
+}
+
+.tabela-produtos th:nth-child(11),
+.tabela-produtos td:nth-child(11) {
+    width: 8%;
+}
+
+
+/* IMAGEM DO PRODUTO */
+
+.produto-lista-img {
+    width: 65px;
+    height: 48px;
+
+    display: block;
+
+    object-fit: cover;
+
+    border-radius: 4px;
+}
+
+.sem-imagem {
+    color: var(--cinza);
+
+    font-size: 11px;
+}
+
+.produto-valor {
+    white-space: normal;
+}
+
+
+/* =====================================================
+   6.3 COLUNAS - CADASTROS SIMPLES
+===================================================== */
+
+.tabela-cadastro th:nth-child(1),
+.tabela-cadastro td:nth-child(1) {
+    width: 8%;
+}
+
+.tabela-cadastro th:nth-child(2),
+.tabela-cadastro td:nth-child(2) {
+    width: 22%;
+}
+
+.tabela-cadastro th:nth-child(3),
+.tabela-cadastro td:nth-child(3) {
+    width: 58%;
+}
+
+.tabela-cadastro th:nth-child(4),
+.tabela-cadastro td:nth-child(4) {
+    width: 12%;
+}
+
+
+/* =====================================================
+   6.4 COLUNAS - COLEÇÕES
+===================================================== */
+
+.tabela-colecoes th:nth-child(1),
+.tabela-colecoes td:nth-child(1) {
+    width: 7%;
+}
+
+.tabela-colecoes th:nth-child(2),
+.tabela-colecoes td:nth-child(2) {
+    width: 13%;
+}
+
+.tabela-colecoes th:nth-child(3),
+.tabela-colecoes td:nth-child(3) {
+    width: 20%;
+}
+
+.tabela-colecoes th:nth-child(4),
+.tabela-colecoes td:nth-child(4) {
+    width: 48%;
+}
+
+.tabela-colecoes th:nth-child(5),
+.tabela-colecoes td:nth-child(5) {
+    width: 12%;
+}
+
+.colecao-lista-img {
+    width: 65px;
+    height: 48px;
+
+    display: block;
+
+    object-fit: cover;
+
+    border-radius: 4px;
+}
+
+
+/* =====================================================
+   6.5 AÇÕES DA TABELA
+===================================================== */
+
+.acoes-admin {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+}
+
+
+/* LINKS E BOTÕES COM MESMO TAMANHO */
+
+.acoes-admin a,
+.acoes-admin button {
+    width: 27px;
+    height: 27px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border: none;
+    border-radius: 4px;
+
+    background-color: transparent;
+
+    font-size: 15px;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+/* EDITAR */
+
+.acao-editar {
+    color: var(--dourado-escuro);
+}
+
+.acao-editar:hover {
+    color: var(--dourado-escuro);
+
+    background-color: rgba(250, 225, 122, 0.28);
+}
+
+
+/* EXCLUIR */
+
+.acao-excluir {
+    color: #C94A4A;
+}
+
+.acao-excluir:hover {
+    color: #C94A4A;
+
+    background-color: rgba(201, 74, 74, 0.10);
+}
+
+
+/* =====================================================
+   7. FORMULÁRIOS ADMIN
+===================================================== */
+
+.admin-form {
+    min-height: 100vh;
+
+    margin-left: 230px;
+
+    padding: 45px 70px 35px;
+
+    background-color: var(--creme);
+}
+
+
+/* CAMINHO */
+
+.form-caminho {
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 28px;
+
+    color: var(--dourado-escuro);
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 11px;
+
+    letter-spacing: 3px;
+}
+
+
+/* TÍTULO */
+
+.form-titulo {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 18px;
+
+    margin-bottom: 30px;
+}
+
+.form-titulo-icone {
+    width: 55px;
+    height: 55px;
+
+    object-fit: contain;
+
+    flex-shrink: 0;
+}
+
+.form-titulo h1 {
+    margin: 0;
+
+    color: var(--azul);
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 40px;
+    font-weight: 400;
+
+    line-height: 1;
+}
+
+.form-titulo p {
+    margin: 16px 0 0;
+
+    color: var(--cinza-escuro);
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 11px;
+}
+
+
+/* =====================================================
+   7.1 CAMPOS
+===================================================== */
+
+.campo-admin {
+    width: 100%;
+}
+
+.campo-admin label:not(.upload-produto) {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: var(--azul);
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.campo-admin input,
+.campo-admin textarea {
+    width: 100%;
+
+    border: 1px solid var(--dourado-escuro);
+    border-radius: 7px;
+
+    outline: none;
+
+    background-color: transparent;
+
+    color: var(--azul);
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 11px;
+}
+
+.campo-admin input {
+    height: 45px;
+
+    padding: 0 15px;
+}
+
+.campo-admin textarea {
+    height: 48px;
+
+    padding: 13px 15px;
+
+    resize: vertical;
+}
+
+.campo-admin input::placeholder,
+.campo-admin textarea::placeholder {
+    color: var(--cinza);
+}
+
+.campo-admin input:focus,
+.campo-admin textarea:focus {
+    border-color: var(--dourado-escuro);
+
+    box-shadow: 0 0 0 2px rgba(207, 168, 78, 0.12);
+}
+
+
+/* ESPAÇAMENTO DOS CADASTROS SIMPLES */
+
+.campo-admin-espaco {
+    margin-top: 20px;
+}
+
+
+/* TEXTAREA GRANDE */
+
+.campo-admin .textarea-cadastro {
+    width: 100%;
+    height: 110px;
+
+    padding: 13px 15px;
+
+    border: 1px solid var(--dourado-escuro);
+    border-radius: 7px;
+
+    background-color: transparent;
+
+    color: var(--azul);
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 11px;
+
+    outline: none;
+
+    resize: vertical;
+}
+
+.campo-admin .textarea-cadastro:focus {
+    border-color: var(--dourado-escuro);
+
+    box-shadow: 0 0 0 2px rgba(207, 168, 78, 0.12);
+}
+
+
+/* =====================================================
+   7.2 CAMPO VALOR
+===================================================== */
+
+.campo-valor {
+    width: 100%;
+    height: 45px;
+
+    display: flex;
+    align-items: center;
+
+    border: 1px solid var(--dourado-escuro);
+    border-radius: 7px;
+
+    overflow: hidden;
+}
+
+.campo-valor span {
+    padding-left: 15px;
+
+    color: var(--cinza-escuro);
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 11px;
+
+    flex-shrink: 0;
+}
+
+.campo-valor input {
+    height: 43px;
+
+    border: none;
+
+    box-shadow: none;
+
+    background-color: transparent;
+}
+
+.campo-valor:focus-within {
+    box-shadow: 0 0 0 2px rgba(207, 168, 78, 0.12);
+}
+
+
+/* =====================================================
+   7.3 UPLOAD DE IMAGEM
+===================================================== */
+
+.campo-imagem {
+    height: 100%;
+}
+
+.campo-imagem > input[type="file"] {
+    display: none;
+}
+
+.upload-produto {
+    width: 100%;
+    height: 100%;
+    min-height: 121px;
+
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    margin: 0;
+
+    border: 1px solid var(--dourado-escuro);
+    border-radius: 7px;
+
+    background-color: rgba(250, 225, 122, 0.06);
+
+    color: var(--cinza-escuro);
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 11px;
+
+    text-align: center;
+
+    cursor: pointer;
+
+    overflow: hidden;
+
+    transition: 0.2s;
+}
+
+.upload-produto:hover {
+    background-color: rgba(250, 225, 122, 0.14);
+}
+
+.upload-produto i {
+    color: var(--dourado-escuro);
+
+    font-size: 30px;
+}
+
+.upload-conteudo {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+}
+
+
+/* PREVIEW */
+
+.preview-imagem {
+    display: none;
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    border-radius: 6px;
+}
+
+
+/* IMAGEM EXISTENTE NA EDIÇÃO */
+
+.preview-imagem-editar {
+    display: block;
+}
+
+
+/* LÁPIS */
+
+.editar-imagem-icone {
+    width: 32px;
+    height: 32px;
+
+    position: absolute;
+
+    top: 10px;
+    right: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 5px;
+
+    background-color: var(--creme);
+
+    color: var(--dourado-escuro);
+
+    font-size: 16px;
+
+    transition: 0.2s;
+
+    z-index: 5;
+}
+
+.editar-imagem-icone:hover {
+    background-color: var(--dourado);
+
+    color: var(--azul);
+}
+
+
+/* =====================================================
+   7.4 BOTÕES DOS FORMULÁRIOS
+===================================================== */
+
+.form-acoes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 15px;
+
+    margin-top: 30px;
+}
+
+.btn-form-cancelar,
+.btn-form-salvar {
+    width: 200px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 5px;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 11px;
+    font-weight: 400;
+
+    letter-spacing: 1px;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+/* CANCELAR */
+
+.btn-form-cancelar {
+    border: 1px solid var(--dourado-escuro);
+
+    background-color: transparent;
+
+    color: var(--dourado-escuro);
+}
+
+.btn-form-cancelar:hover {
+    background-color: var(--dourado-escuro);
+
+    color: var(--creme);
+}
+
+
+/* SALVAR / CADASTRAR */
+
+.btn-form-salvar {
+    border: 1px solid var(--azul);
+
+    background-color: var(--azul);
+
+    color: var(--dourado);
+}
+
+.btn-form-salvar:hover {
+    background-color: var(--azul-hover);
+    border-color: var(--azul-hover);
+
+    color: var(--dourado);
+}
+
+
+/* =====================================================
+   8. SELECT PERSONALIZADO
+===================================================== */
+
+.admin-form .select-personalizado {
+    position: relative;
+
+    width: 100%;
+}
+
+
+/* BOTÃO PRINCIPAL */
+
+.admin-form .select-botao {
+    width: 100% !important;
+    height: 45px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+
+    padding: 0 15px !important;
+    margin: 0 !important;
+
+    border: 1px solid var(--dourado-escuro) !important;
+    border-radius: 7px !important;
+
+    background: transparent !important;
+
+    color: var(--cinza) !important;
+
+    font-family: Georgia, "Times New Roman", serif !important;
+    font-size: 11px !important;
+    font-weight: 400 !important;
+
+    text-align: left !important;
+
+    cursor: pointer;
+
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+
+/* SETA */
+
+.admin-form .select-botao i {
+    color: var(--cinza-escuro);
+
+    font-size: 11px;
+
+    transition: transform 0.2s;
+}
+
+.admin-form .select-personalizado.aberto .select-botao i {
+    transform: rotate(180deg);
+}
+
+
+/* CAIXA DE OPÇÕES */
+
+.admin-form .select-opcoes {
+    display: none;
+
+    position: absolute;
+
+    top: calc(100% + 4px);
+    left: 0;
+
+    width: 100%;
+
+    padding: 4px 0;
+    margin: 0;
+
+    background-color: var(--creme);
+
+    border: 1px solid var(--dourado-escuro);
+    border-radius: 7px;
+
+    box-shadow: 0 5px 12px rgba(7, 21, 45, 0.10);
+
+    overflow: hidden;
+
+    z-index: 9999;
+}
+
+.admin-form .select-personalizado.aberto .select-opcoes {
+    display: block;
+}
+
+
+/* OPÇÃO */
+
+.admin-form .select-opcao {
+    width: 100% !important;
+
+    display: block !important;
+
+    padding: 9px 14px !important;
+    margin: 0 !important;
+
+    border: none !important;
+    border-radius: 0 !important;
+
+    background: var(--creme) !important;
+
+    color: var(--cinza-escuro) !important;
+
+    font-family: Georgia, "Times New Roman", serif !important;
+    font-size: 11px !important;
+    font-weight: 400 !important;
+
+    text-align: left !important;
+
+    cursor: pointer;
+
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.admin-form .select-opcao:hover {
+    background: rgba(250, 225, 122, 0.35) !important;
+
+    color: var(--azul) !important;
+}
+
+.admin-form .select-opcao.selecionada {
+    background: rgba(250, 225, 122, 0.45) !important;
+
+    color: var(--azul) !important;
+}
+
+
+/* =====================================================
+   9. MODAL DE EXCLUSÃO
+===================================================== */
+
+.modal-excluir-admin {
+    position: relative;
+
+    padding: 40px 45px 35px;
+
+    border: 1px solid var(--dourado-escuro);
+    border-radius: 8px;
+
+    background-color: var(--creme);
+
+    text-align: center;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    box-shadow: 0 15px 40px rgba(7, 21, 45, 0.18);
+}
+
+
+/* ÍCONE */
+
+.modal-excluir-icone {
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 auto 20px;
+
+    border: 1px solid var(--dourado-escuro);
+    border-radius: 50%;
+
+    color: var(--dourado-escuro);
+
+    font-size: 24px;
+}
+
+
+/* TÍTULO */
+
+.modal-excluir-admin h2 {
+    margin: 0 0 15px;
+
+    color: var(--azul);
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 27px;
+    font-weight: 400;
+}
+
+
+/* TEXTO */
+
+.modal-excluir-admin p {
+    margin: 0 0 7px;
+
+    color: var(--cinza-escuro);
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 12px;
+}
+
+.modal-excluir-admin p strong {
+    color: var(--azul);
+
+    font-weight: 600;
+}
+
+
+/* AVISO */
+
+.modal-excluir-aviso {
+    display: block;
+
+    color: var(--cinza);
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 10px;
+}
+
+
+/* AÇÕES */
+
+.modal-excluir-acoes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 12px;
+
+    margin-top: 28px;
+}
+
+
+/* BOTÕES */
+
+.btn-modal-cancelar,
+.btn-modal-excluir {
+    width: 150px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border-radius: 5px;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 10px;
+    font-weight: 400;
+
+    letter-spacing: 1px;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+/* CANCELAR */
+
+.btn-modal-cancelar {
+    border: 1px solid var(--dourado-escuro);
+
+    background-color: transparent;
+
+    color: var(--dourado-escuro);
+}
+
+.btn-modal-cancelar:hover {
+    background-color: var(--dourado-escuro);
+
+    color: var(--creme);
+}
+
+
+/* EXCLUIR */
+
+.btn-modal-excluir {
+    border: 1px solid var(--azul);
+
+    background-color: var(--azul);
+
+    color: var(--dourado);
+}
+
+.btn-modal-excluir:hover {
+    background-color: var(--azul-hover);
+    border-color: var(--azul-hover);
+
+    color: var(--dourado);
+}
+
+
+/* =====================================================
+   10. LOGIN ADMIN
+===================================================== */
+
+.login-admin {
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+
+    background-color: var(--creme);
+
+    overflow: hidden;
+}
+
+
+/* =====================================================
+   10.1 LADO ESQUERDO - IMAGEM
+===================================================== */
+
+.login-imagem {
+    width: 53%;
+    min-height: 100vh;
+
+    position: relative;
+
+    background-color: var(--azul);
+
+    overflow: hidden;
+}
+
+.login-imagem img {
+    width: 100%;
+    height: 100vh;
+
+    display: block;
+
+    object-fit: cover;
+    object-position: center;
+}
+
+
+/* CURVA ENTRE OS DOIS LADOS */
+
+.login-imagem::after {
+    content: "";
+
+    position: absolute;
+
+    top: -5%;
+    right: -105px;
+
+    width: 150px;
+    height: 110%;
+
+    background-color: var(--creme);
+
+    border-radius: 50% 0 0 50%;
+}
+
+
+/* =====================================================
+   10.2 LADO DIREITO
+===================================================== */
+
+.login-conteudo {
+    width: 47%;
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 50px 70px;
+
+    background-color: var(--creme);
+}
+
+.login-formulario {
+    width: 100%;
+    max-width: 440px;
+}
+
+
+/* =====================================================
+   10.3 ÁREA ADMINISTRATIVA
+===================================================== */
+
+.login-superior {
+    margin-bottom: 42px;
+
+    text-align: center;
+}
+
+.login-superior > span {
+    color: var(--dourado-escuro);
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 11px;
+    font-weight: 400;
+
+    letter-spacing: 3px;
+}
+
+
+/* DETALHE DOURADO */
+
+.login-detalhe {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 13px;
+
+    margin-top: 13px;
+}
+
+
+/* SOMENTE AS LINHAS */
+
+.login-detalhe > span:not(.login-brilho) {
+    width: 80px;
+    height: 1px;
+
+    background-color: var(--dourado-escuro);
+}
+
+
+/* BRILHO ÚNICO */
+
+.login-brilho {
+    width: 18px !important;
+    height: 18px !important;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: transparent !important;
+
+    color: var(--dourado);
+
+    font-size: 17px;
+    line-height: 18px;
+
+    transform: translateY(1px);
+}
+
+
+/* =====================================================
+   10.4 TÍTULO DO LOGIN
+===================================================== */
+
+.login-titulo {
+    margin-bottom: 38px;
+
+    text-align: center;
+}
+
+.login-titulo h1 {
+    margin: 0;
+
+    color: var(--azul);
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 36px;
+    font-weight: 400;
+
+    line-height: 1.2;
+}
+
+.login-titulo p {
+    margin: 10px 0 0;
+
+    color: var(--cinza);
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 12px;
+}
+
+
+/* =====================================================
+   10.5 CAMPOS DO LOGIN
+===================================================== */
+
+.login-campo {
+    margin-bottom: 24px;
+}
+
+.login-campo label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: var(--dourado-escuro);
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 10px;
+    font-weight: 400;
+
+    letter-spacing: 2px;
+}
+
+
+/* CAIXA DO INPUT */
+
+.login-input {
+    width: 100%;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+
+    border: 1px solid var(--dourado-escuro);
+    border-radius: 7px;
+
+    background-color: transparent;
+
+    transition: 0.2s;
+}
+
+
+/* ÍCONE */
+
+.login-input i {
+    width: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--dourado-escuro);
+
+    font-size: 14px;
+}
+
+
+/* INPUT */
+
+.login-input input {
+    width: 100%;
+    height: 46px;
+
+    padding: 0 15px 0 0;
+
+    border: none;
+
+    outline: none;
+
+    background-color: transparent;
+
+    color: var(--azul);
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 11px;
+}
+
+.login-input input::placeholder {
+    color: #AAA39B;
+}
+
+
+/* FOCO */
+
+.login-input:focus-within {
+    border-color: var(--dourado-escuro);
+
+    box-shadow: 0 0 0 2px rgba(207, 168, 78, 0.10);
+}
+
+
+/* =====================================================
+   10.6 ERRO DO LOGIN
+===================================================== */
+
+.login-erro {
+    display: flex;
+    align-items: center;
+
+    gap: 6px;
+
+    margin-top: 7px;
+
+    color: #B94747;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 10px;
+}
+
+.login-erro i {
+    font-size: 11px;
+}
+
+
+/* =====================================================
+   10.7 BOTÃO ENTRAR
+===================================================== */
+
+.btn-login-admin {
+    width: 100%;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 30px;
+
+    border: 1px solid var(--azul);
+    border-radius: 7px;
+
+    background-color: var(--azul);
+
+    color: var(--dourado);
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 11px;
+    font-weight: 400;
+
+    letter-spacing: 3px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.btn-login-admin:hover {
+    background-color: var(--azul-hover);
+    border-color: var(--azul-hover);
+
+    color: var(--dourado);
+}
+
+
+/* =====================================================
+   10.8 RODAPÉ DO LOGIN
+===================================================== */
+
+.login-rodape {
+    margin-top: 20px;
+
+    text-align: center;
+}
+
+.login-rodape .login-detalhe {
+    margin-top: 0;
+}
+
+.login-rodape p {
+    margin: 10px 0 0;
+
+    color: #AAA39B;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 8px;
+}
+
+
+/* =====================================================
+   11. RESPONSIVIDADE DO LOGIN
+===================================================== */
+
+@media (max-width: 900px) {
+
+    .login-imagem {
+        width: 45%;
+    }
+
+    .login-conteudo {
+        width: 55%;
+
+        padding: 40px;
+    }
+
+    .login-imagem::after {
+        right: -110px;
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    .login-admin {
+        display: block;
+    }
+
+    .login-imagem {
+        display: none;
+    }
+
+    .login-conteudo {
+        width: 100%;
+        min-height: 100vh;
+
+        padding: 40px 25px;
+    }
+
+    .login-formulario {
+        max-width: 420px;
+    }
+}

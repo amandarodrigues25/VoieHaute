@@ -1,0 +1,118 @@
+<%- include('../partials/header') %>
+    <%- include('../partials/menu') %>
+
+        <main class="admin-lista">
+
+            <!-- CABEÇALHO -->
+            <div class="lista-cabecalho">
+
+                <div class="lista-titulo-area">
+
+                    <img src="/uploads/Admin/collection(mais escura).png" class="lista-titulo-icone" alt="">
+
+                    <div>
+                        <span class="lista-superior">COLEÇÕES</span>
+
+                        <h1>Coleções</h1>
+
+                        <p>
+                            Cadastre e consulte as coleções da VoieHaute.
+                        </p>
+                    </div>
+
+                </div>
+
+                <a href="/admin/colecoes/form-cadastrar" class="btn-novo-admin">
+                    Novo
+                </a>
+
+            </div>
+
+
+            <!-- TABELA -->
+            <div class="tabela-admin tabela-colecoes">
+
+                <div class="table-responsive">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Imagem</th>
+                                <th>Nome</th>
+                                <th>Descrição</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <% colecoes.forEach(colecao=> { %>
+
+                                <tr>
+
+                                    <td>
+                                        <%= colecao.id %>
+                                    </td>
+
+                                    <td>
+
+                                        <% if (colecao.imagem) { %>
+
+                                            <img src="/uploads/<%= colecao.imagem %>" class="colecao-lista-img"
+                                                alt="<%= colecao.nome %>">
+
+                                            <% } else { %>
+
+                                                <span class="sem-imagem">
+                                                    Sem imagem
+                                                </span>
+
+                                                <% } %>
+
+                                    </td>
+
+                                    <td>
+                                        <%= colecao.nome %>
+                                    </td>
+
+                                    <td>
+                                        <%= colecao.descricao %>
+                                    </td>
+
+                                    <td>
+
+                                        <div class="acoes-admin">
+
+                                            <a href="/admin/colecoes/editar/<%= colecao.id %>" class="acao-editar"
+                                                title="Editar">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </a>
+
+                                            <button type="button" class="acao-excluir" data-bs-toggle="modal"
+                                                data-bs-target="#modalExcluir" data-nome="<%= colecao.nome %>"
+                                                data-url="/admin/colecoes/excluir/<%= colecao.id %>" title="Excluir">
+                                                <i class="bi bi-trash3"></i>
+                                            </button>
+
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+
+                                <% }) %>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </main>
+
+        <%- include('../partials/modal-excluir') %>
+        <%- include('../partials/footer') %>

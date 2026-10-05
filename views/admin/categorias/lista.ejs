@@ -1,0 +1,104 @@
+<%- include('../partials/header') %>
+    <%- include('../partials/menu') %>
+
+        <main class="admin-lista">
+
+            <!-- CABEÇALHO -->
+            <div class="lista-cabecalho">
+
+                <div class="lista-titulo-area">
+
+                    <img src="/uploads/Admin/etiqueta-de-preco(mais escura).png" class="lista-titulo-icone" alt="">
+
+                    <div>
+                        <span class="lista-superior">CATEGORIAS</span>
+
+                        <h1>Categorias</h1>
+
+                        <p>
+                            Cadastre e consulte as categorias dos produtos.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <a href="/admin/categorias/form-cadastrar" class="btn-novo-admin">
+                    Novo
+                </a>
+
+            </div>
+
+
+            <!-- TABELA -->
+            <div class="tabela-admin tabela-cadastro">
+
+                <div class="table-responsive">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nome</th>
+                                <th>Descrição</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+
+
+                        <tbody>
+
+                            <% categorias.forEach(categoria=> { %>
+
+                                <tr>
+
+                                    <td>
+                                        <%= categoria.id %>
+                                    </td>
+
+                                    <td>
+                                        <%= categoria.nome %>
+                                    </td>
+
+                                    <td>
+                                        <%= categoria.descricao %>
+                                    </td>
+
+                                    <td>
+
+                                        <div class="acoes-admin">
+
+                                            <a href="/admin/categorias/editar/<%= categoria.id %>" class="acao-editar"
+                                                title="Editar">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </a>
+
+
+                                            <button type="button" class="acao-excluir" data-bs-toggle="modal"
+                                                data-bs-target="#modalExcluir" data-nome="<%= categoria.nome %>"
+                                                data-url="/admin/categorias/excluir/<%= categoria.id %>"
+                                                title="Excluir">
+                                                <i class="bi bi-trash3"></i>
+                                            </button>
+
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+
+                                <% }) %>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </main>
+
+        <%- include('../partials/modal-excluir') %>
+        <%- include('../partials/footer') %>

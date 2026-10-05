@@ -1,0 +1,640 @@
+<%- include('../partials/header') %>
+<%- include('../partials/menu') %>
+
+
+<main class="admin-form">
+
+    <!-- CAMINHO -->
+    <div class="form-caminho">
+
+        <span>Produtos</span>
+        <span>›</span>
+        <span>Editar Produto</span>
+
+    </div>
+
+
+    <!-- TÍTULO -->
+    <div class="form-titulo">
+
+        <img
+            src="/uploads/Admin/caixa mais escura.png"
+            class="form-titulo-icone"
+            alt=""
+        >
+
+        <div>
+
+            <h1>Editar Produto</h1>
+
+            <p>
+                Atualize as informações do produto.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- FORMULÁRIO -->
+    <form
+        action="/admin/produtos/editar/<%= produto.id %>"
+        method="POST"
+        enctype="multipart/form-data"
+        class="form-admin"
+    >
+
+        <div class="row g-3">
+
+
+            <!-- NOME -->
+            <div class="col-md-6">
+
+                <div class="campo-admin">
+
+                    <label for="nome">
+                        Nome do Produto
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nome"
+                        name="nome"
+                        value="<%= produto.nome %>"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- CATEGORIA -->
+            <div class="col-md-6">
+
+                <div class="campo-admin">
+
+                    <label>Categorias</label>
+
+                    <div class="select-personalizado">
+
+                        <button
+                            type="button"
+                            class="select-botao"
+                        >
+
+                            <span>
+                                <%= produto.categoria %>
+                            </span>
+
+                            <i class="bi bi-chevron-down"></i>
+
+                        </button>
+
+
+                        <div class="select-opcoes">
+
+                            <% categorias.forEach(categoria => { %>
+
+                                <button
+                                    type="button"
+                                    class="select-opcao <%= produto.categoria === categoria.nome ? 'selecionada' : '' %>"
+                                    data-value="<%= categoria.nome %>"
+                                >
+                                    <%= categoria.nome %>
+                                </button>
+
+                            <% }) %>
+
+                        </div>
+
+
+                        <input
+                            type="hidden"
+                            name="categoria"
+                            class="select-valor"
+                            value="<%= produto.categoria %>"
+                        >
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- MATERIAL -->
+            <div class="col-md-6">
+
+                <div class="campo-admin">
+
+                    <label>Material</label>
+
+                    <div class="select-personalizado">
+
+                        <button
+                            type="button"
+                            class="select-botao"
+                        >
+
+                            <span>
+                                <%= produto.material %>
+                            </span>
+
+                            <i class="bi bi-chevron-down"></i>
+
+                        </button>
+
+
+                        <div class="select-opcoes">
+
+                            <% materiais.forEach(material => { %>
+
+                                <button
+                                    type="button"
+                                    class="select-opcao <%= produto.material === material.nome ? 'selecionada' : '' %>"
+                                    data-value="<%= material.nome %>"
+                                >
+                                    <%= material.nome %>
+                                </button>
+
+                            <% }) %>
+
+                        </div>
+
+
+                        <input
+                            type="hidden"
+                            name="material"
+                            class="select-valor"
+                            value="<%= produto.material %>"
+                        >
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PEDRA -->
+            <div class="col-md-6">
+
+                <div class="campo-admin">
+
+                    <label>Pedras</label>
+
+                    <div class="select-personalizado">
+
+                        <button
+                            type="button"
+                            class="select-botao"
+                        >
+
+                            <span>
+                                <%= produto.pedra %>
+                            </span>
+
+                            <i class="bi bi-chevron-down"></i>
+
+                        </button>
+
+
+                        <div class="select-opcoes">
+
+                            <% pedras.forEach(pedra => { %>
+
+                                <button
+                                    type="button"
+                                    class="select-opcao <%= produto.pedra === pedra.nome ? 'selecionada' : '' %>"
+                                    data-value="<%= pedra.nome %>"
+                                >
+                                    <%= pedra.nome %>
+                                </button>
+
+                            <% }) %>
+
+                        </div>
+
+
+                        <input
+                            type="hidden"
+                            name="pedra"
+                            class="select-valor"
+                            value="<%= produto.pedra %>"
+                        >
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- COLEÇÃO -->
+            <div class="col-md-6">
+
+                <div class="campo-admin">
+
+                    <label>Coleção</label>
+
+                    <div class="select-personalizado">
+
+                        <button
+                            type="button"
+                            class="select-botao"
+                        >
+
+                            <span>
+                                <%= produto.colecao %>
+                            </span>
+
+                            <i class="bi bi-chevron-down"></i>
+
+                        </button>
+
+
+                        <div class="select-opcoes">
+
+                            <% colecoes.forEach(colecao => { %>
+
+                                <button
+                                    type="button"
+                                    class="select-opcao <%= produto.colecao === colecao.nome ? 'selecionada' : '' %>"
+                                    data-value="<%= colecao.nome %>"
+                                >
+                                    <%= colecao.nome %>
+                                </button>
+
+                            <% }) %>
+
+                        </div>
+
+
+                        <input
+                            type="hidden"
+                            name="colecao"
+                            class="select-valor"
+                            value="<%= produto.colecao %>"
+                        >
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- TAMANHO -->
+            <div class="col-md-6">
+
+                <div class="campo-admin">
+
+                    <label>Tamanho</label>
+
+                    <div class="select-personalizado">
+
+                        <button
+                            type="button"
+                            class="select-botao"
+                        >
+
+                            <span>
+                                <%= produto.tamanho %>
+                            </span>
+
+                            <i class="bi bi-chevron-down"></i>
+
+                        </button>
+
+
+                        <div class="select-opcoes">
+
+                            <% tamanhos.forEach(tamanho => { %>
+
+                                <button
+                                    type="button"
+                                    class="select-opcao <%= produto.tamanho === tamanho.tamanho ? 'selecionada' : '' %>"
+                                    data-value="<%= tamanho.tamanho %>"
+                                >
+                                    <%= tamanho.tamanho %>
+                                </button>
+
+                            <% }) %>
+
+                        </div>
+
+
+                        <input
+                            type="hidden"
+                            name="tamanho"
+                            class="select-valor"
+                            value="<%= produto.tamanho %>"
+                        >
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- VALOR + ESTOQUE -->
+            <div class="col-md-6">
+
+                <div class="row g-3">
+
+
+                    <!-- VALOR -->
+                    <div class="col-12">
+
+                        <div class="campo-admin">
+
+                            <label for="valor">
+                                Valor
+                            </label>
+
+                            <div class="campo-valor">
+
+                                <span>R$</span>
+
+                                <input
+                                    type="number"
+                                    id="valor"
+                                    name="valor"
+                                    step="0.01"
+                                    value="<%= produto.valor %>"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ESTOQUE -->
+                    <div class="col-12">
+
+                        <div class="campo-admin">
+
+                            <label for="estoque">
+                                Estoque
+                            </label>
+
+                            <input
+                                type="number"
+                                id="estoque"
+                                name="estoque"
+                                value="<%= produto.estoque %>"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- IMAGEM -->
+            <div class="col-md-6">
+
+                <div class="campo-admin campo-imagem">
+
+                    <label
+                        for="imagem"
+                        class="upload-produto"
+                    >
+
+                        <% if (produto.imagem) { %>
+
+                            <img
+                                id="previewImagem"
+                                class="preview-imagem preview-imagem-editar"
+                                src="/uploads/<%= produto.imagem %>"
+                                alt="<%= produto.nome %>"
+                            >
+
+                        <% } else { %>
+
+                            <div
+                                class="upload-conteudo"
+                                id="uploadConteudo"
+                            >
+
+                                <i class="bi bi-upload"></i>
+
+                                <span>
+                                    Clique para selecionar a<br>
+                                    imagem
+                                </span>
+
+                            </div>
+
+                            <img
+                                id="previewImagem"
+                                class="preview-imagem"
+                                alt="Prévia da imagem"
+                            >
+
+                        <% } %>
+
+
+                        <!-- ÍCONE DE EDITAR -->
+                        <span class="editar-imagem-icone">
+
+                            <i class="bi bi-pencil-square"></i>
+
+                        </span>
+
+                    </label>
+
+
+                    <input
+                        type="file"
+                        id="imagem"
+                        name="imagem"
+                        accept="image/*"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- DESCRIÇÃO -->
+            <div class="col-12">
+
+                <div class="campo-admin">
+
+                    <label for="descricao">
+                        Descrição
+                    </label>
+
+                    <textarea
+                        id="descricao"
+                        name="descricao"
+                        placeholder="Digite a descrição do produto..."
+                    ><%= produto.descricao %></textarea>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- BOTÕES -->
+        <div class="form-acoes">
+
+            <a
+                href="/admin/produtos"
+                class="btn-form-cancelar"
+            >
+                CANCELAR
+            </a>
+
+
+            <button
+                type="submit"
+                class="btn-form-salvar"
+            >
+                SALVAR ALTERAÇÃO
+            </button>
+
+        </div>
+
+    </form>
+
+</main>
+
+
+<script>
+
+    /* =====================================================
+       TROCAR IMAGEM
+    ===================================================== */
+
+    const inputImagem =
+        document.getElementById('imagem');
+
+    const previewImagem =
+        document.getElementById('previewImagem');
+
+    const uploadConteudo =
+        document.getElementById('uploadConteudo');
+
+
+    inputImagem.addEventListener('change', function () {
+
+        const arquivo = this.files[0];
+
+        if (arquivo) {
+
+            previewImagem.src =
+                URL.createObjectURL(arquivo);
+
+            previewImagem.style.display = 'block';
+
+            if (uploadConteudo) {
+                uploadConteudo.style.display = 'none';
+            }
+
+        }
+
+    });
+
+
+
+    /* =====================================================
+       SELECTS PERSONALIZADOS
+    ===================================================== */
+
+    const selects =
+        document.querySelectorAll('.select-personalizado');
+
+
+    selects.forEach(function (select) {
+
+        const botao =
+            select.querySelector('.select-botao');
+
+        const texto =
+            botao.querySelector('span');
+
+        const valor =
+            select.querySelector('.select-valor');
+
+        const opcoes =
+            select.querySelectorAll('.select-opcao');
+
+
+        botao.addEventListener('click', function () {
+
+            selects.forEach(function (outroSelect) {
+
+                if (outroSelect !== select) {
+                    outroSelect.classList.remove('aberto');
+                }
+
+            });
+
+            select.classList.toggle('aberto');
+
+        });
+
+
+        opcoes.forEach(function (opcao) {
+
+            opcao.addEventListener('click', function () {
+
+                texto.textContent =
+                    opcao.textContent.trim();
+
+                valor.value =
+                    opcao.dataset.value;
+
+
+                opcoes.forEach(function (item) {
+
+                    item.classList.remove('selecionada');
+
+                });
+
+
+                opcao.classList.add('selecionada');
+
+                select.classList.remove('aberto');
+
+            });
+
+        });
+
+    });
+
+
+
+    /* FECHAR AO CLICAR FORA */
+
+    document.addEventListener('click', function (event) {
+
+        selects.forEach(function (select) {
+
+            if (!select.contains(event.target)) {
+
+                select.classList.remove('aberto');
+
+            }
+
+        });
+
+    });
+
+</script>
+
+
+<%- include('../partials/footer') %>

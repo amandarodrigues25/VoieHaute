@@ -1,0 +1,101 @@
+<%- include('../partials/header') %>
+<%- include('../partials/menu') %>
+
+
+<main class="admin-form">
+
+    <!-- CAMINHO -->
+    <div class="form-caminho">
+        <span>Categorias</span>
+        <span>›</span>
+        <span>Nova Categoria</span>
+    </div>
+
+
+    <!-- TÍTULO -->
+    <div class="form-titulo">
+
+        <img
+            src="/uploads/Admin/etiqueta-de-preco(mais escura).png"
+            class="form-titulo-icone"
+            alt=""
+        >
+
+        <div>
+            <h1>Categorias</h1>
+
+            <p>
+                Preencha as informações para adicionar uma nova categoria.
+            </p>
+        </div>
+
+    </div>
+
+
+    <!-- FORMULÁRIO -->
+    <form
+        action="/admin/categorias/cadastrar"
+        method="POST"
+        class="form-admin"
+    >
+
+        <!-- NOME -->
+        <div class="campo-admin">
+
+            <label for="nome">
+                Nome da Categoria
+            </label>
+
+            <input
+                type="text"
+                id="nome"
+                name="nome"
+                placeholder="Digite o nome da categoria"
+                required
+            >
+
+        </div>
+
+
+        <!-- DESCRIÇÃO -->
+        <div class="campo-admin campo-admin-espaco">
+
+            <label for="descricao">
+                Descrição
+            </label>
+
+            <textarea
+                id="descricao"
+                name="descricao"
+                class="textarea-cadastro"
+                placeholder="Digite a descrição da categoria..."
+            ></textarea>
+
+        </div>
+
+
+        <!-- BOTÕES -->
+        <div class="form-acoes">
+
+            <a
+                href="/admin/categorias"
+                class="btn-form-cancelar"
+            >
+                CANCELAR
+            </a>
+
+            <button
+                type="submit"
+                class="btn-form-salvar"
+            >
+                CADASTRAR
+            </button>
+
+        </div>
+
+    </form>
+
+</main>
+
+
+<%- include('../partials/footer') %>

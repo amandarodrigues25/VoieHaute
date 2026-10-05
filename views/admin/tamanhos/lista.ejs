@@ -1,0 +1,100 @@
+<%- include('../partials/header') %>
+    <%- include('../partials/menu') %>
+
+        <main class="admin-lista">
+
+            <!-- CABEÇALHO -->
+            <div class="lista-cabecalho">
+
+                <div class="lista-titulo-area">
+
+                    <img src="/uploads/Admin/tape-measure(mais escura).png" class="lista-titulo-icone" alt="">
+
+                    <div>
+                        <span class="lista-superior">TAMANHOS</span>
+
+                        <h1>Tamanhos</h1>
+
+                        <p>
+                            Cadastre e consulte os tamanhos disponíveis para as joias.
+                        </p>
+                    </div>
+
+                </div>
+
+                <a href="/admin/tamanhos/form-cadastrar" class="btn-novo-admin">
+                    Novo
+                </a>
+
+            </div>
+
+
+            <!-- TABELA -->
+            <div class="tabela-admin tabela-cadastro">
+
+                <div class="table-responsive">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tamanho</th>
+                                <th>Descrição</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <% tamanhos.forEach(tamanho=> { %>
+
+                                <tr>
+
+                                    <td>
+                                        <%= tamanho.id %>
+                                    </td>
+
+                                    <td>
+                                        <%= tamanho.tamanho %>
+                                    </td>
+
+                                    <td>
+                                        <%= tamanho.descricao %>
+                                    </td>
+
+                                    <td>
+
+                                        <div class="acoes-admin">
+
+                                            <a href="/admin/tamanhos/editar/<%= tamanho.id %>" class="acao-editar"
+                                                title="Editar">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </a>
+
+                                            <button type="button" class="acao-excluir" data-bs-toggle="modal"
+                                                data-bs-target="#modalExcluir" data-nome="<%= tamanho.tamanho %>"
+                                                data-url="/admin/tamanhos/excluir/<%= tamanho.id %>" title="Excluir">
+                                                <i class="bi bi-trash3"></i>
+                                            </button>
+
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+
+                                <% }) %>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </main>
+
+        <%- include('../partials/modal-excluir') %>
+        <%- include('../partials/footer') %>

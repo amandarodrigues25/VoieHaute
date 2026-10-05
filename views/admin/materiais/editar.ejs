@@ -1,0 +1,104 @@
+<%- include('../partials/header') %>
+<%- include('../partials/menu') %>
+
+
+<main class="admin-form">
+
+    <!-- CAMINHO -->
+    <div class="form-caminho">
+        <span>Materiais</span>
+        <span>›</span>
+        <span>Editar Material</span>
+    </div>
+
+
+    <!-- TÍTULO -->
+    <div class="form-titulo">
+
+        <img
+            src="/uploads/Admin/aco(mais escura).png"
+            class="form-titulo-icone"
+            alt=""
+        >
+
+        <div>
+
+            <h1>Editar Material</h1>
+
+            <p>
+                Atualize as informações do material.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- FORMULÁRIO -->
+    <form
+        action="/admin/materiais/editar/<%= material.id %>"
+        method="POST"
+        class="form-admin"
+    >
+
+        <!-- NOME -->
+        <div class="campo-admin">
+
+            <label for="nome">
+                Nome do Material
+            </label>
+
+            <input
+                type="text"
+                id="nome"
+                name="nome"
+                value="<%= material.nome %>"
+                required
+            >
+
+        </div>
+
+
+        <!-- DESCRIÇÃO -->
+        <div class="campo-admin campo-admin-espaco">
+
+            <label for="descricao">
+                Descrição
+            </label>
+
+            <textarea
+                id="descricao"
+                name="descricao"
+                class="textarea-cadastro"
+                placeholder="Digite a descrição do material..."
+            ><%= material.descricao %></textarea>
+
+        </div>
+
+
+        <!-- BOTÕES -->
+        <div class="form-acoes">
+
+            <a
+                href="/admin/materiais"
+                class="btn-form-cancelar"
+            >
+                CANCELAR
+            </a>
+
+
+            <button
+                type="submit"
+                class="btn-form-salvar"
+            >
+                SALVAR ALTERAÇÃO
+            </button>
+
+        </div>
+
+    </form>
+
+</main>
+
+
+<%- include('../partials/footer') %>

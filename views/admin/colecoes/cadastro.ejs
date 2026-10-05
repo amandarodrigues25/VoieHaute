@@ -1,0 +1,175 @@
+<%- include('../partials/header') %>
+<%- include('../partials/menu') %>
+
+
+<main class="admin-form">
+
+    <!-- CAMINHO -->
+    <div class="form-caminho">
+        <span>Coleções</span>
+        <span>›</span>
+        <span>Nova Coleção</span>
+    </div>
+
+
+    <!-- TÍTULO -->
+    <div class="form-titulo">
+
+        <img
+            src="/uploads/Admin/collection(mais escura).png"
+            class="form-titulo-icone"
+            alt=""
+        >
+
+        <div>
+
+            <h1>Coleções</h1>
+
+            <p>
+                Preencha as informações para adicionar uma nova coleção.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- FORMULÁRIO -->
+    <form
+        action="/admin/colecoes/cadastrar"
+        method="POST"
+        enctype="multipart/form-data"
+        class="form-admin"
+    >
+
+        <div class="row g-3">
+
+            <!-- LADO ESQUERDO -->
+            <div class="col-md-6">
+
+                <div class="campo-admin">
+
+                    <label for="nome">
+                        Nome da Coleção
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nome"
+                        name="nome"
+                        placeholder="Digite o nome da coleção"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo-admin campo-admin-espaco">
+
+                    <label for="descricao">
+                        Descrição
+                    </label>
+
+                    <textarea
+                        id="descricao"
+                        name="descricao"
+                        class="textarea-cadastro"
+                        placeholder="Digite a descrição da coleção..."
+                    ></textarea>
+
+                </div>
+
+            </div>
+
+
+            <!-- LADO DIREITO - IMAGEM -->
+            <div class="col-md-6">
+
+                <div class="campo-admin campo-imagem">
+
+                    <label for="imagem" class="upload-produto">
+
+                        <div
+                            class="upload-conteudo"
+                            id="uploadConteudo"
+                        >
+                            <i class="bi bi-upload"></i>
+
+                            <span>
+                                Clique para selecionar a<br>
+                                imagem da coleção
+                            </span>
+                        </div>
+
+                        <img
+                            id="previewImagem"
+                            class="preview-imagem"
+                            alt="Prévia da imagem"
+                        >
+
+                    </label>
+
+                    <input
+                        type="file"
+                        id="imagem"
+                        name="imagem"
+                        accept="image/*"
+                    >
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- BOTÕES -->
+        <div class="form-acoes">
+
+            <a
+                href="/admin/colecoes"
+                class="btn-form-cancelar"
+            >
+                CANCELAR
+            </a>
+
+            <button
+                type="submit"
+                class="btn-form-salvar"
+            >
+                CADASTRAR
+            </button>
+
+        </div>
+
+    </form>
+
+</main>
+
+
+<script>
+
+    const inputImagem = document.getElementById('imagem');
+    const previewImagem = document.getElementById('previewImagem');
+    const uploadConteudo = document.getElementById('uploadConteudo');
+
+    inputImagem.addEventListener('change', function () {
+
+        const arquivo = this.files[0];
+
+        if (arquivo) {
+
+            previewImagem.src = URL.createObjectURL(arquivo);
+
+            previewImagem.style.display = 'block';
+
+            uploadConteudo.style.display = 'none';
+
+        }
+
+    });
+
+</script>
+
+
+<%- include('../partials/footer') %>

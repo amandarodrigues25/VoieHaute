@@ -1,0 +1,76 @@
+<!-- MODAL DE EXCLUSÃO -->
+<div class="modal fade" id="modalExcluir" tabindex="-1" aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content modal-excluir-admin">
+
+            <!-- ÍCONE -->
+            <div class="modal-excluir-icone">
+                <i class="bi bi-trash3"></i>
+            </div>
+
+
+            <!-- TÍTULO -->
+            <h2>
+                Confirmar exclusão
+            </h2>
+
+
+            <!-- TEXTO -->
+            <p>
+                Tem certeza que deseja excluir
+                <strong id="nomeItemExcluir"></strong>?
+            </p>
+
+            <span class="modal-excluir-aviso">
+                Esta ação não poderá ser desfeita.
+            </span>
+
+
+            <!-- BOTÕES -->
+            <div class="modal-excluir-acoes">
+
+                <button
+                    type="button"
+                    class="btn-modal-cancelar"
+                    data-bs-dismiss="modal"
+                >
+                    CANCELAR
+                </button>
+
+                <a
+                    href="#"
+                    id="btnConfirmarExclusao"
+                    class="btn-modal-excluir"
+                >
+                    EXCLUIR
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    const modalExcluir = document.getElementById('modalExcluir');
+
+    modalExcluir.addEventListener('show.bs.modal', function (event) {
+
+        const botao = event.relatedTarget;
+
+        const nome = botao.getAttribute('data-nome');
+        const url = botao.getAttribute('data-url');
+
+        document.getElementById('nomeItemExcluir').textContent = nome;
+
+        document.getElementById('btnConfirmarExclusao').href = url;
+
+    });
+
+</script>

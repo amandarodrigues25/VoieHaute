@@ -1,0 +1,103 @@
+<%- include('../partials/header') %>
+<%- include('../partials/menu') %>
+
+
+<main class="admin-form">
+
+    <!-- CAMINHO -->
+    <div class="form-caminho">
+        <span>Tamanhos</span>
+        <span>›</span>
+        <span>Novo Tamanho</span>
+    </div>
+
+
+    <!-- TÍTULO -->
+    <div class="form-titulo">
+
+        <img
+            src="/uploads/Admin/tape-measure(mais escura).png"
+            class="form-titulo-icone"
+            alt=""
+        >
+
+        <div>
+
+            <h1>Tamanhos</h1>
+
+            <p>
+                Preencha as informações para adicionar um novo tamanho.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- FORMULÁRIO -->
+    <form
+        action="/admin/tamanhos/cadastrar"
+        method="POST"
+        class="form-admin"
+    >
+
+        <!-- TAMANHO -->
+        <div class="campo-admin">
+
+            <label for="tamanho">
+                Tamanho
+            </label>
+
+            <input
+                type="text"
+                id="tamanho"
+                name="tamanho"
+                placeholder="Digite o tamanho"
+                required
+            >
+
+        </div>
+
+
+        <!-- DESCRIÇÃO -->
+        <div class="campo-admin campo-admin-espaco">
+
+            <label for="descricao">
+                Descrição
+            </label>
+
+            <textarea
+                id="descricao"
+                name="descricao"
+                class="textarea-cadastro"
+                placeholder="Digite a descrição do tamanho..."
+            ></textarea>
+
+        </div>
+
+
+        <!-- BOTÕES -->
+        <div class="form-acoes">
+
+            <a
+                href="/admin/tamanhos"
+                class="btn-form-cancelar"
+            >
+                CANCELAR
+            </a>
+
+            <button
+                type="submit"
+                class="btn-form-salvar"
+            >
+                CADASTRAR
+            </button>
+
+        </div>
+
+    </form>
+
+</main>
+
+
+<%- include('../partials/footer') %>

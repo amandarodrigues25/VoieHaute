@@ -1,0 +1,162 @@
+<%- include('../partials/header') %>
+    <%- include('../partials/menu') %>
+
+        <main class="admin-lista">
+
+            <!-- CABEÇALHO -->
+            <div class="lista-cabecalho">
+
+                <div class="lista-titulo-area">
+
+                    <img src="/uploads/Admin/caixa mais escura.png" class="lista-titulo-icone" alt="">
+
+                    <div>
+                        <span class="lista-superior">PRODUTOS</span>
+
+                        <h1>Produtos</h1>
+
+                        <p>
+                            Cadastre e consulte os produtos disponíveis na loja.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <a href="/admin/produtos/form-cadastrar" class="btn-novo-admin">
+                    Novo
+                </a>
+
+            </div>
+
+
+            <!-- TABELA -->
+            <div class="tabela-admin">
+
+                <div class="table-responsive">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Imagem</th>
+                                <th>Nome</th>
+                                <th>Categoria</th>
+                                <th>Material</th>
+                                <th>Pedra</th>
+                                <th>Coleção</th>
+                                <th>Tamanho</th>
+                                <th>Estoque</th>
+                                <th>Valor</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <% produtos.forEach(produto=> { %>
+
+                                <tr>
+
+                                    <td>
+                                        <%= produto.id %>
+                                    </td>
+
+
+                                    <td>
+
+                                        <% if (produto.imagem) { %>
+
+                                            <img src="/uploads/<%= produto.imagem %>" class="produto-lista-img"
+                                                alt="<%= produto.nome %>">
+
+                                            <% } else { %>
+
+                                                <span class="sem-imagem">
+                                                    Sem imagem
+                                                </span>
+
+                                                <% } %>
+
+                                    </td>
+
+
+                                    <td>
+                                        <%= produto.nome %>
+                                    </td>
+
+
+                                    <td>
+                                        <%= produto.categoria %>
+                                    </td>
+
+
+                                    <td>
+                                        <%= produto.material %>
+                                    </td>
+
+
+                                    <td>
+                                        <%= produto.pedra %>
+                                    </td>
+
+
+                                    <td>
+                                        <%= produto.colecao %>
+                                    </td>
+
+
+                                    <td>
+                                        <%= produto.tamanho %>
+                                    </td>
+
+
+                                    <td>
+                                        <%= produto.estoque %>
+                                    </td>
+
+
+                                    <td class="produto-valor">
+                                        R$ <%= Number(produto.valor).toLocaleString('pt-BR', { minimumFractionDigits: 2,
+                                            maximumFractionDigits: 2 }) %>
+                                    </td>
+
+
+                                    <td>
+
+                                        <div class="acoes-admin">
+
+                                            <!-- EDITAR -->
+                                            <a href="/admin/produtos/editar/<%= produto.id %>" class="acao-editar"
+                                                title="Editar">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </a>
+
+
+                                            <!-- EXCLUIR -->
+                                            <button type="button" class="acao-excluir" data-bs-toggle="modal"
+                                                data-bs-target="#modalExcluir" data-nome="<%= produto.nome %>"
+                                                data-url="/admin/produtos/excluir/<%= produto.id %>" title="Excluir">
+                                                <i class="bi bi-trash3"></i>
+                                            </button>
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+
+                                <% }) %>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </main>
+
+        <%- include('../partials/modal-excluir') %>
+            <%- include('../partials/footer') %>

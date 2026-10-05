@@ -1,0 +1,115 @@
+<%- include('partials/header') %>
+
+<main class="login-admin">
+
+    <!-- LADO ESQUERDO -->
+    <section class="login-imagem">
+        <img
+            src="/uploads/Admin/login-pavao.png"
+            alt="VoieHaute"
+        >
+    </section>
+
+
+    <!-- LADO DIREITO -->
+    <section class="login-conteudo">
+
+        <div class="login-formulario">
+
+            <!-- ÁREA ADMINISTRATIVA -->
+            <div class="login-superior">
+                <span>ÁREA ADMINISTRATIVA</span>
+
+                <div class="login-detalhe">
+                    <span></span>
+                    <span class="login-brilho">✦</span>
+                    <span></span>
+                </div>
+            </div>
+
+
+            <!-- TÍTULO -->
+            <div class="login-titulo">
+                <h1>Bem-vindo de volta</h1>
+                <p>Acesse o painel da VoieHaute</p>
+            </div>
+
+
+            <!-- FORM -->
+            <form action="/admin/login" method="POST">
+
+                <!-- EMAIL -->
+                <div class="login-campo">
+
+                    <label for="email">E-MAIL</label>
+
+                    <div class="login-input">
+                        <i class="bi bi-envelope"></i>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="seuemail@email.com"
+                            required
+                        >
+                    </div>
+
+                </div>
+
+
+                <!-- SENHA -->
+                <div class="login-campo">
+
+                    <label for="senha">SENHA</label>
+
+                    <div class="login-input">
+                        <i class="bi bi-lock"></i>
+
+                        <input
+                            type="password"
+                            id="senha"
+                            name="senha"
+                            placeholder="Sua senha"
+                            required
+                        >
+                    </div>
+
+                    <% if (erro) { %>
+
+                        <div class="login-erro">
+                            <i class="bi bi-exclamation-circle"></i>
+                            <%= erro %>
+                        </div>
+
+                    <% } %>
+
+                </div>
+
+
+                <!-- BOTÃO -->
+                <button type="submit" class="btn-login-admin">
+                    ENTRAR
+                </button>
+
+            </form>
+
+
+            <!-- DETALHE INFERIOR -->
+            <div class="login-rodape">
+
+                <div class="login-detalhe">
+                    <span></span>
+                    <span class="login-brilho">✦</span>
+                    <span></span>
+                </div>
+
+                <p>Acesso restrito</p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
