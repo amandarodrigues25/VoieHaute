@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Anéis | VoieHaute</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+    <%- include('partials/header') %>
+
+
+        <main class="pagina-joia">
+
+            <!-- ================================
+             ABERTURA
+        ================================= -->
+
+            <section class="joia-abertura">
+
+                <div class="joia-abertura-imagem">
+                    <img src="/uploads/aneis-capa.jpg" alt="Coleção de anéis VoieHaute">
+                </div>
+
+
+                <div class="joia-abertura-texto">
+
+                    <div class="produto-caminho">
+
+
+                        <a href="/">
+                            Home
+                        </a>
+
+                        <span>✦</span>
+
+                        <a href="/joias/aneis" class="atual">
+                            Anéis
+                        </a>
+                    </div>
+
+                    <div class="joia-eyebrow">
+                        <span></span>
+                        <p>JOIAS</p>
+                        <span></span>
+                    </div>
+
+                    <h1>ANEL</h1>
+
+                    <p class="joia-descricao">
+                        Os anéis VoieHaute são criações de presença singular, concebidas para transformar cada gesto em
+                        uma expressão de elegância. Pedras preciosas excepcionais, diamantes luminosos e metais nobres
+                        se encontram em composições que exploram diferentes lapidações, volumes e formas, dos desenhos
+                        mais delicados às peças de impacto marcante. Cada anel valoriza as mãos e revela uma
+                        personalidade própria, tornando-se uma escolha especial para celebrar momentos inesquecíveis ou
+                        simplesmente carregar consigo uma joia extraordinária, feita para ser desejada, admirada e
+                        eternizada.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================================
+             VITRINE INTERATIVA
+        ================================= -->
+
+            <% if (aneis && aneis.length> 0) { %>
+
+                <section class="joia-vitrine">
+
+                    <!-- FUNDO ESQUERDO / MODELO -->
+
+                    <div class="joia-vitrine-fundo joia-vitrine-fundo-modelo">
+                        <img src="/uploads/fundo-modelo.png" alt="">
+                    </div>
+
+
+                    <!-- FUNDO DIREITO / PRODUTO -->
+
+                    <div class="joia-vitrine-fundo joia-vitrine-fundo-produto">
+                        <img src="/uploads/fundo-produto.png" alt="">
+                    </div>
+
+
+                    <!-- LISTA -->
+
+                    <div class="joia-vitrine-lista">
+
+                        <div class="joia-vitrine-titulo">
+                            <span></span>
+                            <h2>NOSSOS ANÉIS</h2>
+                            <span></span>
+                        </div>
+
+                        <div class="joia-vitrine-nomes">
+
+                            <% aneis.forEach((anel, index)=> { %>
+
+                                <button type="button" class="joia-vitrine-nome <%= index === 0 ? 'ativo' : '' %>"
+                                    data-index="<%= index %>" data-id="<%= anel.id %>" data-nome="<%= anel.nome %>"
+                                    data-valor="<%= anel.valor %>" data-modelo="<%= anel.modelo_categoria || '' %>"
+                                    data-produto="<%= anel.produto_categoria || '' %>">
+                                    <%= anel.nome %>
+                                </button>
+
+                                <% }) %>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- MODELO -->
+
+                    <div class="joia-vitrine-modelo">
+
+                        <img id="vitrineModeloAtual" class="vitrine-camada"
+                            src="<%= aneis[0].modelo_categoria ? '/uploads/' + aneis[0].modelo_categoria : '' %>"
+                            alt="<%= aneis[0].nome %>" <%=aneis[0].modelo_categoria ? '' : 'style="display:none;"' %>
+                        >
+
+                        <img id="vitrineModeloProxima" class="vitrine-camada" src="" alt="" style="display:none;">
+
+                    </div>
+
+                    <!-- PRODUTO -->
+
+                    <div class="joia-vitrine-produto">
+
+                        <div class="joia-vitrine-produto-imagem">
+
+                            <img id="vitrineProdutoAtual" class="vitrine-camada"
+                                src="<%= aneis[0].produto_categoria ? '/uploads/' + aneis[0].produto_categoria : '' %>"
+                                alt="<%= aneis[0].nome %>" <%=aneis[0].produto_categoria ? '' : 'style="display:none;"'
+                                %>
+                            >
+
+                            <img id="vitrineProdutoProximo" class="vitrine-camada" src="" alt="" style="display:none;">
+
+                        </div>
+
+
+                        <div class="joia-vitrine-info">
+
+                            <h3 id="vitrineNome">
+                                <%= aneis[0].nome %>
+                            </h3>
+
+                            <p id="vitrinePreco">
+                                R$ <%= Number(aneis[0].valor).toLocaleString('pt-BR', { minimumFractionDigits: 2,
+                                    maximumFractionDigits: 2 }) %>
+                            </p>
+
+                            <a href="/produto/<%= aneis[0].id %>" id="vitrineDetalhes">
+                                VER DETALHES
+                            </a>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SETAS -->
+
+                    <div class="joia-vitrine-setas">
+
+                        <button type="button" id="vitrineAnterior" aria-label="Anel anterior">
+                            <i class="bi bi-chevron-up"></i>
+                        </button>
+
+                        <div></div>
+
+                        <button type="button" id="vitrineProximo" aria-label="Próximo anel">
+                            <i class="bi bi-chevron-down"></i>
+                        </button>
+
+                    </div>
+
+                </section>
+
+                <% } %>
+
+        </main>
+
+
+        <%- include('partials/footer') %>
+
+
+            <script>
+                let anelAtual = 0;
+                let animandoVitrine = false;
+
+                const nomesVitrine =
+                    document.querySelectorAll('.joia-vitrine-nome');
+
+                let modeloAtual =
+                    document.getElementById('vitrineModeloAtual');
+
+                let modeloProxima =
+                    document.getElementById('vitrineModeloProxima');
+
+                let produtoAtual =
+                    document.getElementById('vitrineProdutoAtual');
+
+                let produtoProximo =
+                    document.getElementById('vitrineProdutoProximo');
+
+                const vitrineNome =
+                    document.getElementById('vitrineNome');
+
+                const vitrinePreco =
+                    document.getElementById('vitrinePreco');
+
+                const vitrineDetalhes =
+                    document.getElementById('vitrineDetalhes');
+
+                const botaoAnterior =
+                    document.getElementById('vitrineAnterior');
+
+                const botaoProximo =
+                    document.getElementById('vitrineProximo');
+
+                const vitrineJoia =
+                    document.querySelector('.joia-vitrine');
+
+                const vitrineInfo = document.querySelector('.joia-vitrine-info');
+
+
+                function formatarPreco(valor) {
+                    return Number(valor).toLocaleString('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL'
+                    });
+                }
+
+
+                function trocarAnel(novoIndex, direcaoForcada = null) {
+
+                    if (animandoVitrine || novoIndex === anelAtual) {
+                        return;
+                    }
+
+                    let direcao = direcaoForcada;
+
+                    if (!direcao) {
+                        direcao = novoIndex > anelAtual
+                            ? 'baixo'
+                            : 'cima';
+                    }
+
+                    if (novoIndex >= nomesVitrine.length) {
+                        novoIndex = 0;
+                        direcao = 'baixo';
+                    }
+
+                    if (novoIndex < 0) {
+                        novoIndex = nomesVitrine.length - 1;
+                        direcao = 'cima';
+                    }
+
+                    animandoVitrine = true;
+
+                    const item =
+                        nomesVitrine[novoIndex];
+
+                    const id =
+                        item.dataset.id;
+
+                    const nome =
+                        item.dataset.nome;
+
+                    const valor =
+                        item.dataset.valor;
+
+                    const modelo =
+                        item.dataset.modelo;
+
+                    const produto =
+                        item.dataset.produto;
+
+
+
+
+                    /* ===============================
+                       PREPARA AS NOVAS IMAGENS
+                    =============================== */
+
+                    if (modelo) {
+                        modeloProxima.src = '/uploads/' + modelo;
+                        modeloProxima.style.display = 'block';
+                    } else {
+                        modeloProxima.style.display = 'none';
+                    }
+
+                    if (produto) {
+                        produtoProximo.src = '/uploads/' + produto;
+                        produtoProximo.style.display = 'block';
+                    } else {
+                        produtoProximo.style.display = 'none';
+                    }
+
+
+                    modeloAtual.style.transition = 'none';
+                    modeloProxima.style.transition = 'none';
+                    produtoAtual.style.transition = 'none';
+                    produtoProximo.style.transition = 'none';
+
+
+                    if (direcao === 'baixo') {
+
+                        /* MULHER NOVA VEM DE CIMA */
+                        modeloProxima.style.transform =
+                            'translateY(-100%)';
+
+                        /* JOIA NOVA VEM DE BAIXO */
+                        produtoProximo.style.transform =
+                            'translateY(100%)';
+
+                    } else {
+
+                        /* MULHER NOVA VEM DE BAIXO */
+                        modeloProxima.style.transform =
+                            'translateY(100%)';
+
+                        /* JOIA NOVA VEM DE CIMA */
+                        produtoProximo.style.transform =
+                            'translateY(-100%)';
+                    }
+
+
+                    void modeloProxima.offsetHeight;
+                    void produtoProximo.offsetHeight;
+
+
+                    modeloAtual.style.transition =
+                        'transform 0.6s ease';
+
+                    modeloProxima.style.transition =
+                        'transform 0.6s ease';
+
+                    produtoAtual.style.transition =
+                        'transform 0.6s ease';
+
+                    produtoProximo.style.transition =
+                        'transform 0.6s ease';
+
+                    vitrineInfo.style.transition =
+                        'transform 0.6s ease, opacity 0.6s ease';
+
+
+                    /* ===============================
+                       EXECUTA O MOVIMENTO
+                    =============================== */
+
+                    if (direcao === 'baixo') {
+
+                        /* MULHER ATUAL DESCE */
+                        modeloAtual.style.transform =
+                            'translateY(100%)';
+
+                        modeloProxima.style.transform =
+                            'translateY(0)';
+
+
+                        /* JOIA ATUAL SOBE */
+                        produtoAtual.style.transform =
+                            'translateY(-100%)';
+
+                        produtoProximo.style.transform =
+                            'translateY(0)';
+
+                        vitrineInfo.style.transform =
+                            'translateY(-100%)';
+
+                        vitrineInfo.style.opacity = '0';
+
+                    } else {
+
+                        /* MULHER ATUAL SOBE */
+                        modeloAtual.style.transform =
+                            'translateY(-100%)';
+
+                        modeloProxima.style.transform =
+                            'translateY(0)';
+
+
+                        /* JOIA ATUAL DESCE */
+                        produtoAtual.style.transform =
+                            'translateY(100%)';
+
+                        produtoProximo.style.transform =
+                            'translateY(0)';
+
+                        produtoAtual.style.transform =
+                            'translateY(100%)';
+
+                        produtoProximo.style.transform =
+                            'translateY(0)';
+                    }
+
+
+
+                    /* NOME SELECIONADO */
+
+                    nomesVitrine.forEach((nomeItem, indice) => {
+                        nomeItem.classList.toggle(
+                            'ativo',
+                            indice === novoIndex
+                        );
+                    });
+
+
+                    setTimeout(() => {
+
+
+                        vitrineInfo.style.transition = 'none';
+
+                        if (direcao === 'baixo') {
+                            vitrineInfo.style.transform = 'translateY(100%)';
+                        } else {
+                            vitrineInfo.style.transform = 'translateY(-100%)';
+                        }
+
+                        vitrineNome.textContent = nome;
+                        vitrinePreco.textContent = formatarPreco(valor);
+                        vitrineDetalhes.href = '/produto/' + id;
+
+                        void vitrineInfo.offsetHeight;
+
+                        vitrineInfo.style.transition =
+                            'transform 0.6s ease, opacity 0.6s ease';
+
+                        vitrineInfo.style.opacity = '1';
+                        vitrineInfo.style.transform = 'translateY(0)';
+
+                        /* TROCA AS CAMADAS */
+
+                        const modeloVelho = modeloAtual;
+                        modeloAtual = modeloProxima;
+                        modeloProxima = modeloVelho;
+
+                        const produtoVelho = produtoAtual;
+                        produtoAtual = produtoProximo;
+                        produtoProximo = produtoVelho;
+
+
+                        modeloProxima.style.display = 'none';
+                        produtoProximo.style.display = 'none';
+
+                        modeloAtual.style.transition = 'none';
+                        produtoAtual.style.transition = 'none';
+
+                        modeloAtual.style.transform = 'translateY(0)';
+                        produtoAtual.style.transform = 'translateY(0)';
+
+                        anelAtual = novoIndex;
+                        animandoVitrine = false;
+
+                    }, 600);
+                }
+
+
+                /* CLIQUE NOS NOMES */
+
+                nomesVitrine.forEach((item, index) => {
+
+                    item.addEventListener('click', () => {
+
+                        if (index === anelAtual) {
+                            return;
+                        }
+
+                        trocarAnel(
+                            index,
+                            index > anelAtual ? 'baixo' : 'cima'
+                        );
+                    });
+
+                });
+
+
+                /* SETA PARA CIMA */
+
+                botaoAnterior?.addEventListener('click', () => {
+                    trocarAnel(anelAtual - 1, 'cima');
+                });
+
+
+                /* SETA PARA BAIXO */
+
+                botaoProximo?.addEventListener('click', () => {
+                    trocarAnel(anelAtual + 1, 'baixo');
+                });
+
+
+                /* SCROLL */
+
+                vitrineJoia?.addEventListener('wheel', function (event) {
+
+                    event.preventDefault();
+
+                    if (animandoVitrine) {
+                        return;
+                    }
+
+                    if (event.deltaY > 0) {
+
+                        trocarAnel(
+                            anelAtual + 1,
+                            'baixo'
+                        );
+
+                    } else {
+
+                        trocarAnel(
+                            anelAtual - 1,
+                            'cima'
+                        );
+                    }
+
+                }, { passive: false });
+            </script>
+
+</body>
+
+</html>

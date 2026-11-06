@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Première Lumière | VoieHaute</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+    <%- include('partials/header') %>
+
+
+        <!-- =================================================
+         HERO — JARDIN DES ROIS
+    ================================================== -->
+
+        <section class="colecao-hero">
+            <video class="colecao-hero-video" autoplay muted loop playsinline>
+                <source src="/uploads/premierelumiere-hero.mp4" type="video/mp4">
+            </video>
+        </section>
+
+
+        <!-- =================================================
+     APRESENTAÇÃO DA COLEÇÃO
+================================================== -->
+
+        <section class="colecao-apresentacao">
+
+            <div class="colecao-apresentacao-texto">
+
+                <div class="colecao-eyebrow">
+                    <span></span>
+                    <p>A COLEÇÃO</p>
+                    <span></span>
+                </div>
+
+                <h2>PREMIÈRE LUMIÈRE</h2>
+
+                <p class="colecao-apresentacao-descricao">
+                    Inspirada nos primeiros raios do amanhecer, Première Lumière
+                    transforma a delicadeza da luz em alta joalheria. Safiras
+                    Padparadscha, diamantes e ouro rosé se encontram em criações
+                    luminosas, onde tons suaves e reflexos preciosos evocam
+                    renovação, feminilidade e a beleza de um novo começo.
+                </p>
+
+            </div>
+
+
+            <div class="colecao-apresentacao-imagem">
+
+                <img src="/uploads/premierelumiere-colecao.png" alt="Coleção Première Lumière">
+
+        </section>
+
+
+        <!-- =================================================
+     CRIAÇÕES DA COLEÇÃO
+================================================== -->
+
+        <section class="colecao-criacoes">
+
+            <div class="colecao-criacoes-cabecalho">
+
+                <div class="colecao-criacoes-eyebrow">
+                    <span></span>
+                    <p>PREMIÈRE LUMIÈRE</p>
+                    <span></span>
+                </div>
+
+                <h2>Criações da Coleção</h2>
+
+            </div>
+
+
+            <div class="colecao-criacoes-carrossel">
+
+                <button type="button" class="colecao-criacoes-seta colecao-criacoes-seta-esquerda" id="colecaoAnterior"
+                    aria-label="Produto anterior">
+                    ‹
+                </button>
+
+
+                <div class="colecao-criacoes-viewport">
+
+                    <div class="colecao-criacoes-trilho" id="colecaoTrilho">
+
+                        <% produtos.forEach(produto=> { %>
+
+                            <a href="/produto/<%= produto.id %>" class="colecao-criacao-card">
+
+                                <div
+                                    class="colecao-criacao-imagem <%= produto.imagem_secundaria ? 'tem-secundaria' : '' %>">
+
+                                    <img class="colecao-criacao-foto colecao-criacao-foto-principal"
+                                        src="/uploads/<%= produto.imagem %>" alt="<%= produto.nome %>">
+
+                                    <% if (produto.imagem_secundaria) { %>
+
+                                        <img class="colecao-criacao-foto colecao-criacao-foto-secundaria"
+                                            src="/uploads/<%= produto.imagem_secundaria %>" alt="<%= produto.nome %>">
+
+                                        <% } %>
+
+                                </div>
+
+
+                                <div class="colecao-criacao-info">
+
+                                    <h3>
+                                        <%= produto.nome %>
+                                    </h3>
+
+                                    <p>
+                                        <%= Number(produto.valor).toLocaleString( 'pt-BR' , { style: 'currency' ,
+                                            currency: 'BRL' } ) %>
+                                    </p>
+
+                                </div>
+
+                            </a>
+
+                            <% }) %>
+
+                    </div>
+
+                </div>
+
+
+                <button type="button" class="colecao-criacoes-seta colecao-criacoes-seta-direita" id="colecaoProximo"
+                    aria-label="Próximo produto">
+                    ›
+                </button>
+
+            </div>
+
+        </section>
+
+        <!-- =================================================
+     INSPIRAÇÃO DA COLEÇÃO
+================================================== -->
+
+        <section class="colecao-inspiracao">
+
+            <div class="colecao-inspiracao-imagem">
+                <img src="/uploads/premierelumiere-inspiracao.png" alt="Inspiração da coleção Première Lumière">
+            </div>
+
+            <div class="colecao-inspiracao-texto">
+
+                <div class="colecao-eyebrow">
+                    <span></span>
+                    <p>A INSPIRAÇÃO</p>
+                    <span></span>
+                </div>
+
+                <h2>
+                    O AMANHECER<br>
+                    COMO SÍMBOLO DE<br>
+                    RENASCIMENTO
+                </h2>
+
+                <p>
+                    Première Lumière nasce do instante em que os primeiros raios
+                    de sol atravessam um jardim e despertam suas cores. Entre flores
+                    cobertas pela orvalhada, tecidos leves e tons rosados no horizonte,
+                    a coleção encontra inspiração na delicadeza de um novo começo.
+                    A luminosidade da Safira Padparadscha, os reflexos dos diamantes
+                    Rose e a suavidade do Ouro Rosé dão forma a criações que unem
+                    ternura, renascimento e luz.
+                </p>
+
+            </div>
+
+        </section>
+
+        <!-- =================================================
+     DA IDEIA À JOIA
+================================================== -->
+
+        <section class="colecao-processo">
+
+            <div class="colecao-processo-cabecalho">
+
+                <div class="colecao-eyebrow">
+                    <span></span>
+                    <p>DA IDEIA À JOIA</p>
+                    <span></span>
+                </div>
+
+                <h2>A Luz Transformada em Alta Joalheria</h2>
+
+            </div>
+
+
+            <div class="colecao-processo-grid">
+
+                <!-- O TRAÇO -->
+
+                <div class="colecao-processo-item">
+
+                    <div class="colecao-processo-imagem">
+                        <img src="/uploads/premierelumiere-traco.png" alt="O Traço — Première Lumière">
+                    </div>
+
+                    <h3>O TRAÇO</h3>
+
+                    <p>
+                        Desenhos inspirados em pétalas, flores e nos primeiros
+                        raios do amanhecer dão origem a formas delicadas e luminosas.
+                    </p>
+
+                </div>
+
+
+                <!-- O DIAMANTE -->
+
+                <div class="colecao-processo-item">
+
+                    <div class="colecao-processo-imagem">
+                        <img src="/uploads/premierelumiere-padparadscha.png" alt="A Padparadscha">
+                    </div>
+
+                    <h3>A PADPARADSCHA</h3>
+
+                    <p>
+                        Safiras Padparadscha são selecionadas por seus raros tons
+                        entre rosa e pêssego, que evocam as cores da primeira luz.
+                    </p>
+
+                </div>
+
+
+                <!-- A FORMA -->
+
+                <div class="colecao-processo-item">
+
+                    <div class="colecao-processo-imagem">
+                        <img src="/uploads/premierelumiere-forma.png" alt="A Forma">
+                    </div>
+
+                    <h3>A FORMA</h3>
+
+                    <p>
+                        O trabalho artesanal une Ouro Rosé 18k, Safiras Padparadscha
+                        e diamantes em composições florais concebidas para eternizar
+                        a beleza do amanhecer.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- =================================================
+     BANNER EDITORIAL
+================================================== -->
+
+        <section class="colecao-banner">
+            <img src="/uploads/premierelumiere-banner.png"
+                alt="Première Lumière — Safiras Padparadscha, diamantes rosé e ouro rosé 18k">
+
+            <!-- =================================================
+     O LEGADO CONTINUA
+================================================== -->
+
+            <section class="colecao-legado">
+
+                <div class="colecao-legado-cabecalho">
+
+                    <div class="colecao-eyebrow">
+                        <span></span>
+                        <p>O LEGADO CONTINUA</p>
+                        <span></span>
+                    </div>
+
+                    <h2>
+                        Uma História Onde Cada Amanhecer Se Torna Eterno
+                    </h2>
+
+                </div>
+
+
+                <div class="colecao-legado-conteudo">
+
+                    <div class="colecao-legado-texto">
+
+                        <p>
+                            Première Lumière nasce daquele breve instante em que a noite
+                            termina e os primeiros raios do amanhecer começam a transformar
+                            o mundo. A luz atravessa as janelas, toca as flores e revela
+                            lentamente tons de rosa, pêssego e dourado — cores que existem
+                            por poucos minutos antes de um novo dia começar.
+                        </p>
+
+                        <p>
+                            É desse momento efêmero que surge a identidade da coleção.
+                            As raras Safiras Padparadscha reproduzem as mesmas nuances do
+                            horizonte, enquanto os diamantes Rose evocam flores iluminadas
+                            pela manhã. O Ouro Rosé 18k envolve cada pedra em formas
+                            delicadas e orgânicas, inspiradas em pétalas que começam
+                            a se abrir com a chegada da luz.
+                        </p>
+
+                        <p>
+                            Cinco criações traduzem diferentes momentos desse despertar,
+                            unindo a delicadeza das flores à precisão da alta joalheria.
+                            Cada peça busca preservar aquilo que o amanhecer possui de mais
+                            especial: uma beleza luminosa, delicada e impossível de repetir
+                            exatamente da mesma forma.
+                        </p>
+
+                        <p>
+                            Première Lumière eterniza o instante em que a primeira luz
+                            transforma o efêmero em inesquecível.
+                        </p>
+
+                    </div>
+
+
+                    <div class="colecao-legado-imagem">
+
+                        <img src="/uploads/premierelumiere-legado.png" alt="O legado da coleção Première Lumière">
+                    </div>
+
+                </div>
+
+            </section>
+
+            <%- include('partials/footer') %>
+
+                <script>
+                    const colecaoTrilho = document.getElementById('colecaoTrilho');
+                    const colecaoAnterior = document.getElementById('colecaoAnterior');
+                    const colecaoProximo = document.getElementById('colecaoProximo');
+
+                    let colecaoPosicao = 0;
+
+                    function atualizarCarrosselColecao() {
+
+                        const cards = document.querySelectorAll('.colecao-criacao-card');
+
+                        if (!cards.length) return;
+
+                        const visiveis = 4;
+                        const maximo = Math.max(0, cards.length - visiveis);
+
+                        if (colecaoPosicao < 0) {
+                            colecaoPosicao = 0;
+                        }
+
+                        if (colecaoPosicao > maximo) {
+                            colecaoPosicao = maximo;
+                        }
+
+                        const card = cards[0];
+
+                        const gap = 18;
+
+                        const deslocamento =
+                            colecaoPosicao * (card.offsetWidth + gap);
+
+                        colecaoTrilho.style.transform =
+                            `translateX(-${deslocamento}px)`;
+                    }
+
+
+                    colecaoProximo?.addEventListener('click', () => {
+                        colecaoPosicao++;
+                        atualizarCarrosselColecao();
+                    });
+
+
+                    colecaoAnterior?.addEventListener('click', () => {
+                        colecaoPosicao--;
+                        atualizarCarrosselColecao();
+                    });
+                </script>
+
+</body>
+
+</html>

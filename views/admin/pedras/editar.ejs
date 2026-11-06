@@ -38,6 +38,7 @@
     <form
         action="/admin/pedras/editar/<%= pedra.id %>"
         method="POST"
+        enctype="multipart/form-data"
         class="form-admin"
     >
 
@@ -71,7 +72,67 @@
                 name="descricao"
                 class="textarea-cadastro"
                 placeholder="Digite a descrição da pedra..."
-            ><%= pedra.descricao %></textarea>
+            ><%= pedra.descricao || '' %></textarea>
+
+        </div>
+
+
+        <!-- IMAGEM -->
+        <div class="campo-admin campo-admin-espaco campo-imagem">
+
+            <label>
+                Imagem da Pedra
+            </label>
+
+            <input
+                type="file"
+                id="imagem"
+                name="imagem"
+                accept="image/*"
+            >
+
+            <label for="imagem" class="upload-produto">
+
+                <% if (pedra.imagem) { %>
+
+                    <!-- IMAGEM ATUAL -->
+                    <img
+                        src="/uploads/<%= pedra.imagem %>"
+                        id="previewImagem"
+                        class="preview-imagem preview-imagem-editar"
+                        alt="Imagem da pedra"
+                    >
+
+                    <!-- ÍCONE PARA TROCAR A IMAGEM -->
+                    <span class="editar-imagem-icone">
+                        <i class="bi bi-pencil"></i>
+                    </span>
+
+                <% } else { %>
+
+                    <!-- CASO A PEDRA AINDA NÃO TENHA IMAGEM -->
+                    <div
+                        class="upload-conteudo"
+                        id="uploadConteudo"
+                    >
+
+                        <i class="bi bi-cloud-arrow-up"></i>
+
+                        <span>
+                            Clique para selecionar uma imagem
+                        </span>
+
+                    </div>
+
+                    <img
+                        id="previewImagem"
+                        class="preview-imagem"
+                        alt="Pré-visualização da imagem"
+                    >
+
+                <% } %>
+
+            </label>
 
         </div>
 
@@ -98,6 +159,32 @@
     </form>
 
 </main>
+
+
+<script>
+
+    const inputImagem = document.getElementById('imagem');
+    const previewImagem = document.getElementById('previewImagem');
+    const uploadConteudo = document.getElementById('uploadConteudo');
+
+    inputImagem.addEventListener('change', function () {
+
+        const arquivo = this.files[0];
+
+        if (arquivo) {
+
+            previewImagem.src = URL.createObjectURL(arquivo);
+            previewImagem.style.display = 'block';
+
+            if (uploadConteudo) {
+                uploadConteudo.style.display = 'none';
+            }
+
+        }
+
+    });
+
+</script>
 
 
 <%- include('../partials/footer') %>

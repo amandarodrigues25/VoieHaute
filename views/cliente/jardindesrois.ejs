@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Jardin des Rois | VoieHaute</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+    <%- include('partials/header') %>
+
+
+        <!-- =================================================
+         HERO — JARDIN DES ROIS
+    ================================================== -->
+
+        <section class="colecao-hero">
+            <video class="colecao-hero-video" autoplay muted loop playsinline>
+                <source src="/uploads/jardindesrois-hero.mp4" type="video/mp4">
+            </video>
+        </section>
+
+
+        <!-- =================================================
+     APRESENTAÇÃO DA COLEÇÃO
+================================================== -->
+
+        <section class="colecao-apresentacao">
+
+            <div class="colecao-apresentacao-texto">
+
+                <div class="colecao-eyebrow">
+                    <span></span>
+                    <p>A COLEÇÃO</p>
+                    <span></span>
+                </div>
+
+                <h2>JARDIN DES ROIS</h2>
+
+                <p class="colecao-apresentacao-descricao">
+                    Inspirada na força indomável dos jardins reais, Jardin des Rois
+                    transforma a natureza em alta joalheria. Esmeraldas colombianas,
+                    diamantes e ouro amarelo se entrelaçam em formas orgânicas, onde
+                    folhas e ramos ocupam poder, mistério e uma beleza majestosa que
+                    não foi feita para ser domada.
+                </p>
+
+            </div>
+
+
+            <div class="colecao-apresentacao-imagem">
+
+                <img src="/uploads/jardindesrois-colecao.png" alt="Coleção Jardin des Rois">
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+     CRIAÇÕES DA COLEÇÃO
+================================================== -->
+
+        <section class="colecao-criacoes">
+
+            <div class="colecao-criacoes-cabecalho">
+
+                <div class="colecao-criacoes-eyebrow">
+                    <span></span>
+                    <p>JARDIN DES ROIS</p>
+                    <span></span>
+                </div>
+
+                <h2>Criações da Coleção</h2>
+
+            </div>
+
+
+            <div class="colecao-criacoes-carrossel">
+
+                <button type="button" class="colecao-criacoes-seta colecao-criacoes-seta-esquerda" id="colecaoAnterior"
+                    aria-label="Produto anterior">
+                    ‹
+                </button>
+
+
+                <div class="colecao-criacoes-viewport">
+
+                    <div class="colecao-criacoes-trilho" id="colecaoTrilho">
+
+                        <% produtos.forEach(produto=> { %>
+
+                            <a href="/produto/<%= produto.id %>" class="colecao-criacao-card">
+
+                                <div
+                                    class="colecao-criacao-imagem <%= produto.imagem_secundaria ? 'tem-secundaria' : '' %>">
+
+                                    <img class="colecao-criacao-foto colecao-criacao-foto-principal"
+                                        src="/uploads/<%= produto.imagem %>" alt="<%= produto.nome %>">
+
+                                    <% if (produto.imagem_secundaria) { %>
+
+                                        <img class="colecao-criacao-foto colecao-criacao-foto-secundaria"
+                                            src="/uploads/<%= produto.imagem_secundaria %>" alt="<%= produto.nome %>">
+
+                                        <% } %>
+
+                                </div>
+
+
+                                <div class="colecao-criacao-info">
+
+                                    <h3>
+                                        <%= produto.nome %>
+                                    </h3>
+
+                                    <p>
+                                        <%= Number(produto.valor).toLocaleString( 'pt-BR' , { style: 'currency' ,
+                                            currency: 'BRL' } ) %>
+                                    </p>
+
+                                </div>
+
+                            </a>
+
+                            <% }) %>
+
+                    </div>
+
+                </div>
+
+
+                <button type="button" class="colecao-criacoes-seta colecao-criacoes-seta-direita" id="colecaoProximo"
+                    aria-label="Próximo produto">
+                    ›
+                </button>
+
+            </div>
+
+        </section>
+
+        <!-- =================================================
+     INSPIRAÇÃO DA COLEÇÃO
+================================================== -->
+
+        <section class="colecao-inspiracao">
+
+            <div class="colecao-inspiracao-imagem">
+                <img src="/uploads/jardindesrois-inspiracao.png" alt="Inspiração da coleção Jardin des Rois">
+            </div>
+
+            <div class="colecao-inspiracao-texto">
+
+                <div class="colecao-eyebrow">
+                    <span></span>
+                    <p>A INSPIRAÇÃO</p>
+                    <span></span>
+                </div>
+
+                <h2>
+                    A NATUREZA COMO<br>
+                    SÍMBOLO DE PODER
+                </h2>
+
+                <p>
+                    Jardin des Rois nasce do encontro entre a grandiosidade dos
+                    jardins reais e a força de uma natureza que cresce livremente.
+                    Entre colunas, fontes e antigas arquiteturas tomadas pela
+                    vegetação, folhas e ramos avançam sem pedir permissão,
+                    transformando o espaço e revelando uma beleza ao mesmo tempo
+                    majestosa e indomável.
+                </p>
+
+                <p>
+                    Essa força inspira as formas orgânicas da coleção, enquanto o
+                    verde intenso das esmeraldas evoca a profundidade dos jardins
+                    e o ouro reflete a luz que atravessa suas folhagens.
+                </p>
+
+            </div>
+
+        </section>
+
+        <!-- =================================================
+     DA IDEIA À JOIA
+================================================== -->
+
+        <section class="colecao-processo">
+
+            <div class="colecao-processo-cabecalho">
+
+                <div class="colecao-eyebrow">
+                    <span></span>
+                    <p>DA IDEIA À JOIA</p>
+                    <span></span>
+                </div>
+
+                <h2>A Natureza Transformada em Alta Joalheria</h2>
+
+            </div>
+
+
+            <div class="colecao-processo-grid">
+
+                <!-- O TRAÇO -->
+
+                <div class="colecao-processo-item">
+
+                    <div class="colecao-processo-imagem">
+                        <img src="/uploads/jardindesrois-traco.png" alt="O Traço — Jardin des Rois">
+                    </div>
+
+                    <h3>O TRAÇO</h3>
+
+                    <p>
+                        Desenhos inspirados em folhas, ramos e formas orgânicas
+                        reinterpretam a natureza em composições majestosas.
+                    </p>
+
+                </div>
+
+
+                <!-- O DIAMANTE -->
+
+                <div class="colecao-processo-item">
+
+                    <div class="colecao-processo-imagem">
+                        <img src="/uploads/jardindesrois-esmeralda.png" alt="A Esmeralda">
+                    </div>
+
+                    <h3>A ESMERALDA</h3>
+
+                    <p>
+                        Esmeraldas colombianas são selecionadas pela intensidade
+                        de seu verde, profundidade e caráter excepcional.
+                    </p>
+
+                </div>
+
+
+                <!-- A FORMA -->
+
+                <div class="colecao-processo-item">
+
+                    <div class="colecao-processo-imagem">
+                        <img src="/uploads/jardindesrois-forma.png" alt="A Forma">
+                    </div>
+
+                    <h3>A FORMA</h3>
+
+                    <p>
+                        O trabalho artesanal entrelaça ouro amarelo, esmeraldas e
+                        diamantes em estruturas que parecem crescer naturalmente
+                        ao redor das pedras.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- =================================================
+     BANNER EDITORIAL
+================================================== -->
+
+        <section class="colecao-banner">
+            <img src="/uploads/jardindesrois-banner.png" alt="Jardin des Rois — natureza, arte e alta joalheria">
+        </section>
+
+        <!-- =================================================
+     O LEGADO CONTINUA
+================================================== -->
+
+        <section class="colecao-legado">
+
+            <div class="colecao-legado-cabecalho">
+
+                <div class="colecao-eyebrow">
+                    <span></span>
+                    <p>O LEGADO CONTINUA</p>
+                    <span></span>
+                </div>
+
+                <h2>
+                    Uma História Onde a Natureza Reivindica seu Reino
+                </h2>
+
+            </div>
+
+
+            <div class="colecao-legado-conteudo">
+
+                <div class="colecao-legado-texto">
+
+                    <p>
+                        Jardin des Rois nasce da imagem de antigos jardins reais
+                        criados para representar ordem, grandeza e poder. Com o
+                        passar do tempo, porém, a natureza transforma esses espaços:
+                        ramos avançam sobre as colunas, folhas envolvem a arquitetura
+                        e flores surgem entre pedras que um dia foram perfeitamente
+                        esculpidas.
+                    </p>
+
+                    <p>
+                        É desse encontro entre o controle e o indomável que nasce a
+                        coleção. As Esmeraldas Colombianas traduzem a intensidade dos
+                        jardins, enquanto os diamantes evocam os pontos de luz que
+                        atravessam suas folhagens. O ouro amarelo dá presença e
+                        estrutura às formas orgânicas, como ramos que crescem e
+                        envolvem naturalmente as pedras.
+                    </p>
+
+                    <p>
+                        Cinco criações contam essa história, revelando diferentes
+                        interpretações de uma mesma natureza — exuberante, misteriosa
+                        e impossível de conter. Em cada peça, a delicadeza das folhas
+                        encontra a imponência das pedras preciosas, transformando o
+                        jardim em alta joalheria.
+                    </p>
+
+                    <p>
+                        Jardin des Rois é a celebração de uma natureza que não foi
+                        feita para ser domada.
+                    </p>
+
+                </div>
+
+
+                <div class="colecao-legado-imagem">
+
+                    <img src="/uploads/jardindesrois-legado.png" alt="O legado da coleção Jardin des Rois">
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <%- include('partials/footer') %>
+
+            <script>
+                const colecaoTrilho = document.getElementById('colecaoTrilho');
+                const colecaoAnterior = document.getElementById('colecaoAnterior');
+                const colecaoProximo = document.getElementById('colecaoProximo');
+
+                let colecaoPosicao = 0;
+
+                function atualizarCarrosselColecao() {
+
+                    const cards = document.querySelectorAll('.colecao-criacao-card');
+
+                    if (!cards.length) return;
+
+                    const visiveis = 4;
+                    const maximo = Math.max(0, cards.length - visiveis);
+
+                    if (colecaoPosicao < 0) {
+                        colecaoPosicao = 0;
+                    }
+
+                    if (colecaoPosicao > maximo) {
+                        colecaoPosicao = maximo;
+                    }
+
+                    const card = cards[0];
+
+                    const gap = 18;
+
+                    const deslocamento =
+                        colecaoPosicao * (card.offsetWidth + gap);
+
+                    colecaoTrilho.style.transform =
+                        `translateX(-${deslocamento}px)`;
+                }
+
+
+                colecaoProximo?.addEventListener('click', () => {
+                    colecaoPosicao++;
+                    atualizarCarrosselColecao();
+                });
+
+
+                colecaoAnterior?.addEventListener('click', () => {
+                    colecaoPosicao--;
+                    atualizarCarrosselColecao();
+                });
+            </script>
+
+</body>
+
+</html>

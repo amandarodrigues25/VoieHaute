@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Busca | VoieHaute</title>
+
+    <!-- BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- BOOTSTRAP ICONS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <%- include('partials/header') %>
+
+
+        <!-- =====================================================
+         PÁGINA DE BUSCA
+    ====================================================== -->
+
+        <main class="pagina-busca">
+
+            <section class="busca-conteudo">
+
+                <% if (pesquisa) { %>
+
+                    <h1 class="busca-titulo">
+                        <%= pesquisa %>
+                    </h1>
+
+                    <% } else { %>
+
+                        <h1 class="busca-titulo">
+                            Filtro
+                        </h1>
+
+                        <% } %>
+
+
+                            <!-- =====================================================
+                 BARRA DE FILTROS
+            ====================================================== -->
+
+                            <div class="filtros-barra">
+
+                                <button type="button" class="filtro-botao" id="botaoCategorias">
+                                    Categorias
+                                    <i class="bi bi-chevron-down"></i>
+                                </button>
+
+
+                                <button type="button" class="filtro-botao" id="botaoColecoes">
+                                    Coleções
+                                    <i class="bi bi-chevron-down"></i>
+                                </button>
+
+                                <button type="button" class="filtro-botao" id="botaoMaterial">
+                                    Material
+                                    <i class="bi bi-chevron-down"></i>
+                                </button>
+
+                                <button type="button" class="filtro-botao" id="botaoTamanho">
+                                    Tamanho
+                                    <i class="bi bi-chevron-down"></i>
+                                </button>
+
+                                <button type="button" class="filtro-botao" id="botaoPedra">
+                                    Pedra
+                                    <i class="bi bi-chevron-down"></i>
+                                </button>
+
+                                <button type="button" class="filtro-botao" id="botaoPreco">
+                                    Preço
+                                    <i class="bi bi-chevron-down"></i>
+                                </button>
+
+                                <button type="button" class="filtros-limpar" id="limparFiltros">
+                                    Limpar filtro
+                                </button>
+
+                            </div>
+
+                            <!-- =====================================================
+     PAINEL - CATEGORIAS
+===================================================== -->
+
+                            <div class="filtro-painel" id="painelCategorias">
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="categoria" value="Anéis">
+                                    <span class="filtro-checkbox"></span>
+                                    Anéis
+                                </label>
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="categoria" value="Colares">
+                                    <span class="filtro-checkbox"></span>
+                                    Colares
+                                </label>
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="categoria" value="Pulseiras">
+                                    <span class="filtro-checkbox"></span>
+                                    Pulseiras
+                                </label>
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="categoria" value="Brincos">
+                                    <span class="filtro-checkbox"></span>
+                                    Brincos
+                                </label>
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="categoria" value="Tiaras">
+                                    <span class="filtro-checkbox"></span>
+                                    Tiaras
+                                </label>
+
+                            </div>
+
+                            <!-- =====================================================
+     PAINEL - COLEÇÕES
+===================================================== -->
+
+                            <div class="filtro-painel" id="painelColecoes">
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="colecao" value="L’Héritage">
+                                    <span class="filtro-checkbox"></span>
+                                    L’Héritage
+                                </label>
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="colecao" value="Première Lumière">
+                                    <span class="filtro-checkbox"></span>
+                                    Première Lumière
+                                </label>
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="colecao" value="La Couronne">
+                                    <span class="filtro-checkbox"></span>
+                                    La Couronne
+                                </label>
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="colecao" value="Lumière du Brésil">
+                                    <span class="filtro-checkbox"></span>
+                                    Lumière du Brésil
+                                </label>
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="colecao" value="Minuit">
+                                    <span class="filtro-checkbox"></span>
+                                    Minuit
+                                </label>
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="colecao" value="Velours de Minuit">
+                                    <span class="filtro-checkbox"></span>
+                                    Velours de Minuit
+                                </label>
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="colecao" value="Jardin de Rois">
+                                    <span class="filtro-checkbox"></span>
+                                    Jardin de Rois
+                                </label>
+
+                            </div>
+
+                            <!-- =====================================================
+     PAINEL - MATERIAL
+===================================================== -->
+
+                            <div class="filtro-painel" id="painelMaterial">
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="material" value="Ouro Amarelo 18k">
+                                    <span class="filtro-checkbox"></span>
+                                    Ouro Amarelo 18k
+                                </label>
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="material" value="Ouro Branco 18k">
+                                    <span class="filtro-checkbox"></span>
+                                    Ouro Branco 18k
+                                </label>
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="material" value="Ouro Rosé 18k">
+                                    <span class="filtro-checkbox"></span>
+                                    Ouro Rosé 18k
+                                </label>
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="material" value="Platina 950">
+                                    <span class="filtro-checkbox"></span>
+                                    Platina 950
+                                </label>
+
+                            </div>
+
+                            <!-- =====================================================
+     PAINEL - TAMANHO
+===================================================== -->
+
+                            <div class="filtro-painel filtro-painel-tamanho" id="painelTamanho">
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="tamanho" value="Anel — Aro 10">
+                                    <span class="filtro-checkbox"></span>
+                                    Anel — Aro 10
+                                </label>
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="tamanho" value="Anel — Aro 18">
+                                    <span class="filtro-checkbox"></span>
+                                    Anel — Aro 18
+                                </label>
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="tamanho" value="Colar — 45 cm">
+                                    <span class="filtro-checkbox"></span>
+                                    Colar — 45 cm
+                                </label>
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="tamanho" value="Pulseira — 16 cm">
+                                    <span class="filtro-checkbox"></span>
+                                    Pulseira — 16 cm
+                                </label>
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="tamanho" value="Tiara — P">
+                                    <span class="filtro-checkbox"></span>
+                                    Tiara — P
+                                </label>
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="tamanho" value="Anel — Aro 12">
+                                    <span class="filtro-checkbox"></span>
+                                    Anel — Aro 12
+                                </label>
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="tamanho" value="Anel — Aro 20">
+                                    <span class="filtro-checkbox"></span>
+                                    Anel — Aro 20
+                                </label>
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="tamanho" value="Colar — 50 cm">
+                                    <span class="filtro-checkbox"></span>
+                                    Colar — 50 cm
+                                </label>
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="tamanho" value="Pulseira — 17 cm">
+                                    <span class="filtro-checkbox"></span>
+                                    Pulseira — 17 cm
+                                </label>
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="tamanho" value="Tiara — M">
+                                    <span class="filtro-checkbox"></span>
+                                    Tiara — M
+                                </label>
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="tamanho" value="Anel — Aro 14">
+                                    <span class="filtro-checkbox"></span>
+                                    Anel — Aro 14
+                                </label>
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="tamanho" value="Colar — 35 cm">
+                                    <span class="filtro-checkbox"></span>
+                                    Colar — 35 cm
+                                </label>
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="tamanho" value="Colar — 60 cm">
+                                    <span class="filtro-checkbox"></span>
+                                    Colar — 60 cm
+                                </label>
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="tamanho" value="Pulseira — 18 cm">
+                                    <span class="filtro-checkbox"></span>
+                                    Pulseira — 18 cm
+                                </label>
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="tamanho" value="Tiara — G">
+                                    <span class="filtro-checkbox"></span>
+                                    Tiara — G
+                                </label>
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="tamanho" value="Anel — Aro 16">
+                                    <span class="filtro-checkbox"></span>
+                                    Anel — Aro 16
+                                </label>
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="tamanho" value="Colar — 40 cm">
+                                    <span class="filtro-checkbox"></span>
+                                    Colar — 40 cm
+                                </label>
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="tamanho" value="Pulseira — 15 cm">
+                                    <span class="filtro-checkbox"></span>
+                                    Pulseira — 15 cm
+                                </label>
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="tamanho" value="Pulseira — 19 cm">
+                                    <span class="filtro-checkbox"></span>
+                                    Pulseira — 19 cm
+                                </label>
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="tamanho" value="Brinco — Tamanho Único">
+                                    <span class="filtro-checkbox"></span>
+                                    Brinco — Tamanho Único
+                                </label>
+
+                            </div>
+
+                            <!-- =====================================================
+     PAINEL - PEDRA
+===================================================== -->
+
+                            <div class="filtro-painel" id="painelPedra">
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="pedra" value="Diamante Branco">
+                                    <span class="filtro-checkbox"></span>
+                                    Diamante Branco
+                                </label>
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="pedra" value="Esmeralda Colombiana">
+                                    <span class="filtro-checkbox"></span>
+                                    Esmeralda Colombiana
+                                </label>
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="pedra" value="Diamante Rosa">
+                                    <span class="filtro-checkbox"></span>
+                                    Diamante Rosa
+                                </label>
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="pedra" value="Safira Padparadscha">
+                                    <span class="filtro-checkbox"></span>
+                                    Safira Padparadscha
+                                </label>
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="pedra" value="Diamante Azul">
+                                    <span class="filtro-checkbox"></span>
+                                    Diamante Azul
+                                </label>
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="pedra" value="Turmalina Paraíba">
+                                    <span class="filtro-checkbox"></span>
+                                    Turmalina Paraíba
+                                </label>
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="pedra" value="Rubi Pigeon Blood">
+                                    <span class="filtro-checkbox"></span>
+                                    Rubi Pigeon Blood
+                                </label>
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="pedra" value="Tanzanita">
+                                    <span class="filtro-checkbox"></span>
+                                    Tanzanita
+                                </label>
+
+                            </div>
+
+                            <!-- =====================================================
+     PAINEL - PREÇO
+===================================================== -->
+
+                            <div class="filtro-painel filtro-painel-preco" id="painelPreco">
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="preco" value="ate-500000">
+                                    <span class="filtro-checkbox"></span>
+                                    Até R$ 500.000
+                                </label>
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="preco" value="acima-5000000">
+                                    <span class="filtro-checkbox"></span>
+                                    Acima de R$ 5.000.000
+                                </label>
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="preco" value="500000-1000000">
+                                    <span class="filtro-checkbox"></span>
+                                    R$ 500.000 – R$ 1.000.000
+                                </label>
+
+                                <span></span>
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="preco" value="1000000-2000000">
+                                    <span class="filtro-checkbox"></span>
+                                    R$ 1.000.000 – R$ 2.000.000
+                                </label>
+
+                                <span></span>
+
+                                <label class="filtro-opcao">
+                                    <input type="checkbox" name="preco" value="2000000-5000000">
+                                    <span class="filtro-checkbox"></span>
+                                    R$ 2.000.000 – R$ 5.000.000
+                                </label>
+
+                            </div>
+
+                            <!-- =====================================================
+                 PRODUTOS
+            ====================================================== -->
+
+                            <div class="busca-produtos">
+
+                                <% if (produtos && produtos.length> 0) { %>
+
+                                    <% produtos.forEach(produto=> { %>
+
+                                        <a href="/produto/<%= produto.id %>" class="busca-produto-card"
+                                            data-categoria="<%= produto.categoria || '' %>"
+                                            data-colecao="<%= produto.colecao || '' %>"
+                                            data-material="<%= produto.material || '' %>"
+                                            data-tamanho="<%= produto.tamanho || '' %>"
+                                            data-pedra="<%= produto.pedra || '' %>"
+                                            data-valor="<%= Number(produto.valor || 0) %>">
+
+                                            <!-- IMAGEM -->
+                                            <div
+                                                class="busca-produto-imagem <%= produto.imagem_secundaria ? 'tem-secundaria' : '' %>">
+
+                                                <img src="/uploads/<%= produto.imagem %>" alt="<%= produto.nome %>"
+                                                    class="busca-imagem-principal">
+
+                                                <% if (produto.imagem_secundaria) { %>
+
+                                                    <img src="/uploads/<%= produto.imagem_secundaria %>"
+                                                        alt="<%= produto.nome %>" class="busca-imagem-secundaria">
+
+                                                    <% } %>
+
+                                            </div>
+
+
+                                            <!-- INFORMAÇÕES -->
+                                            <div class="busca-produto-info">
+
+                                                <h2>
+                                                    <%= produto.nome %>
+                                                </h2>
+
+                                                <span>
+                                                    R$ <%= Number(produto.valor).toLocaleString('pt-BR', {
+                                                        minimumFractionDigits: 2, maximumFractionDigits: 2 }) %>
+                                                </span>
+
+                                            </div>
+
+                                        </a>
+
+                                        <% }) %>
+
+                                            <% } else { %>
+
+                                                <div class="busca-vazia">
+
+                                                    <div class="busca-vazia-icone">
+                                                        <i class="bi bi-search"></i>
+                                                    </div>
+
+                                                    <h2>Nenhuma joia encontrada</h2>
+
+                                                    <% if (pesquisa) { %>
+                                                        <p>
+                                                            Não encontramos criações para
+                                                            <span>“<%= pesquisa %>”</span>.
+                                                            Tente uma nova busca ou explore nossas joias.
+                                                        </p>
+                                                        <% } else { %>
+                                                            <p>
+                                                                Não encontramos criações com os critérios selecionados.
+                                                            </p>
+                                                            <% } %>
+
+                                                                <a href="/busca" class="busca-vazia-botao">
+                                                                    Explorar todas as joias
+                                                                </a>
+
+                                                </div>
+
+                                                <% } %>
+
+                            </div>
+
+            </section>
+
+        </main>
+
+
+        <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+        <%- include('partials/footer') %>
+
+
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+
+                    function configurarFiltro(botaoId, painelId) {
+
+                        const botao = document.getElementById(botaoId);
+                        const painel = document.getElementById(painelId);
+
+                        botao.addEventListener("click", function () {
+
+                            const estavaAberto = painel.classList.contains("ativo");
+
+                            /* FECHA TODOS OS PAINÉIS */
+                            document.querySelectorAll(".filtro-painel").forEach(function (outroPainel) {
+                                outroPainel.classList.remove("ativo");
+                            });
+
+                            /* DESATIVA TODOS OS BOTÕES */
+                            document.querySelectorAll(".filtro-botao").forEach(function (outroBotao) {
+                                outroBotao.classList.remove("ativo");
+
+                                const outroIcone = outroBotao.querySelector("i");
+
+                                if (outroIcone) {
+                                    outroIcone.className = "bi bi-chevron-down";
+                                }
+                            });
+
+                            /* ABRE O SELECIONADO */
+                            if (!estavaAberto) {
+                                painel.classList.add("ativo");
+                                botao.classList.add("ativo");
+
+                                const icone = botao.querySelector("i");
+                                icone.className = "bi bi-chevron-up";
+                            }
+
+                        });
+                    }
+
+                    configurarFiltro("botaoCategorias", "painelCategorias");
+                    configurarFiltro("botaoColecoes", "painelColecoes");
+                    configurarFiltro("botaoMaterial", "painelMaterial");
+                    configurarFiltro("botaoTamanho", "painelTamanho");
+                    configurarFiltro("botaoPedra", "painelPedra");
+                    configurarFiltro("botaoPreco", "painelPreco");
+
+                    /* =====================================================
+     FILTRAR PRODUTOS
+  ===================================================== */
+
+                    const checkboxesCategoria =
+                        document.querySelectorAll('input[name="categoria"]');
+
+                    const checkboxesColecao =
+                        document.querySelectorAll('input[name="colecao"]');
+
+                    const checkboxesMaterial =
+                        document.querySelectorAll('input[name="material"]');
+
+                    const checkboxesTamanho =
+                        document.querySelectorAll('input[name="tamanho"]');
+
+                    const checkboxesPedra =
+                        document.querySelectorAll('input[name="pedra"]');
+
+                    const checkboxesPreco =
+                        document.querySelectorAll('input[name="preco"]');
+
+                    const cardsProdutos =
+                        document.querySelectorAll(".busca-produto-card");
+
+
+                    function valoresSelecionados(checkboxes) {
+                        return Array.from(checkboxes)
+                            .filter(checkbox => checkbox.checked)
+                            .map(checkbox => checkbox.value);
+                    }
+
+
+                    function correspondePreco(valorProduto, precosSelecionados) {
+
+                        if (precosSelecionados.length === 0) {
+                            return true;
+                        }
+
+                        return precosSelecionados.some(faixa => {
+
+                            if (faixa === "ate-500000") {
+                                return valorProduto <= 500000;
+                            }
+
+                            if (faixa === "500000-1000000") {
+                                return valorProduto >= 500000 &&
+                                    valorProduto <= 1000000;
+                            }
+
+                            if (faixa === "1000000-2000000") {
+                                return valorProduto >= 1000000 &&
+                                    valorProduto <= 2000000;
+                            }
+
+                            if (faixa === "2000000-5000000") {
+                                return valorProduto >= 2000000 &&
+                                    valorProduto <= 5000000;
+                            }
+
+                            if (faixa === "acima-5000000") {
+                                return valorProduto > 5000000;
+                            }
+
+                            return false;
+                        });
+                    }
+
+
+                    function filtrarProdutos() {
+
+                        const categoriasSelecionadas =
+                            valoresSelecionados(checkboxesCategoria);
+
+                        const colecoesSelecionadas =
+                            valoresSelecionados(checkboxesColecao);
+
+                        const materiaisSelecionados =
+                            valoresSelecionados(checkboxesMaterial);
+
+                        const tamanhosSelecionados =
+                            valoresSelecionados(checkboxesTamanho);
+
+                        const pedrasSelecionadas =
+                            valoresSelecionados(checkboxesPedra);
+
+                        const precosSelecionados =
+                            valoresSelecionados(checkboxesPreco);
+
+
+                        cardsProdutos.forEach(card => {
+
+                            const categoriaProduto = card.dataset.categoria;
+                            const colecaoProduto = card.dataset.colecao;
+                            const materialProduto = card.dataset.material;
+                            const tamanhoProduto = card.dataset.tamanho;
+                            const pedraProduto = card.dataset.pedra;
+                            const valorProduto = Number(card.dataset.valor);
+
+
+                            const correspondeCategoria =
+                                categoriasSelecionadas.length === 0 ||
+                                categoriasSelecionadas.includes(categoriaProduto);
+
+
+                            const correspondeColecao =
+                                colecoesSelecionadas.length === 0 ||
+                                colecoesSelecionadas.includes(colecaoProduto);
+
+
+                            const correspondeMaterial =
+                                materiaisSelecionados.length === 0 ||
+                                materiaisSelecionados.includes(materialProduto);
+
+
+                            const correspondeTamanho =
+                                tamanhosSelecionados.length === 0 ||
+                                tamanhosSelecionados.includes(tamanhoProduto);
+
+
+                            const correspondePedra =
+                                pedrasSelecionadas.length === 0 ||
+                                pedrasSelecionadas.includes(pedraProduto);
+
+
+                            const correspondeFaixaPreco =
+                                correspondePreco(valorProduto, precosSelecionados);
+
+
+                            if (
+                                correspondeCategoria &&
+                                correspondeColecao &&
+                                correspondeMaterial &&
+                                correspondeTamanho &&
+                                correspondePedra &&
+                                correspondeFaixaPreco
+                            ) {
+                                card.style.display = "block";
+                            } else {
+                                card.style.display = "none";
+                            }
+
+                        });
+                    }
+
+
+                    /* =====================================================
+                       ATIVAR FILTROS
+                    ===================================================== */
+
+                    [
+                        checkboxesCategoria,
+                        checkboxesColecao,
+                        checkboxesMaterial,
+                        checkboxesTamanho,
+                        checkboxesPedra,
+                        checkboxesPreco
+
+                    ].forEach(grupo => {
+
+                        grupo.forEach(checkbox => {
+                            checkbox.addEventListener("change", filtrarProdutos);
+                        });
+
+                    });
+
+
+                    /* =====================================================
+   LIMPAR FILTROS
+===================================================== */
+
+                    const botaoLimparFiltros =
+                        document.getElementById("limparFiltros");
+
+                    botaoLimparFiltros.addEventListener("click", function () {
+
+                        /* DESMARCA TODOS OS CHECKBOXES */
+                        document
+                            .querySelectorAll('.filtro-painel input[type="checkbox"]')
+                            .forEach(checkbox => {
+                                checkbox.checked = false;
+                            });
+
+
+                        /* MOSTRA TODOS OS PRODUTOS NOVAMENTE */
+                        filtrarProdutos();
+
+
+                        /* FECHA TODOS OS PAINÉIS */
+                        document.querySelectorAll(".filtro-painel").forEach(painel => {
+                            painel.classList.remove("ativo");
+                        });
+
+
+                        /* VOLTA TODOS OS BOTÕES AO NORMAL */
+                        document.querySelectorAll(".filtro-botao").forEach(botao => {
+
+                            botao.classList.remove("ativo");
+
+                            const icone = botao.querySelector("i");
+
+                            if (icone) {
+                                icone.className = "bi bi-chevron-down";
+                            }
+
+                        });
+
+                    });
+
+                });
+            </script>
+
+</body>
+
+</html>

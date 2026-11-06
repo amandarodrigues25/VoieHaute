@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Lumière du Brésil | VoieHaute</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+    <%- include('partials/header') %>
+
+
+        <!-- =================================================
+         HERO — JARDIN DES ROIS
+    ================================================== -->
+
+        <section class="colecao-hero">
+            <video class="colecao-hero-video" autoplay muted loop playsinline>
+                <source src="/uploads/lumieredubresil-hero.mp4" type="video/mp4">
+            </video>
+        </section>
+
+
+        <!-- =================================================
+     APRESENTAÇÃO DA COLEÇÃO
+================================================== -->
+
+        <section class="colecao-apresentacao">
+
+            <div class="colecao-apresentacao-texto">
+
+                <div class="colecao-eyebrow">
+                    <span></span>
+                    <p>A COLEÇÃO</p>
+                    <span></span>
+                </div>
+
+                <h2>LUMIÈRE DU BRÉSIL</h2>
+
+                <p class="colecao-apresentacao-descricao">
+                    Inspirada na luminosidade das águas brasileiras, Lumière du Brésil
+                    transforma a intensidade da natureza em alta joalheria. Turmalinas
+                    Paraíba, diamantes e Ouro Branco 18k se encontram em criações
+                    fluidas e luminosas, onde tons azul-esverdeados evocam águas
+                    cristalinas, reflexos do sol e a beleza vibrante de um Brasil
+                    banhado pela luz.
+                </p>
+
+            </div>
+
+
+            <div class="colecao-apresentacao-imagem">
+
+                <img src="/uploads/lumieredubresil-colecao.jpeg" alt="Coleção Lumière du Brésil">
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+     CRIAÇÕES DA COLEÇÃO
+================================================== -->
+
+        <section class="colecao-criacoes">
+
+            <div class="colecao-criacoes-cabecalho">
+
+                <div class="colecao-criacoes-eyebrow">
+                    <span></span>
+                    <p>LUMIÈRE DU BRÉSIL</p>
+                    <span></span>
+                </div>
+
+                <h2>Criações da Coleção</h2>
+
+            </div>
+
+
+            <div class="colecao-criacoes-carrossel">
+
+                <button type="button" class="colecao-criacoes-seta colecao-criacoes-seta-esquerda" id="colecaoAnterior"
+                    aria-label="Produto anterior">
+                    ‹
+                </button>
+
+
+                <div class="colecao-criacoes-viewport">
+
+                    <div class="colecao-criacoes-trilho" id="colecaoTrilho">
+
+                        <% produtos.forEach(produto=> { %>
+
+                            <a href="/produto/<%= produto.id %>" class="colecao-criacao-card">
+
+                                <div
+                                    class="colecao-criacao-imagem <%= produto.imagem_secundaria ? 'tem-secundaria' : '' %>">
+
+                                    <img class="colecao-criacao-foto colecao-criacao-foto-principal"
+                                        src="/uploads/<%= produto.imagem %>" alt="<%= produto.nome %>">
+
+                                    <% if (produto.imagem_secundaria) { %>
+
+                                        <img class="colecao-criacao-foto colecao-criacao-foto-secundaria"
+                                            src="/uploads/<%= produto.imagem_secundaria %>" alt="<%= produto.nome %>">
+
+                                        <% } %>
+
+                                </div>
+
+
+                                <div class="colecao-criacao-info">
+
+                                    <h3>
+                                        <%= produto.nome %>
+                                    </h3>
+
+                                    <p>
+                                        <%= Number(produto.valor).toLocaleString( 'pt-BR' , { style: 'currency' ,
+                                            currency: 'BRL' } ) %>
+                                    </p>
+
+                                </div>
+
+                            </a>
+
+                            <% }) %>
+
+                    </div>
+
+                </div>
+
+
+                <button type="button" class="colecao-criacoes-seta colecao-criacoes-seta-direita" id="colecaoProximo"
+                    aria-label="Próximo produto">
+                    ›
+                </button>
+
+            </div>
+
+        </section>
+
+        <!-- =================================================
+     INSPIRAÇÃO DA COLEÇÃO
+================================================== -->
+
+        <section class="colecao-inspiracao">
+
+            <div class="colecao-inspiracao-imagem">
+                <img src="/uploads/lumieredubresil-inspiracao.jpeg" alt="Inspiração da coleção Lumière du Brésil">
+            </div>
+
+            <div class="colecao-inspiracao-texto">
+
+                <div class="colecao-eyebrow">
+                    <span></span>
+                    <p>A INSPIRAÇÃO</p>
+                    <span></span>
+                </div>
+
+                <h2>
+                    A LUZ DAS ÁGUAS<br>
+                    BRASILEIRAS
+                </h2>
+
+                <p>
+                    Lumière du Brésil nasce do encontro entre a intensidade da luz
+                    tropical e a transparência das águas brasileiras. O movimento do
+                    mar, os reflexos do sol e as infinitas nuances entre o azul e o
+                    verde inspiram uma coleção marcada pela leveza, fluidez e
+                    luminosidade. O azul extraordinário das Turmalinas Paraíba,
+                    combinado ao brilho dos diamantes e à pureza do Ouro Branco 18k,
+                    traduz essa paisagem em criações que parecem carregar a luz e o
+                    movimento das águas.
+                </p>
+
+            </div>
+
+        </section>
+
+        <!-- =================================================
+     DA IDEIA À JOIA
+================================================== -->
+
+        <section class="colecao-processo">
+
+            <div class="colecao-processo-cabecalho">
+
+                <div class="colecao-eyebrow">
+                    <span></span>
+                    <p>DA IDEIA À JOIA</p>
+                    <span></span>
+                </div>
+
+                <h2> A Luz das Águas Transformada em Alta Joalheria </h2>
+
+            </div>
+
+
+            <div class="colecao-processo-grid">
+
+                <!-- O TRAÇO -->
+
+                <div class="colecao-processo-item">
+
+                    <div class="colecao-processo-imagem">
+                        <img src="/uploads/lumieredubresil-traco.jpeg" alt="O Traço">
+                    </div>
+
+                    <h3>O TRAÇO</h3>
+
+                    <p>
+                        Linhas inspiradas no movimento das ondas e nos reflexos do
+                        sol sobre a água dão origem a formas fluidas e luminosas.
+                    </p>
+
+                </div>
+
+
+                <!-- O DIAMANTE -->
+
+                <div class="colecao-processo-item">
+
+                    <div class="colecao-processo-imagem">
+                        <img src="/uploads/lumieredubresil-turmalina.jpeg" alt="A Turmalina Paraíba">
+                    </div>
+
+                    <h3>A TURMALINA PARAÍBA</h3>
+
+                    <p>
+                        Turmalinas Paraíba são selecionadas pela intensidade de seus
+                        raros tons azul-esverdeados, transparência e luminosidade
+                        extraordinária.
+                    </p>
+
+                </div>
+
+
+                <!-- A FORMA -->
+
+                <div class="colecao-processo-item">
+
+                    <div class="colecao-processo-imagem">
+                        <img src="/uploads/lumieredubresil-forma.jpeg" alt="A Forma">
+                    </div>
+
+                    <h3>A FORMA</h3>
+
+                    <p>
+                        O trabalho artesanal une Ouro Branco 18k, Turmalinas Paraíba
+                        e diamantes em criações fluidas que parecem capturar a luz
+                        e o movimento das águas.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- =================================================
+     BANNER EDITORIAL
+================================================== -->
+
+        <section class="colecao-banner">
+            <img src="/uploads/lumieredubresil-banner.jpeg" alt="A luz do Brasil refletida em cada pedra">
+        </section>
+
+        <!-- =================================================
+     O LEGADO CONTINUA
+================================================== -->
+
+        <section class="colecao-legado">
+
+            <div class="colecao-legado-cabecalho">
+
+                <div class="colecao-eyebrow">
+                    <span></span>
+                    <p>O LEGADO CONTINUA</p>
+                    <span></span>
+                </div>
+
+                <h2>
+                    Uma História Onde a Luz Encontra sua Cor
+                </h2>
+
+            </div>
+
+
+            <div class="colecao-legado-conteudo">
+
+                <div class="colecao-legado-texto">
+
+                    <p>
+                        Lumière du Brésil nasce da fascinação por uma das expressões
+                        mais extraordinárias da natureza brasileira: o encontro entre
+                        a intensidade da luz tropical e os tons luminosos das águas.
+                        Sob o sol, azuis e verdes se transformam a cada movimento,
+                        criando reflexos que parecem carregar luz própria.
+                    </p>
+
+                    <p>
+                        No centro dessa história está a Turmalina Paraíba, uma pedra
+                        de cor excepcional que traduz essa luminosidade em nuances
+                        intensas de azul e verde. Seu brilho encontra nos diamantes
+                        a transparência dos reflexos sobre a água, enquanto o Ouro
+                        Branco 18k cria estruturas leves e fluidas, inspiradas no
+                        movimento das ondas.
+                    </p>
+
+                    <p>
+                        Cinco criações interpretam esse universo através de curvas,
+                        brilhos e formas que parecem estar em constante movimento.
+                        Em cada uma, a precisão da alta joalheria encontra uma
+                        natureza vibrante, transformando a luz e as águas brasileiras
+                        em algo destinado a permanecer.
+                    </p>
+
+                    <p>
+                        Lumière du Brésil é uma homenagem à luz de um país onde até
+                        a natureza parece ter aprendido a brilhar.
+                    </p>
+
+                </div>
+
+
+                <div class="colecao-legado-imagem">
+
+                    <img src="/uploads/lumieredubresil-legado.jpeg" alt="O legado da coleção Lumière du Brésil">
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <%- include('partials/footer') %>
+
+            <script>
+                const colecaoTrilho = document.getElementById('colecaoTrilho');
+                const colecaoAnterior = document.getElementById('colecaoAnterior');
+                const colecaoProximo = document.getElementById('colecaoProximo');
+
+                let colecaoPosicao = 0;
+
+                function atualizarCarrosselColecao() {
+
+                    const cards = document.querySelectorAll('.colecao-criacao-card');
+
+                    if (!cards.length) return;
+
+                    const visiveis = 4;
+                    const maximo = Math.max(0, cards.length - visiveis);
+
+                    if (colecaoPosicao < 0) {
+                        colecaoPosicao = 0;
+                    }
+
+                    if (colecaoPosicao > maximo) {
+                        colecaoPosicao = maximo;
+                    }
+
+                    const card = cards[0];
+
+                    const gap = 18;
+
+                    const deslocamento =
+                        colecaoPosicao * (card.offsetWidth + gap);
+
+                    colecaoTrilho.style.transform =
+                        `translateX(-${deslocamento}px)`;
+                }
+
+
+                colecaoProximo?.addEventListener('click', () => {
+                    colecaoPosicao++;
+                    atualizarCarrosselColecao();
+                });
+
+
+                colecaoAnterior?.addEventListener('click', () => {
+                    colecaoPosicao--;
+                    atualizarCarrosselColecao();
+                });
+            </script>
+
+</body>
+
+</html>

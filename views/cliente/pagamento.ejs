@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Pagamento | VoieHaute</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body class="pagina-entrega pagina-pagamento">
+
+    <%- include('./partials/header') %>
+
+        <main class="entrega-pagina">
+
+            <!-- ETAPAS DO CHECKOUT -->
+
+            <nav class="entrega-etapas" aria-label="Etapas da compra">
+
+                <div class="entrega-etapa">
+                    <span>1</span> Sacola
+                </div>
+
+                <div class="entrega-etapa">
+                    <span>2</span> Entrega
+                </div>
+
+                <div class="entrega-etapa ativa">
+                    <span>3</span> Pagamento
+                </div>
+
+                <div class="entrega-etapa">
+                    <span>4</span> Revisão
+                </div>
+
+            </nav>
+
+            <!-- CABEÇALHO -->
+
+            <header class="entrega-cabecalho">
+
+                <div class="entrega-eyebrow">
+                    <span></span>
+                    SEU PAGAMENTO
+                    <span></span>
+                </div>
+
+                <h1>Forma de Pagamento</h1>
+
+                <p>
+                    Escolha a forma de pagamento ideal para você.
+                </p>
+
+            </header>
+
+            <div class="entrega-layout">
+
+                <!-- COLUNA ESQUERDA -->
+
+                <section class="entrega-conteudo pagamento-conteudo">
+
+                    <h2 class="pagamento-secao-titulo">
+                        SELECIONE A FORMA DE PAGAMENTO
+                    </h2>
+
+                    <form id="formPagamento" action="/carrinho/pagamento/continuar" method="POST">
+
+                        <!-- CARTÃO DE CRÉDITO -->
+
+                        <div class="pagamento-opcao" id="opcaoCartao">
+
+                            <label class="pagamento-opcao-cabecalho">
+
+                                <input type="radio" name="metodo" value="cartao" class="pagamento-radio" required>
+
+                                <span class="pagamento-radio-visual"></span>
+
+                                <span class="pagamento-opcao-nome">
+                                    Cartão de crédito
+                                </span>
+
+                                <span class="pagamento-bandeiras">
+                                    <img src="/uploads/visa.jpg" alt="Visa" class="pagamento-logo-visa">
+
+                                    <img src="/uploads/mastercard.jpg" alt="Mastercard"
+                                        class="pagamento-logo-mastercard">
+                                </span>
+
+                            </label>
+
+                            <!-- CAMPOS DO CARTÃO -->
+
+                            <div class="pagamento-opcao-conteudo">
+
+                                <div class="pagamento-campos">
+
+                                    <div class="pagamento-campo">
+
+                                        <label for="numeroCartao">
+                                            Número do cartão
+                                        </label>
+
+                                        <input type="text" id="numeroCartao" placeholder="0000 0000 0000 0000"
+                                            inputmode="numeric" maxlength="23" autocomplete="off">
+
+                                    </div>
+
+                                    <div class="pagamento-campo">
+
+                                        <label for="nomeCartao">
+                                            Nome impresso no cartão
+                                        </label>
+
+                                        <input type="text" id="nomeCartao" placeholder="Nome como aparece no cartão"
+                                            autocomplete="off">
+
+                                    </div>
+
+                                    <div class="pagamento-campos-duplos">
+
+                                        <div class="pagamento-campo">
+
+                                            <label for="validadeCartao">
+                                                Validade
+                                            </label>
+
+                                            <input type="text" id="validadeCartao" placeholder="MM/AA" maxlength="5"
+                                                inputmode="numeric" autocomplete="off">
+
+                                        </div>
+
+                                        <div class="pagamento-campo">
+
+                                            <label for="cvcCartao">
+                                                CVC
+                                            </label>
+
+                                            <input type="password" id="cvcCartao" placeholder="000" maxlength="4"
+                                                inputmode="numeric" autocomplete="off">
+
+                                        </div>
+
+                                    </div>
+
+                                    <!-- PARCELAMENTO PERSONALIZADO -->
+
+                                    <div class="pagamento-campo pagamento-parcelamento">
+
+                                        <label id="parcelamento-label">
+                                            Parcelamento
+                                        </label>
+
+                                        <div class="pagamento-dropdown" id="dropdownParcelas">
+
+                                            <input type="hidden" id="parcelas" name="parcelas" value="1">
+
+                                            <button type="button" class="pagamento-dropdown-botao" id="botaoParcelas"
+                                                aria-haspopup="listbox" aria-expanded="false"
+                                                aria-labelledby="parcelamento-label botaoParcelas">
+
+                                                <span id="parcelamentoSelecionado">
+                                                    1x de
+                                                    <%= total.toLocaleString('pt-BR', { style: 'currency' ,
+                                                        currency: 'BRL' }) %>
+                                                        sem juros
+                                                </span>
+
+                                                <i class="bi bi-chevron-down"></i>
+
+                                            </button>
+
+                                            <div class="pagamento-dropdown-lista" id="listaParcelas" role="listbox"
+                                                aria-label="Parcelamento">
+
+                                                <% for (let i=1; i <=10; i++) { %>
+
+                                                    <button type="button"
+                                                        class="pagamento-dropdown-item <%= i === 1 ? 'ativo' : '' %>"
+                                                        role="option" aria-selected="<%= i === 1 ? 'true' : 'false' %>"
+                                                        data-valor="<%= i %>">
+
+                                                        <%= i %>x de
+                                                            <%= (total / i).toLocaleString('pt-BR', { style: 'currency'
+                                                                , currency: 'BRL' }) %>
+                                                                sem juros
+
+                                                    </button>
+
+                                                    <% } %>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- PIX -->
+
+                        <div class="pagamento-opcao" id="opcaoPix">
+
+                            <label class="pagamento-opcao-cabecalho">
+
+                                <input type="radio" name="metodo" value="pix" class="pagamento-radio" required>
+
+                                <span class="pagamento-radio-visual"></span>
+
+                                <span class="pagamento-opcao-nome">
+                                    PIX
+                                </span>
+
+                                <span class="pagamento-pix-logo">
+                                    <img src="/uploads/pix.png" alt="Pix" class="pagamento-logo-pix">
+                                </span>
+
+                            </label>
+
+                            <!-- CONTEÚDO DO PIX -->
+
+                            <div class="pagamento-opcao-conteudo">
+
+                                <div class="pagamento-pix-informacao">
+
+                                    <i class="bi bi-shield-check"></i>
+
+                                    <p>
+                                        Você poderá revisar seu pedido antes
+                                        de confirmar a simulação de pagamento
+                                        via Pix.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- BOTÃO REVISAR PEDIDO -->
+
+                        <button type="submit" class="entrega-botao-principal pagamento-botao-revisar">
+
+                            REVISAR PEDIDO
+
+                        </button>
+
+                        <p class="pagamento-seguranca">
+                            <i class="bi bi-lock"></i>
+                            Simulação de pagamento — nenhuma cobrança será realizada.
+                        </p>
+
+                    </form>
+
+                </section>
+
+                <!-- RESUMO DO PEDIDO -->
+
+                <aside class="entrega-resumo">
+
+                    <div class="entrega-resumo-cabecalho">
+
+                        <h2>RESUMO DO PEDIDO</h2>
+
+                        <a href="/carrinho">
+                            editar sacola
+                        </a>
+
+                    </div>
+
+                    <div class="entrega-resumo-produtos">
+
+                        <% itens.forEach(item=> { %>
+
+                            <div class="entrega-resumo-produto">
+
+                                <img src="<%= item.produto.imagem
+                                    ? (item.produto.imagem.startsWith('/')
+                                        ? item.produto.imagem
+                                        : '/uploads/' + item.produto.imagem)
+                                    : '/uploads/sem-imagem.png' %>" alt="<%= item.produto.nome %>">
+
+                                <div class="entrega-resumo-info">
+
+                                    <h3>
+                                        <%= item.produto.nome %>
+                                    </h3>
+
+                                    <strong>
+                                        <%= item.subtotal.toLocaleString('pt-BR', { style: 'currency' , currency: 'BRL'
+                                            }) %>
+                                    </strong>
+
+                                    <p>
+                                        QAT: <%= item.quantidade %>
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                            <% }) %>
+
+                    </div>
+
+                    <div class="entrega-resumo-valores">
+
+                        <div>
+
+                            <span>Subtotal</span>
+
+                            <span>
+                                <%= total.toLocaleString('pt-BR', { style: 'currency' , currency: 'BRL' }) %>
+                            </span>
+
+                        </div>
+
+                        <div>
+                            <span>Frete</span>
+                            <span>Grátis</span>
+                        </div>
+
+                    </div>
+
+                    <div class="entrega-resumo-total">
+
+                        <span>Total</span>
+
+                        <strong>
+                            <%= total.toLocaleString('pt-BR', { style: 'currency' , currency: 'BRL' }) %>
+                        </strong>
+
+                    </div>
+
+                </aside>
+
+            </div>
+
+        </main>
+
+        <%- include('./partials/footer') %>
+
+            <script>
+                // ==========================================
+                // SELEÇÃO DA FORMA DE PAGAMENTO
+                // ==========================================
+
+                const opcoesPagamento = document.querySelectorAll(
+                    '.pagamento-opcao'
+                );
+
+                const radiosPagamento = document.querySelectorAll(
+                    '.pagamento-radio'
+                );
+
+                const numeroCartao = document.getElementById('numeroCartao');
+                const nomeCartao = document.getElementById('nomeCartao');
+                const validadeCartao = document.getElementById('validadeCartao');
+                const cvcCartao = document.getElementById('cvcCartao');
+
+                const camposCartao = [
+                    numeroCartao,
+                    nomeCartao,
+                    validadeCartao,
+                    cvcCartao
+                ];
+
+                function atualizarPagamento() {
+                    const selecionado = document.querySelector(
+                        '.pagamento-radio:checked'
+                    );
+
+                    opcoesPagamento.forEach(opcao => {
+                        const radio = opcao.querySelector('.pagamento-radio');
+
+                        opcao.classList.toggle(
+                            'selecionado',
+                            radio.checked
+                        );
+                    });
+
+                    const cartaoAtivo =
+                        selecionado && selecionado.value === 'cartao';
+
+                    camposCartao.forEach(campo => {
+                        campo.required = Boolean(cartaoAtivo);
+                    });
+
+                    if (!cartaoAtivo) {
+                        camposCartao.forEach(campo => {
+                            campo.value = '';
+                        });
+                    }
+                }
+
+                radiosPagamento.forEach(radio => {
+                    radio.addEventListener('change', atualizarPagamento);
+                });
+
+                // ==========================================
+                // MÁSCARA DO NÚMERO DO CARTÃO
+                // ==========================================
+
+                numeroCartao.addEventListener('input', function () {
+                    const numeros = this.value
+                        .replace(/\D/g, '')
+                        .slice(0, 19);
+
+                    this.value = numeros
+                        .replace(/(.{4})/g, '$1 ')
+                        .trim();
+                });
+
+                // ==========================================
+                // MÁSCARA DA VALIDADE
+                // ==========================================
+
+                validadeCartao.addEventListener('input', function () {
+                    const numeros = this.value
+                        .replace(/\D/g, '')
+                        .slice(0, 4);
+
+                    this.value = numeros.length > 2
+                        ? numeros.slice(0, 2) + '/' + numeros.slice(2)
+                        : numeros;
+                });
+
+                // ==========================================
+                // MÁSCARA DO CVC
+                // ==========================================
+
+                cvcCartao.addEventListener('input', function () {
+                    this.value = this.value
+                        .replace(/\D/g, '')
+                        .slice(0, 4);
+                });
+
+                // ==========================================
+                // DROPDOWN DE PARCELAMENTO
+                // ==========================================
+
+                const dropdownParcelas = document.getElementById(
+                    'dropdownParcelas'
+                );
+
+                const botaoParcelas = document.getElementById(
+                    'botaoParcelas'
+                );
+
+                const inputParcelas = document.getElementById(
+                    'parcelas'
+                );
+
+                const textoParcelas = document.getElementById(
+                    'parcelamentoSelecionado'
+                );
+
+                const opcoesParcelas = dropdownParcelas.querySelectorAll(
+                    '.pagamento-dropdown-item'
+                );
+
+                function fecharDropdownParcelas() {
+                    dropdownParcelas.classList.remove('aberto');
+
+                    botaoParcelas.setAttribute(
+                        'aria-expanded',
+                        'false'
+                    );
+                }
+
+                botaoParcelas.addEventListener('click', function () {
+                    const aberto = dropdownParcelas.classList.toggle(
+                        'aberto'
+                    );
+
+                    botaoParcelas.setAttribute(
+                        'aria-expanded',
+                        String(aberto)
+                    );
+                });
+
+                opcoesParcelas.forEach(opcao => {
+                    opcao.addEventListener('click', function () {
+
+                        inputParcelas.value = this.dataset.valor;
+
+                        textoParcelas.textContent =
+                            this.textContent.replace(/\s+/g, ' ').trim();
+
+                        opcoesParcelas.forEach(item => {
+                            item.classList.remove('ativo');
+                            item.setAttribute(
+                                'aria-selected',
+                                'false'
+                            );
+                        });
+
+                        this.classList.add('ativo');
+
+                        this.setAttribute(
+                            'aria-selected',
+                            'true'
+                        );
+
+                        fecharDropdownParcelas();
+                        botaoParcelas.focus();
+                    });
+                });
+
+                document.addEventListener('click', function (event) {
+                    if (!dropdownParcelas.contains(event.target)) {
+                        fecharDropdownParcelas();
+                    }
+                });
+
+                document.addEventListener('keydown', function (event) {
+                    if (event.key === 'Escape') {
+                        fecharDropdownParcelas();
+                    }
+                });
+
+                // ==========================================
+                // VALIDAÇÃO DO FORMULÁRIO
+                // ==========================================
+
+                document.getElementById('formPagamento')
+                    .addEventListener('submit', function (event) {
+
+                        const selecionado = document.querySelector(
+                            '.pagamento-radio:checked'
+                        );
+
+                        if (!selecionado) {
+                            event.preventDefault();
+
+                            alert(
+                                'Selecione uma forma de pagamento.'
+                            );
+
+                            return;
+                        }
+
+                        if (selecionado.value === 'cartao') {
+
+                            const numeros = numeroCartao.value
+                                .replace(/\D/g, '');
+
+                            const partes = validadeCartao.value.split('/');
+                            const mes = Number(partes[0]);
+                            const ano = partes[1] || '';
+
+                            const cvc = cvcCartao.value
+                                .replace(/\D/g, '');
+
+                            if (
+                                numeros.length < 13 ||
+                                numeros.length > 19 ||
+                                !nomeCartao.value.trim() ||
+                                partes.length !== 2 ||
+                                mes < 1 ||
+                                mes > 12 ||
+                                ano.length !== 2 ||
+                                cvc.length < 3
+                            ) {
+                                event.preventDefault();
+
+                                alert(
+                                    'Confira os dados demonstrativos do cartão.'
+                                );
+                            }
+                        }
+                    });
+
+                atualizarPagamento();
+            </script>
+
+</body>
+
+</html>

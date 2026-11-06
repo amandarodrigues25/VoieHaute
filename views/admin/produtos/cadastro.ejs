@@ -1,352 +1,87 @@
 <%- include('../partials/header') %>
-<%- include('../partials/menu') %>
+    <%- include('../partials/menu') %>
 
 
-<main class="admin-form">
+        <main class="admin-form">
 
-    <!-- CAMINHO -->
-    <div class="form-caminho">
-        <span>Produtos</span>
-        <span>›</span>
-        <span>Novo Produto</span>
-    </div>
-
-
-    <!-- TÍTULO -->
-    <div class="form-titulo">
-
-        <img
-            src="/uploads/Admin/caixa mais escura.png"
-            class="form-titulo-icone"
-            alt=""
-        >
-
-        <div>
-            <h1>Produtos</h1>
-
-            <p>
-                Preencha as informações para adicionar um novo produto.
-            </p>
-        </div>
-
-    </div>
+            <!-- CAMINHO -->
+            <div class="form-caminho">
+                <span>Produtos</span>
+                <span>›</span>
+                <span>Novo Produto</span>
+            </div>
 
 
-    <!-- FORMULÁRIO -->
-    <form
-        action="/admin/produtos/cadastrar"
-        method="POST"
-        enctype="multipart/form-data"
-        class="form-admin"
-    >
+            <!-- TÍTULO -->
+            <div class="form-titulo">
 
-        <div class="row g-3">
+                <img src="/uploads/Admin/caixa mais escura.png" class="form-titulo-icone" alt="">
 
+                <div>
+                    <h1>Produtos</h1>
 
-            <!-- NOME -->
-            <div class="col-md-6">
-
-                <div class="campo-admin">
-
-                    <label for="nome">
-                        Nome do Produto
-                    </label>
-
-                    <input
-                        type="text"
-                        id="nome"
-                        name="nome"
-                        placeholder="Digite o nome do produto"
-                        required
-                    >
-
+                    <p>
+                        Preencha as informações para adicionar um novo produto.
+                    </p>
                 </div>
 
             </div>
 
 
-            <!-- CATEGORIA -->
-            <div class="col-md-6">
-
-                <div class="campo-admin">
-
-                    <label>
-                        Categorias
-                    </label>
-
-                    <div class="select-personalizado">
-
-                        <button
-                            type="button"
-                            class="select-botao"
-                        >
-                            <span>Selecione uma categoria</span>
-
-                            <i class="bi bi-chevron-down"></i>
-                        </button>
-
-
-                        <div class="select-opcoes">
-
-                            <% categorias.forEach(categoria => { %>
-
-                                <button
-                                    type="button"
-                                    class="select-opcao"
-                                    data-value="<%= categoria.nome %>"
-                                >
-                                    <%= categoria.nome %>
-                                </button>
-
-                            <% }) %>
-
-                        </div>
-
-
-                        <input
-                            type="hidden"
-                            name="categoria"
-                            class="select-valor"
-                        >
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- MATERIAL -->
-            <div class="col-md-6">
-
-                <div class="campo-admin">
-
-                    <label>
-                        Material
-                    </label>
-
-                    <div class="select-personalizado">
-
-                        <button
-                            type="button"
-                            class="select-botao"
-                        >
-                            <span>Selecione um material</span>
-
-                            <i class="bi bi-chevron-down"></i>
-                        </button>
-
-
-                        <div class="select-opcoes">
-
-                            <% materiais.forEach(material => { %>
-
-                                <button
-                                    type="button"
-                                    class="select-opcao"
-                                    data-value="<%= material.nome %>"
-                                >
-                                    <%= material.nome %>
-                                </button>
-
-                            <% }) %>
-
-                        </div>
-
-
-                        <input
-                            type="hidden"
-                            name="material"
-                            class="select-valor"
-                        >
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- PEDRA -->
-            <div class="col-md-6">
-
-                <div class="campo-admin">
-
-                    <label>
-                        Pedras
-                    </label>
-
-                    <div class="select-personalizado">
-
-                        <button
-                            type="button"
-                            class="select-botao"
-                        >
-                            <span>Selecione uma pedra</span>
-
-                            <i class="bi bi-chevron-down"></i>
-                        </button>
-
-
-                        <div class="select-opcoes">
-
-                            <% pedras.forEach(pedra => { %>
-
-                                <button
-                                    type="button"
-                                    class="select-opcao"
-                                    data-value="<%= pedra.nome %>"
-                                >
-                                    <%= pedra.nome %>
-                                </button>
-
-                            <% }) %>
-
-                        </div>
-
-
-                        <input
-                            type="hidden"
-                            name="pedra"
-                            class="select-valor"
-                        >
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- COLEÇÃO -->
-            <div class="col-md-6">
-
-                <div class="campo-admin">
-
-                    <label>
-                        Coleção
-                    </label>
-
-                    <div class="select-personalizado">
-
-                        <button
-                            type="button"
-                            class="select-botao"
-                        >
-                            <span>Selecione uma coleção</span>
-
-                            <i class="bi bi-chevron-down"></i>
-                        </button>
-
-
-                        <div class="select-opcoes">
-
-                            <% colecoes.forEach(colecao => { %>
-
-                                <button
-                                    type="button"
-                                    class="select-opcao"
-                                    data-value="<%= colecao.nome %>"
-                                >
-                                    <%= colecao.nome %>
-                                </button>
-
-                            <% }) %>
-
-                        </div>
-
-
-                        <input
-                            type="hidden"
-                            name="colecao"
-                            class="select-valor"
-                        >
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- TAMANHO -->
-            <div class="col-md-6">
-
-                <div class="campo-admin">
-
-                    <label>
-                        Tamanho
-                    </label>
-
-                    <div class="select-personalizado">
-
-                        <button
-                            type="button"
-                            class="select-botao"
-                        >
-                            <span>Selecione um tamanho</span>
-
-                            <i class="bi bi-chevron-down"></i>
-                        </button>
-
-
-                        <div class="select-opcoes">
-
-                            <% tamanhos.forEach(tamanho => { %>
-
-                                <button
-                                    type="button"
-                                    class="select-opcao"
-                                    data-value="<%= tamanho.tamanho %>"
-                                >
-                                    <%= tamanho.tamanho %>
-                                </button>
-
-                            <% }) %>
-
-                        </div>
-
-
-                        <input
-                            type="hidden"
-                            name="tamanho"
-                            class="select-valor"
-                        >
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- VALOR + ESTOQUE -->
-            <div class="col-md-6">
+            <!-- FORMULÁRIO -->
+            <form action="/admin/produtos/cadastrar" method="POST" enctype="multipart/form-data" class="form-admin">
 
                 <div class="row g-3">
 
 
-                    <!-- VALOR -->
-                    <div class="col-12">
+                    <!-- NOME -->
+                    <div class="col-md-6">
 
                         <div class="campo-admin">
 
-                            <label for="valor">
-                                Valor
+                            <label for="nome">
+                                Nome do Produto
                             </label>
 
-                            <div class="campo-valor">
+                            <input type="text" id="nome" name="nome" placeholder="Digite o nome do produto" required>
 
-                                <span>R$</span>
+                        </div>
 
-                                <input
-                                    type="number"
-                                    id="valor"
-                                    name="valor"
-                                    step="0.01"
-                                    placeholder="0,00"
-                                    required
-                                >
+                    </div>
+
+
+                    <!-- CATEGORIA -->
+                    <div class="col-md-6">
+
+                        <div class="campo-admin">
+
+                            <label>
+                                Categorias
+                            </label>
+
+                            <div class="select-personalizado">
+
+                                <button type="button" class="select-botao">
+                                    <span>Selecione uma categoria</span>
+
+                                    <i class="bi bi-chevron-down"></i>
+                                </button>
+
+
+                                <div class="select-opcoes">
+
+                                    <% categorias.forEach(categoria=> { %>
+
+                                        <button type="button" class="select-opcao" data-value="<%= categoria.nome %>">
+                                            <%= categoria.nome %>
+                                        </button>
+
+                                        <% }) %>
+
+                                </div>
+
+
+                                <input type="hidden" name="categoria" class="select-valor">
 
                             </div>
 
@@ -355,266 +90,788 @@
                     </div>
 
 
-                    <!-- ESTOQUE -->
-                    <div class="col-12">
+                    <!-- MATERIAL -->
+                    <div class="col-md-6">
 
                         <div class="campo-admin">
 
-                            <label for="estoque">
-                                Estoque
+                            <label>
+                                Material
                             </label>
 
-                            <input
-                                type="number"
-                                id="estoque"
-                                name="estoque"
-                                placeholder="0"
-                                required
-                            >
+                            <div class="select-personalizado">
+
+                                <button type="button" class="select-botao">
+                                    <span>Selecione um material</span>
+
+                                    <i class="bi bi-chevron-down"></i>
+                                </button>
+
+
+                                <div class="select-opcoes">
+
+                                    <% materiais.forEach(material=> { %>
+
+                                        <button type="button" class="select-opcao" data-value="<%= material.nome %>">
+                                            <%= material.nome %>
+                                        </button>
+
+                                        <% }) %>
+
+                                </div>
+
+
+                                <input type="hidden" name="material" class="select-valor">
+
+                            </div>
 
                         </div>
 
                     </div>
 
-                </div>
 
-            </div>
+                    <!-- PEDRA -->
+                    <div class="col-md-6">
+
+                        <div class="campo-admin">
+
+                            <label>
+                                Pedras
+                            </label>
+
+                            <div class="select-personalizado">
+
+                                <button type="button" class="select-botao">
+                                    <span>Selecione uma pedra</span>
+
+                                    <i class="bi bi-chevron-down"></i>
+                                </button>
 
 
-            <!-- IMAGEM -->
-            <div class="col-md-6">
+                                <div class="select-opcoes">
 
-                <div class="campo-admin campo-imagem">
+                                    <% pedras.forEach(pedra=> { %>
 
-                    <label
-                        for="imagem"
-                        class="upload-produto"
-                    >
+                                        <button type="button" class="select-opcao" data-value="<%= pedra.nome %>">
+                                            <%= pedra.nome %>
+                                        </button>
 
-                        <!-- ANTES DE SELECIONAR -->
-                        <div
-                            class="upload-conteudo"
-                            id="uploadConteudo"
-                        >
+                                        <% }) %>
 
-                            <i class="bi bi-upload"></i>
+                                </div>
 
-                            <span>
-                                Clique para selecionar a<br>
-                                imagem
-                            </span>
+
+                                <input type="hidden" name="pedra" class="select-valor">
+
+                            </div>
 
                         </div>
 
-
-                        <!-- DEPOIS DE SELECIONAR -->
-                        <img
-                            id="previewImagem"
-                            class="preview-imagem"
-                            alt="Prévia da imagem"
-                        >
-
-                    </label>
+                    </div>
 
 
-                    <input
-                        type="file"
-                        id="imagem"
-                        name="imagem"
-                        accept="image/*"
-                        required
-                    >
+                    <!-- COLEÇÃO -->
+                    <div class="col-md-6">
 
-                </div>
+                        <div class="campo-admin">
 
-            </div>
+                            <label>
+                                Coleção
+                            </label>
 
+                            <div class="select-personalizado">
 
-            <!-- DESCRIÇÃO -->
-            <div class="col-12">
+                                <button type="button" class="select-botao">
+                                    <span>Selecione uma coleção</span>
 
-                <div class="campo-admin">
-
-                    <label for="descricao">
-                        Descrição
-                    </label>
-
-                    <textarea
-                        id="descricao"
-                        name="descricao"
-                        placeholder="Digite a descrição do produto..."
-                    ></textarea>
-
-                </div>
-
-            </div>
-
-        </div>
+                                    <i class="bi bi-chevron-down"></i>
+                                </button>
 
 
-        <!-- BOTÕES -->
-        <div class="form-acoes">
+                                <div class="select-opcoes">
 
-            <a
-                href="/admin/produtos"
-                class="btn-form-cancelar"
-            >
-                CANCELAR
-            </a>
+                                    <% colecoes.forEach(colecao=> { %>
 
+                                        <button type="button" class="select-opcao" data-value="<%= colecao.nome %>">
+                                            <%= colecao.nome %>
+                                        </button>
 
-            <button
-                type="submit"
-                class="btn-form-salvar"
-            >
-                CADASTRAR
-            </button>
+                                        <% }) %>
 
-        </div>
-
-    </form>
-
-</main>
+                                </div>
 
 
+                                <input type="hidden" name="colecao" class="select-valor">
 
-<script>
+                            </div>
 
-    /* =====================================================
-       PRÉVIA DA IMAGEM
-    ===================================================== */
+                        </div>
 
-    const inputImagem =
-        document.getElementById('imagem');
-
-    const previewImagem =
-        document.getElementById('previewImagem');
-
-    const uploadConteudo =
-        document.getElementById('uploadConteudo');
+                    </div>
 
 
-    inputImagem.addEventListener('change', function () {
+                    <!-- TAMANHO -->
+                    <div class="col-md-6">
 
-        const arquivo = this.files[0];
+                        <div class="campo-admin">
 
-        if (arquivo) {
+                            <label>
+                                Tamanho
+                            </label>
 
-            previewImagem.src =
-                URL.createObjectURL(arquivo);
+                            <div class="select-personalizado">
 
-            previewImagem.style.display = 'block';
+                                <button type="button" class="select-botao">
+                                    <span>Selecione um tamanho</span>
 
-            uploadConteudo.style.display = 'none';
-
-        }
-
-    });
-
-
-
-    /* =====================================================
-       SELECTS PERSONALIZADOS
-    ===================================================== */
-
-    const selects =
-        document.querySelectorAll('.select-personalizado');
+                                    <i class="bi bi-chevron-down"></i>
+                                </button>
 
 
-    selects.forEach(function (select) {
+                                <div class="select-opcoes">
 
-        const botao =
-            select.querySelector('.select-botao');
+                                    <% tamanhos.forEach(tamanho=> { %>
 
-        const texto =
-            botao.querySelector('span');
+                                        <button type="button" class="select-opcao" data-value="<%= tamanho.tamanho %>">
+                                            <%= tamanho.tamanho %>
+                                        </button>
 
-        const valor =
-            select.querySelector('.select-valor');
+                                        <% }) %>
 
-        const opcoes =
-            select.querySelectorAll('.select-opcao');
+                                </div>
 
 
-        /* ABRIR SELECT */
-        botao.addEventListener('click', function () {
+                                <input type="hidden" name="tamanho" class="select-valor">
 
-            /* FECHA OS OUTROS */
-            selects.forEach(function (outroSelect) {
+                            </div>
 
-                if (outroSelect !== select) {
+                        </div>
 
-                    outroSelect.classList.remove('aberto');
+                    </div>
 
+
+                    <!-- VALOR + ESTOQUE -->
+                    <div class="col-md-6">
+
+                        <div class="row g-3">
+
+
+                            <!-- VALOR -->
+                            <div class="col-12">
+
+                                <div class="campo-admin">
+
+                                    <label for="valor">
+                                        Valor
+                                    </label>
+
+                                    <div class="campo-valor">
+
+                                        <span>R$</span>
+
+                                        <input type="number" id="valor" name="valor" step="0.01" placeholder="0,00"
+                                            required>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- ESTOQUE -->
+                            <div class="col-12">
+
+                                <div class="campo-admin">
+
+                                    <label for="estoque">
+                                        Estoque
+                                    </label>
+
+                                    <input type="number" id="estoque" name="estoque" placeholder="0" required>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- MÍDIAS DO PRODUTO -->
+
+                    <div class="col-12">
+                        <div class="form-secao">
+                            <span>MÍDIAS DO PRODUTO</span>
+                            <div></div>
+                        </div>
+                    </div>
+
+                    <!-- FOTO PRINCIPAL -->
+                    <div class="col-md-4">
+                        <div class="campo-admin campo-imagem">
+
+                            <label for="imagem" class="upload-produto">
+
+                                <div class="upload-conteudo" id="uploadConteudo">
+                                    <i class="bi bi-upload"></i>
+
+                                    <span>
+                                        Clique para selecionar a<br>
+                                        foto principal
+                                    </span>
+                                </div>
+
+                                <img id="previewImagem" class="preview-imagem" alt="Prévia da foto principal">
+                            </label>
+
+                            <input type="file" id="imagem" name="imagem" accept="image/jpeg, image/png, image/webp"
+                                required>
+
+                        </div>
+                    </div>
+
+
+                    <!-- FOTO 2 -->
+                    <div class="col-md-4">
+                        <div class="campo-admin campo-imagem">
+
+                            <label for="imagem_secundaria" class="upload-produto">
+
+                                <div class="upload-conteudo" id="uploadConteudoSecundario">
+                                    <i class="bi bi-upload"></i>
+
+                                    <span>
+                                        Clique para selecionar a<br>
+                                        segunda foto
+                                    </span>
+                                </div>
+
+                                <img id="previewImagemSecundaria" class="preview-imagem" alt="Prévia da segunda foto">
+                            </label>
+
+                            <input type="file" id="imagem_secundaria" name="imagem_secundaria"
+                                accept="image/jpeg, image/png, image/webp">
+
+                        </div>
+                    </div>
+
+
+                    <!-- FOTO 3 -->
+                    <div class="col-md-4">
+                        <div class="campo-admin campo-imagem">
+
+                            <label for="imagem_3" class="upload-produto">
+
+                                <div class="upload-conteudo" id="uploadConteudoImagem3">
+                                    <i class="bi bi-upload"></i>
+
+                                    <span>
+                                        Clique para selecionar a<br>
+                                        terceira foto
+                                    </span>
+                                </div>
+
+                                <img id="previewImagem3" class="preview-imagem" alt="Prévia da terceira foto">
+                            </label>
+
+                            <input type="file" id="imagem_3" name="imagem_3" accept="image/jpeg, image/png, image/webp">
+
+                        </div>
+                    </div>
+
+
+                    <!-- FOTO 4 -->
+                    <div class="col-md-4">
+                        <div class="campo-admin campo-imagem">
+
+                            <label for="imagem_4" class="upload-produto">
+
+                                <div class="upload-conteudo" id="uploadConteudoImagem4">
+                                    <i class="bi bi-upload"></i>
+
+                                    <span>
+                                        Clique para selecionar a<br>
+                                        quarta foto
+                                    </span>
+                                </div>
+
+                                <img id="previewImagem4" class="preview-imagem" alt="Prévia da quarta foto">
+                            </label>
+
+                            <input type="file" id="imagem_4" name="imagem_4" accept="image/jpeg, image/png, image/webp">
+
+                        </div>
+                    </div>
+
+
+                    <!-- VÍDEO -->
+                    <div class="col-md-4">
+                        <div class="campo-admin campo-imagem">
+
+                            <label for="video" class="upload-produto">
+
+                                <div class="upload-conteudo" id="uploadConteudoVideo">
+                                    <i class="bi bi-camera-video"></i>
+
+                                    <span>
+                                        Clique para selecionar o<br>
+                                        vídeo do produto
+                                    </span>
+                                </div>
+
+                                <video id="previewVideo" class="preview-imagem" muted controls>
+                                </video>
+                            </label>
+
+                            <input type="file" id="video" name="video" accept="video/mp4">
+
+                        </div>
+                    </div>
+
+                    <!-- IMAGENS DA PÁGINA DE CATEGORIA -->
+
+                    <div class="col-12">
+                        <div class="form-secao">
+                            <span>IMAGENS DA PÁGINA DE CATEGORIA</span>
+                            <div></div>
+                        </div>
+                    </div>
+
+
+                    <!-- MODELO USANDO A JOIA -->
+
+                    <div class="col-md-4">
+                        <div class="campo-admin campo-imagem">
+
+                            <label for="modelo_categoria" class="upload-produto">
+
+                                <div class="upload-conteudo" id="uploadConteudoModeloCategoria">
+                                    <i class="bi bi-person"></i>
+
+                                    <span>
+                                        Clique para selecionar a<br>
+                                        modelo usando a joia
+                                    </span>
+                                </div>
+
+                                <img id="previewModeloCategoria" class="preview-imagem" alt="Prévia da modelo">
+
+                            </label>
+
+                            <input type="file" id="modelo_categoria" name="modelo_categoria"
+                                accept="image/jpeg, image/png, image/webp">
+
+                        </div>
+                    </div>
+
+
+                    <!-- JOIA SEM FUNDO -->
+
+                    <div class="col-md-4">
+                        <div class="campo-admin campo-imagem">
+
+                            <label for="produto_categoria" class="upload-produto">
+
+                                <div class="upload-conteudo" id="uploadConteudoProdutoCategoria">
+                                    <i class="bi bi-gem"></i>
+
+                                    <span>
+                                        Clique para selecionar a<br>
+                                        joia sem fundo
+                                    </span>
+                                </div>
+
+                                <img id="previewProdutoCategoria" class="preview-imagem" alt="Prévia da joia">
+
+                            </label>
+
+                            <input type="file" id="produto_categoria" name="produto_categoria"
+                                accept="image/jpeg, image/png, image/webp">
+
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="form-secao">
+                            <span>INFORMAÇÕES DA JOIA</span>
+                            <div></div>
+                        </div>
+                    </div>
+
+
+                    <!-- DESCRIÇÃO CURTA -->
+                    <div class="col-12">
+
+                        <div class="campo-admin">
+
+                            <label for="descricao">
+                                Descrição curta
+                            </label>
+
+                            <textarea id="descricao" name="descricao"
+                                placeholder="Digite uma breve descrição da joia..."></textarea>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- DETALHES DA JOIA -->
+                    <div class="col-12">
+
+                        <div class="campo-admin">
+
+                            <label for="detalhes">
+                                Detalhes da joia
+                            </label>
+
+                            <textarea id="detalhes" name="detalhes"
+                                placeholder="Digite os detalhes completos da joia..."></textarea>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- BOTÕES -->
+                    <div class="form-acoes">
+
+                        <a href="/admin/produtos" class="btn-form-cancelar">
+                            CANCELAR
+                        </a>
+
+
+                        <button type="submit" class="btn-form-salvar">
+                            CADASTRAR
+                        </button>
+
+                    </div>
+
+            </form>
+
+        </main>
+
+
+
+        <script>
+
+            /* =====================================================
+               PRÉVIA DA FOTO PRINCIPAL
+               ===================================================== */
+
+            const inputImagem =
+                document.getElementById('imagem');
+
+            const previewImagem =
+                document.getElementById('previewImagem');
+
+            const uploadConteudo =
+                document.getElementById('uploadConteudo');
+
+
+            inputImagem.addEventListener('change', function () {
+
+                const arquivo = this.files[0];
+
+                if (arquivo) {
+
+                    previewImagem.src =
+                        URL.createObjectURL(arquivo);
+
+                    previewImagem.style.display = 'block';
+
+                    uploadConteudo.style.display = 'none';
                 }
 
             });
 
 
-            /* ABRE OU FECHA O ATUAL */
-            select.classList.toggle('aberto');
+            /* =====================================================
+               PRÉVIA DA SEGUNDA FOTO
+               ===================================================== */
 
-        });
+            const inputImagemSecundaria =
+                document.getElementById('imagem_secundaria');
 
+            const previewImagemSecundaria =
+                document.getElementById('previewImagemSecundaria');
 
-
-        /* ESCOLHER UMA OPÇÃO */
-        opcoes.forEach(function (opcao) {
-
-            opcao.addEventListener('click', function () {
-
-                /* MUDA O TEXTO DO CAMPO */
-                texto.textContent =
-                    opcao.textContent.trim();
+            const uploadConteudoSecundario =
+                document.getElementById('uploadConteudoSecundario');
 
 
-                /* GUARDA O VALOR */
-                valor.value =
-                    opcao.dataset.value;
+            inputImagemSecundaria.addEventListener('change', function () {
+
+                const arquivo = this.files[0];
+
+                if (arquivo) {
+
+                    previewImagemSecundaria.src =
+                        URL.createObjectURL(arquivo);
+
+                    previewImagemSecundaria.style.display = 'block';
+
+                    uploadConteudoSecundario.style.display = 'none';
+                }
+
+            });
+
+            /* =====================================================
+   PRÉVIA DA TERCEIRA FOTO
+   ===================================================== */
+
+            const inputImagem3 =
+                document.getElementById('imagem_3');
+
+            const previewImagem3 =
+                document.getElementById('previewImagem3');
+
+            const uploadConteudoImagem3 =
+                document.getElementById('uploadConteudoImagem3');
+
+            inputImagem3.addEventListener('change', function () {
+
+                const arquivo = this.files[0];
+
+                if (arquivo) {
+
+                    previewImagem3.src =
+                        URL.createObjectURL(arquivo);
+
+                    previewImagem3.style.display = 'block';
+
+                    uploadConteudoImagem3.style.display = 'none';
+                }
+
+            });
 
 
-                /* REMOVE SELEÇÃO ANTERIOR */
-                opcoes.forEach(function (item) {
+            /* =====================================================
+               PRÉVIA DA QUARTA FOTO
+               ===================================================== */
 
-                    item.classList.remove('selecionada');
+            const inputImagem4 =
+                document.getElementById('imagem_4');
+
+            const previewImagem4 =
+                document.getElementById('previewImagem4');
+
+            const uploadConteudoImagem4 =
+                document.getElementById('uploadConteudoImagem4');
+
+            inputImagem4.addEventListener('change', function () {
+
+                const arquivo = this.files[0];
+
+                if (arquivo) {
+
+                    previewImagem4.src =
+                        URL.createObjectURL(arquivo);
+
+                    previewImagem4.style.display = 'block';
+
+                    uploadConteudoImagem4.style.display = 'none';
+                }
+
+            });
+
+
+            /* =====================================================
+               PRÉVIA DO VÍDEO
+               ===================================================== */
+
+            const inputVideo =
+                document.getElementById('video');
+
+            const previewVideo =
+                document.getElementById('previewVideo');
+
+            const uploadConteudoVideo =
+                document.getElementById('uploadConteudoVideo');
+
+
+            inputVideo.addEventListener('change', function () {
+
+                const arquivo = this.files[0];
+
+                if (arquivo) {
+
+                    previewVideo.src =
+                        URL.createObjectURL(arquivo);
+
+                    previewVideo.style.display = 'block';
+
+                    uploadConteudoVideo.style.display = 'none';
+
+                    previewVideo.load();
+                }
+
+            });
+
+            /* =====================================================
+   PRÉVIA - MODELO DA CATEGORIA
+===================================================== */
+
+            const inputModeloCategoria =
+                document.getElementById('modelo_categoria');
+
+            const previewModeloCategoria =
+                document.getElementById('previewModeloCategoria');
+
+            const uploadConteudoModeloCategoria =
+                document.getElementById('uploadConteudoModeloCategoria');
+
+            inputModeloCategoria.addEventListener('change', function () {
+
+                const arquivo = this.files[0];
+
+                if (arquivo) {
+
+                    previewModeloCategoria.src =
+                        URL.createObjectURL(arquivo);
+
+                    previewModeloCategoria.style.display = 'block';
+
+                    uploadConteudoModeloCategoria.style.display = 'none';
+                }
+
+            });
+
+
+            /* =====================================================
+               PRÉVIA - PRODUTO DA CATEGORIA
+            ===================================================== */
+
+            const inputProdutoCategoria =
+                document.getElementById('produto_categoria');
+
+            const previewProdutoCategoria =
+                document.getElementById('previewProdutoCategoria');
+
+            const uploadConteudoProdutoCategoria =
+                document.getElementById('uploadConteudoProdutoCategoria');
+
+            inputProdutoCategoria.addEventListener('change', function () {
+
+                const arquivo = this.files[0];
+
+                if (arquivo) {
+
+                    previewProdutoCategoria.src =
+                        URL.createObjectURL(arquivo);
+
+                    previewProdutoCategoria.style.display = 'block';
+
+                    uploadConteudoProdutoCategoria.style.display = 'none';
+                }
+
+            });
+
+
+            /* =====================================================
+               SELECTS PERSONALIZADOS
+            ===================================================== */
+
+            const selects =
+                document.querySelectorAll('.select-personalizado');
+
+
+            selects.forEach(function (select) {
+
+                const botao =
+                    select.querySelector('.select-botao');
+
+                const texto =
+                    botao.querySelector('span');
+
+                const valor =
+                    select.querySelector('.select-valor');
+
+                const opcoes =
+                    select.querySelectorAll('.select-opcao');
+
+
+                /* ABRIR SELECT */
+                botao.addEventListener('click', function () {
+
+                    /* FECHA OS OUTROS */
+                    selects.forEach(function (outroSelect) {
+
+                        if (outroSelect !== select) {
+
+                            outroSelect.classList.remove('aberto');
+
+                        }
+
+                    });
+
+
+                    /* ABRE OU FECHA O ATUAL */
+                    select.classList.toggle('aberto');
 
                 });
 
 
-                /* MARCA A NOVA OPÇÃO */
-                opcao.classList.add('selecionada');
+
+                /* ESCOLHER UMA OPÇÃO */
+                opcoes.forEach(function (opcao) {
+
+                    opcao.addEventListener('click', function () {
+
+                        /* MUDA O TEXTO DO CAMPO */
+                        texto.textContent =
+                            opcao.textContent.trim();
 
 
-                /* FECHA */
-                select.classList.remove('aberto');
+                        /* GUARDA O VALOR */
+                        valor.value =
+                            opcao.dataset.value;
+
+
+                        /* REMOVE SELEÇÃO ANTERIOR */
+                        opcoes.forEach(function (item) {
+
+                            item.classList.remove('selecionada');
+
+                        });
+
+
+                        /* MARCA A NOVA OPÇÃO */
+                        opcao.classList.add('selecionada');
+
+
+                        /* FECHA */
+                        select.classList.remove('aberto');
+
+                    });
+
+                });
 
             });
 
-        });
-
-    });
 
 
+            /* =====================================================
+               FECHAR SELECT AO CLICAR FORA
+            ===================================================== */
 
-    /* =====================================================
-       FECHAR SELECT AO CLICAR FORA
-    ===================================================== */
+            document.addEventListener('click', function (event) {
 
-    document.addEventListener('click', function (event) {
+                selects.forEach(function (select) {
 
-        selects.forEach(function (select) {
+                    if (!select.contains(event.target)) {
 
-            if (!select.contains(event.target)) {
+                        select.classList.remove('aberto');
 
-                select.classList.remove('aberto');
+                    }
 
-            }
+                });
 
-        });
+            });
 
-    });
-
-</script>
+        </script>
 
 
-<%- include('../partials/footer') %>
+        <%- include('../partials/footer') %>

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Minuit | VoieHaute</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+    <%- include('partials/header') %>
+
+
+        <!-- =================================================
+         HERO — MINUIT
+    ================================================== -->
+
+        <section class="colecao-hero">
+            <video class="colecao-hero-video" autoplay muted loop playsinline>
+                <source src="/uploads/minuit-hero.mp4" type="video/mp4">
+            </video>
+        </section>
+
+
+        <!-- =================================================
+     APRESENTAÇÃO DA COLEÇÃO
+================================================== -->
+
+        <section class="colecao-apresentacao">
+
+            <div class="colecao-apresentacao-texto">
+
+                <div class="colecao-eyebrow">
+                    <span></span>
+                    <p>A COLEÇÃO</p>
+                    <span></span>
+                </div>
+
+                <h2>MINUIT</h2>
+
+                <p class="colecao-apresentacao-descricao">
+                    Inspirada no encanto silencioso da meia-noite, Minuit transforma
+                    a beleza do céu noturno em alta joalheria. Diamantes azuis,
+                    diamantes brancos e ouro amarelo se encontram em criações
+                    luminosas, onde tons profundos e reflexos dourados evocam
+                    mistério, sonho e a magia de uma noite que parece não ter fim.
+                </p>
+
+            </div>
+
+
+            <div class="colecao-apresentacao-imagem">
+
+                <img src="/uploads/minuit-colecao.png" alt="Coleção Minuit VoieHaute">
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+     CRIAÇÕES DA COLEÇÃO
+================================================== -->
+
+        <section class="colecao-criacoes">
+
+            <div class="colecao-criacoes-cabecalho">
+
+                <div class="colecao-criacoes-eyebrow">
+                    <span></span>
+                    <p>MINUIT</p>
+                    <span></span>
+                </div>
+
+                <h2>Criações da Coleção</h2>
+
+            </div>
+
+
+            <div class="colecao-criacoes-carrossel">
+
+                <button type="button" class="colecao-criacoes-seta colecao-criacoes-seta-esquerda" id="colecaoAnterior"
+                    aria-label="Produto anterior">
+                    ‹
+                </button>
+
+
+                <div class="colecao-criacoes-viewport">
+
+                    <div class="colecao-criacoes-trilho" id="colecaoTrilho">
+
+                        <% produtos.forEach(produto=> { %>
+
+                            <a href="/produto/<%= produto.id %>" class="colecao-criacao-card">
+
+                                <div
+                                    class="colecao-criacao-imagem <%= produto.imagem_secundaria ? 'tem-secundaria' : '' %>">
+
+                                    <img class="colecao-criacao-foto colecao-criacao-foto-principal"
+                                        src="/uploads/<%= produto.imagem %>" alt="<%= produto.nome %>">
+
+                                    <% if (produto.imagem_secundaria) { %>
+
+                                        <img class="colecao-criacao-foto colecao-criacao-foto-secundaria"
+                                            src="/uploads/<%= produto.imagem_secundaria %>" alt="<%= produto.nome %>">
+
+                                        <% } %>
+
+                                </div>
+
+
+                                <div class="colecao-criacao-info">
+
+                                    <h3>
+                                        <%= produto.nome %>
+                                    </h3>
+
+                                    <p>
+                                        <%= Number(produto.valor).toLocaleString( 'pt-BR' , { style: 'currency' ,
+                                            currency: 'BRL' } ) %>
+                                    </p>
+
+                                </div>
+
+                            </a>
+
+                            <% }) %>
+
+                    </div>
+
+                </div>
+
+
+                <button type="button" class="colecao-criacoes-seta colecao-criacoes-seta-direita" id="colecaoProximo"
+                    aria-label="Próximo produto">
+                    ›
+                </button>
+
+            </div>
+
+        </section>
+
+        <!-- =================================================
+     INSPIRAÇÃO DA COLEÇÃO
+================================================== -->
+
+        <section class="colecao-inspiracao">
+
+            <div class="colecao-inspiracao-imagem">
+                <img src="/uploads/minuit-inspiracao.png" alt="Inspiração da coleção Minuit">
+            </div>
+
+            <div class="colecao-inspiracao-texto">
+
+                <div class="colecao-eyebrow">
+                    <span></span>
+                    <p>A INSPIRAÇÃO</p>
+                    <span></span>
+                </div>
+
+                <h2>
+                    A NOITE COMO<br>
+                    SÍMBOLO DE<br>
+                    ENCANTO
+                </h2>
+
+                <p>
+                    Minuit nasce do instante em que a noite transforma tudo ao seu
+                    redor. Inspirada pelo céu à meia-noite, pelo brilho da lua e pelos
+                    palácios iluminados sob tons profundos de azul, a coleção traduz
+                    mistério e sonho em criações onde diamantes azuis e reflexos
+                    dourados evocam a magia de um céu estrelado.
+                </p>
+
+            </div>
+
+        </section>
+
+        <!-- =================================================
+     DA IDEIA À JOIA
+================================================== -->
+
+        <section class="colecao-processo">
+
+            <div class="colecao-processo-cabecalho">
+
+                <div class="colecao-eyebrow">
+                    <span></span>
+                    <p>DA IDEIA À JOIA</p>
+                    <span></span>
+                </div>
+
+                <h2>A Arte de Capturar a Noite</h2>
+
+            </div>
+
+
+            <div class="colecao-processo-grid">
+
+                <!-- O TRAÇO -->
+
+                <div class="colecao-processo-item">
+
+                    <div class="colecao-processo-imagem">
+                        <img src="/uploads/minuit-traco.png" alt="O Traço">
+                    </div>
+
+                    <h3>O TRAÇO</h3>
+
+                    <p>
+                        Desenhos inspirados no céu noturno transformam
+                        estrelas, luz e movimento em formas delicadas.
+                    </p>
+
+                </div>
+
+
+                <!-- O DIAMANTE -->
+
+                <div class="colecao-processo-item">
+
+                    <div class="colecao-processo-imagem">
+                        <img src="/uploads/minuit-diamante.png" alt="O Diamante Azul">
+                    </div>
+
+                    <h3>O DIAMANTE AZUL</h3>
+
+                    <p>
+                        Diamantes azuis excepcionais são selecionados pela
+                        intensidade de sua cor, raridade e luminosidade.
+                    </p>
+
+                </div>
+
+
+                <!-- A FORMA -->
+
+                <div class="colecao-processo-item">
+
+                    <div class="colecao-processo-imagem">
+                        <img src="/uploads/minuit-forma.png" alt="A Forma">
+                    </div>
+
+                    <h3>A FORMA</h3>
+
+                    <p>
+                        O trabalho artesanal une ouro amarelo, diamantes azuis
+                        e diamantes brancos em criações que parecem capturar
+                        a luz da noite.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- =================================================
+     BANNER EDITORIAL
+================================================== -->
+
+        <section class="colecao-banner">
+            <img src="/uploads/minuit-banner.png" alt="A noite revelada em cada reflexo">
+        </section>
+
+        <!-- =================================================
+     O LEGADO CONTINUA
+================================================== -->
+
+        <section class="colecao-legado">
+
+            <div class="colecao-legado-cabecalho">
+
+                <div class="colecao-eyebrow">
+                    <span></span>
+                    <p>O LEGADO CONTINUA</p>
+                    <span></span>
+                </div>
+
+                <h2>
+                    Uma História Onde a Noite Encontra a Luz
+                </h2>
+
+            </div>
+
+
+            <div class="colecao-legado-conteudo">
+
+                <div class="colecao-legado-texto">
+
+                    <p>
+                        Minuit nasce da fascinação pelo instante em que o dia
+                        desaparece e a noite revela uma beleza completamente
+                        diferente. Sob o céu profundo da meia-noite, a luz da lua,
+                        as estrelas e os reflexos dourados dos palácios criam um
+                        universo silencioso, misterioso e quase impossível de esquecer.
+                    </p>
+
+                    <p>
+                        Os diamantes azuis traduzem a profundidade desse céu,
+                        enquanto os diamantes brancos evocam pequenas porções de luz
+                        na escuridão. O ouro amarelo dá origem a um reflexo quente,
+                        inspirado nas luzes que atravessam a noite e iluminam cada criação.
+                    </p>
+
+                    <p>
+                        Cinco joias dão forma a esse universo, cada uma capturando
+                        uma expressão diferente da noite — seu mistério, sua
+                        luminosidade, seu movimento e sua capacidade de transformar
+                        o extraordinário em eterno.
+                    </p>
+
+                    <p>
+                        Minuit é o instante em que a noite deixa de ser apenas
+                        escuridão e se transforma em luz.
+                    </p>
+
+                </div>
+
+
+                <div class="colecao-legado-imagem">
+
+                    <img src="/uploads/minuit-legado.png" alt="O legado da coleção Minuit">
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <%- include('partials/footer') %>
+
+            <script>
+                const colecaoTrilho = document.getElementById('colecaoTrilho');
+                const colecaoAnterior = document.getElementById('colecaoAnterior');
+                const colecaoProximo = document.getElementById('colecaoProximo');
+
+                let colecaoPosicao = 0;
+
+                function atualizarCarrosselColecao() {
+
+                    const cards = document.querySelectorAll('.colecao-criacao-card');
+
+                    if (!cards.length) return;
+
+                    const visiveis = 4;
+                    const maximo = Math.max(0, cards.length - visiveis);
+
+                    if (colecaoPosicao < 0) {
+                        colecaoPosicao = 0;
+                    }
+
+                    if (colecaoPosicao > maximo) {
+                        colecaoPosicao = maximo;
+                    }
+
+                    const card = cards[0];
+
+                    const gap = 18;
+
+                    const deslocamento =
+                        colecaoPosicao * (card.offsetWidth + gap);
+
+                    colecaoTrilho.style.transform =
+                        `translateX(-${deslocamento}px)`;
+                }
+
+
+                colecaoProximo?.addEventListener('click', () => {
+                    colecaoPosicao++;
+                    atualizarCarrosselColecao();
+                });
+
+
+                colecaoAnterior?.addEventListener('click', () => {
+                    colecaoPosicao--;
+                    atualizarCarrosselColecao();
+                });
+            </script>
+
+</body>
+
+</html>

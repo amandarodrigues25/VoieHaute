@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Brincos | VoieHaute</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+    <%- include('partials/header') %>
+
+
+        <main class="pagina-joia">
+
+            <!-- ================================
+             ABERTURA
+        ================================= -->
+
+            <section class="joia-abertura">
+
+                <div class="joia-abertura-imagem">
+                    <img src="/uploads/tiaras-capa.jpg" alt="Coleção de tiaras VoieHaute">
+                </div>
+
+
+                <div class="joia-abertura-texto">
+
+                    <div class="produto-caminho">
+
+
+                        <a href="/">
+                            Home
+                        </a>
+
+                        <span>✦</span>
+
+                        <a href="/joias/tiaras" class="atual">
+                            Brincos
+                        </a>
+                    </div>
+
+                    <div class="joia-eyebrow">
+                        <span></span>
+                        <p>JOIAS</p>
+                        <span></span>
+                    </div>
+
+                    <h1>TIARA</h1>
+
+                    <p class="joia-descricao">
+                        As tiaras VoieHaute são criações que coroam a beleza com elegância e transformam cada aparição
+                        em uma expressão de sofisticação. Pedras preciosas excepcionais, diamantes luminosos e metais
+                        nobres se encontram em designs que exploram diferentes formas, volumes e lapidações, dos traços
+                        mais delicados às composições de presença majestosa. Cada tiara emoldura o rosto, valoriza seus
+                        traços e revela uma personalidade única, tornando-se uma joia extraordinária para celebrar
+                        ocasiões inesquecíveis, feita para encantar, ser desejada e atravessar gerações.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================================
+             VITRINE INTERATIVA
+        ================================= -->
+
+            <% if (tiaras && tiaras.length> 0) { %>
+
+                <section class="joia-vitrine">
+
+                    <!-- FUNDO ESQUERDO / MODELO -->
+
+                    <div class="joia-vitrine-fundo joia-vitrine-fundo-modelo">
+                        <img src="/uploads/fundo-modelo.png" alt="">
+                    </div>
+
+
+                    <!-- FUNDO DIREITO / PRODUTO -->
+
+                    <div class="joia-vitrine-fundo joia-vitrine-fundo-produto">
+                        <img src="/uploads/fundo-produto.png" alt="">
+                    </div>
+
+
+                    <!-- LISTA -->
+
+                    <div class="joia-vitrine-lista">
+
+                        <div class="joia-vitrine-titulo">
+                            <span></span>
+                            <h2>NOSSAS TIARAS</h2>
+                            <span></span>
+                        </div>
+
+                        <div class="joia-vitrine-nomes">
+
+                            <% tiaras.forEach((tiara, index)=> { %>
+
+                                <button type="button" class="joia-vitrine-nome <%= index === 0 ? 'ativo' : '' %>"
+                                    data-index="<%= index %>" data-id="<%= tiara.id %>" data-nome="<%= tiara.nome %>"
+                                    data-valor="<%= tiara.valor %>" data-modelo="<%= tiara.modelo_categoria || '' %>"
+                                    data-produto="<%= tiara.produto_categoria || '' %>">
+                                    <%= tiara.nome %>
+                                </button>
+
+                                <% }) %>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- MODELO -->
+
+                    <div class="joia-vitrine-modelo">
+
+                        <img id="vitrineModeloAtual" class="vitrine-camada"
+                            src="<%= tiaras[0].modelo_categoria ? '/uploads/' + tiaras[0].modelo_categoria : '' %>"
+                            alt="<%= tiaras[0].nome %>" <%=tiaras[0].modelo_categoria ? '' : 'style="display:none;"' %>
+                        >
+
+                        <img id="vitrineModeloProxima" class="vitrine-camada" src="" alt="" style="display:none;">
+
+                    </div>
+
+                    <!-- PRODUTO -->
+
+                    <div class="joia-vitrine-produto">
+
+                        <div class="joia-vitrine-produto-imagem">
+
+                            <img id="vitrineProdutoAtual" class="vitrine-camada"
+                                src="<%= tiaras[0].produto_categoria ? '/uploads/' + tiaras[0].produto_categoria : '' %>"
+                                alt="<%= tiaras[0].nome %>" <%=tiaras[0].produto_categoria ? ''
+                                : 'style="display:none;"' %>
+                            >
+
+                            <img id="vitrineProdutoProximo" class="vitrine-camada" src="" alt="" style="display:none;">
+
+                        </div>
+
+
+                        <div class="joia-vitrine-info">
+
+                            <h3 id="vitrineNome">
+                                <%= tiaras[0].nome %>
+                            </h3>
+
+                            <p id="vitrinePreco">
+                                R$ <%= Number(tiaras[0].valor).toLocaleString('pt-BR', { minimumFractionDigits: 2,
+                                    maximumFractionDigits: 2 }) %>
+                            </p>
+
+                            <a href="/produto/<%= tiaras[0].id %>" id="vitrineDetalhes">
+                                VER DETALHES
+                            </a>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SETAS -->
+
+                    <div class="joia-vitrine-setas">
+
+                        <button type="button" id="vitrineAnterior" aria-label="Pulseira anterior">
+                            <i class="bi bi-chevron-up"></i>
+                        </button>
+
+                        <div></div>
+
+                        <button type="button" id="vitrineProximo" aria-label="Próxima tiara">
+                            <i class="bi bi-chevron-down"></i>
+                        </button>
+
+                    </div>
+
+                </section>
+
+                <% } %>
+
+        </main>
+
+
+        <%- include('partials/footer') %>
+
+            <script>
+                let tiaraAtual = 0;
+                let animandoVitrine = false;
+
+                const nomesVitrine = document.querySelectorAll('.joia-vitrine-nome');
+
+                let modeloAtual = document.getElementById('vitrineModeloAtual');
+                let modeloProxima = document.getElementById('vitrineModeloProxima');
+
+                let produtoAtual = document.getElementById('vitrineProdutoAtual');
+                let produtoProximo = document.getElementById('vitrineProdutoProximo');
+
+                const vitrineNome = document.getElementById('vitrineNome');
+                const vitrinePreco = document.getElementById('vitrinePreco');
+                const vitrineDetalhes = document.getElementById('vitrineDetalhes');
+
+                const botaoAnterior = document.getElementById('vitrineAnterior');
+                const botaoProximo = document.getElementById('vitrineProximo');
+
+                const vitrineJoia = document.querySelector('.joia-vitrine');
+
+
+                /* =====================================================
+                   FORMATAR PREÇO
+                ===================================================== */
+
+                function formatarPreco(valor) {
+                    return Number(valor).toLocaleString('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL'
+                    });
+                }
+
+
+                /* =====================================================
+                   TROCAR TIARA
+                ===================================================== */
+
+                function trocarTiara(novoIndex, direcaoForcada = null) {
+
+                    if (
+                        animandoVitrine ||
+                        novoIndex === tiaraAtual ||
+                        !nomesVitrine.length
+                    ) {
+                        return;
+                    }
+
+                    let direcao = direcaoForcada;
+
+                    if (!direcao) {
+                        direcao = novoIndex > tiaraAtual
+                            ? 'baixo'
+                            : 'cima';
+                    }
+
+
+                    /* SE PASSOU DA ÚLTIMA, VOLTA PARA A PRIMEIRA */
+
+                    if (novoIndex >= nomesVitrine.length) {
+                        novoIndex = 0;
+                        direcao = 'baixo';
+                    }
+
+
+                    /* SE VOLTOU DA PRIMEIRA, VAI PARA A ÚLTIMA */
+
+                    if (novoIndex < 0) {
+                        novoIndex = nomesVitrine.length - 1;
+                        direcao = 'cima';
+                    }
+
+
+                    animandoVitrine = true;
+
+
+                    /* =================================================
+                       PEGA OS DADOS DA NOVA TIARA
+                    ================================================= */
+
+                    const item = nomesVitrine[novoIndex];
+
+                    const id = item.dataset.id;
+                    const nome = item.dataset.nome;
+                    const valor = item.dataset.valor;
+                    const modelo = item.dataset.modelo;
+                    const produto = item.dataset.produto;
+
+
+                    /* =================================================
+                       PREPARA A NOVA MODELO
+                    ================================================= */
+
+                    if (modelo) {
+
+                        modeloProxima.src = '/uploads/' + modelo;
+                        modeloProxima.alt = nome;
+                        modeloProxima.style.display = 'block';
+
+                    } else {
+
+                        modeloProxima.style.display = 'none';
+
+                    }
+
+
+                    /* =================================================
+                       PREPARA A NOVA TIARA
+                    ================================================= */
+
+                    if (produto) {
+
+                        produtoProximo.src = '/uploads/' + produto;
+                        produtoProximo.alt = nome;
+                        produtoProximo.style.display = 'block';
+
+                    } else {
+
+                        produtoProximo.style.display = 'none';
+
+                    }
+
+
+                    /* =================================================
+                       REMOVE AS TRANSIÇÕES TEMPORARIAMENTE
+                    ================================================= */
+
+                    modeloAtual.style.transition = 'none';
+                    modeloProxima.style.transition = 'none';
+
+                    produtoAtual.style.transition = 'none';
+                    produtoProximo.style.transition = 'none';
+
+
+                    /* =================================================
+                       DEFINE DE ONDE AS NOVAS IMAGENS VÃO ENTRAR
+                    ================================================= */
+
+                    if (direcao === 'baixo') {
+
+                        /*
+                            SCROLL PARA BAIXO
+            
+                            Mulher nova entra de cima.
+                            Tiara nova entra de baixo.
+                        */
+
+                        modeloProxima.style.transform =
+                            'translate3d(0, -100%, 0)';
+
+                        produtoProximo.style.transform =
+                            'translate3d(0, 100%, 0)';
+
+                    } else {
+
+                        /*
+                            SCROLL PARA CIMA
+            
+                            Mulher nova entra de baixo.
+                            Tiara nova entra de cima.
+                        */
+
+                        modeloProxima.style.transform =
+                            'translate3d(0, 100%, 0)';
+
+                        produtoProximo.style.transform =
+                            'translate3d(0, -100%, 0)';
+
+                    }
+
+
+                    /* FORÇA O NAVEGADOR A REGISTRAR A POSIÇÃO */
+
+                    void modeloProxima.offsetHeight;
+                    void produtoProximo.offsetHeight;
+
+
+                    /* =================================================
+                       ATIVA AS TRANSIÇÕES
+                    ================================================= */
+
+                    modeloAtual.style.transition =
+                        'transform 0.6s ease';
+
+                    modeloProxima.style.transition =
+                        'transform 0.6s ease';
+
+                    produtoAtual.style.transition =
+                        'transform 0.6s ease';
+
+                    produtoProximo.style.transition =
+                        'transform 0.6s ease';
+
+
+                    /* =================================================
+                       FAZ A ANIMAÇÃO
+                    ================================================= */
+
+                    if (direcao === 'baixo') {
+
+                        /* MULHER ATUAL DESCE */
+
+                        modeloAtual.style.transform =
+                            'translate3d(0, 100%, 0)';
+
+
+                        /* MULHER NOVA ENTRA DE CIMA */
+
+                        modeloProxima.style.transform =
+                            'translate3d(0, 0, 0)';
+
+
+                        /* TIARA ATUAL SOBE */
+
+                        produtoAtual.style.transform =
+                            'translate3d(0, -100%, 0)';
+
+
+                        /* TIARA NOVA ENTRA DE BAIXO */
+
+                        produtoProximo.style.transform =
+                            'translate3d(0, 0, 0)';
+
+                    } else {
+
+                        /* MULHER ATUAL SOBE */
+
+                        modeloAtual.style.transform =
+                            'translate3d(0, -100%, 0)';
+
+
+                        /* MULHER NOVA ENTRA DE BAIXO */
+
+                        modeloProxima.style.transform =
+                            'translate3d(0, 0, 0)';
+
+
+                        /* TIARA ATUAL DESCE */
+
+                        produtoAtual.style.transform =
+                            'translate3d(0, 100%, 0)';
+
+
+                        /* TIARA NOVA ENTRA DE CIMA */
+
+                        produtoProximo.style.transform =
+                            'translate3d(0, 0, 0)';
+
+                    }
+
+
+                    /* =================================================
+                       ATUALIZA NOME, PREÇO E LINK
+                    ================================================= */
+
+                    vitrineNome.textContent = nome;
+
+                    vitrinePreco.textContent =
+                        formatarPreco(valor);
+
+                    vitrineDetalhes.href =
+                        '/produto/' + id;
+
+
+                    /* =================================================
+                       ATUALIZA O NOME ATIVO NA LISTA
+                    ================================================= */
+
+                    nomesVitrine.forEach((nomeItem, indice) => {
+
+                        nomeItem.classList.toggle(
+                            'ativo',
+                            indice === novoIndex
+                        );
+
+                    });
+
+
+                    /* =================================================
+                       FINALIZA A ANIMAÇÃO
+                    ================================================= */
+
+                    setTimeout(() => {
+
+                        /*
+                            MODELO
+            
+                            A modelo que entrou passa
+                            a ser a atual.
+                        */
+
+                        const modeloVelho = modeloAtual;
+
+                        modeloAtual = modeloProxima;
+                        modeloProxima = modeloVelho;
+
+
+                        /*
+                            PRODUTO
+            
+                            A tiara que entrou passa
+                            a ser a atual.
+                        */
+
+                        const produtoVelho = produtoAtual;
+
+                        produtoAtual = produtoProximo;
+                        produtoProximo = produtoVelho;
+
+
+                        /* ESCONDE AS CAMADAS ANTIGAS */
+
+                        modeloProxima.style.display = 'none';
+                        produtoProximo.style.display = 'none';
+
+
+                        /* RESETA AS POSIÇÕES */
+
+                        modeloAtual.style.transition = 'none';
+                        produtoAtual.style.transition = 'none';
+
+                        modeloAtual.style.transform =
+                            'translate3d(0, 0, 0)';
+
+                        produtoAtual.style.transform =
+                            'translate3d(0, 0, 0)';
+
+
+                        /* ATUALIZA O ÍNDICE */
+
+                        tiaraAtual = novoIndex;
+
+                        animandoVitrine = false;
+
+                    }, 600);
+                }
+
+
+                /* =====================================================
+                   CLIQUE NOS NOMES DAS TIARAS
+                ===================================================== */
+
+                nomesVitrine.forEach((item, index) => {
+
+                    item.addEventListener('click', () => {
+
+                        if (index === tiaraAtual) {
+                            return;
+                        }
+
+                        trocarTiara(
+                            index,
+                            index > tiaraAtual
+                                ? 'baixo'
+                                : 'cima'
+                        );
+
+                    });
+
+                });
+
+
+                /* =====================================================
+                   SETA PARA CIMA
+                ===================================================== */
+
+                botaoAnterior?.addEventListener('click', () => {
+
+                    trocarTiara(
+                        tiaraAtual - 1,
+                        'cima'
+                    );
+
+                });
+
+
+                /* =====================================================
+                   SETA PARA BAIXO
+                ===================================================== */
+
+                botaoProximo?.addEventListener('click', () => {
+
+                    trocarTiara(
+                        tiaraAtual + 1,
+                        'baixo'
+                    );
+
+                });
+
+
+                /* =====================================================
+                   SCROLL DO MOUSE
+                ===================================================== */
+
+                vitrineJoia?.addEventListener(
+                    'wheel',
+                    function (event) {
+
+                        event.preventDefault();
+
+                        if (animandoVitrine) {
+                            return;
+                        }
+
+
+                        /* SCROLL PARA BAIXO */
+
+                        if (event.deltaY > 0) {
+
+                            trocarTiara(
+                                tiaraAtual + 1,
+                                'baixo'
+                            );
+
+                        }
+
+
+                        /* SCROLL PARA CIMA */
+
+                        else if (event.deltaY < 0) {
+
+                            trocarTiara(
+                                tiaraAtual - 1,
+                                'cima'
+                            );
+
+                        }
+
+                    },
+                    {
+                        passive: false
+                    }
+                );
+            </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sua Sacola | VoieHaute</title>
+
+    <!-- BOOTSTRAP 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- BOOTSTRAP ICONS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- CSS DA VOIEHAUTE -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body class="pagina-carrinho">
+
+    <%- include('./partials/header') %>
+
+        <main class="sacola-pagina">
+
+
+            <% if (itens.length===0) { %>
+
+                <!-- =====================================
+                 SACOLA VAZIA
+            ====================================== -->
+
+                <section class="sacola-vazia">
+
+                    <!-- PENA DECORATIVA -->
+                    <img src="/uploads/admin/pena.png" alt="" class="sacola-vazia-pena">
+
+                    <div class="sacola-vazia-conteudo">
+
+                        <div class="sacola-vazia-eyebrow">
+                            <span></span>
+                            <p>SUA SACOLA</p>
+                            <span></span>
+                        </div>
+
+                        <!-- ÍCONE DA SACOLA -->
+                        <div class="sacola-vazia-icone">
+
+                            <svg viewBox="0 0 120 145" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                aria-hidden="true">
+                                <path d="M36 48V31C36 14 46 5 60 5C74 5 84 14 84 31V48" stroke="#06172D"
+                                    stroke-width="6" stroke-linecap="round" />
+
+                                <path
+                                    d="M17 43C17 39 20 36 24 36H96C100 36 103 39 103 43L109 130C109 135 105 139 100 139H20C15 139 11 135 11 130L17 43Z"
+                                    stroke="#06172D" stroke-width="6" stroke-linejoin="round" />
+                            </svg>
+
+                        </div>
+
+                        <h1>SUA SACOLA ESTÁ VAZIA</h1>
+
+                        <p class="sacola-vazia-subtitulo">
+                            Ainda não há joias na sua sacola
+                        </p>
+
+                        <p class="sacola-vazia-descricao">
+                            Descubra nossas coleções e encontre a joia perfeita para fazer
+                            <br>
+                            parte da sua jornada
+                        </p>
+
+                        <a href="/" class="sacola-vazia-botao">
+                            CONTINUAR COMPRANDO
+                        </a>
+
+                    </div>
+
+                </section>
+
+                <% } else { %>
+
+                    <!-- =========================================
+                 SACOLA COM PRODUTOS
+            ========================================= -->
+
+                    <section class="sacola-cheia">
+
+                        <!-- CABEÇALHO -->
+                        <div class="sacola-cheia-cabecalho">
+
+                            <div class="sacola-cheia-eyebrow">
+                                <span></span>
+                                <p>SUA SACOLA</p>
+                                <span></span>
+                            </div>
+
+                            <h1>Suas Escolhas, Sua Essência</h1>
+
+                            <p>
+                                Reunimos aqui as criações que conquistaram seu olhar.
+                                Cada joia selecionada reflete elegância, exclusividade e sofisticação,
+                                <br>
+                                tornando sua experiência VoieHaute ainda mais especial.
+                            </p>
+
+                        </div>
+
+                        <div class="sacola-cheia-layout">
+
+                            <!-- =====================================
+                         LISTA DE PRODUTOS
+                    ====================================== -->
+
+                            <div class="sacola-cheia-lista">
+
+                                <div class="sacola-cheia-colunas">
+                                    <span>PRODUTO</span>
+                                    <span>QUANTIDADE</span>
+                                    <span>PREÇO</span>
+                                </div>
+
+                                <% itens.forEach(item=> { %>
+
+                                    <article class="sacola-cheia-produto">
+
+                                        <!-- IMAGEM E INFORMAÇÕES -->
+                                        <div class="sacola-cheia-detalhes">
+
+                                            <a href="/produto/<%= item.produto.id %>">
+
+                                                <img src="<%= item.produto.imagem
+                                                ? (item.produto.imagem.startsWith('/')
+                                                    ? item.produto.imagem
+                                                    : '/uploads/' + item.produto.imagem)
+                                                : '/uploads/sem-imagem.png' %>" alt="<%= item.produto.nome %>"
+                                                    class="sacola-cheia-imagem">
+
+                                            </a>
+
+                                            <div class="sacola-cheia-informacoes">
+
+                                                <h2>
+                                                    <%= item.produto.nome %>
+                                                </h2>
+
+                                                <p class="sacola-cheia-colecao">
+                                                    Coleção <%= item.produto.colecao || 'VoieHaute' %>
+                                                </p>
+
+                                                <div class="sacola-cheia-caracteristicas">
+
+                                                    <% if (item.produto.material) { %>
+                                                        <p>
+                                                            Material: <%= item.produto.material %>
+                                                        </p>
+                                                        <% } %>
+
+                                                            <% if (item.produto.pedra) { %>
+                                                                <p>
+                                                                    Pedra: <%= item.produto.pedra %>
+                                                                </p>
+                                                                <% } %>
+
+                                                                    <% if (item.produto.tamanho) { %>
+                                                                        <p>
+                                                                            Tamanho: <%= item.produto.tamanho %>
+                                                                        </p>
+                                                                        <% } %>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <!-- QUANTIDADE -->
+                                        <div class="sacola-cheia-quantidade">
+
+                                            <form action="/carrinho/adicionar/<%= item.produto.id %>" method="POST">
+                                                <button type="submit" aria-label="Aumentar quantidade">+</button>
+                                            </form>
+
+                                            <span>
+                                                <%= item.quantidade %>
+                                            </span>
+
+                                            <form action="/carrinho/diminuir/<%= item.produto.id %>" method="POST">
+                                                <button type="submit" aria-label="Diminuir quantidade">−</button>
+                                            </form>
+
+                                        </div>
+
+                                        <!-- PREÇO -->
+                                        <p class="sacola-cheia-preco">
+                                            <%= item.subtotal.toLocaleString('pt-BR', { style: 'currency' ,
+                                                currency: 'BRL' }) %>
+                                        </p>
+
+                                        <!-- REMOVER PRODUTO -->
+                                        <form class="sacola-cheia-remover"
+                                            action="/carrinho/remover/<%= item.produto.id %>" method="POST">
+                                            <button type="submit" aria-label="Remover produto">×</button>
+                                        </form>
+
+                                    </article>
+
+                                    <% }) %>
+
+                            </div>
+
+                            <!-- =====================================
+                         RESUMO DO PEDIDO
+                    ====================================== -->
+
+                            <aside class="sacola-cheia-resumo">
+
+                                <h2>RESUMO</h2>
+
+                                <div class="sacola-resumo-linha">
+                                    <span>Subtotal</span>
+                                    <span>
+                                        <%= total.toLocaleString('pt-BR', { style: 'currency' , currency: 'BRL' }) %>
+                                    </span>
+                                </div>
+
+                                <div class="sacola-resumo-linha">
+                                    <span>Frete</span>
+                                    <span>Grátis</span>
+                                </div>
+
+                                <div class="sacola-resumo-total">
+                                    <span>Total</span>
+
+                                    <strong>
+                                        <%= total.toLocaleString('pt-BR', { style: 'currency' , currency: 'BRL' }) %>
+                                    </strong>
+                                </div>
+
+                                <a href="/carrinho/finalizar" class="sacola-resumo-finalizar">
+                                    FINALIZAR COMPRA
+                                </a>
+
+                                <p class="sacola-resumo-seguranca">
+                                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                        <rect x="5" y="10" width="14" height="11" rx="1.5" stroke="currentColor"
+                                            stroke-width="1.5" />
+                                        <path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" />
+                                    </svg>
+
+                                    <span>Compra 100% segura</span>
+                                </p>
+
+                                <!-- BENEFÍCIOS -->
+                                <div class="sacola-resumo-beneficios">
+
+                                    <!-- FRETE -->
+                                    <div class="sacola-resumo-beneficio">
+
+                                        <div class="sacola-beneficio-icone">
+                                            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor"
+                                                stroke-width="1.5">
+                                                <path d="M3 12h27v22H3zM30 19h8l7 9v6H30z" />
+                                                <circle cx="12" cy="36" r="4" />
+                                                <circle cx="37" cy="36" r="4" />
+                                                <path d="M1 18h18M5 24h14" />
+                                            </svg>
+                                        </div>
+
+                                        <div>
+                                            <h3>Frete grátis</h3>
+                                            <p>para todo o Brasil</p>
+                                        </div>
+
+                                    </div>
+
+                                    <!-- EMBALAGEM -->
+                                    <div class="sacola-resumo-beneficio">
+
+                                        <div class="sacola-beneficio-icone">
+                                            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor"
+                                                stroke-width="1.8">
+                                                <path d="M24 3L40 9v13c0 11-7 18-16 23C15 40 8 33 8 22V9z" />
+                                                <path d="M15 23l6 6 12-13" />
+                                            </svg>
+                                        </div>
+
+                                        <div>
+                                            <h3>Embalagem exclusiva</h3>
+                                            <p>com certificado de autenticação</p>
+                                        </div>
+
+                                    </div>
+
+                                    <!-- PAGAMENTO -->
+                                    <div class="sacola-resumo-beneficio">
+
+                                        <div class="sacola-beneficio-icone">
+                                            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor"
+                                                stroke-width="1.5">
+                                                <rect x="3" y="10" width="42" height="28" rx="3" />
+                                                <path d="M3 18h42M9 27h12M9 32h8" />
+                                            </svg>
+                                        </div>
+
+                                        <div>
+                                            <h3>Pagamento Facilitado</h3>
+                                            <p>em até 10x sem juros</p>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </aside>
+
+                        </div>
+
+                    </section>
+
+                    <% } %>
+
+        </main>
+
+        <%- include('./partials/footer') %>
+
+</body>
+
+</html>

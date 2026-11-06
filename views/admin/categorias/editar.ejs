@@ -38,6 +38,7 @@
     <form
         action="/admin/categorias/editar/<%= categoria.id %>"
         method="POST"
+        enctype="multipart/form-data"
         class="form-admin"
     >
 
@@ -71,7 +72,64 @@
                 name="descricao"
                 class="textarea-cadastro"
                 placeholder="Digite a descrição da categoria..."
-            ><%= categoria.descricao %></textarea>
+            ><%= categoria.descricao || '' %></textarea>
+
+        </div>
+
+
+        <!-- IMAGEM -->
+        <div class="campo-admin campo-admin-espaco campo-imagem">
+
+            <label>
+                Imagem da Categoria
+            </label>
+
+            <input
+                type="file"
+                id="imagem"
+                name="imagem"
+                accept="image/*"
+            >
+
+            <label for="imagem" class="upload-produto">
+
+                <% if (categoria.imagem) { %>
+
+                    <!-- IMAGEM ATUAL -->
+                    <img
+                        src="/uploads/<%= categoria.imagem %>"
+                        id="previewImagem"
+                        class="preview-imagem preview-imagem-editar"
+                        alt="Imagem da categoria"
+                    >
+
+                    <!-- ÍCONE PARA TROCAR -->
+                    <span class="editar-imagem-icone">
+                        <i class="bi bi-pencil"></i>
+                    </span>
+
+                <% } else { %>
+
+                    <!-- SEM IMAGEM -->
+                    <div class="upload-conteudo" id="uploadConteudo">
+
+                        <i class="bi bi-cloud-arrow-up"></i>
+
+                        <span>
+                            Clique para selecionar uma imagem
+                        </span>
+
+                    </div>
+
+                    <img
+                        id="previewImagem"
+                        class="preview-imagem"
+                        alt="Pré-visualização da imagem"
+                    >
+
+                <% } %>
+
+            </label>
 
         </div>
 
@@ -99,6 +157,32 @@
     </form>
 
 </main>
+
+
+<script>
+
+    const inputImagem = document.getElementById('imagem');
+    const previewImagem = document.getElementById('previewImagem');
+    const uploadConteudo = document.getElementById('uploadConteudo');
+
+    inputImagem.addEventListener('change', function () {
+
+        const arquivo = this.files[0];
+
+        if (arquivo) {
+
+            previewImagem.src = URL.createObjectURL(arquivo);
+            previewImagem.style.display = 'block';
+
+            if (uploadConteudo) {
+                uploadConteudo.style.display = 'none';
+            }
+
+        }
+
+    });
+
+</script>
 
 
 <%- include('../partials/footer') %>

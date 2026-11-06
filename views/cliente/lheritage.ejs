@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>L’Héritage | VoieHaute</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+    <%- include('partials/header') %>
+
+
+        <!-- =================================================
+         HERO — L'HÉRITAGE
+    ================================================== -->
+
+        <section class="colecao-hero">
+            <video class="colecao-hero-video" autoplay muted loop playsinline>
+                <source src="/uploads/lheritage-hero.mp4" type="video/mp4">
+            </video>
+        </section>
+
+
+        <!-- =================================================
+     APRESENTAÇÃO DA COLEÇÃO
+================================================== -->
+
+        <section class="colecao-apresentacao">
+
+            <div class="colecao-apresentacao-texto">
+
+                <div class="colecao-eyebrow">
+                    <span></span>
+                    <p>A COLEÇÃO</p>
+                    <span></span>
+                </div>
+
+                <h2>L’HÉRITAGE</h2>
+
+                <p class="colecao-apresentacao-descricao">
+                    Inspirada na elegância que atravessa gerações, L’Héritage
+                    transforma o legado da alta joalheria em criações atemporais.
+                    Diamantes brancos, platina e formas clássicas se encontram em
+                    joias que celebram tradição, raridade e sofisticação.
+                </p>
+
+            </div>
+
+
+            <div class="colecao-apresentacao-imagem">
+
+                <img src="/uploads/lheritage-colecao.png" alt="Coleção L’Héritage VoieHaute">
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+     CRIAÇÕES DA COLEÇÃO
+================================================== -->
+
+        <section class="colecao-criacoes">
+
+            <div class="colecao-criacoes-cabecalho">
+
+                <div class="colecao-criacoes-eyebrow">
+                    <span></span>
+                    <p>L’HÉRITAGE</p>
+                    <span></span>
+                </div>
+
+                <h2>Criações da Coleção</h2>
+
+            </div>
+
+
+            <div class="colecao-criacoes-carrossel">
+
+                <button type="button" class="colecao-criacoes-seta colecao-criacoes-seta-esquerda" id="colecaoAnterior"
+                    aria-label="Produto anterior">
+                    ‹
+                </button>
+
+
+                <div class="colecao-criacoes-viewport">
+
+                    <div class="colecao-criacoes-trilho" id="colecaoTrilho">
+
+                        <% produtos.forEach(produto=> { %>
+
+                            <a href="/produto/<%= produto.id %>" class="colecao-criacao-card">
+
+                                <div
+                                    class="colecao-criacao-imagem <%= produto.imagem_secundaria ? 'tem-secundaria' : '' %>">
+
+                                    <img class="colecao-criacao-foto colecao-criacao-foto-principal"
+                                        src="/uploads/<%= produto.imagem %>" alt="<%= produto.nome %>">
+
+                                    <% if (produto.imagem_secundaria) { %>
+
+                                        <img class="colecao-criacao-foto colecao-criacao-foto-secundaria"
+                                            src="/uploads/<%= produto.imagem_secundaria %>" alt="<%= produto.nome %>">
+
+                                        <% } %>
+
+                                </div>
+
+
+                                <div class="colecao-criacao-info">
+
+                                    <h3>
+                                        <%= produto.nome %>
+                                    </h3>
+
+                                    <p>
+                                        <%= Number(produto.valor).toLocaleString( 'pt-BR' , { style: 'currency' ,
+                                            currency: 'BRL' } ) %>
+                                    </p>
+
+                                </div>
+
+                            </a>
+
+                            <% }) %>
+
+                    </div>
+
+                </div>
+
+
+                <button type="button" class="colecao-criacoes-seta colecao-criacoes-seta-direita" id="colecaoProximo"
+                    aria-label="Próximo produto">
+                    ›
+                </button>
+
+            </div>
+
+        </section>
+
+        <!-- =================================================
+     INSPIRAÇÃO DA COLEÇÃO
+================================================== -->
+
+        <section class="colecao-inspiracao">
+
+            <div class="colecao-inspiracao-imagem">
+                <img src="/uploads/lheritage-inspiracao.png" alt="Inspiração da coleção L’Héritage">
+            </div>
+
+            <div class="colecao-inspiracao-texto">
+
+                <div class="colecao-eyebrow">
+                    <span></span>
+                    <p>A INSPIRAÇÃO</p>
+                    <span></span>
+                </div>
+
+                <h2>
+                    O LEGADO COMO<br>
+                    SÍMBOLO DE<br>
+                    ETERNIDADE
+                </h2>
+
+                <p>
+                    L’Héritage nasce da elegância preservada através das gerações.
+                    Inspirada na arquitetura clássica, nos salões históricos e na
+                    tradição das grandes maisons, a coleção transforma memórias em
+                    criações atemporais, unindo a pureza dos diamantes à sofisticação
+                    da platina em joias concebidas para permanecer.
+                </p>
+
+            </div>
+
+        </section>
+
+        <!-- =================================================
+     DA IDEIA À JOIA
+================================================== -->
+
+        <section class="colecao-processo">
+
+            <div class="colecao-processo-cabecalho">
+
+                <div class="colecao-eyebrow">
+                    <span></span>
+                    <p>DA IDEIA À JOIA</p>
+                    <span></span>
+                </div>
+
+                <h2>A Arte de Criar o Eterno</h2>
+
+            </div>
+
+
+            <div class="colecao-processo-grid">
+
+                <!-- O TRAÇO -->
+
+                <div class="colecao-processo-item">
+
+                    <div class="colecao-processo-imagem">
+                        <img src="/uploads/lheritage-traco.png" alt="O Traço — L’Héritage">
+                    </div>
+
+                    <h3>O TRAÇO</h3>
+
+                    <p>
+                        Desenhos que reinterpretam a tradição
+                        da alta joalheria em formas atemporais.
+                    </p>
+
+                </div>
+
+
+                <!-- O DIAMANTE -->
+
+                <div class="colecao-processo-item">
+
+                    <div class="colecao-processo-imagem">
+                        <img src="/uploads/lheritage-diamante.png" alt="O Diamante — L’Héritage">
+                    </div>
+
+                    <h3>O DIAMANTE</h3>
+
+                    <p>
+                        Diamantes excepcionais são selecionados
+                        por sua pureza, lapidação e luminosidade.
+                    </p>
+
+                </div>
+
+
+                <!-- A FORMA -->
+
+                <div class="colecao-processo-item">
+
+                    <div class="colecao-processo-imagem">
+                        <img src="/uploads/lheritage-forma.png" alt="A Forma — L’Héritage">
+                    </div>
+
+                    <h3>A FORMA</h3>
+
+                    <p>
+                        A precisão artesanal transforma platina e
+                        diamantes em criações concebidas para
+                        atravessar gerações.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- =================================================
+     BANNER EDITORIAL
+================================================== -->
+
+        <section class="colecao-banner">
+            <img src="/uploads/lheritage-banner.png" alt="Um legado revelado em cada detalhe">
+        </section>
+
+    <!-- =================================================
+     O LEGADO CONTINUA
+================================================== -->
+
+<section class="colecao-legado">
+
+    <div class="colecao-legado-cabecalho">
+
+        <div class="colecao-eyebrow">
+            <span></span>
+            <p>O LEGADO CONTINUA</p>
+            <span></span>
+        </div>
+
+        <h2>
+            Uma História Criada Para Atravessar Gerações
+        </h2>
+
+    </div>
+
+
+    <div class="colecao-legado-conteudo">
+
+        <div class="colecao-legado-texto">
+
+            <p>
+                L’Héritage nasce da ideia de que algumas joias carregam
+                mais do que beleza: guardam memórias, marcam momentos e
+                atravessam gerações. Inspirada na tradição das grandes
+                maisons e na preciosidade preservada com o passar do
+                tempo, a coleção celebra aquilo que permanece.
+            </p>
+
+            <p>
+                Diamantes brancos e platina são escolhidos para criar
+                peças que unem a elegância da alta joalheria clássica a
+                uma presença contemporânea. Cada detalhe é pensado para
+                resistir ao tempo, transformando raridade, precisão e
+                excelência artesanal em peças destinadas a permanecer.
+            </p>
+
+            <p>
+                Cinco criações contam essa história, cada uma como um
+                capítulo de um mesmo legado — joias concebidas para serem
+                usadas, admiradas, preservadas e, um dia, transmitidas.
+            </p>
+
+            <p>
+                Porque algumas joias não pertencem apenas ao presente.
+            </p>
+
+        </div>
+
+
+        <div class="colecao-legado-imagem">
+
+            <img
+                src="/uploads/lheritage-legado.png"
+                alt="O legado da coleção L’Héritage"
+            >
+
+        </div>
+
+    </div>
+
+</section>
+
+        <%- include('partials/footer') %>
+
+            <script>
+                const colecaoTrilho = document.getElementById('colecaoTrilho');
+                const colecaoAnterior = document.getElementById('colecaoAnterior');
+                const colecaoProximo = document.getElementById('colecaoProximo');
+
+                let colecaoPosicao = 0;
+
+                function atualizarCarrosselColecao() {
+
+                    const cards = document.querySelectorAll('.colecao-criacao-card');
+
+                    if (!cards.length) return;
+
+                    const visiveis = 4;
+                    const maximo = Math.max(0, cards.length - visiveis);
+
+                    if (colecaoPosicao < 0) {
+                        colecaoPosicao = 0;
+                    }
+
+                    if (colecaoPosicao > maximo) {
+                        colecaoPosicao = maximo;
+                    }
+
+                    const card = cards[0];
+
+                    const gap = 18;
+
+                    const deslocamento =
+                        colecaoPosicao * (card.offsetWidth + gap);
+
+                    colecaoTrilho.style.transform =
+                        `translateX(-${deslocamento}px)`;
+                }
+
+
+                colecaoProximo?.addEventListener('click', () => {
+                    colecaoPosicao++;
+                    atualizarCarrosselColecao();
+                });
+
+
+                colecaoAnterior?.addEventListener('click', () => {
+                    colecaoPosicao--;
+                    atualizarCarrosselColecao();
+                });
+            </script>
+
+</body>
+
+</html>

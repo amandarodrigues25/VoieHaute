@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>La Couronne | VoieHaute</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+    <%- include('partials/header') %>
+
+
+        <!-- =================================================
+         HERO — L'HÉRITAGE
+    ================================================== -->
+
+        <section class="colecao-hero">
+            <video class="colecao-hero-video" autoplay muted loop playsinline>
+                <source src="/uploads/lacouronne-hero.mp4" type="video/mp4">
+            </video>
+        </section>
+
+
+        <!-- =================================================
+     APRESENTAÇÃO DA COLEÇÃO
+================================================== -->
+
+        <section class="colecao-apresentacao">
+
+            <div class="colecao-apresentacao-texto">
+
+                <div class="colecao-eyebrow">
+                    <span></span>
+                    <p>A COLEÇÃO</p>
+                    <span></span>
+                </div>
+
+                <h2>LA COURONNE</h2>
+
+                <p class="colecao-apresentacao-descricao">
+                    Inspirada na imponência e no poder das grandes cortes,
+                    La Couronne transforma a majestade em alta joalheria.
+                    Rubis Pigeon Blood, diamantes e ouro amarelo se encontram
+                    em criações intensas, onde cada detalhe traduz autoridade,
+                    nobreza e uma elegância feita para dominar olhares.
+                </p>
+
+            </div>
+
+
+            <div class="colecao-apresentacao-imagem">
+
+                <img src="/uploads/lacouronne-colecao.png" alt="Coleção L’Héritage VoieHaute">
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+     CRIAÇÕES DA COLEÇÃO
+================================================== -->
+
+        <section class="colecao-criacoes">
+
+            <div class="colecao-criacoes-cabecalho">
+
+                <div class="colecao-criacoes-eyebrow">
+                    <span></span>
+                    <p>LA COURONNE</p>
+                    <span></span>
+                </div>
+
+                <h2>Criações da Coleção</h2>
+
+            </div>
+
+
+            <div class="colecao-criacoes-carrossel">
+
+                <button type="button" class="colecao-criacoes-seta colecao-criacoes-seta-esquerda" id="colecaoAnterior"
+                    aria-label="Produto anterior">
+                    ‹
+                </button>
+
+
+                <div class="colecao-criacoes-viewport">
+
+                    <div class="colecao-criacoes-trilho" id="colecaoTrilho">
+
+                        <% produtos.forEach(produto=> { %>
+
+                            <a href="/produto/<%= produto.id %>" class="colecao-criacao-card">
+
+                                <div
+                                    class="colecao-criacao-imagem <%= produto.imagem_secundaria ? 'tem-secundaria' : '' %>">
+
+                                    <img class="colecao-criacao-foto colecao-criacao-foto-principal"
+                                        src="/uploads/<%= produto.imagem %>" alt="<%= produto.nome %>">
+
+                                    <% if (produto.imagem_secundaria) { %>
+
+                                        <img class="colecao-criacao-foto colecao-criacao-foto-secundaria"
+                                            src="/uploads/<%= produto.imagem_secundaria %>" alt="<%= produto.nome %>">
+
+                                        <% } %>
+
+                                </div>
+
+
+                                <div class="colecao-criacao-info">
+
+                                    <h3>
+                                        <%= produto.nome %>
+                                    </h3>
+
+                                    <p>
+                                        <%= Number(produto.valor).toLocaleString( 'pt-BR' , { style: 'currency' ,
+                                            currency: 'BRL' } ) %>
+                                    </p>
+
+                                </div>
+
+                            </a>
+
+                            <% }) %>
+
+                    </div>
+
+                </div>
+
+
+                <button type="button" class="colecao-criacoes-seta colecao-criacoes-seta-direita" id="colecaoProximo"
+                    aria-label="Próximo produto">
+                    ›
+                </button>
+
+            </div>
+
+        </section>
+
+        <!-- =================================================
+     INSPIRAÇÃO DA COLEÇÃO
+================================================== -->
+
+        <section class="colecao-inspiracao">
+
+            <div class="colecao-inspiracao-imagem">
+                <img src="/uploads/lacouronne-inspiracao.png" alt="Inspiração da coleção La Couronne">
+            </div>
+
+            <div class="colecao-inspiracao-texto">
+
+                <div class="colecao-eyebrow">
+                    <span></span>
+                    <p>A INSPIRAÇÃO</p>
+                    <span></span>
+                </div>
+
+                <h2>
+                    O PODER COMO<br>
+                    SÍMBOLO DE<br>
+                    MAJESTADE
+                </h2>
+
+                <p>
+                    La Couronne nasce do esplendor das grandes cortes e da presença
+                    de mulheres que transformaram elegância em poder. Inspirada nos
+                    salões reais, nos veludos intensos e na imponência das cerimônias
+                    da realeza, a coleção traduz autoridade e sedução em criações
+                    marcadas pelo vermelho profundo dos rubis e pela riqueza do ouro.
+                </p>
+
+            </div>
+
+        </section>
+
+        <!-- =================================================
+     DA IDEIA À JOIA
+================================================== -->
+
+        <section class="colecao-processo">
+
+            <div class="colecao-processo-cabecalho">
+
+                <div class="colecao-eyebrow">
+                    <span></span>
+                    <p>DA IDEIA À JOIA</p>
+                    <span></span>
+                </div>
+
+                <h2>A Arte de Criar o Poder</h2>
+
+            </div>
+
+
+            <div class="colecao-processo-grid">
+
+                <!-- O TRAÇO -->
+
+                <div class="colecao-processo-item">
+
+                    <div class="colecao-processo-imagem">
+                        <img src="/uploads/lacouronne-traco.png" alt="O Traço — La Couronne">
+                    </div>
+
+                    <h3>O TRAÇO</h3>
+
+                    <p>
+                        Desenhos inspirados na imponência das cortes
+                        transformam símbolos de poder em formas marcantes.
+                    </p>
+
+                </div>
+
+
+                <!-- O DIAMANTE -->
+
+                <div class="colecao-processo-item">
+
+                    <div class="colecao-processo-imagem">
+                        <img src="/uploads/lacouronne-rubi.png" alt="O Rubi — La Couronne">
+                    </div>
+
+                    <h3>O RUBI</h3>
+
+                    <p>
+                        Rubis Pigeon Blood são selecionados pela intensidade
+                        de sua cor, raridade e profundidade excepcionais.
+                    </p>
+
+                </div>
+
+
+                <!-- A FORMA -->
+
+                <div class="colecao-processo-item">
+
+                    <div class="colecao-processo-imagem">
+                        <img src="/uploads/lacouronne-forma.png" alt="A Forma — La Couronne">
+                    </div>
+
+                    <h3>A FORMA</h3>
+
+                    <p>
+                        O trabalho artesanal une ouro amarelo, rubis e
+                        diamantes em criações concebidas para impor presença.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- =================================================
+     BANNER EDITORIAL
+================================================== -->
+
+        <section class="colecao-banner">
+            <img src="/uploads/lacouronne-banner.png" alt="O poder se revela em cada detalhe">
+        </section>
+
+        <!-- =================================================
+     O LEGADO CONTINUA
+================================================== -->
+
+        <section class="colecao-legado">
+
+            <div class="colecao-legado-cabecalho">
+
+                <div class="colecao-eyebrow">
+                    <span></span>
+                    <p>O LEGADO CONTINUA</p>
+                    <span></span>
+                </div>
+
+                <h2>
+                    Uma História Onde Elegância e Poder Se Encontram
+                </h2>
+
+            </div>
+
+
+            <div class="colecao-legado-conteudo">
+
+                <div class="colecao-legado-texto">
+
+                    <p>
+                        La Couronne nasce de um universo em que uma joia não era
+                        apenas um símbolo de beleza, mas também uma expressão de
+                        poder. Inspirada no esplendor das grandes cortes, nos salões
+                        palacianos e nas figuras que fizeram da elegância uma forma
+                        de presença, a coleção revisita a majestade através da alta
+                        joalheria.
+                    </p>
+
+                    <p>
+                        O vermelho profundo dos Rubis Pigeon Blood ocupa o centro
+                        de cada criação, evocando intensidade, paixão e autoridade.
+                        Ao seu redor, diamantes e ouro amarelo são construídos em
+                        composições marcantes, inspiradas na riqueza ornamental das
+                        joias reais e reinterpretadas em uma linguagem contemporânea.
+                    </p>
+
+                    <p>
+                        Cinco criações dão forma a esse universo, cada uma revelando
+                        uma expressão diferente de La Couronne — da força de um anel
+                        à imponência de uma tiara. Juntas, elas contam uma história
+                        sobre mulheres que não esperam por uma coroa para reconhecer
+                        o próprio poder.
+
+                    </p>
+
+                    <p>
+                        La Couronne não foi criada apenas para ser admirada.
+                        Foi criada para ser lembrada.
+                    </p>
+
+                </div>
+
+
+                <div class="colecao-legado-imagem">
+
+                    <img src="/uploads/lacouronne-legado.png" alt="O legado da coleção La Couronne">
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <%- include('partials/footer') %>
+
+            <script>
+                const colecaoTrilho = document.getElementById('colecaoTrilho');
+                const colecaoAnterior = document.getElementById('colecaoAnterior');
+                const colecaoProximo = document.getElementById('colecaoProximo');
+
+                let colecaoPosicao = 0;
+
+                function atualizarCarrosselColecao() {
+
+                    const cards = document.querySelectorAll('.colecao-criacao-card');
+
+                    if (!cards.length) return;
+
+                    const visiveis = 4;
+                    const maximo = Math.max(0, cards.length - visiveis);
+
+                    if (colecaoPosicao < 0) {
+                        colecaoPosicao = 0;
+                    }
+
+                    if (colecaoPosicao > maximo) {
+                        colecaoPosicao = maximo;
+                    }
+
+                    const card = cards[0];
+
+                    const gap = 18;
+
+                    const deslocamento =
+                        colecaoPosicao * (card.offsetWidth + gap);
+
+                    colecaoTrilho.style.transform =
+                        `translateX(-${deslocamento}px)`;
+                }
+
+
+                colecaoProximo?.addEventListener('click', () => {
+                    colecaoPosicao++;
+                    atualizarCarrosselColecao();
+                });
+
+
+                colecaoAnterior?.addEventListener('click', () => {
+                    colecaoPosicao--;
+                    atualizarCarrosselColecao();
+                });
+            </script>
+
+</body>
+
+</html>

@@ -1,1040 +1,691 @@
+
 const express = require('express');
 const appAdmin = express();
 
 const db = require('../banco/database');
 const upload = require('../util/imagens');
 
+// =====================================================
+// FUNÇÕES AUXILIARES
+// =====================================================
 
-//================== ROTAS DE LOGIN / INDEX ==================//
+function executar(sql, parametros, res, destino, mensagem) {
+    db.run(sql, parametros, function (erro) {
+        if (erro) {
+            console.error(erro.message);
+            return res.status(500).send(mensagem);
+        }
+        res.redirect(destino);
+    });
+}
 
-// ABRIR LOGIN
+function arquivoEnviado(req, campo) {
+    return req.files?.[campo]?.[0]?.filename || null;
+}
+
+// =====================================================
+// LOGIN / INDEX
+// =====================================================
+
 appAdmin.get('/', (req, res) => {
     res.render('admin/login', { erro: null });
 });
 
-
-// VALIDAR LOGIN
 appAdmin.post('/login', (req, res) => {
-
-    const email = req.body.email;
-    const senha = req.body.senha;
+    const { email, senha } = req.body;
 
     if (email === 'admin@gmail.com' && senha === '123') {
-        res.redirect('/admin/index');
-    } else {
-        res.render('admin/login', {
-            erro: 'E-mail ou senha incorretos!'
-        });
+        return res.redirect('/admin/index');
     }
 
+    res.render('admin/login', {
+        erro: 'E-mail ou senha incorretos!'
+    });
 });
 
-
-// ABRIR HOME ADMIN
 appAdmin.get('/index', (req, res) => {
     res.render('admin/index-admin');
 });
 
+// =====================================================
+// CATEGORIAS
+// =====================================================
 
-
-//============================================================//
-//======================= CATEGORIAS =========================//
-//============================================================//
-
-
-// LISTAR CATEGORIAS
 appAdmin.get('/categorias', (req, res) => {
-
-    db.all(
-        'SELECT * FROM categorias',
-        [],
-        function (erro, categorias) {
-
-            if (erro) {
-                console.log(erro.message);
-                return res.send('Erro ao consultar categorias.');
-            }
-
-            res.render('admin/categorias/lista', { categorias });
-        }
-    );
-
+    db.all('SELECT * FROM categorias', [], (erro, categorias) => {
+        if (erro) return res.status(500).send('Erro ao consultar categorias.');
+        res.render('admin/categorias/lista', { categorias });
+    });
 });
 
-
-// FORMULÁRIO DE CADASTRO
 appAdmin.get('/categorias/form-cadastrar', (req, res) => {
     res.render('admin/categorias/cadastro');
 });
 
+appAdmin.post('/categorias/cadastrar', upload.single('imagem'), (req, res) => {
+    const { nome, descricao } = req.body;
+    const imagem = req.file?.filename || null;
 
-// CADASTRAR
-appAdmin.post('/categorias/cadastrar', (req, res) => {
-
-    const nome = req.body.nome;
-    const descricao = req.body.descricao;
-
-    db.run(
-        `INSERT INTO categorias (nome, descricao)
-         VALUES (?, ?)`,
-        [nome, descricao],
-
-        function (erro) {
-
-            if (erro) {
-                console.log(erro.message);
-                return res.send('Erro ao cadastrar categoria.');
-            }
-
-            res.redirect('/admin/categorias');
-        }
+    executar(
+        'INSERT INTO categorias (nome, descricao, imagem) VALUES (?, ?, ?)',
+        [nome, descricao, imagem],
+        res,
+        '/admin/categorias',
+        'Erro ao cadastrar categoria.'
     );
-
 });
 
-
-// ABRIR EDIÇÃO
 appAdmin.get('/categorias/editar/:id', (req, res) => {
-
-    const id = req.params.id;
-
     db.get(
         'SELECT * FROM categorias WHERE id = ?',
-        [id],
-        function (erro, categoria) {
-
-            if (erro) {
-                console.log(erro.message);
-                return res.send('Erro ao buscar categoria.');
-            }
-
+        [req.params.id],
+        (erro, categoria) => {
+            if (erro) return res.status(500).send('Erro ao buscar categoria.');
+            if (!categoria) return res.status(404).send('Categoria não encontrada.');
             res.render('admin/categorias/editar', { categoria });
         }
     );
-
 });
 
+appAdmin.post('/categorias/editar/:id', upload.single('imagem'), (req, res) => {
+    const { nome, descricao } = req.body;
+    const { id } = req.params;
 
-// SALVAR EDIÇÃO
-appAdmin.post('/categorias/editar/:id', (req, res) => {
-
-    const id = req.params.id;
-    const nome = req.body.nome;
-    const descricao = req.body.descricao;
-
-    db.run(
-        `UPDATE categorias
-         SET nome = ?, descricao = ?
-         WHERE id = ?`,
-        [nome, descricao, id],
-
-        function (erro) {
-
-            if (erro) {
-                console.log(erro.message);
-                return res.send('Erro ao editar categoria.');
-            }
-
-            res.redirect('/admin/categorias');
-        }
-    );
-
+    if (req.file) {
+        executar(
+            'UPDATE categorias SET nome = ?, descricao = ?, imagem = ? WHERE id = ?',
+            [nome, descricao, req.file.filename, id],
+            res,
+            '/admin/categorias',
+            'Erro ao editar categoria.'
+        );
+    } else {
+        executar(
+            'UPDATE categorias SET nome = ?, descricao = ? WHERE id = ?',
+            [nome, descricao, id],
+            res,
+            '/admin/categorias',
+            'Erro ao editar categoria.'
+        );
+    }
 });
 
-
-// EXCLUIR
 appAdmin.get('/categorias/excluir/:id', (req, res) => {
-
-    const id = req.params.id;
-
-    db.run(
+    executar(
         'DELETE FROM categorias WHERE id = ?',
-        [id],
-        function (erro) {
-
-            if (erro) {
-                console.log(erro.message);
-                return res.send('Erro ao excluir categoria.');
-            }
-
-            res.redirect('/admin/categorias');
-        }
+        [req.params.id],
+        res,
+        '/admin/categorias',
+        'Erro ao excluir categoria.'
     );
-
 });
 
+// =====================================================
+// MATERIAIS
+// =====================================================
 
-
-//============================================================//
-//======================== MATERIAIS =========================//
-//============================================================//
-
-
-// LISTAR MATERIAIS
 appAdmin.get('/materiais', (req, res) => {
-
-    db.all(
-        'SELECT * FROM materiais',
-        [],
-        function (erro, materiais) {
-
-            if (erro) {
-                console.log(erro.message);
-                return res.send('Erro ao consultar materiais.');
-            }
-
-            res.render('admin/materiais/lista', { materiais });
-        }
-    );
-
+    db.all('SELECT * FROM materiais', [], (erro, materiais) => {
+        if (erro) return res.status(500).send('Erro ao consultar materiais.');
+        res.render('admin/materiais/lista', { materiais });
+    });
 });
 
-
-// FORMULÁRIO DE CADASTRO
 appAdmin.get('/materiais/form-cadastrar', (req, res) => {
     res.render('admin/materiais/cadastro');
 });
 
-
-// CADASTRAR
 appAdmin.post('/materiais/cadastrar', (req, res) => {
+    const { nome, descricao } = req.body;
 
-    const nome = req.body.nome;
-    const descricao = req.body.descricao;
-
-    db.run(
-        `INSERT INTO materiais (nome, descricao)
-         VALUES (?, ?)`,
+    executar(
+        'INSERT INTO materiais (nome, descricao) VALUES (?, ?)',
         [nome, descricao],
-
-        function (erro) {
-
-            if (erro) {
-                console.log(erro.message);
-                return res.send('Erro ao cadastrar material.');
-            }
-
-            res.redirect('/admin/materiais');
-        }
+        res,
+        '/admin/materiais',
+        'Erro ao cadastrar material.'
     );
-
 });
 
-
-// ABRIR EDIÇÃO
 appAdmin.get('/materiais/editar/:id', (req, res) => {
-
-    const id = req.params.id;
-
     db.get(
         'SELECT * FROM materiais WHERE id = ?',
-        [id],
-        function (erro, material) {
-
-            if (erro) {
-                console.log(erro.message);
-                return res.send('Erro ao buscar material.');
-            }
-
+        [req.params.id],
+        (erro, material) => {
+            if (erro) return res.status(500).send('Erro ao buscar material.');
+            if (!material) return res.status(404).send('Material não encontrado.');
             res.render('admin/materiais/editar', { material });
         }
     );
-
 });
 
-
-// SALVAR EDIÇÃO
 appAdmin.post('/materiais/editar/:id', (req, res) => {
+    const { nome, descricao } = req.body;
 
-    const id = req.params.id;
-    const nome = req.body.nome;
-    const descricao = req.body.descricao;
-
-    db.run(
-        `UPDATE materiais
-         SET nome = ?, descricao = ?
-         WHERE id = ?`,
-        [nome, descricao, id],
-
-        function (erro) {
-
-            if (erro) {
-                console.log(erro.message);
-                return res.send('Erro ao editar material.');
-            }
-
-            res.redirect('/admin/materiais');
-        }
+    executar(
+        'UPDATE materiais SET nome = ?, descricao = ? WHERE id = ?',
+        [nome, descricao, req.params.id],
+        res,
+        '/admin/materiais',
+        'Erro ao editar material.'
     );
-
 });
 
-
-// EXCLUIR
 appAdmin.get('/materiais/excluir/:id', (req, res) => {
-
-    const id = req.params.id;
-
-    db.run(
+    executar(
         'DELETE FROM materiais WHERE id = ?',
-        [id],
-        function (erro) {
-
-            if (erro) {
-                console.log(erro.message);
-                return res.send('Erro ao excluir material.');
-            }
-
-            res.redirect('/admin/materiais');
-        }
+        [req.params.id],
+        res,
+        '/admin/materiais',
+        'Erro ao excluir material.'
     );
-
 });
 
+// =====================================================
+// PEDRAS
+// =====================================================
 
-
-//============================================================//
-//========================== PEDRAS ==========================//
-//============================================================//
-
-
-// LISTAR PEDRAS
 appAdmin.get('/pedras', (req, res) => {
-
-    db.all(
-        'SELECT * FROM pedras',
-        [],
-        function (erro, pedras) {
-
-            if (erro) {
-                console.log(erro.message);
-                return res.send('Erro ao consultar pedras.');
-            }
-
-            res.render('admin/pedras/lista', { pedras });
-        }
-    );
-
+    db.all('SELECT * FROM pedras', [], (erro, pedras) => {
+        if (erro) return res.status(500).send('Erro ao consultar pedras.');
+        res.render('admin/pedras/lista', { pedras });
+    });
 });
 
-
-// FORMULÁRIO DE CADASTRO
 appAdmin.get('/pedras/form-cadastrar', (req, res) => {
     res.render('admin/pedras/cadastro');
 });
 
+appAdmin.post('/pedras/cadastrar', upload.single('imagem'), (req, res) => {
+    const { nome, descricao } = req.body;
+    const imagem = req.file?.filename || null;
 
-// CADASTRAR
-appAdmin.post('/pedras/cadastrar', (req, res) => {
-
-    const nome = req.body.nome;
-    const descricao = req.body.descricao;
-
-    db.run(
-        `INSERT INTO pedras (nome, descricao)
-         VALUES (?, ?)`,
-        [nome, descricao],
-
-        function (erro) {
-
-            if (erro) {
-                console.log(erro.message);
-                return res.send('Erro ao cadastrar pedra.');
-            }
-
-            res.redirect('/admin/pedras');
-        }
+    executar(
+        'INSERT INTO pedras (nome, descricao, imagem) VALUES (?, ?, ?)',
+        [nome, descricao, imagem],
+        res,
+        '/admin/pedras',
+        'Erro ao cadastrar pedra.'
     );
-
 });
 
-
-// ABRIR EDIÇÃO
 appAdmin.get('/pedras/editar/:id', (req, res) => {
-
-    const id = req.params.id;
-
     db.get(
         'SELECT * FROM pedras WHERE id = ?',
-        [id],
-        function (erro, pedra) {
-
-            if (erro) {
-                console.log(erro.message);
-                return res.send('Erro ao buscar pedra.');
-            }
-
+        [req.params.id],
+        (erro, pedra) => {
+            if (erro) return res.status(500).send('Erro ao buscar pedra.');
+            if (!pedra) return res.status(404).send('Pedra não encontrada.');
             res.render('admin/pedras/editar', { pedra });
         }
     );
-
 });
 
+appAdmin.post('/pedras/editar/:id', upload.single('imagem'), (req, res) => {
+    const { nome, descricao } = req.body;
+    const { id } = req.params;
 
-// SALVAR EDIÇÃO
-appAdmin.post('/pedras/editar/:id', (req, res) => {
-
-    const id = req.params.id;
-    const nome = req.body.nome;
-    const descricao = req.body.descricao;
-
-    db.run(
-        `UPDATE pedras
-         SET nome = ?, descricao = ?
-         WHERE id = ?`,
-        [nome, descricao, id],
-
-        function (erro) {
-
-            if (erro) {
-                console.log(erro.message);
-                return res.send('Erro ao editar pedra.');
-            }
-
-            res.redirect('/admin/pedras');
-        }
-    );
-
+    if (req.file) {
+        executar(
+            'UPDATE pedras SET nome = ?, descricao = ?, imagem = ? WHERE id = ?',
+            [nome, descricao, req.file.filename, id],
+            res,
+            '/admin/pedras',
+            'Erro ao editar pedra.'
+        );
+    } else {
+        executar(
+            'UPDATE pedras SET nome = ?, descricao = ? WHERE id = ?',
+            [nome, descricao, id],
+            res,
+            '/admin/pedras',
+            'Erro ao editar pedra.'
+        );
+    }
 });
 
-
-// EXCLUIR
 appAdmin.get('/pedras/excluir/:id', (req, res) => {
-
-    const id = req.params.id;
-
-    db.run(
+    executar(
         'DELETE FROM pedras WHERE id = ?',
-        [id],
-        function (erro) {
-
-            if (erro) {
-                console.log(erro.message);
-                return res.send('Erro ao excluir pedra.');
-            }
-
-            res.redirect('/admin/pedras');
-        }
+        [req.params.id],
+        res,
+        '/admin/pedras',
+        'Erro ao excluir pedra.'
     );
-
 });
 
+// =====================================================
+// COLEÇÕES
+// =====================================================
 
-
-//============================================================//
-//======================== COLEÇÕES ==========================//
-//============================================================//
-
-
-// LISTAR COLEÇÕES
 appAdmin.get('/colecoes', (req, res) => {
-
-    db.all(
-        'SELECT * FROM colecoes',
-        [],
-        function (erro, colecoes) {
-
-            if (erro) {
-                console.log(erro.message);
-                return res.send('Erro ao consultar coleções.');
-            }
-
-            res.render('admin/colecoes/lista', { colecoes });
-        }
-    );
-
+    db.all('SELECT * FROM colecoes', [], (erro, colecoes) => {
+        if (erro) return res.status(500).send('Erro ao consultar coleções.');
+        res.render('admin/colecoes/lista', { colecoes });
+    });
 });
 
-
-// FORMULÁRIO DE CADASTRO
 appAdmin.get('/colecoes/form-cadastrar', (req, res) => {
     res.render('admin/colecoes/cadastro');
 });
 
+appAdmin.post('/colecoes/cadastrar', upload.single('imagem'), (req, res) => {
+    const { nome, descricao } = req.body;
+    const imagem = req.file?.filename || '';
 
-// CADASTRAR
-appAdmin.post(
-    '/colecoes/cadastrar',
-    upload.single('imagem'),
-    (req, res) => {
+    executar(
+        'INSERT INTO colecoes (nome, descricao, imagem) VALUES (?, ?, ?)',
+        [nome, descricao, imagem],
+        res,
+        '/admin/colecoes',
+        'Erro ao cadastrar coleção.'
+    );
+});
 
-        const nome = req.body.nome;
-        const descricao = req.body.descricao;
-
-        let imagem = '';
-
-        if (req.file) {
-            imagem = req.file.filename;
-        }
-
-        db.run(
-            `INSERT INTO colecoes (nome, descricao, imagem)
-             VALUES (?, ?, ?)`,
-            [nome, descricao, imagem],
-
-            function (erro) {
-
-                if (erro) {
-                    console.log(erro.message);
-                    return res.send('Erro ao cadastrar coleção.');
-                }
-
-                res.redirect('/admin/colecoes');
-            }
-        );
-
-    }
-);
-
-
-// ABRIR EDIÇÃO
 appAdmin.get('/colecoes/editar/:id', (req, res) => {
-
-    const id = req.params.id;
-
     db.get(
         'SELECT * FROM colecoes WHERE id = ?',
-        [id],
-        function (erro, colecao) {
-
-            if (erro) {
-                console.log(erro.message);
-                return res.send('Erro ao buscar coleção.');
-            }
-
+        [req.params.id],
+        (erro, colecao) => {
+            if (erro) return res.status(500).send('Erro ao buscar coleção.');
+            if (!colecao) return res.status(404).send('Coleção não encontrada.');
             res.render('admin/colecoes/editar', { colecao });
         }
     );
-
 });
 
+appAdmin.post('/colecoes/editar/:id', upload.single('imagem'), (req, res) => {
+    const { nome, descricao } = req.body;
+    const { id } = req.params;
 
-// SALVAR EDIÇÃO
-appAdmin.post(
-    '/colecoes/editar/:id',
-    upload.single('imagem'),
-    (req, res) => {
+    db.get('SELECT * FROM colecoes WHERE id = ?', [id], (erro, colecao) => {
+        if (erro) return res.status(500).send('Erro ao buscar coleção.');
+        if (!colecao) return res.status(404).send('Coleção não encontrada.');
 
-        const id = req.params.id;
-        const nome = req.body.nome;
-        const descricao = req.body.descricao;
+        const imagem = req.file?.filename || colecao.imagem;
 
-        db.get(
-            'SELECT * FROM colecoes WHERE id = ?',
-            [id],
-            function (erro, colecao) {
-
-                if (erro) {
-                    console.log(erro.message);
-                    return res.send('Erro ao buscar coleção.');
-                }
-
-                let imagem = colecao.imagem;
-
-                if (req.file) {
-                    imagem = req.file.filename;
-                }
-
-                db.run(
-                    `UPDATE colecoes
-                     SET nome = ?, descricao = ?, imagem = ?
-                     WHERE id = ?`,
-                    [nome, descricao, imagem, id],
-
-                    function (erro) {
-
-                        if (erro) {
-                            console.log(erro.message);
-                            return res.send('Erro ao editar coleção.');
-                        }
-
-                        res.redirect('/admin/colecoes');
-                    }
-                );
-
-            }
+        executar(
+            'UPDATE colecoes SET nome = ?, descricao = ?, imagem = ? WHERE id = ?',
+            [nome, descricao, imagem, id],
+            res,
+            '/admin/colecoes',
+            'Erro ao editar coleção.'
         );
+    });
+});
 
-    }
-);
-
-
-// EXCLUIR
 appAdmin.get('/colecoes/excluir/:id', (req, res) => {
-
-    const id = req.params.id;
-
-    db.run(
+    executar(
         'DELETE FROM colecoes WHERE id = ?',
-        [id],
-        function (erro) {
-
-            if (erro) {
-                console.log(erro.message);
-                return res.send('Erro ao excluir coleção.');
-            }
-
-            res.redirect('/admin/colecoes');
-        }
+        [req.params.id],
+        res,
+        '/admin/colecoes',
+        'Erro ao excluir coleção.'
     );
-
 });
 
+// =====================================================
+// TAMANHOS
+// =====================================================
 
-
-//============================================================//
-//======================== TAMANHOS ==========================//
-//============================================================//
-
-
-// LISTAR TAMANHOS
 appAdmin.get('/tamanhos', (req, res) => {
-
-    db.all(
-        'SELECT * FROM tamanhos',
-        [],
-        function (erro, tamanhos) {
-
-            if (erro) {
-                console.log(erro.message);
-                return res.send('Erro ao consultar tamanhos.');
-            }
-
-            res.render('admin/tamanhos/lista', { tamanhos });
-        }
-    );
-
+    db.all('SELECT * FROM tamanhos', [], (erro, tamanhos) => {
+        if (erro) return res.status(500).send('Erro ao consultar tamanhos.');
+        res.render('admin/tamanhos/lista', { tamanhos });
+    });
 });
 
-
-// FORMULÁRIO DE CADASTRO
 appAdmin.get('/tamanhos/form-cadastrar', (req, res) => {
     res.render('admin/tamanhos/cadastro');
 });
 
-
-// CADASTRAR
 appAdmin.post('/tamanhos/cadastrar', (req, res) => {
+    const { tamanho, descricao } = req.body;
 
-    const tamanho = req.body.tamanho;
-    const descricao = req.body.descricao;
-
-    db.run(
-        `INSERT INTO tamanhos (tamanho, descricao)
-         VALUES (?, ?)`,
+    executar(
+        'INSERT INTO tamanhos (tamanho, descricao) VALUES (?, ?)',
         [tamanho, descricao],
-
-        function (erro) {
-
-            if (erro) {
-                console.log(erro.message);
-                return res.send('Erro ao cadastrar tamanho.');
-            }
-
-            res.redirect('/admin/tamanhos');
-        }
+        res,
+        '/admin/tamanhos',
+        'Erro ao cadastrar tamanho.'
     );
-
 });
 
-
-// ABRIR EDIÇÃO
 appAdmin.get('/tamanhos/editar/:id', (req, res) => {
-
-    const id = req.params.id;
-
     db.get(
         'SELECT * FROM tamanhos WHERE id = ?',
-        [id],
-        function (erro, tamanho) {
-
-            if (erro) {
-                console.log(erro.message);
-                return res.send('Erro ao buscar tamanho.');
-            }
-
+        [req.params.id],
+        (erro, tamanho) => {
+            if (erro) return res.status(500).send('Erro ao buscar tamanho.');
+            if (!tamanho) return res.status(404).send('Tamanho não encontrado.');
             res.render('admin/tamanhos/editar', { tamanho });
         }
     );
-
 });
 
-
-// SALVAR EDIÇÃO
 appAdmin.post('/tamanhos/editar/:id', (req, res) => {
+    const { tamanho, descricao } = req.body;
 
-    const id = req.params.id;
-    const tamanho = req.body.tamanho;
-    const descricao = req.body.descricao;
-
-    db.run(
-        `UPDATE tamanhos
-         SET tamanho = ?, descricao = ?
-         WHERE id = ?`,
-        [tamanho, descricao, id],
-
-        function (erro) {
-
-            if (erro) {
-                console.log(erro.message);
-                return res.send('Erro ao editar tamanho.');
-            }
-
-            res.redirect('/admin/tamanhos');
-        }
+    executar(
+        'UPDATE tamanhos SET tamanho = ?, descricao = ? WHERE id = ?',
+        [tamanho, descricao, req.params.id],
+        res,
+        '/admin/tamanhos',
+        'Erro ao editar tamanho.'
     );
-
 });
 
-
-// EXCLUIR
 appAdmin.get('/tamanhos/excluir/:id', (req, res) => {
-
-    const id = req.params.id;
-
-    db.run(
+    executar(
         'DELETE FROM tamanhos WHERE id = ?',
-        [id],
-        function (erro) {
-
-            if (erro) {
-                console.log(erro.message);
-                return res.send('Erro ao excluir tamanho.');
-            }
-
-            res.redirect('/admin/tamanhos');
-        }
+        [req.params.id],
+        res,
+        '/admin/tamanhos',
+        'Erro ao excluir tamanho.'
     );
-
 });
 
+// =====================================================
+// PRODUTOS — CONFIGURAÇÃO DE UPLOADS
+// =====================================================
 
+const uploadProduto = upload.fields([
+    { name: 'imagem', maxCount: 1 },
+    { name: 'imagem_secundaria', maxCount: 1 },
+    { name: 'imagem_3', maxCount: 1 },
+    { name: 'imagem_4', maxCount: 1 },
+    { name: 'video', maxCount: 1 },
+    { name: 'modelo_categoria', maxCount: 1 },
+    { name: 'produto_categoria', maxCount: 1 }
+]);
 
-//============================================================//
-//========================= PRODUTOS =========================//
-//============================================================//
+// =====================================================
+// PRODUTOS — LISTAGEM
+// =====================================================
 
-
-// LISTAR PRODUTOS
 appAdmin.get('/produtos', (req, res) => {
-
-    db.all(
-        'SELECT * FROM produtos',
-        [],
-        function (erro, produtos) {
-
-            if (erro) {
-                console.log(erro.message);
-                return res.send('Erro ao consultar produtos.');
-            }
-
-            res.render('admin/produtos/lista', { produtos });
-        }
-    );
-
-});
-
-
-// FORMULÁRIO DE CADASTRO
-appAdmin.get('/produtos/form-cadastrar', (req, res) => {
-
-    db.all('SELECT * FROM categorias', [], function (erro, categorias) {
-
-        if (erro) {
-            return res.send('Erro ao consultar categorias.');
-        }
-
-        db.all('SELECT * FROM materiais', [], function (erro, materiais) {
-
-            if (erro) {
-                return res.send('Erro ao consultar materiais.');
-            }
-
-            db.all('SELECT * FROM pedras', [], function (erro, pedras) {
-
-                if (erro) {
-                    return res.send('Erro ao consultar pedras.');
-                }
-
-                db.all('SELECT * FROM colecoes', [], function (erro, colecoes) {
-
-                    if (erro) {
-                        return res.send('Erro ao consultar coleções.');
-                    }
-
-                    db.all('SELECT * FROM tamanhos', [], function (erro, tamanhos) {
-
-                        if (erro) {
-                            return res.send('Erro ao consultar tamanhos.');
-                        }
-
-                        res.render('admin/produtos/cadastro', {
-                            categorias,
-                            materiais,
-                            pedras,
-                            colecoes,
-                            tamanhos
-                        });
-
-                    });
-
-                });
-
-            });
-
-        });
-
+    db.all('SELECT * FROM produtos', [], (erro, produtos) => {
+        if (erro) return res.status(500).send('Erro ao consultar produtos.');
+        res.render('admin/produtos/lista', { produtos });
     });
-
 });
 
+// =====================================================
+// PRODUTOS — CARREGAR SELECTS
+// =====================================================
 
-// CADASTRAR PRODUTO
-appAdmin.post(
-    '/produtos/cadastrar',
-    upload.single('imagem'),
-    (req, res) => {
+function carregarOpcoes(callback) {
+    const tabelas = [
+        'categorias',
+        'materiais',
+        'pedras',
+        'colecoes',
+        'tamanhos'
+    ];
 
-        const nome = req.body.nome;
-        const categoria = req.body.categoria;
-        const material = req.body.material;
-        const pedra = req.body.pedra;
-        const colecao = req.body.colecao;
-        const tamanho = req.body.tamanho;
-        const valor = req.body.valor;
-        const estoque = req.body.estoque;
-        const descricao = req.body.descricao;
+    const dados = {};
+    let indice = 0;
 
-        let imagem = '';
-
-        if (req.file) {
-            imagem = req.file.filename;
+    function proxima() {
+        if (indice >= tabelas.length) {
+            return callback(null, dados);
         }
 
-        db.run(
-            `INSERT INTO produtos
-            (
-                nome,
-                categoria,
-                material,
-                pedra,
-                colecao,
-                tamanho,
-                valor,
-                estoque,
-                descricao,
-                imagem
-            )
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-            [
-                nome,
-                categoria,
-                material,
-                pedra,
-                colecao,
-                tamanho,
-                valor,
-                estoque,
-                descricao,
-                imagem
-            ],
+        const tabela = tabelas[indice++];
 
-            function (erro) {
+        db.all(`SELECT * FROM ${tabela}`, [], (erro, registros) => {
+            if (erro) return callback(erro);
+            dados[tabela] = registros;
+            proxima();
+        });
+    }
 
-                if (erro) {
-                    console.log(erro.message);
-                    return res.send('Erro ao cadastrar produto.');
-                }
+    proxima();
+}
+
+// =====================================================
+// PRODUTOS — FORMULÁRIO DE CADASTRO
+// =====================================================
+
+appAdmin.get('/produtos/form-cadastrar', (req, res) => {
+    carregarOpcoes((erro, dados) => {
+        if (erro) {
+            console.error(erro.message);
+            return res.status(500).send('Erro ao carregar dados do formulário.');
+        }
+
+        res.render('admin/produtos/cadastro', dados);
+    });
+});
+
+// =====================================================
+// PRODUTOS — CADASTRAR
+// =====================================================
+
+appAdmin.post('/produtos/cadastrar', uploadProduto, (req, res) => {
+    const {
+        nome,
+        categoria,
+        material,
+        pedra,
+        colecao,
+        tamanho,
+        valor,
+        estoque,
+        descricao,
+        detalhes
+    } = req.body;
+
+    const imagem = arquivoEnviado(req, 'imagem') || '';
+    const imagem_secundaria = arquivoEnviado(req, 'imagem_secundaria') || '';
+    const imagem_3 = arquivoEnviado(req, 'imagem_3') || '';
+    const imagem_4 = arquivoEnviado(req, 'imagem_4') || '';
+    const video = arquivoEnviado(req, 'video') || '';
+
+    const sql = `
+        INSERT INTO produtos (
+            nome, categoria, material, pedra, colecao,
+            tamanho, valor, estoque, descricao, detalhes,
+            imagem, imagem_secundaria, imagem_3, imagem_4, video
+        )
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `;
+
+    const valores = [
+        nome, categoria, material, pedra, colecao,
+        tamanho, valor, estoque, descricao, detalhes,
+        imagem, imagem_secundaria, imagem_3, imagem_4, video
+    ];
+
+    db.run(sql, valores, function (erro) {
+        if (erro) {
+            console.error(erro.message);
+            return res.status(500).send('Erro ao cadastrar produto.');
+        }
+
+        const produtoId = this.lastID;
+        const modeloCategoria = arquivoEnviado(req, 'modelo_categoria');
+        const produtoCategoria = arquivoEnviado(req, 'produto_categoria');
+
+        salvarImagemCategoria(produtoId, 'modelo_categoria', modeloCategoria, (erro) => {
+            if (erro) return res.status(500).send('Erro ao salvar imagem da modelo.');
+
+            salvarImagemCategoria(produtoId, 'produto_categoria', produtoCategoria, (erro) => {
+                if (erro) return res.status(500).send('Erro ao salvar imagem da joia.');
 
                 res.redirect('/admin/produtos');
-            }
-        );
+            });
+        });
+    });
+});
 
-    }
-);
+// =====================================================
+// PRODUTOS — IMAGENS DE CATEGORIA
+// =====================================================
 
-
-// ABRIR EDIÇÃO DO PRODUTO
-appAdmin.get('/produtos/editar/:id', (req, res) => {
-
-    const id = req.params.id;
+function salvarImagemCategoria(produtoId, tipo, imagem, callback) {
+    if (!imagem) return callback(null);
 
     db.get(
-        'SELECT * FROM produtos WHERE id = ?',
-        [id],
-        function (erro, produto) {
+        'SELECT id FROM produto_imagens WHERE produto_id = ? AND tipo = ?',
+        [produtoId, tipo],
+        (erro, existente) => {
+            if (erro) return callback(erro);
 
-            if (erro) {
-                console.log(erro.message);
-                return res.send('Erro ao buscar produto.');
+            if (existente) {
+                db.run(
+                    'UPDATE produto_imagens SET imagem = ? WHERE id = ?',
+                    [imagem, existente.id],
+                    callback
+                );
+            } else {
+                db.run(
+                    'INSERT INTO produto_imagens (produto_id, tipo, imagem) VALUES (?, ?, ?)',
+                    [produtoId, tipo, imagem],
+                    callback
+                );
             }
-
-            if (!produto) {
-                return res.send('Produto não encontrado.');
-            }
-
-            db.all('SELECT * FROM categorias', [], function (erro, categorias) {
-
-                if (erro) {
-                    return res.send('Erro ao consultar categorias.');
-                }
-
-                db.all('SELECT * FROM materiais', [], function (erro, materiais) {
-
-                    if (erro) {
-                        return res.send('Erro ao consultar materiais.');
-                    }
-
-                    db.all('SELECT * FROM pedras', [], function (erro, pedras) {
-
-                        if (erro) {
-                            return res.send('Erro ao consultar pedras.');
-                        }
-
-                        db.all('SELECT * FROM colecoes', [], function (erro, colecoes) {
-
-                            if (erro) {
-                                return res.send('Erro ao consultar coleções.');
-                            }
-
-                            db.all('SELECT * FROM tamanhos', [], function (erro, tamanhos) {
-
-                                if (erro) {
-                                    return res.send('Erro ao consultar tamanhos.');
-                                }
-
-
-                                res.render('admin/produtos/editar', {
-                                    produto,
-                                    categorias,
-                                    materiais,
-                                    pedras,
-                                    colecoes,
-                                    tamanhos
-                                });
-
-                            });
-
-                        });
-
-                    });
-
-                });
-
-            });
-
         }
     );
+}
 
-});
+// =====================================================
+// PRODUTOS — ABRIR EDIÇÃO
+// =====================================================
 
-
-// SALVAR EDIÇÃO DO PRODUTO
-appAdmin.post(
-    '/produtos/editar/:id',
-    upload.single('imagem'),
-    (req, res) => {
-
-        const id = req.params.id;
-
-        const nome = req.body.nome;
-        const categoria = req.body.categoria;
-        const material = req.body.material;
-        const pedra = req.body.pedra;
-        const colecao = req.body.colecao;
-        const tamanho = req.body.tamanho;
-        const valor = req.body.valor;
-        const estoque = req.body.estoque;
-        const descricao = req.body.descricao;
-
-        db.get(
-            'SELECT * FROM produtos WHERE id = ?',
-            [id],
-            function (erro, produto) {
-
-                if (erro) {
-                    console.log(erro.message);
-                    return res.send('Erro ao buscar produto.');
-                }
-
-                if (!produto) {
-                    return res.send('Produto não encontrado.');
-                }
-
-                let imagem = produto.imagem;
-
-                if (req.file) {
-                    imagem = req.file.filename;
-                }
-
-                db.run(
-                    `UPDATE produtos
-                     SET nome = ?,
-                         categoria = ?,
-                         material = ?,
-                         pedra = ?,
-                         colecao = ?,
-                         tamanho = ?,
-                         valor = ?,
-                         estoque = ?,
-                         descricao = ?,
-                         imagem = ?
-                     WHERE id = ?`,
-                    [
-                        nome,
-                        categoria,
-                        material,
-                        pedra,
-                        colecao,
-                        tamanho,
-                        valor,
-                        estoque,
-                        descricao,
-                        imagem,
-                        id
-                    ],
-
-                    function (erro) {
-
-                        if (erro) {
-                            console.log(erro.message);
-                            return res.send('Erro ao editar produto.');
-                        }
-
-                        res.redirect('/admin/produtos');
-                    }
-                );
-
-            }
-        );
-
-    }
-);
-
-
-// EXCLUIR PRODUTO
-appAdmin.get('/produtos/excluir/:id', (req, res) => {
-
+appAdmin.get('/produtos/editar/:id', (req, res) => {
     const id = req.params.id;
 
-    db.run(
-        'DELETE FROM produtos WHERE id = ?',
-        [id],
-        function (erro) {
+    db.get('SELECT * FROM produtos WHERE id = ?', [id], (erro, produto) => {
+        if (erro) return res.status(500).send('Erro ao buscar produto.');
+        if (!produto) return res.status(404).send('Produto não encontrado.');
 
-            if (erro) {
-                console.log(erro.message);
-                return res.send('Erro ao excluir produto.');
-            }
+        carregarOpcoes((erro, dados) => {
+            if (erro) return res.status(500).send('Erro ao carregar opções.');
 
-            res.redirect('/admin/produtos');
-        }
-    );
+            db.all(
+                'SELECT * FROM produto_imagens WHERE produto_id = ?',
+                [id],
+                (erro, imagensCategoria) => {
+                    if (erro) {
+                        return res.status(500).send('Erro ao buscar imagens da categoria.');
+                    }
 
+                    const modeloCategoria =
+                        imagensCategoria.find(i => i.tipo === 'modelo_categoria') || null;
+
+                    const produtoCategoria =
+                        imagensCategoria.find(i => i.tipo === 'produto_categoria') || null;
+
+                    res.render('admin/produtos/editar', {
+                        produto,
+                        ...dados,
+                        modeloCategoria,
+                        produtoCategoria
+                    });
+                }
+            );
+        });
+    });
 });
 
+// =====================================================
+// PRODUTOS — SALVAR EDIÇÃO
+// =====================================================
 
+appAdmin.post('/produtos/editar/:id', uploadProduto, (req, res) => {
+    const id = req.params.id;
 
-//================== EXPORTAÇÃO ==================//
+    db.get('SELECT * FROM produtos WHERE id = ?', [id], (erro, produto) => {
+        if (erro) return res.status(500).send('Erro ao buscar produto.');
+        if (!produto) return res.status(404).send('Produto não encontrado.');
+
+        const {
+            nome,
+            categoria,
+            material,
+            pedra,
+            colecao,
+            tamanho,
+            valor,
+            estoque,
+            descricao,
+            detalhes
+        } = req.body;
+
+        // Mantém arquivos antigos quando não há novo upload
+        const imagem = arquivoEnviado(req, 'imagem') || produto.imagem;
+        const imagem_secundaria =
+            arquivoEnviado(req, 'imagem_secundaria') || produto.imagem_secundaria;
+        const imagem_3 = arquivoEnviado(req, 'imagem_3') || produto.imagem_3;
+        const imagem_4 = arquivoEnviado(req, 'imagem_4') || produto.imagem_4;
+        const video = arquivoEnviado(req, 'video') || produto.video;
+
+        const sql = `
+            UPDATE produtos SET
+                nome = ?,
+                categoria = ?,
+                material = ?,
+                pedra = ?,
+                colecao = ?,
+                tamanho = ?,
+                valor = ?,
+                estoque = ?,
+                descricao = ?,
+                detalhes = ?,
+                imagem = ?,
+                imagem_secundaria = ?,
+                imagem_3 = ?,
+                imagem_4 = ?,
+                video = ?
+            WHERE id = ?
+        `;
+
+        const valores = [
+            nome, categoria, material, pedra, colecao,
+            tamanho, valor, estoque, descricao, detalhes,
+            imagem, imagem_secundaria, imagem_3, imagem_4,
+            video, id
+        ];
+
+        db.run(sql, valores, (erro) => {
+            if (erro) {
+                console.error(erro.message);
+                return res.status(500).send('Erro ao editar produto.');
+            }
+
+            const modeloCategoria = arquivoEnviado(req, 'modelo_categoria');
+            const produtoCategoria = arquivoEnviado(req, 'produto_categoria');
+
+            salvarImagemCategoria(id, 'modelo_categoria', modeloCategoria, (erro) => {
+                if (erro) return res.status(500).send('Erro ao salvar imagem da modelo.');
+
+                salvarImagemCategoria(id, 'produto_categoria', produtoCategoria, (erro) => {
+                    if (erro) return res.status(500).send('Erro ao salvar imagem da joia.');
+
+                    res.redirect('/admin/produtos');
+                });
+            });
+        });
+    });
+});
+
+// =====================================================
+// PRODUTOS — EXCLUIR
+// =====================================================
+
+appAdmin.get('/produtos/excluir/:id', (req, res) => {
+    executar(
+        'DELETE FROM produtos WHERE id = ?',
+        [req.params.id],
+        res,
+        '/admin/produtos',
+        'Erro ao excluir produto.'
+    );
+});
+
+// =====================================================
+// EXPORTAÇÃO DAS ROTAS ADMINISTRATIVAS
+// =====================================================
 
 module.exports = appAdmin;

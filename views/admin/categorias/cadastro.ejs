@@ -36,6 +36,7 @@
     <form
         action="/admin/categorias/cadastrar"
         method="POST"
+        enctype="multipart/form-data"
         class="form-admin"
     >
 
@@ -74,6 +75,43 @@
         </div>
 
 
+        <!-- IMAGEM -->
+        <div class="campo-admin campo-admin-espaco campo-imagem">
+
+            <label>
+                Imagem da Categoria
+            </label>
+
+            <input
+                type="file"
+                id="imagem"
+                name="imagem"
+                accept="image/*"
+            >
+
+            <label for="imagem" class="upload-produto">
+
+                <div class="upload-conteudo" id="uploadConteudo">
+
+                    <i class="bi bi-cloud-arrow-up"></i>
+
+                    <span>
+                        Clique para selecionar uma imagem
+                    </span>
+
+                </div>
+
+                <img
+                    id="previewImagem"
+                    class="preview-imagem"
+                    alt="Pré-visualização da imagem"
+                >
+
+            </label>
+
+        </div>
+
+
         <!-- BOTÕES -->
         <div class="form-acoes">
 
@@ -96,6 +134,28 @@
     </form>
 
 </main>
+
+
+<script>
+    const inputImagem = document.getElementById('imagem');
+    const previewImagem = document.getElementById('previewImagem');
+    const uploadConteudo = document.getElementById('uploadConteudo');
+
+    inputImagem.addEventListener('change', function () {
+
+        const arquivo = this.files[0];
+
+        if (arquivo) {
+
+            previewImagem.src = URL.createObjectURL(arquivo);
+            previewImagem.style.display = 'block';
+
+            uploadConteudo.style.display = 'none';
+
+        }
+
+    });
+</script>
 
 
 <%- include('../partials/footer') %>

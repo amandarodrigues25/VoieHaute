@@ -1,0 +1,343 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrega | VoieHaute</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body class="pagina-entrega">
+
+    <%- include('./partials/header') %>
+
+    <main class="entrega-pagina">
+
+        <!-- ETAPAS -->
+        <nav class="entrega-etapas" aria-label="Etapas da compra">
+            <div class="entrega-etapa">
+                <span>1</span> Sacola
+            </div>
+
+            <div class="entrega-etapa ativa">
+                <span>2</span> Entrega
+            </div>
+
+            <div class="entrega-etapa">
+                <span>3</span> Pagamento
+            </div>
+
+            <div class="entrega-etapa">
+                <span>4</span> Revisão
+            </div>
+        </nav>
+
+        <!-- CABEÇALHO -->
+        <header class="entrega-cabecalho">
+            <div class="entrega-eyebrow">
+                <span></span>
+                SUA ENTREGA
+                <span></span>
+            </div>
+
+            <h1>Informações de Entrega</h1>
+            <p>Para onde devemos enviar o seu tesouro?</p>
+        </header>
+
+        <div class="entrega-layout">
+
+            <!-- COLUNA ESQUERDA -->
+            <section class="entrega-conteudo">
+
+                <% if (erroEntrega) { %>
+                    <p class="entrega-erro" role="alert">
+                        <%= erroEntrega %>
+                    </p>
+                <% } %>
+
+                <% if (modo === 'resumo' && endereco) { %>
+
+                    <!-- ENDEREÇO CADASTRADO -->
+                    <h2 class="entrega-secao-titulo">
+                        ENDEREÇO DE ENTREGA
+                    </h2>
+
+                    <div class="entrega-endereco-card">
+
+                        <i class="bi bi-geo-alt entrega-icone-local"></i>
+
+                        <div class="entrega-endereco-dados">
+                            <h3><%= endereco.nome %></h3>
+
+                            <p>
+                                <%= endereco.endereco %>,
+                                <%= endereco.numero %>
+                            </p>
+
+                            <% if (endereco.complemento) { %>
+                                <p><%= endereco.complemento %></p>
+                            <% } %>
+
+                            <p><%= endereco.bairro %></p>
+                            <p>
+                                <%= endereco.cidade %> -
+                                <%= endereco.estado %>
+                            </p>
+                            <p><%= endereco.cep %></p>
+                        </div>
+
+                        <a href="/carrinho/entrega?editar=1"
+                           class="entrega-editar">
+                            <i class="bi bi-pencil"></i>
+                            Editar
+                        </a>
+                    </div>
+
+                    <h2 class="entrega-secao-titulo entrega-titulo-frete">
+                        FORMA DE ENTREGA
+                    </h2>
+
+                    <div class="entrega-frete-card">
+                        <i class="bi bi-truck"></i>
+
+                        <div>
+                            <h3>Entrega Padrão</h3>
+                            <p>Prazo de 5 a 12 dias úteis</p>
+                        </div>
+
+                        <strong>Grátis</strong>
+                    </div>
+
+                    <form action="/carrinho/entrega/continuar"
+                          method="POST"
+                          class="entrega-acao-final">
+                        <button type="submit"
+                                class="entrega-botao-principal">
+                            CONTINUAR
+                        </button>
+                    </form>
+
+                <% } else { %>
+
+                    <!-- FORMULÁRIO NOVO OU EDIÇÃO -->
+                    <form action="/carrinho/entrega/salvar"
+                          method="POST"
+                          class="entrega-formulario">
+
+                        <div class="entrega-campos duas-colunas">
+                            <div class="entrega-campo">
+                                <label for="entrega-nome">
+                                    Nome Completo
+                                </label>
+                                <input id="entrega-nome"
+                                       name="nome"
+                                       required
+                                       autocomplete="name"
+                                       placeholder="Digite seu nome completo"
+                                       value="<%= endereco?.nome || '' %>">
+                            </div>
+
+                            <div class="entrega-campo">
+                                <label for="entrega-cpf">CPF</label>
+                                <input id="entrega-cpf"
+                                       name="cpf"
+                                       required
+                                       inputmode="numeric"
+                                       maxlength="14"
+                                       placeholder="000.000.000-00"
+                                       value="<%= endereco?.cpf || '' %>">
+                            </div>
+                        </div>
+
+                        <div class="entrega-campo">
+                            <label for="entrega-cep">CEP</label>
+                            <input id="entrega-cep"
+                                   name="cep"
+                                   required
+                                   inputmode="numeric"
+                                   maxlength="9"
+                                   autocomplete="postal-code"
+                                   placeholder="00000-000"
+                                   value="<%= endereco?.cep || '' %>">
+                        </div>
+
+                        <div class="entrega-campos endereco-numero">
+                            <div class="entrega-campo">
+                                <label for="entrega-rua">Endereço</label>
+                                <input id="entrega-rua"
+                                       name="endereco"
+                                       required
+                                       autocomplete="address-line1"
+                                       placeholder="Digite seu endereço"
+                                       value="<%= endereco?.endereco || '' %>">
+                            </div>
+
+                            <div class="entrega-campo">
+                                <label for="entrega-numero">Número</label>
+                                <input id="entrega-numero"
+                                       name="numero"
+                                       required
+                                       placeholder="Nº"
+                                       value="<%= endereco?.numero || '' %>">
+                            </div>
+                        </div>
+
+                        <div class="entrega-campo">
+                            <label for="entrega-complemento">
+                                Complemento (opcional)
+                            </label>
+                            <input id="entrega-complemento"
+                                   name="complemento"
+                                   autocomplete="address-line2"
+                                   placeholder="Apartamento, casa, etc."
+                                   value="<%= endereco?.complemento || '' %>">
+                        </div>
+
+                        <div class="entrega-campos tres-colunas">
+                            <div class="entrega-campo">
+                                <label for="entrega-bairro">Bairro</label>
+                                <input id="entrega-bairro"
+                                       name="bairro"
+                                       required
+                                       placeholder="Digite seu bairro"
+                                       value="<%= endereco?.bairro || '' %>">
+                            </div>
+
+                            <div class="entrega-campo">
+                                <label for="entrega-cidade">Cidade</label>
+                                <input id="entrega-cidade"
+                                       name="cidade"
+                                       required
+                                       autocomplete="address-level2"
+                                       placeholder="Digite sua cidade"
+                                       value="<%= endereco?.cidade || '' %>">
+                            </div>
+
+                            <div class="entrega-campo">
+                                <label for="entrega-estado">Estado</label>
+                                <input id="entrega-estado"
+                                       name="estado"
+                                       required
+                                       maxlength="2"
+                                       autocomplete="address-level1"
+                                       placeholder="UF"
+                                       value="<%= endereco?.estado || '' %>">
+                            </div>
+                        </div>
+
+                        <label class="entrega-salvar-checkbox">
+                            <input type="checkbox"
+                                   name="salvar"
+                                   <%= endereco?.salvar ? 'checked' : '' %>>
+                            <span>
+                                Salvar este endereço para próxima compra
+                            </span>
+                        </label>
+
+                        <% if (modo === 'editar') { %>
+                            <div class="entrega-botoes-edicao">
+                                <a href="/carrinho/entrega"
+                                   class="entrega-botao-cancelar">
+                                    CANCELAR
+                                </a>
+
+                                <button type="submit"
+                                        class="entrega-botao-principal">
+                                    SALVAR
+                                </button>
+                            </div>
+                        <% } else { %>
+                            <button type="submit"
+                                    class="entrega-botao-principal">
+                                CONTINUAR
+                            </button>
+                        <% } %>
+                    </form>
+
+                <% } %>
+
+            </section>
+
+            <!-- RESUMO DO PEDIDO -->
+            <aside class="entrega-resumo">
+
+                <div class="entrega-resumo-cabecalho">
+                    <h2>RESUMO DO PEDIDO</h2>
+                    <a href="/carrinho">editar sacola</a>
+                </div>
+
+                <div class="entrega-resumo-produtos">
+
+                    <% itens.forEach(item => { %>
+                        <div class="entrega-resumo-produto">
+
+                            <img
+                                src="<%= item.produto.imagem
+                                    ? (item.produto.imagem.startsWith('/')
+                                        ? item.produto.imagem
+                                        : '/uploads/' + item.produto.imagem)
+                                    : '/uploads/sem-imagem.png' %>"
+                                alt="<%= item.produto.nome %>">
+
+                            <div class="entrega-resumo-info">
+                                <h3><%= item.produto.nome %></h3>
+
+                                <strong>
+                                    <%= item.subtotal.toLocaleString(
+                                        'pt-BR',
+                                        {
+                                            style: 'currency',
+                                            currency: 'BRL'
+                                        }
+                                    ) %>
+                                </strong>
+
+                                <p>QAT: <%= item.quantidade %></p>
+                            </div>
+
+                        </div>
+                    <% }) %>
+
+                </div>
+
+                <div class="entrega-resumo-valores">
+                    <div>
+                        <span>Subtotal</span>
+                        <span>
+                            <%= total.toLocaleString('pt-BR', {
+                                style: 'currency',
+                                currency: 'BRL'
+                            }) %>
+                        </span>
+                    </div>
+
+                    <div>
+                        <span>Frete</span>
+                        <span>Grátis</span>
+                    </div>
+                </div>
+
+                <div class="entrega-resumo-total">
+                    <span>Total</span>
+                    <strong>
+                        <%= total.toLocaleString('pt-BR', {
+                            style: 'currency',
+                            currency: 'BRL'
+                        }) %>
+                    </strong>
+                </div>
+
+            </aside>
+
+        </div>
+    </main>
+
+    <%- include('./partials/footer') %>
+
+</body>
+</html>

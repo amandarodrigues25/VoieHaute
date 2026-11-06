@@ -1,0 +1,438 @@
+<!-- =====================================================
+     HEADER - VOIEHAUTE
+     ===================================================== -->
+
+<header class="cabecalho">
+
+    <!-- PARTE SUPERIOR -->
+    <div class="cabecalho-superior">
+
+        <!-- LOGO -->
+        <a href="/" class="cabecalho-logo">
+
+            <img src="/uploads/Logo.png" alt="VoieHaute">
+
+        </a>
+
+
+        <!-- AÇÕES -->
+        <div class="cabecalho-acoes">
+
+            <!-- PESQUISA -->
+            <div class="cabecalho-pesquisa-area">
+
+                <form class="cabecalho-pesquisa" action="/busca" method="GET" id="formPesquisa">
+
+                    <button type="submit" class="cabecalho-pesquisa-botao" aria-label="Pesquisar">
+                        <i class="bi bi-search"></i>
+                    </button>
+
+                    <input type="text" name="q" id="campoPesquisa" placeholder="O que está procurando"
+                        autocomplete="off">
+
+                </form>
+
+
+                <!-- PESQUISAS RECENTES -->
+                <div class="pesquisas-recentes" id="pesquisasRecentes">
+
+                    <div class="pesquisas-recentes-topo">
+
+                        <span>PESQUISAS RECENTES</span>
+
+                        <button type="button" id="limparPesquisasRecentes">
+                            Limpar
+                        </button>
+
+                    </div>
+
+                    <div class="pesquisas-recentes-lista" id="listaPesquisasRecentes"></div>
+
+                    <p class="pesquisas-recentes-vazio" id="pesquisasRecentesVazio">
+                        Nenhuma pesquisa recente
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- FAVORITOS -->
+            <a href="#" class="cabecalho-icone" aria-label="Favoritos">
+                <i class="bi bi-heart"></i>
+            </a>
+
+
+            <!-- CONTA -->
+            <a href="#" class="cabecalho-icone" aria-label="Minha conta">
+                <i class="bi bi-person"></i>
+            </a>
+
+
+            <!-- SACOLA -->
+            <a href="/carrinho" class="cabecalho-icone" aria-label="Sacola">
+                <i class="bi bi-bag"></i>
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- LINHA DOURADA -->
+    <div class="cabecalho-divisor">
+
+        <span class="linha"></span>
+
+        <span class="estrela">✦</span>
+
+        <span class="linha"></span>
+
+    </div>
+
+
+    <!-- MENU -->
+    <nav class="menu-principal">
+
+        <ul>
+
+            <li>
+                <a href="/">Início</a>
+            </li>
+
+            <li class="menu-item-mega">
+                <a href="#" class="menu-link-mega">Joias</a>
+
+                <div class="mega-menu">
+
+                    <div class="mega-menu-conteudo">
+
+                        <div class="mega-menu-titulo">
+                            <span class="mega-menu-linha"></span>
+                            <span>UNIVERSO VOIEHAUTE</span>
+                            <span class="mega-menu-linha"></span>
+                        </div>
+
+                        <div class="mega-menu-categorias">
+
+                            <!-- ANÉIS -->
+                            <a href="/joias/aneis" class="mega-menu-card">
+
+                                <div class="mega-menu-imagem">
+                                    <img src="/uploads/joia-aneis.png" alt="Anéis">
+                                </div>
+
+                                <span>Anéis</span>
+
+                            </a>
+
+
+                            <!-- COLARES -->
+                            <a href="/joias/colares" class="mega-menu-card">
+
+                                <div class="mega-menu-imagem">
+                                    <img src="/uploads/joia-colares.png" alt="Colares">
+                                </div>
+
+                                <span>Colares</span>
+
+                            </a>
+
+
+                            <!-- PULSEIRAS -->
+                            <a href="/joias/pulseiras" class="mega-menu-card">
+
+                                <div class="mega-menu-imagem">
+                                    <img src="/uploads/joia-pulseiras.png" alt="Pulseiras">
+                                </div>
+
+                                <span>Pulseiras</span>
+
+                            </a>
+
+
+                            <!-- BRINCOS -->
+                            <a href="/joias/brincos" class="mega-menu-card">
+
+                                <div class="mega-menu-imagem">
+                                    <img src="/uploads/joia-brincos.png" alt="Brincos">
+                                </div>
+
+                                <span>Brincos</span>
+
+                            </a>
+
+
+                            <!-- TIARAS -->
+                            <a href="/joias/tiaras" class="mega-menu-card">
+
+                                <div class="mega-menu-imagem">
+                                    <img src="/uploads/joia-tiaras.png" alt="Tiaras">
+                                </div>
+
+                                <span>Tiaras</span>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </li>
+
+            <li class="menu-item-mega">
+
+                <a href="#" class="menu-link-mega">
+                    Coleções
+                </a>
+
+                <div class="mega-menu">
+
+                    <div class="mega-menu-conteudo">
+
+                        <div class="mega-menu-titulo">
+                            <span class="mega-menu-linha"></span>
+                            <span>COLEÇÕES VOIEHAUTE</span>
+                            <span class="mega-menu-linha"></span>
+                        </div>
+
+                        <div class="mega-menu-colecoes">
+
+                            <a href="/colecao/lheritage" class="mega-menu-card">
+                                <div class="mega-menu-imagem">
+                                    <img src="/uploads/colecao-lheritage.png" alt="L’Héritage">
+                                </div>
+                                <span>L’Héritage</span>
+                            </a>
+
+                            <a href="/colecao/lacouronne" class="mega-menu-card">
+                                <div class="mega-menu-imagem">
+                                    <img src="/uploads/colecao-la-couronne.png" alt="La Couronne">
+                                </div>
+                                <span>La Couronne</span>
+                            </a>
+
+                            <a href="/colecao/minuit" class="mega-menu-card">
+                                <div class="mega-menu-imagem">
+                                    <img src="/uploads/colecao-minuit.png" alt="Minuit">
+                                </div>
+                                <span>Minuit</span>
+                            </a>
+
+                            <a href="/colecao/jardindesrois" class="mega-menu-card">
+                                <div class="mega-menu-imagem">
+                                    <img src="/uploads/colecao-jardin-de-rois.png" alt="Jardin de Rois">
+                                </div>
+                                <span>Jardin de Rois</span>
+                            </a>
+
+                            <a href="/colecao/premierelumiere" class="mega-menu-card">
+                                <div class="mega-menu-imagem">
+                                    <img src="/uploads/colecao-premiere-lumiere.png" alt="Première Lumière">
+                                </div>
+                                <span>Première Lumière</span>
+                            </a>
+
+                            <a href="/colecao/lumieredubresil" class="mega-menu-card">
+                                <div class="mega-menu-imagem">
+                                    <img src="/uploads/colecao-lumiere-du-bresil.png" alt="Lumière du Brésil">
+                                </div>
+                                <span>Lumière du Brésil</span>
+                            </a>
+
+                            <a href="/colecao/veloursdeminuit" class="mega-menu-card">
+                                <div class="mega-menu-imagem">
+                                    <img src="/uploads/colecao-velours-de-minuit.png" alt="Velours de Minuit">
+                                </div>
+
+                                <span>Velours de Minuit</span>
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </li>
+
+            <li>
+                <a href="/maison">A Maison</a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+</header>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const cabecalho = document.querySelector(".cabecalho");
+        const itens = document.querySelectorAll(".menu-item-mega");
+
+        function fecharTodos() {
+            itens.forEach(item => {
+                item.classList.remove("menu-fixo");
+            });
+
+            cabecalho.classList.remove("tem-menu-fixo");
+        }
+
+        itens.forEach(item => {
+            const botao = item.querySelector(".menu-link-mega");
+
+            botao.addEventListener("click", event => {
+                event.preventDefault();
+                event.stopPropagation();
+
+                const vaiAbrir = !item.classList.contains("menu-fixo");
+
+                fecharTodos();
+
+                if (vaiAbrir) {
+                    item.classList.add("menu-fixo");
+                    cabecalho.classList.add("tem-menu-fixo");
+                }
+            });
+
+            item.querySelector(".mega-menu").addEventListener("click", event => {
+                event.stopPropagation();
+            });
+        });
+
+        document.addEventListener("click", fecharTodos);
+
+
+    });
+
+    /* =====================================================
+   PESQUISAS RECENTES
+===================================================== */
+
+    const formPesquisa = document.getElementById("formPesquisa");
+    const campoPesquisa = document.getElementById("campoPesquisa");
+    const painelPesquisas = document.getElementById("pesquisasRecentes");
+    const listaPesquisas = document.getElementById("listaPesquisasRecentes");
+    const mensagemVazia = document.getElementById("pesquisasRecentesVazio");
+    const botaoLimparPesquisas = document.getElementById("limparPesquisasRecentes");
+
+
+    function obterPesquisasRecentes() {
+        return JSON.parse(
+            localStorage.getItem("voiehautePesquisasRecentes") || "[]"
+        );
+    }
+
+
+    function salvarPesquisasRecentes(pesquisas) {
+        localStorage.setItem(
+            "voiehautePesquisasRecentes",
+            JSON.stringify(pesquisas)
+        );
+    }
+
+
+    function mostrarPesquisasRecentes() {
+
+        const pesquisas = obterPesquisasRecentes();
+
+        listaPesquisas.innerHTML = "";
+
+        if (pesquisas.length === 0) {
+
+            mensagemVazia.style.display = "block";
+            botaoLimparPesquisas.style.display = "none";
+
+        } else {
+
+            mensagemVazia.style.display = "none";
+            botaoLimparPesquisas.style.display = "block";
+
+            pesquisas.forEach(pesquisa => {
+
+                const botao = document.createElement("button");
+
+                botao.type = "button";
+                botao.className = "pesquisa-recente-item";
+
+                const icone = document.createElement("i");
+                icone.className = "bi bi-clock-history";
+
+                const texto = document.createElement("span");
+                texto.textContent = pesquisa;
+
+                botao.appendChild(icone);
+                botao.appendChild(texto);
+
+                botao.addEventListener("click", () => {
+
+                    campoPesquisa.value = pesquisa;
+
+                    painelPesquisas.classList.remove("ativo");
+
+                    formPesquisa.submit();
+
+                });
+
+                listaPesquisas.appendChild(botao);
+
+            });
+
+        }
+
+    }
+
+
+    campoPesquisa.addEventListener("focus", () => {
+
+        mostrarPesquisasRecentes();
+
+        painelPesquisas.classList.add("ativo");
+
+    });
+
+
+    formPesquisa.addEventListener("submit", () => {
+
+        const pesquisa = campoPesquisa.value.trim();
+
+        if (!pesquisa) {
+            return;
+        }
+
+        let pesquisas = obterPesquisasRecentes();
+
+        pesquisas = pesquisas.filter(
+            item => item.toLowerCase() !== pesquisa.toLowerCase()
+        );
+
+        pesquisas.unshift(pesquisa);
+
+        pesquisas = pesquisas.slice(0, 5);
+
+        salvarPesquisasRecentes(pesquisas);
+
+    });
+
+
+    botaoLimparPesquisas.addEventListener("click", event => {
+
+        event.stopPropagation();
+
+        localStorage.removeItem("voiehautePesquisasRecentes");
+
+        mostrarPesquisasRecentes();
+
+    });
+
+
+    document.addEventListener("click", event => {
+
+        if (!event.target.closest(".cabecalho-pesquisa-area")) {
+            painelPesquisas.classList.remove("ativo");
+        }
+
+    });
+</script>

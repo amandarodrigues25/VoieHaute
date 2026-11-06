@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Pedido Confirmado | VoieHaute</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body class="pagina-confirmacao">
+
+    <main class="confirmacao-container">
+
+        <!-- LOGO VOIEHAUTE -->
+
+        <img
+            src="/uploads/logo-azul.png"
+            alt="VoieHaute"
+            class="confirmacao-logo"
+        >
+
+        <!-- TÍTULO -->
+
+        <h1 class="confirmacao-titulo">
+            PEDIDO<br>
+            CONFIRMADO
+        </h1>
+
+        <!-- AGRADECIMENTO -->
+
+        <p class="confirmacao-subtitulo">
+            OBRIGADA POR ESCOLHER A VOIEHAUTE
+        </p>
+
+        <!-- MENSAGEM -->
+
+        <p class="confirmacao-mensagem">
+            Seu pedido foi recolhido e está sendo preparado com
+            todo o cuidado que ele merece
+        </p>
+
+        <!-- NÚMERO DO PEDIDO -->
+
+        <div class="confirmacao-pedido">
+
+            <span class="confirmacao-pedido-label">
+                NÚMERO DO PEDIDO
+            </span>
+
+            <strong class="confirmacao-pedido-numero">
+                #<%= pedido.numero %>
+            </strong>
+
+        </div>
+
+        <!-- BOTÃO -->
+
+        <a href="/" class="confirmacao-botao">
+            CONTINUAR COMPRANDO
+        </a>
+
+        <!-- AVISO DA DEMONSTRAÇÃO -->
+
+        <p class="confirmacao-aviso">
+            Pedido demonstrativo. Nenhuma cobrança real foi realizada.
+        </p>
+
+    </main>
+
+</body>
+</html>

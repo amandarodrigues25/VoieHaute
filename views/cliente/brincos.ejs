@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Brincos | VoieHaute</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+    <%- include('partials/header') %>
+
+
+        <main class="pagina-joia">
+
+            <!-- ================================
+             ABERTURA
+        ================================= -->
+
+            <section class="joia-abertura">
+
+                <div class="joia-abertura-imagem">
+                    <img src="/uploads/brincos-capa.jpg" alt="Coleção de brincos VoieHaute">
+                </div>
+
+
+                <div class="joia-abertura-texto">
+
+                    <div class="produto-caminho">
+
+
+                        <a href="/">
+                            Home
+                        </a>
+
+                        <span>✦</span>
+
+                        <a href="/joias/brincos" class="atual">
+                            Brincos
+                        </a>
+                    </div>
+
+                    <div class="joia-eyebrow">
+                        <span></span>
+                        <p>JOIAS</p>
+                        <span></span>
+                    </div>
+
+                    <h1>BRINCO</h1>
+
+                    <p class="joia-descricao">
+                        Os brincos VoieHaute são criações que iluminam o rosto com elegância e transformam cada detalhe
+                        em uma expressão de sofisticação. Pedras preciosas excepcionais, diamantes luminosos e metais
+                        nobres se encontram em designs que exploram diferentes formas, volumes e lapidações, dos modelos
+                        mais delicados às peças de presença marcante. Cada par emoldura o rosto, valoriza seus traços e
+                        revela uma personalidade única, tornando-se uma joia extraordinária para celebrar ocasiões
+                        especiais ou elevar momentos cotidianos, feita para encantar, ser desejada e atravessar
+                        gerações.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================================
+             VITRINE INTERATIVA
+        ================================= -->
+
+            <% if (brincos && brincos.length> 0) { %>
+
+                <section class="joia-vitrine">
+
+                    <!-- FUNDO ESQUERDO / MODELO -->
+
+                    <div class="joia-vitrine-fundo joia-vitrine-fundo-modelo">
+                        <img src="/uploads/fundo-modelo.png" alt="">
+                    </div>
+
+
+                    <!-- FUNDO DIREITO / PRODUTO -->
+
+                    <div class="joia-vitrine-fundo joia-vitrine-fundo-produto">
+                        <img src="/uploads/fundo-produto.png" alt="">
+                    </div>
+
+
+                    <!-- LISTA -->
+
+                    <div class="joia-vitrine-lista">
+
+                        <div class="joia-vitrine-titulo">
+                            <span></span>
+                            <h2>NOSSAS BRINCOS</h2>
+                            <span></span>
+                        </div>
+
+                        <div class="joia-vitrine-nomes">
+
+                            <% brincos.forEach((brinco, index)=> { %>
+
+                                <button type="button" class="joia-vitrine-nome <%= index === 0 ? 'ativo' : '' %>"
+                                    data-index="<%= index %>" data-id="<%= brinco.id %>" data-nome="<%= brinco.nome %>"
+                                    data-valor="<%= brinco.valor %>" data-modelo="<%= brinco.modelo_categoria || '' %>"
+                                    data-produto="<%= brinco.produto_categoria || '' %>">
+                                    <%= brinco.nome %>
+                                </button>
+
+                                <% }) %>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- MODELO -->
+
+                    <div class="joia-vitrine-modelo">
+
+                        <img id="vitrineModeloAtual" class="vitrine-camada"
+                            src="<%= brincos[0].modelo_categoria ? '/uploads/' + brincos[0].modelo_categoria : '' %>"
+                            alt="<%= brincos[0].nome %>" <%=brincos[0].modelo_categoria ? '' : 'style="display:none;"'
+                            %>
+                        >
+
+                        <img id="vitrineModeloProxima" class="vitrine-camada" src="" alt="" style="display:none;">
+
+                    </div>
+
+                    <!-- PRODUTO -->
+
+                    <div class="joia-vitrine-produto">
+
+                        <div class="joia-vitrine-produto-imagem">
+
+                            <img id="vitrineProdutoAtual" class="vitrine-camada"
+                                src="<%= brincos[0].produto_categoria ? '/uploads/' + brincos[0].produto_categoria : '' %>"
+                                alt="<%= brincos[0].nome %>" <%=brincos[0].produto_categoria ? ''
+                                : 'style="display:none;"' %>
+                            >
+
+                            <img id="vitrineProdutoProximo" class="vitrine-camada" src="" alt="" style="display:none;">
+
+                        </div>
+
+
+                        <div class="joia-vitrine-info">
+
+                            <h3 id="vitrineNome">
+                                <%= brincos[0].nome %>
+                            </h3>
+
+                            <p id="vitrinePreco">
+                                R$ <%= Number(brincos[0].valor).toLocaleString('pt-BR', { minimumFractionDigits: 2,
+                                    maximumFractionDigits: 2 }) %>
+                            </p>
+
+                            <a href="/produto/<%= brincos[0].id %>" id="vitrineDetalhes">
+                                VER DETALHES
+                            </a>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SETAS -->
+
+                    <div class="joia-vitrine-setas">
+
+                        <button type="button" id="vitrineAnterior" aria-label="Pulseira anterior">
+                            <i class="bi bi-chevron-up"></i>
+                        </button>
+
+                        <div></div>
+
+                        <button type="button" id="vitrineProximo" aria-label="Próxima brinco">
+                            <i class="bi bi-chevron-down"></i>
+                        </button>
+
+                    </div>
+
+                </section>
+
+                <% } %>
+
+        </main>
+
+
+        <%- include('partials/footer') %>
+
+
+            <script>
+                let brincoAtual = 0;
+                let animandoVitrine = false;
+
+                const nomesVitrine =
+                    document.querySelectorAll('.joia-vitrine-nome');
+
+                let modeloAtual =
+                    document.getElementById('vitrineModeloAtual');
+
+                let modeloProxima =
+                    document.getElementById('vitrineModeloProxima');
+
+                let produtoAtual =
+                    document.getElementById('vitrineProdutoAtual');
+
+                let produtoProximo =
+                    document.getElementById('vitrineProdutoProximo');
+
+                const vitrineNome =
+                    document.getElementById('vitrineNome');
+
+                const vitrinePreco =
+                    document.getElementById('vitrinePreco');
+
+                const vitrineDetalhes =
+                    document.getElementById('vitrineDetalhes');
+
+                const botaoAnterior =
+                    document.getElementById('vitrineAnterior');
+
+                const botaoProximo =
+                    document.getElementById('vitrineProximo');
+
+                const vitrineJoia =
+                    document.querySelector('.joia-vitrine');
+
+
+                /* =====================================================
+                   FORMATAR PREÇO
+                ===================================================== */
+
+                function formatarPreco(valor) {
+                    return Number(valor).toLocaleString('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL'
+                    });
+                }
+
+
+                /* =====================================================
+                   TROCAR BRINCO
+                ===================================================== */
+
+                function trocarBrinco(novoIndex, direcaoForcada = null) {
+
+                    if (
+                        animandoVitrine ||
+                        novoIndex === brincoAtual ||
+                        !nomesVitrine.length
+                    ) {
+                        return;
+                    }
+
+                    let direcao = direcaoForcada;
+
+                    if (!direcao) {
+                        direcao =
+                            novoIndex > brincoAtual
+                                ? 'baixo'
+                                : 'cima';
+                    }
+
+
+                    /* =================================================
+                       SE PASSOU DO ÚLTIMO, VOLTA PARA O PRIMEIRO
+                    ================================================= */
+
+                    if (novoIndex >= nomesVitrine.length) {
+                        novoIndex = 0;
+                        direcao = 'baixo';
+                    }
+
+
+                    /* =================================================
+                       SE VOLTOU DO PRIMEIRO, VAI PARA O ÚLTIMO
+                    ================================================= */
+
+                    if (novoIndex < 0) {
+                        novoIndex = nomesVitrine.length - 1;
+                        direcao = 'cima';
+                    }
+
+
+                    animandoVitrine = true;
+
+
+                    /* =================================================
+                       DADOS DO NOVO BRINCO
+                    ================================================= */
+
+                    const item =
+                        nomesVitrine[novoIndex];
+
+                    const id =
+                        item.dataset.id;
+
+                    const nome =
+                        item.dataset.nome;
+
+                    const valor =
+                        item.dataset.valor;
+
+                    const modelo =
+                        item.dataset.modelo;
+
+                    const produto =
+                        item.dataset.produto;
+
+
+                    /* =================================================
+                       PREPARA A NOVA MODELO
+                    ================================================= */
+
+                    if (modelo) {
+
+                        modeloProxima.src =
+                            '/uploads/' + modelo;
+
+                        modeloProxima.alt =
+                            nome;
+
+                        modeloProxima.style.display =
+                            'block';
+
+                    } else {
+
+                        modeloProxima.style.display =
+                            'none';
+                    }
+
+
+                    /* =================================================
+                       PREPARA O NOVO BRINCO
+                    ================================================= */
+
+                    if (produto) {
+
+                        produtoProximo.src =
+                            '/uploads/' + produto;
+
+                        produtoProximo.alt =
+                            nome;
+
+                        produtoProximo.style.display =
+                            'block';
+
+                    } else {
+
+                        produtoProximo.style.display =
+                            'none';
+                    }
+
+
+                    /* =================================================
+                       REMOVE A TRANSIÇÃO PARA POSICIONAR
+                       AS NOVAS IMAGENS
+                    ================================================= */
+
+                    modeloAtual.style.transition =
+                        'none';
+
+                    modeloProxima.style.transition =
+                        'none';
+
+                    produtoAtual.style.transition =
+                        'none';
+
+                    produtoProximo.style.transition =
+                        'none';
+
+
+                    /* =================================================
+                       POSIÇÃO INICIAL DAS NOVAS IMAGENS
+                    ================================================= */
+
+                    if (direcao === 'baixo') {
+
+                        /*
+                            Scroll para baixo:
+            
+                            Mulher nova entra de cima.
+                            Brinco novo entra de baixo.
+                        */
+
+                        modeloProxima.style.transform =
+                            'translate3d(0, -100%, 0)';
+
+                        produtoProximo.style.transform =
+                            'translate3d(0, 100%, 0)';
+
+                    } else {
+
+                        /*
+                            Scroll para cima:
+            
+                            Mulher nova entra de baixo.
+                            Brinco novo entra de cima.
+                        */
+
+                        modeloProxima.style.transform =
+                            'translate3d(0, 100%, 0)';
+
+                        produtoProximo.style.transform =
+                            'translate3d(0, -100%, 0)';
+                    }
+
+
+                    /*
+                        Força o navegador a registrar
+                        a posição inicial antes de animar.
+                    */
+
+                    void modeloProxima.offsetHeight;
+                    void produtoProximo.offsetHeight;
+
+
+                    /* =================================================
+                       ATIVA AS TRANSIÇÕES
+                    ================================================= */
+
+                    modeloAtual.style.transition =
+                        'transform 0.6s ease';
+
+                    modeloProxima.style.transition =
+                        'transform 0.6s ease';
+
+                    produtoAtual.style.transition =
+                        'transform 0.6s ease';
+
+                    produtoProximo.style.transition =
+                        'transform 0.6s ease';
+
+
+                    /* =================================================
+                       EXECUTA O MOVIMENTO
+                    ================================================= */
+
+                    if (direcao === 'baixo') {
+
+                        /* MULHER ATUAL DESCE */
+
+                        modeloAtual.style.transform =
+                            'translate3d(0, 100%, 0)';
+
+
+                        /* MULHER NOVA ENTRA */
+
+                        modeloProxima.style.transform =
+                            'translate3d(0, 0, 0)';
+
+
+                        /* BRINCO ATUAL SOBE */
+
+                        produtoAtual.style.transform =
+                            'translate3d(0, -100%, 0)';
+
+
+                        /* BRINCO NOVO ENTRA */
+
+                        produtoProximo.style.transform =
+                            'translate3d(0, 0, 0)';
+
+                    } else {
+
+                        /* MULHER ATUAL SOBE */
+
+                        modeloAtual.style.transform =
+                            'translate3d(0, -100%, 0)';
+
+
+                        /* MULHER NOVA ENTRA */
+
+                        modeloProxima.style.transform =
+                            'translate3d(0, 0, 0)';
+
+
+                        /* BRINCO ATUAL DESCE */
+
+                        produtoAtual.style.transform =
+                            'translate3d(0, 100%, 0)';
+
+
+                        /* BRINCO NOVO ENTRA */
+
+                        produtoProximo.style.transform =
+                            'translate3d(0, 0, 0)';
+                    }
+
+
+                    /* =================================================
+                       ATUALIZA NOME, PREÇO E LINK
+                    ================================================= */
+
+                    vitrineNome.textContent =
+                        nome;
+
+                    vitrinePreco.textContent =
+                        formatarPreco(valor);
+
+                    vitrineDetalhes.href =
+                        '/produto/' + id;
+
+
+                    /* =================================================
+                       MARCA O BRINCO SELECIONADO
+                    ================================================= */
+
+                    nomesVitrine.forEach(
+                        (nomeItem, indice) => {
+
+                            nomeItem.classList.toggle(
+                                'ativo',
+                                indice === novoIndex
+                            );
+
+                        }
+                    );
+
+
+                    /* =================================================
+                       FINAL DA ANIMAÇÃO
+                    ================================================= */
+
+                    setTimeout(() => {
+
+                        /*
+                            A modelo que entrou passa
+                            a ser a modelo atual.
+                        */
+
+                        const modeloVelho =
+                            modeloAtual;
+
+                        modeloAtual =
+                            modeloProxima;
+
+                        modeloProxima =
+                            modeloVelho;
+
+
+                        /*
+                            O brinco que entrou passa
+                            a ser o produto atual.
+                        */
+
+                        const produtoVelho =
+                            produtoAtual;
+
+                        produtoAtual =
+                            produtoProximo;
+
+                        produtoProximo =
+                            produtoVelho;
+
+
+                        /*
+                            Esconde as camadas antigas.
+                        */
+
+                        modeloProxima.style.display =
+                            'none';
+
+                        produtoProximo.style.display =
+                            'none';
+
+
+                        /*
+                            Reseta a posição das
+                            camadas atuais.
+                        */
+
+                        modeloAtual.style.transition =
+                            'none';
+
+                        produtoAtual.style.transition =
+                            'none';
+
+                        modeloAtual.style.transform =
+                            'translate3d(0, 0, 0)';
+
+                        produtoAtual.style.transform =
+                            'translate3d(0, 0, 0)';
+
+
+                        /*
+                            Atualiza o índice atual.
+                        */
+
+                        brincoAtual =
+                            novoIndex;
+
+                        animandoVitrine =
+                            false;
+
+                    }, 600);
+                }
+
+
+                /* =====================================================
+                   CLIQUE NO NOME DOS BRINCOS
+                ===================================================== */
+
+                nomesVitrine.forEach(
+                    (item, index) => {
+
+                        item.addEventListener(
+                            'click',
+                            () => {
+
+                                if (index === brincoAtual) {
+                                    return;
+                                }
+
+                                trocarBrinco(
+                                    index,
+                                    index > brincoAtual
+                                        ? 'baixo'
+                                        : 'cima'
+                                );
+
+                            }
+                        );
+
+                    }
+                );
+
+
+                /* =====================================================
+                   SETA PARA CIMA
+                ===================================================== */
+
+                botaoAnterior?.addEventListener(
+                    'click',
+                    () => {
+
+                        trocarBrinco(
+                            brincoAtual - 1,
+                            'cima'
+                        );
+
+                    }
+                );
+
+
+                /* =====================================================
+                   SETA PARA BAIXO
+                ===================================================== */
+
+                botaoProximo?.addEventListener(
+                    'click',
+                    () => {
+
+                        trocarBrinco(
+                            brincoAtual + 1,
+                            'baixo'
+                        );
+
+                    }
+                );
+
+
+                /* =====================================================
+                   SCROLL DO MOUSE NA VITRINE
+                ===================================================== */
+
+                vitrineJoia?.addEventListener(
+                    'wheel',
+                    function (event) {
+
+                        /*
+                            Enquanto o mouse estiver sobre
+                            o banner, o scroll controla
+                            os brincos.
+                        */
+
+                        event.preventDefault();
+
+
+                        /*
+                            Impede uma segunda troca
+                            enquanto a animação acontece.
+                        */
+
+                        if (animandoVitrine) {
+                            return;
+                        }
+
+
+                        /* SCROLL PARA BAIXO */
+
+                        if (event.deltaY > 0) {
+
+                            trocarBrinco(
+                                brincoAtual + 1,
+                                'baixo'
+                            );
+
+                        }
+
+
+                        /* SCROLL PARA CIMA */
+
+                        else if (event.deltaY < 0) {
+
+                            trocarBrinco(
+                                brincoAtual - 1,
+                                'cima'
+                            );
+
+                        }
+
+                    },
+                    {
+                        passive: false
+                    }
+                );
+            </script>
+
+</body>
+
+</html>

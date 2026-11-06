@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Velours de Minuit | VoieHaute</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+    <%- include('partials/header') %>
+
+
+        <!-- =================================================
+         HERO — JARDIN DES ROIS
+    ================================================== -->
+
+        <section class="colecao-hero">
+            <video class="colecao-hero-video" autoplay muted loop playsinline>
+                <source src="/uploads/veloursdeminuit-hero.mp4" type="video/mp4">
+            </video>
+        </section>
+
+
+        <!-- =================================================
+     APRESENTAÇÃO DA COLEÇÃO
+================================================== -->
+
+        <section class="colecao-apresentacao">
+
+            <div class="colecao-apresentacao-texto">
+
+                <div class="colecao-eyebrow">
+                    <span></span>
+                    <p>A COLEÇÃO</p>
+                    <span></span>
+                </div>
+
+                <h2>VELOURS DE MINUIT</h2>
+
+                <p class="colecao-apresentacao-descricao">
+                    Inspirada na imensidão e no mistério da galáxia, Velours de Minuit
+                    transforma a beleza do cosmos em alta joalheria. Tanzanitas de
+                    profundos tons azul-violeta, diamantes luminosos e Platina 950 se
+                    encontram em criações de formas fluidas e orbitais, evocando
+                    nebulosas, constelações e pontos de luz que atravessam a escuridão.
+                </p>
+
+            </div>
+
+
+            <div class="colecao-apresentacao-imagem">
+
+                <img src="/uploads/veloursdeminuit-colecao.jpeg" alt="Coleção Velours de Minuit">
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+     CRIAÇÕES DA COLEÇÃO
+================================================== -->
+
+        <section class="colecao-criacoes">
+
+            <div class="colecao-criacoes-cabecalho">
+
+                <div class="colecao-criacoes-eyebrow">
+                    <span></span>
+                    <p>VELOURS DE MINUIT</p>
+                    <span></span>
+                </div>
+
+                <h2>Criações da Coleção</h2>
+
+            </div>
+
+
+            <div class="colecao-criacoes-carrossel">
+
+                <button type="button" class="colecao-criacoes-seta colecao-criacoes-seta-esquerda" id="colecaoAnterior"
+                    aria-label="Produto anterior">
+                    ‹
+                </button>
+
+
+                <div class="colecao-criacoes-viewport">
+
+                    <div class="colecao-criacoes-trilho" id="colecaoTrilho">
+
+                        <% produtos.forEach(produto=> { %>
+
+                            <a href="/produto/<%= produto.id %>" class="colecao-criacao-card">
+
+                                <div
+                                    class="colecao-criacao-imagem <%= produto.imagem_secundaria ? 'tem-secundaria' : '' %>">
+
+                                    <img class="colecao-criacao-foto colecao-criacao-foto-principal"
+                                        src="/uploads/<%= produto.imagem %>" alt="<%= produto.nome %>">
+
+                                    <% if (produto.imagem_secundaria) { %>
+
+                                        <img class="colecao-criacao-foto colecao-criacao-foto-secundaria"
+                                            src="/uploads/<%= produto.imagem_secundaria %>" alt="<%= produto.nome %>">
+
+                                        <% } %>
+
+                                </div>
+
+
+                                <div class="colecao-criacao-info">
+
+                                    <h3>
+                                        <%= produto.nome %>
+                                    </h3>
+
+                                    <p>
+                                        <%= Number(produto.valor).toLocaleString( 'pt-BR' , { style: 'currency' ,
+                                            currency: 'BRL' } ) %>
+                                    </p>
+
+                                </div>
+
+                            </a>
+
+                            <% }) %>
+
+                    </div>
+
+                </div>
+
+
+                <button type="button" class="colecao-criacoes-seta colecao-criacoes-seta-direita" id="colecaoProximo"
+                    aria-label="Próximo produto">
+                    ›
+                </button>
+
+            </div>
+
+        </section>
+
+        <!-- =================================================
+     INSPIRAÇÃO DA COLEÇÃO
+================================================== -->
+
+        <section class="colecao-inspiracao">
+
+            <div class="colecao-inspiracao-imagem">
+                <img src="/uploads/veloursdeminuit-inspiracao.jpeg" alt="Inspiração da coleção Velours de Minuit">
+            </div>
+
+            <div class="colecao-inspiracao-texto">
+
+                <div class="colecao-eyebrow">
+                    <span></span>
+                    <p>A INSPIRAÇÃO</p>
+                    <span></span>
+                </div>
+
+                <h2>
+                    O INFINITO COMO<br>
+                    FONTE DE MISTÉRIO
+                </h2>
+
+                <p>
+                    Velours de Minuit nasce da imensidão da galáxia, onde luz e
+                    escuridão se encontram em um universo de profundidade e movimento.
+                    Nebulosas violetas, constelações distantes e órbitas luminosas
+                    inspiram formas fluidas que parecem percorrer o infinito.
+                </p>
+
+                <p>
+                    Os reflexos azul-violeta das Tanzanitas evocam as cores do cosmos,
+                    enquanto os diamantes remetem a pontos de luz dispersos na
+                    escuridão e a Platina 950 traduz o brilho frio e etéreo desse
+                    universo. A coleção transforma a grandiosidade da galáxia em
+                    criações misteriosas, luminosas e extraordinárias.
+                </p>
+
+            </div>
+
+        </section>
+
+        <!-- =================================================
+     DA IDEIA À JOIA
+================================================== -->
+
+        <section class="colecao-processo">
+
+            <div class="colecao-processo-cabecalho">
+
+                <div class="colecao-eyebrow">
+                    <span></span>
+                    <p>DA IDEIA À JOIA</p>
+                    <span></span>
+                </div>
+
+                <h2>O Infinito Transformado em Alta Joalheria</h2>
+
+            </div>
+
+
+            <div class="colecao-processo-grid">
+
+                <!-- O TRAÇO -->
+
+                <div class="colecao-processo-item">
+
+                    <div class="colecao-processo-imagem">
+                        <img src="/uploads/veloursdeminuit-traco.jpeg" alt="O Traço">
+                    </div>
+
+                    <h3>O TRAÇO</h3>
+
+                    <p>
+                        Linhas inspiradas em órbitas, nebulosas e trajetórias celestes
+                        dão origem a formas fluidas que parecem se mover pelo infinito.
+                    </p>
+
+                </div>
+
+
+                <!-- O DIAMANTE -->
+
+                <div class="colecao-processo-item">
+
+                    <div class="colecao-processo-imagem">
+                        <img src="/uploads/veloursdeminuit-tanzanita.jpeg" alt="A Tanzanita">
+                    </div>
+
+                    <h3>A TANZANITA</h3>
+
+                    <p>
+                        Tanzanitas excepcionais são selecionadas pela profundidade
+                        de seus tons azul-violeta, que evocam as cores misteriosas
+                        das nebulosas e se transformam sob diferentes incidências de luz.
+                    </p>
+
+                </div>
+
+
+                <!-- A FORMA -->
+
+                <div class="colecao-processo-item">
+
+                    <div class="colecao-processo-imagem">
+                        <img src="/uploads/veloursdeminuit-forma.jpeg" alt="A Forma">
+                    </div>
+
+                    <h3>A FORMA</h3>
+
+                    <p>
+                        A precisão artesanal une Platina 950, Tanzanitas e diamantes
+                        em composições que desenham órbitas luminosas ao redor das
+                        pedras, transformando a imensidão da galáxia em alta joalheria.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- =================================================
+     BANNER EDITORIAL
+================================================== -->
+
+        <section class="colecao-banner">
+            <img src="/uploads/veloursdeminuit-banner.jpeg" alt="A luz do Brasil refletida em cada pedra">
+        </section>
+
+        <!-- =================================================
+     O LEGADO CONTINUA
+================================================== -->
+
+        <section class="colecao-legado">
+
+            <div class="colecao-legado-cabecalho">
+
+                <div class="colecao-eyebrow">
+                    <span></span>
+                    <p>O LEGADO CONTINUA</p>
+                    <span></span>
+                </div>
+
+                <h2>
+                    Uma História Onde Cada Joia Mostra um Fragmento do Infinito
+                </h2>
+
+            </div>
+
+
+            <div class="colecao-legado-conteudo">
+
+                <div class="colecao-legado-texto">
+
+                    <p>
+                        Velours de Minuit nasce da contemplação da galáxia — um
+                        universo onde escuridão, cor e luz coexistem em constante
+                        movimento. Entre nebulosas violetas, constelações distantes
+                        e milhões de pontos luminosos, o cosmos revela uma beleza
+                        que parece não conhecer limites.
+                    </p>
+
+                    <p>
+                        As Tanzanitas, com seus reflexos que transitam entre o azul
+                        profundo e o violeta, tornam-se o coração dessa história.
+                        Ao seu redor, os diamantes surgem como estrelas dispersas
+                        no infinito, enquanto a Platina 950 desenha curvas inspiradas
+                        em órbitas e trajetórias celestes.
+                    </p>
+
+                    <p>
+                        Cinco criações interpretam diferentes expressões desse
+                        universo, transformando a imensidão da galáxia em formas
+                        preciosas, luminosas e envolventes. Cada joia carrega a
+                        sensação de observar algo distante, raro e impossível
+                        de reproduzir.
+                    </p>
+
+                    <p>
+                        Velours de Minuit transforma o infinito em algo que pode
+                        ser eternizado.
+                    </p>
+
+                </div>
+
+
+                <div class="colecao-legado-imagem">
+
+                    <img src="/uploads/veloursdeminuit-legado.png" alt="O legado da coleção Velours de Minuit">
+                    
+                </div>
+
+            </div>
+
+        </section>
+
+        <%- include('partials/footer') %>
+
+            <script>
+                const colecaoTrilho = document.getElementById('colecaoTrilho');
+                const colecaoAnterior = document.getElementById('colecaoAnterior');
+                const colecaoProximo = document.getElementById('colecaoProximo');
+
+                let colecaoPosicao = 0;
+
+                function atualizarCarrosselColecao() {
+
+                    const cards = document.querySelectorAll('.colecao-criacao-card');
+
+                    if (!cards.length) return;
+
+                    const visiveis = 4;
+                    const maximo = Math.max(0, cards.length - visiveis);
+
+                    if (colecaoPosicao < 0) {
+                        colecaoPosicao = 0;
+                    }
+
+                    if (colecaoPosicao > maximo) {
+                        colecaoPosicao = maximo;
+                    }
+
+                    const card = cards[0];
+
+                    const gap = 18;
+
+                    const deslocamento =
+                        colecaoPosicao * (card.offsetWidth + gap);
+
+                    colecaoTrilho.style.transform =
+                        `translateX(-${deslocamento}px)`;
+                }
+
+
+                colecaoProximo?.addEventListener('click', () => {
+                    colecaoPosicao++;
+                    atualizarCarrosselColecao();
+                });
+
+
+                colecaoAnterior?.addEventListener('click', () => {
+                    colecaoPosicao--;
+                    atualizarCarrosselColecao();
+                });
+            </script>
+
+</body>
+
+</html>

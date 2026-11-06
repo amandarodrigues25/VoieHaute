@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>
+        <%= produto.nome %> | VoieHaute
+    </title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <%- include('partials/header') %>
+
+        <main class="produto-pagina">
+
+            <section class="produto-principal">
+
+                <!-- =========================================
+                 GALERIA
+            ========================================== -->
+
+                <div class="produto-galeria">
+
+                    <!-- MINIATURAS -->
+                    <div class="produto-miniaturas">
+
+                        <% if (produto.imagem) { %>
+                            <button type="button" class="produto-miniatura ativo"
+                                data-imagem="/uploads/<%= produto.imagem %>">
+
+                                <img src="/uploads/<%= produto.imagem %>" alt="<%= produto.nome %>">
+                            </button>
+                            <% } %>
+
+                                <% if (produto.imagem_secundaria) { %>
+                                    <button type="button" class="produto-miniatura"
+                                        data-imagem="/uploads/<%= produto.imagem_secundaria %>">
+
+                                        <img src="/uploads/<%= produto.imagem_secundaria %>" alt="<%= produto.nome %>">
+                                    </button>
+                                    <% } %>
+
+                                        <% if (produto.imagem_3) { %>
+                                            <button type="button" class="produto-miniatura"
+                                                data-imagem="/uploads/<%= produto.imagem_3 %>">
+
+                                                <img src="/uploads/<%= produto.imagem_3 %>" alt="<%= produto.nome %>">
+                                            </button>
+                                            <% } %>
+
+                                                <% if (produto.imagem_4) { %>
+                                                    <button type="button" class="produto-miniatura"
+                                                        data-imagem="/uploads/<%= produto.imagem_4 %>">
+
+                                                        <img src="/uploads/<%= produto.imagem_4 %>"
+                                                            alt="<%= produto.nome %>">
+                                                    </button>
+                                                    <% } %>
+
+                    </div>
+
+
+                    <!-- IMAGEM GRANDE -->
+                    <div class="produto-imagem-principal">
+
+                        <img id="produtoImagemPrincipal" src="/uploads/<%= produto.imagem %>" alt="<%= produto.nome %>">
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================================
+                 INFORMAÇÕES DO PRODUTO
+            ========================================== -->
+
+                <div class="produto-informacoes">
+
+                    <!-- CAMINHO -->
+                    <div class="produto-caminho">
+
+                        <a href="/">
+                            Home
+                        </a>
+
+                        <span>✦</span>
+
+                        <a href="/categoria/<%= encodeURIComponent(produto.categoria) %>">
+                            <%= produto.categoria %>
+                        </a>
+
+                        <span>✦</span>
+
+                        <a href="/produto/<%= produto.id %>" class="atual">
+                            <%= produto.nome %>
+                        </a>
+
+                    </div>
+
+                    <!-- COLEÇÃO -->
+                    <span class="produto-colecao">
+                        COLEÇÃO <%= produto.colecao %>
+                    </span>
+
+
+                    <!-- NOME -->
+                    <h1>
+                        <%= produto.nome %>
+                    </h1>
+
+
+                    <!-- DESCRIÇÃO CURTA -->
+                    <p class="produto-descricao-curta">
+                        <%= produto.descricao %>
+                    </p>
+
+
+                    <!-- PREÇO -->
+                    <div class="produto-preco">
+                        R$ <%= Number(produto.valor || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2,
+                            maximumFractionDigits: 2 }) %>
+                    </div>
+
+                    <!-- VÍDEO DO PRODUTO -->
+                    <% if (produto.video) { %>
+
+                        <button type="button" class="produto-video-preview" id="abrirVideoProduto"
+                            aria-label="Assistir vídeo do produto">
+
+                            <video src="/uploads/<%= produto.video %>" muted autoplay loop playsinline>
+                            </video>
+
+                        </button>
+
+                        <% } %>
+
+                            <!-- =====================================
+                     AÇÕES
+                ====================================== -->
+
+
+                            <div class="produto-acoes">
+
+                                <!-- ADICIONAR À SACOLA -->
+
+                                <form action="/carrinho/adicionar/<%= produto.id %>" method="POST"
+                                    class="produto-form-sacola">
+                                    <button type="submit" class="produto-btn-sacola">
+                                        ADICIONAR À SACOLA
+                                    </button>
+                                </form>
+
+                                <!-- FAVORITOS -->
+
+                                <button type="button" class="produto-btn-favorito" aria-label="Adicionar aos favoritos">
+                                    <i class="bi bi-heart"></i>
+                                </button>
+
+                            </div>
+
+
+                </div>
+
+            </section>
+
+        </main>
+
+
+        <!-- =====================================================
+     CARRINHO MINIMIZADO — VOIEHAUTE
+===================================================== -->
+
+        <div class="mini-sacola-fundo" id="miniSacolaFundo"></div>
+
+        <aside class="mini-sacola" id="miniSacola" role="dialog" aria-modal="true"
+            aria-label="Produto adicionado à sacola" aria-hidden="true">
+
+            <button type="button" class="mini-sacola-fechar" id="miniSacolaFechar" aria-label="Fechar">×</button>
+
+            <div class="mini-sacola-confirmacao">
+
+                <div class="mini-sacola-check">
+                    <svg viewBox="0 0 48 48" fill="none">
+                        <path d="M11 24L20 33L38 14" stroke="currentColor" stroke-width="3" stroke-linecap="square" />
+                    </svg>
+                </div>
+
+                <h2>PRODUTO ADICIONADO AO CARRINHO</h2>
+
+            </div>
+
+            <!-- JOIA ADICIONADA -->
+
+            <div class="mini-sacola-produto">
+
+                <img id="miniSacolaImagem" src="" alt="Joia adicionada">
+
+                <div class="mini-sacola-produto-info">
+
+                    <h3 id="miniSacolaNome"></h3>
+
+                    <p class="mini-sacola-colecao" id="miniSacolaColecao"></p>
+
+                    <p class="mini-sacola-preco" id="miniSacolaPreco"></p>
+
+                </div>
+
+            </div>
+
+            <!-- BOTÕES -->
+
+            <div class="mini-sacola-acoes">
+
+                <a href="/carrinho" class="mini-sacola-ver">
+                    VER CARRINHO
+                </a>
+
+                <button type="button" class="mini-sacola-continuar" id="miniSacolaContinuar">
+                    CONTINUAR COMPRANDO
+                </button>
+
+            </div>
+
+            <!-- SUGESTÕES -->
+
+            <div class="mini-sacola-sugestoes" id="miniSacolaSugestoes">
+
+                <h3>VOCÊ TAMBÉM PODE GOSTAR</h3>
+
+                <div class="mini-sacola-sugestoes-grid" id="miniSacolaSugestoesGrid">
+                </div>
+
+            </div>
+
+        </aside>
+
+
+        <!-- =====================================================
+     MODAL DO VÍDEO DO PRODUTO
+===================================================== -->
+
+        <% if (produto.video) { %>
+
+            <div class="produto-video-modal" id="produtoVideoModal">
+
+                <div class="produto-video-modal-conteudo">
+
+                    <div class="produto-video-modal-area">
+
+                        <video id="produtoVideoModalPlayer" src="/uploads/<%= produto.video %>" controls playsinline>
+                        </video>
+
+                    </div>
+
+
+                    <div class="produto-video-modal-info">
+
+                        <img src="/uploads/<%= produto.imagem %>" alt="<%= produto.nome %>">
+
+                        <div>
+                            <h3>
+                                <%= produto.nome %>
+                            </h3>
+
+                            <span>
+                                R$ <%= Number(produto.valor || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2,
+                                    maximumFractionDigits: 2 }) %>
+                            </span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <% } %>
+
+                <!-- =====================================================
+     INFORMAÇÕES DA JOIA
+===================================================== -->
+
+                <section class="produto-conteudo">
+
+                    <div class="produto-abas">
+
+                        <button type="button" class="produto-aba ativo" data-aba="joia">
+                            A JOIA
+                        </button>
+
+                        <button type="button" class="produto-aba" data-aba="detalhes">
+                            DETALHES
+                        </button>
+
+                        <button type="button" class="produto-aba" data-aba="cuidados">
+                            CUIDADOS
+                        </button>
+
+                    </div>
+
+
+                    <!-- A JOIA -->
+                    <div class="produto-aba-conteudo ativo" id="aba-joia">
+
+                        <p>
+                            <%= produto.detalhes %>
+                        </p>
+
+                    </div>
+
+
+                    <!-- DETALHES -->
+                    <div class="produto-aba-conteudo" id="aba-detalhes">
+
+                        <div class="produto-detalhes-grid">
+
+                            <div class="produto-detalhes-coluna">
+
+                                <div class="produto-detalhe-item">
+                                    <span>COLEÇÃO</span>
+                                    <p>
+                                        <%= produto.colecao %>
+                                    </p>
+                                </div>
+
+                                <div class="produto-detalhe-item">
+                                    <span>CATEGORIA</span>
+                                    <p>
+                                        <%= produto.categoria %>
+                                    </p>
+                                </div>
+
+                                <div class="produto-detalhe-item">
+                                    <span>MATERIAL</span>
+                                    <p>
+                                        <%= produto.material %>
+                                    </p>
+                                </div>
+
+                            </div>
+
+
+                            <div class="produto-detalhes-coluna">
+
+                                <div class="produto-detalhe-item">
+                                    <span>PEDRA PRINCIPAL</span>
+                                    <p>
+                                        <%= produto.pedra %>
+                                    </p>
+                                </div>
+
+                                <% if (produto.tamanho) { %>
+                                    <div class="produto-detalhe-item">
+                                        <span>TAMANHO DISPONÍVEL</span>
+                                        <p>
+                                            <%= produto.tamanho %>
+                                        </p>
+                                    </div>
+                                    <% } %>
+
+                                        <div class="produto-detalhe-item">
+                                            <span>ESTOQUE</span>
+                                            <p>
+                                                <%= produto.estoque %>
+                                            </p>
+                                        </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- CUIDADOS -->
+                    <div class="produto-aba-conteudo" id="aba-cuidados">
+
+                        <p>
+                            Cada joia VoieHaute foi criada para atravessar o tempo. Para preservar seu brilho,
+                            acabamento e beleza, recomendamos alguns cuidados especiais:
+                        </p>
+
+                        <p>
+                            Evite o contato com perfumes, cremes, cosméticos e produtos químicos. <br>
+                            Retire a joia antes de tomar banho, entrar em piscinas ou no mar. <br>
+                            Evite usar durante atividades físicas ou situações que possam causar impactos, riscos ou
+                            deformações. <br>
+                            Após o uso, limpe delicadamente com um pano macio, limpo e seco. <br>
+                            Guarde cada peça separadamente, preferencialmente em sua embalagem VoieHaute, evitando o
+                            atrito entre as joias. <br>
+                            Mantenha-a em um ambiente seco, protegido da umidade e da exposição prolongada ao sol. <br>
+                        </p>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =====================================================
+     OUTRAS CRIAÇÕES DA COLEÇÃO
+===================================================== -->
+
+                <% if (outrosProdutos && outrosProdutos.length> 0) { %>
+
+                    <section class="produto-outras-criacoes">
+
+                        <!-- TÍTULO -->
+                        <div class="produto-outras-titulo">
+
+                            <div class="produto-outras-colecao">
+                                <span></span>
+
+                                <p>
+                                    <%= produto.colecao %>
+                                </p>
+
+                                <span></span>
+                            </div>
+
+                            <h2>
+                                Outras Criações da Coleção
+                            </h2>
+
+                        </div>
+
+
+                        <!-- CARROSSEL -->
+                        <div class="produto-outras-carrossel">
+
+                            <div class="produto-outras-janela">
+
+                                <div class="produto-outras-lista">
+
+                                    <% outrosProdutos.forEach(outro=> { %>
+
+                                        <a href="/produto/<%= outro.id %>" class="produto-outra-card">
+
+                                            <div class="produto-outra-imagem">
+
+                                                <img class="produto-outra-principal" src="/uploads/<%= outro.imagem %>"
+                                                    alt="<%= outro.nome %>">
+
+                                                <% if (outro.imagem_secundaria) { %>
+
+                                                    <img class="produto-outra-secundaria"
+                                                        src="/uploads/<%= outro.imagem_secundaria %>"
+                                                        alt="<%= outro.nome %>">
+
+                                                    <% } %>
+
+                                            </div>
+
+
+                                            <div class="produto-outra-info">
+
+                                                <h3>
+                                                    <%= outro.nome %>
+                                                </h3>
+
+                                                <p>
+                                                    R$ <%= Number(outro.valor || 0).toLocaleString('pt-BR', {
+                                                        minimumFractionDigits: 2, maximumFractionDigits: 2 }) %>
+                                                </p>
+
+                                            </div>
+
+                                        </a>
+
+                                        <% }) %>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                    <% } %>
+
+
+                        <!-- FOOTER -->
+                        <%- include('partials/footer') %>
+
+
+                            <!-- =============================================
+         TROCA DA IMAGEM PRINCIPAL
+    ============================================== -->
+
+                            <script>
+
+                                const miniaturas =
+                                    document.querySelectorAll('.produto-miniatura');
+
+                                const imagemPrincipal =
+                                    document.getElementById('produtoImagemPrincipal');
+
+
+                                miniaturas.forEach(miniatura => {
+
+                                    miniatura.addEventListener('click', function () {
+
+                                        const novaImagem =
+                                            this.dataset.imagem;
+
+                                        imagemPrincipal.src = novaImagem;
+
+
+                                        miniaturas.forEach(item => {
+                                            item.classList.remove('ativo');
+                                        });
+
+
+                                        this.classList.add('ativo');
+
+                                    });
+
+                                });
+
+                                /* =====================================================
+           MODAL DO VÍDEO
+        ===================================================== */
+
+                                const abrirVideoProduto =
+                                    document.getElementById('abrirVideoProduto');
+
+                                const fecharVideoProduto =
+                                    document.getElementById('fecharVideoProduto');
+
+                                const produtoVideoModal =
+                                    document.getElementById('produtoVideoModal');
+
+                                const produtoVideoModalPlayer =
+                                    document.getElementById('produtoVideoModalPlayer');
+
+
+                                if (abrirVideoProduto && produtoVideoModal) {
+
+                                    abrirVideoProduto.addEventListener('click', function () {
+
+                                        produtoVideoModal.classList.add('aberto');
+
+                                        document.body.style.overflow = 'hidden';
+
+                                        produtoVideoModalPlayer.currentTime = 0;
+                                        produtoVideoModalPlayer.play();
+
+                                    });
+
+                                }
+
+
+                                produtoVideoModal?.addEventListener('click', function (event) {
+
+                                    if (event.target === produtoVideoModal) {
+                                        fecharModalVideo();
+                                    }
+
+                                });
+
+
+                                function fecharModalVideo() {
+
+                                    produtoVideoModal.classList.remove('aberto');
+
+                                    document.body.style.overflow = '';
+
+                                    produtoVideoModalPlayer.pause();
+                                    produtoVideoModalPlayer.currentTime = 0;
+
+                                }
+
+
+                                /* =====================================================
+           ABAS DO PRODUTO
+        ===================================================== */
+
+                                const produtoAbas =
+                                    document.querySelectorAll('.produto-aba');
+
+                                const produtoConteudos =
+                                    document.querySelectorAll('.produto-aba-conteudo');
+
+
+                                produtoAbas.forEach(aba => {
+
+                                    aba.addEventListener('click', function () {
+
+                                        const abaSelecionada =
+                                            this.dataset.aba;
+
+
+                                        produtoAbas.forEach(item => {
+                                            item.classList.remove('ativo');
+                                        });
+
+
+                                        produtoConteudos.forEach(conteudo => {
+                                            conteudo.classList.remove('ativo');
+                                        });
+
+
+                                        this.classList.add('ativo');
+
+
+                                        document
+                                            .getElementById(`aba-${abaSelecionada}`)
+                                            .classList.add('ativo');
+
+                                    });
+
+                                });
+
+
+                                /* =====================================================
+                                   CARRINHO MINIMIZADO
+                                ===================================================== */
+
+                                const miniSacola = document.getElementById('miniSacola');
+                                const miniSacolaFundo = document.getElementById('miniSacolaFundo');
+                                const miniSacolaFechar = document.getElementById('miniSacolaFechar');
+                                const miniSacolaContinuar = document.getElementById('miniSacolaContinuar');
+                                const formularioSacola = document.querySelector('.produto-form-sacola');
+
+                                const formatarPrecoSacola = valor =>
+                                    Number(valor).toLocaleString('pt-BR', {
+                                        style: 'currency',
+                                        currency: 'BRL'
+                                    });
+
+                                function imagemSacola(caminho) {
+                                    if (!caminho) return '';
+                                    return caminho.startsWith('/') ? caminho : '/uploads/' + caminho;
+                                }
+
+                                function fecharMiniSacola() {
+                                    miniSacola.classList.remove('aberto');
+                                    miniSacolaFundo.classList.remove('aberto');
+                                    miniSacola.setAttribute('aria-hidden', 'true');
+                                    document.body.style.overflow = '';
+                                }
+
+                                function abrirMiniSacola(dados) {
+                                    const produto = dados.produto;
+
+                                    document.getElementById('miniSacolaImagem').src =
+                                        imagemSacola(produto.imagem);
+
+                                    document.getElementById('miniSacolaImagem').alt = produto.nome;
+
+                                    document.getElementById('miniSacolaNome').textContent =
+                                        produto.nome;
+
+                                    document.getElementById('miniSacolaColecao').textContent =
+                                        produto.colecao ? 'Coleção ' + produto.colecao : '';
+
+                                    document.getElementById('miniSacolaPreco').textContent =
+                                        formatarPrecoSacola(produto.valor);
+
+                                    const grid = document.getElementById('miniSacolaSugestoesGrid');
+                                    const secao = document.getElementById('miniSacolaSugestoes');
+
+                                    grid.replaceChildren();
+
+                                    const sugestoes = dados.sugestoes || [];
+                                    secao.style.display = sugestoes.length ? '' : 'none';
+
+                                    sugestoes.forEach(sugestao => {
+                                        const card = document.createElement('a');
+                                        card.className = 'mini-sacola-sugestao';
+                                        card.href = '/produto/' + encodeURIComponent(sugestao.id);
+
+                                        const img = document.createElement('img');
+                                        img.src = imagemSacola(sugestao.imagem);
+                                        img.alt = sugestao.nome;
+
+                                        const info = document.createElement('div');
+                                        info.className = 'mini-sacola-sugestao-info';
+
+                                        const nome = document.createElement('h4');
+                                        nome.textContent = sugestao.nome;
+
+                                        const preco = document.createElement('p');
+                                        preco.textContent = formatarPrecoSacola(sugestao.valor);
+
+                                        info.append(nome, preco);
+                                        card.append(img, info);
+                                        grid.appendChild(card);
+                                    });
+
+                                    miniSacola.classList.add('aberto');
+                                    miniSacolaFundo.classList.add('aberto');
+                                    miniSacola.setAttribute('aria-hidden', 'false');
+                                    document.body.style.overflow = 'hidden';
+
+                                    miniSacolaFechar.focus();
+                                }
+
+                                formularioSacola?.addEventListener('submit', async function (evento) {
+                                    evento.preventDefault();
+
+                                    const botao = formularioSacola.querySelector('button[type="submit"]');
+                                    botao.disabled = true;
+
+                                    try {
+                                        const resposta = await fetch(formularioSacola.action, {
+                                            method: 'POST',
+                                            headers: {
+                                                'Accept': 'application/json'
+                                            },
+                                            credentials: 'same-origin'
+                                        });
+
+
+                                        const tipoResposta = resposta.headers.get('content-type') || '';
+
+                                        if (!tipoResposta.includes('application/json')) {
+                                            const mensagem = await resposta.text();
+
+                                            throw new Error(
+                                                mensagem || 'O servidor não retornou uma resposta válida.'
+                                            );
+                                        }
+
+                                        const dados = await resposta.json();
+
+                                        if (!resposta.ok || !dados.sucesso) {
+                                            throw new Error(
+                                                dados.mensagem || 'Não foi possível adicionar a joia.'
+                                            );
+                                        }
+
+
+                                        abrirMiniSacola(dados);
+
+                                    } catch (erro) {
+                                        alert(erro.message || 'Erro ao adicionar a joia à sacola.');
+                                    } finally {
+                                        botao.disabled = false;
+                                    }
+                                });
+
+                                miniSacolaFechar?.addEventListener('click', fecharMiniSacola);
+                                miniSacolaContinuar?.addEventListener('click', fecharMiniSacola);
+                                miniSacolaFundo?.addEventListener('click', fecharMiniSacola);
+
+                                document.addEventListener('keydown', function (evento) {
+                                    if (evento.key === 'Escape' && miniSacola.classList.contains('aberto')) {
+                                        fecharMiniSacola();
+                                    }
+                                });
+
+
+                            </script>
+
+</body>
+
+</html>
