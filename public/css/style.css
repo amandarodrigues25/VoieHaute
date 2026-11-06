@@ -1,0 +1,7611 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* =====================================================*
+   HEADER - VOIEHAUTE*
+   ===================================================== */
+
+.cabecalho {
+    width: 100%;
+    background-color: #07152D;
+    color: #FAE17A;
+}
+
+/* =====================================================*
+   PARTE SUPERIOR*
+   ===================================================== */
+
+.cabecalho-superior {
+    width: 100%;
+    height: 105px;
+    padding: 12px 5% 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* =====================================================*
+   LOGO*
+   ===================================================== */
+
+.cabecalho-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.cabecalho-logo img {
+    width: 155px;
+    height: auto;
+    display: block;
+}
+
+/* =====================================================*
+   AÇÕES DO HEADER*
+   ===================================================== */
+
+.cabecalho-acoes {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* =====================================================*
+   PESQUISA*
+   ===================================================== */
+
+.cabecalho-pesquisa {
+    width: 320px;
+    height: 42px;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1.5px solid #FAE17A;
+    border-radius: 30px;
+    background-color: transparent;
+    transition: 0.25s;
+}
+
+.cabecalho-pesquisa i {
+    flex-shrink: 0;
+    color: #FAE17A;
+    font-size: 18px;
+    opacity: 1;
+    transition: 0.25s;
+}
+
+/* CAMPO DE PESQUISA */
+.cabecalho-pesquisa input {
+    width: 100%;
+    padding: 0;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: #FBF7F0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 0.2px;
+}
+
+/* TEXTO DA PESQUISA */
+.cabecalho-pesquisa input::placeholder {
+    color: rgba(251, 247, 240, 0.65);
+    font-weight: 400;
+    opacity: 1;
+    transition: opacity 0.2s;
+}
+
+/* AO CLICAR NA PESQUISA */
+.cabecalho-pesquisa:focus-within {
+    background-color: rgba(255, 255, 255, 0.025);
+    box-shadow:
+        0 0 15px rgba(80, 145, 220, 0.08),
+        0 0 30px rgba(80, 145, 220, 0.04);
+}
+
+/* TEXTO SOME AO CLICAR */
+.cabecalho-pesquisa input:focus::placeholder {
+    opacity: 0;
+}
+
+/* LUPA CONTINUA APARECENDO */
+.cabecalho-pesquisa:focus-within i {
+    color: #FAE17A;
+    opacity: 1;
+}
+
+/* REMOVE ESTILOS AUTOMÁTICOS DO INPUT */
+.cabecalho-pesquisa input:focus {
+    border: none;
+    outline: none;
+    box-shadow: none;
+    background-color: transparent;
+    color: #FBF7F0;
+}
+
+/* =====================================================*
+   ÍCONES - CORAÇÃO / CONTA / SACOLA*
+   ===================================================== */
+
+.cabecalho-icone {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FAE17A;
+    font-size: 25px;
+    text-decoration: none;
+    border-radius: 50%;
+    transition:
+        background-color 0.25s ease,
+        box-shadow 0.25s ease,
+        transform 0.25s ease;
+}
+
+/* BRILHO AZUL DISCRETO */
+.cabecalho-icone:hover {
+    color: #FAE17A;
+    background-color: rgba(75, 130, 195, 0.08);
+    box-shadow:
+        0 0 16px rgba(75, 140, 215, 0.18),
+        0 0 32px rgba(75, 140, 215, 0.08);
+    transform: translateY(-1px);
+}
+
+/* AO CLICAR CONTINUA DOURADO */
+.cabecalho-icone:focus,
+.cabecalho-icone:active {
+    color: #FAE17A;
+}
+
+/* =====================================================*
+   DIVISOR DOURADO*
+   ===================================================== */
+
+.cabecalho-divisor {
+    width: 88%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+}
+
+.cabecalho-divisor .linha {
+    height: 1px;
+    flex: 1;
+    background-color: #CFA84E;
+}
+
+.cabecalho-divisor .estrela {
+    color: #FAE17A;
+    font-size: 18px;
+    line-height: 1;
+}
+
+/* =====================================================*
+   MENU PRINCIPAL*
+   ===================================================== */
+
+.menu-principal {
+    width: 100%;
+}
+
+.menu-principal>ul {
+    height: 62px;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 78px;
+    list-style: none;
+}
+
+.menu-principal>ul>li {
+    margin: 0;
+    padding: 0;
+}
+
+.menu-principal>ul>li>a {
+    position: relative;
+    color: #FBF7F0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.menu-principal>ul>li>a:hover {
+    color: #FAE17A;
+}
+
+/* =====================================================*
+   EFEITO DOS LINKS*
+   ===================================================== */
+
+.menu-principal>ul>li>a::after {
+    content: "";
+    width: 0;
+    height: 2px;
+    position: absolute;
+    left: 50%;
+    bottom: -10px;
+    background-color: #FAE17A;
+    transform: translateX(-50%);
+    transition: width 0.2s;
+}
+
+.menu-principal>ul>li>a:hover::after {
+    width: 100%;
+}
+
+/* =====================================================
+   MEGA MENU - JOIAS
+===================================================== */
+
+.cabecalho {
+    position: relative;
+    z-index: 1000;
+}
+
+.menu-item-mega {
+    position: static;
+}
+
+.menu-item-mega.menu-fixo .mega-menu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.menu-link-mega {
+    position: relative;
+
+    color: #FBF7F0;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 16px;
+    font-weight: 400;
+
+    letter-spacing: 0.3px;
+    text-decoration: none;
+
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.menu-link-mega:hover {
+    color: #FAE17A;
+}
+
+/* LINHA EMBAIXO DE JOIAS */
+
+.menu-link-mega::after {
+    content: "";
+
+    position: absolute;
+    left: 50%;
+    bottom: -10px;
+
+    width: 0;
+    height: 2px;
+
+    background-color: #FAE17A;
+
+    transform: translateX(-50%);
+    transition: width 0.2s ease;
+}
+
+.menu-item-mega:hover .menu-link-mega::after {
+    width: 100%;
+}
+
+/* =====================================================
+   PAINEL
+===================================================== */
+
+.mega-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+
+    width: 100%;
+
+    background-color: #07152D;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition:
+        opacity 0.2s ease,
+        visibility 0.2s ease;
+}
+
+
+/* HOVER NORMAL, SOMENTE QUANDO NENHUM MENU ESTÁ FIXO */
+.cabecalho:not(.tem-menu-fixo) .menu-item-mega:hover .mega-menu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+/* =====================================================
+   CONTEÚDO DO MEGA MENU
+===================================================== */
+
+.mega-menu-conteudo {
+    width: 100%;
+    padding: 28px 6% 34px;
+    box-sizing: border-box;
+
+    background-color: #07152D;
+}
+
+
+/* =====================================================
+   TÍTULO
+===================================================== */
+
+.mega-menu-titulo {
+    margin-bottom: 27px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+
+    color: #FAE17A;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 11px;
+    font-weight: 400;
+
+    letter-spacing: 2.4px;
+}
+
+.mega-menu-linha {
+    width: 48px;
+    height: 1px;
+
+    background-color: #CFA84E;
+}
+
+
+/* =====================================================
+   CATEGORIAS
+===================================================== */
+
+.mega-menu-categorias {
+    width: 82%;
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+
+    gap: 42px;
+}
+
+/* =====================================================
+   CARD
+===================================================== */
+
+.mega-menu-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    color: #FBF7F0;
+    text-decoration: none;
+}
+
+
+/* =====================================================
+   FOTO REDONDA
+===================================================== */
+
+.mega-menu-imagem {
+    width: 125px;
+    height: 125px;
+
+    margin: 7px 7px 22px;
+
+    overflow: visible;
+
+    position: relative;
+
+    border-radius: 50%;
+
+    background-color: #102344;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.mega-menu-imagem img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    position: relative;
+    z-index: 2;
+
+    transition: transform 0.4s ease;
+}
+
+.mega-menu-imagem::before {
+    content: "";
+
+    position: absolute;
+
+    top: -7px;
+    left: -7px;
+    right: -7px;
+    bottom: -7px;
+
+    border: 1.5px solid #FAE17A;
+    border-radius: 50%;
+
+    z-index: 1;
+
+    pointer-events: none;
+}
+
+/* =====================================================
+   NOME
+===================================================== */
+
+.mega-menu-card>span {
+    display: block;
+
+    color: #FBF7F0;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 15px;
+    font-weight: 400;
+
+    letter-spacing: 0.6px;
+
+    text-align: center;
+
+    transition: color 0.3s ease;
+}
+
+
+/* =====================================================
+   HOVER
+===================================================== */
+
+.mega-menu-card:hover .mega-menu-imagem {
+    transform: translateY(-3px);
+
+    border-color: #FAE17A;
+
+    box-shadow:
+        0 7px 20px rgba(0, 0, 0, 0.18),
+        0 0 18px rgba(250, 225, 122, 0.08);
+}
+
+.mega-menu-card:hover .mega-menu-imagem img {
+    transform: scale(1.05);
+}
+
+.mega-menu-card:hover>span {
+    color: #FAE17A;
+}
+
+/* =====================================================
+   MEGA MENU - COLEÇÕES
+===================================================== */
+
+.mega-menu-colecoes {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+
+    gap: 22px;
+}
+
+.mega-menu-colecoes .mega-menu-imagem {
+    width: 125px;
+    height: 125px;
+}
+
+/* =====================================================*
+   HERO / CARROSSEL - VOIEHAUTE*
+   ===================================================== */
+
+.hero {
+    width: 100%;
+    background-color: #07152D;
+}
+
+/* =====================================================*
+   CARROSSEL*
+   ===================================================== */
+
+.hero {
+    width: 100%;
+    background-color: var(--azul);
+}
+
+.hero-carrossel {
+    width: 100%;
+    aspect-ratio: 12 / 5;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-slide {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition: opacity 0.6s ease;
+}
+
+.hero-slide.ativo {
+    opacity: 1;
+    visibility: visible;
+}
+
+.hero-imagem {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* =====================================================*
+   SOMBRA PARA O TEXTO*
+   ===================================================== */
+
+.hero-sombra {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg,
+            rgba(4, 14, 31, 0.74) 0%,
+            rgba(4, 14, 31, 0.52) 26%,
+            rgba(4, 14, 31, 0.20) 48%,
+            rgba(4, 14, 31, 0.05) 62%,
+            rgba(4, 14, 31, 0) 72%);
+    pointer-events: none;
+}
+
+/* =====================================================*
+   CONTEÚDO*
+   ===================================================== */
+
+.hero-conteudo {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: 9%;
+    width: 560px;
+    transform: translateY(-50%);
+}
+
+/* =====================================================*
+   TÍTULO*
+   ===================================================== */
+
+.hero-conteudo h1 {
+    margin: 0 0 20px;
+    color: #FBF7F0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 56px;
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: 0.3px;
+}
+
+/* =====================================================*
+   TEXTO*
+   ===================================================== */
+
+.hero-conteudo p {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 0 28px;
+    color: #FBF7F0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.55;
+    opacity: 0.88;
+}
+
+/* ====================================================*
+   BOTÃO*
+   ===================================================== */
+
+.hero-botao {
+    min-width: 205px;
+    height: 44px;
+    padding: 0 26px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid #FAE17A;
+    border-radius: 40px;
+    background-color: transparent;
+    color: #FAE17A;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 1.1px;
+    text-decoration: none;
+    transition:
+        background-color 0.25s ease,
+        color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+/* HOVER DO BOTÃO */
+.hero-botao:hover {
+    color: #07152D;
+    background-color: #FAE17A;
+    box-shadow:
+        0 0 18px rgba(250, 225, 122, 0.18),
+        0 0 32px rgba(250, 225, 122, 0.08);
+}
+
+/* =====================================================*
+   SETAS*
+   ===================================================== */
+
+.hero-seta {
+    position: absolute;
+    z-index: 10;
+    top: 50%;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 50%;
+    background-color: rgba(7, 21, 45, 0.45);
+    color: #FAE17A;
+    font-size: 22px;
+    cursor: pointer;
+    transform: translateY(-50%);
+    transition:
+        background-color 0.25s ease,
+        box-shadow 0.25s ease,
+        transform 0.25s ease;
+}
+
+/* HOVER DAS SETAS */
+.hero-seta:hover {
+    color: #FAE17A;
+    background-color: rgba(20, 45, 80, 0.70);
+    box-shadow:
+        0 0 16px rgba(80, 145, 220, 0.16),
+        0 0 30px rgba(80, 145, 220, 0.08);
+}
+
+/* POSIÇÃO DAS SETAS */
+.hero-seta-esquerda {
+    left: 24px;
+}
+
+.hero-seta-direita {
+    right: 24px;
+}
+
+/* =====================================================*
+   INDICADORES / BOLINHAS*
+   ===================================================== */
+
+.hero-indicadores {
+    position: absolute;
+    z-index: 20;
+    left: 50%;
+    bottom: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    transform: translateX(-50%);
+}
+
+/* BOLINHAS INATIVAS */
+.hero-indicador {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: 1px solid rgba(251, 247, 240, 0.65);
+    border-radius: 50%;
+    background-color: #07152D;
+    cursor: pointer;
+    transition:
+        background-color 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.25s ease;
+}
+
+/* BOLINHA ATIVA */
+.hero-indicador.ativo {
+    background-color: #FAE17A;
+    border-color: #FAE17A;
+    transform: scale(1.08);
+}
+
+/* HOVER DAS BOLINHAS */
+.hero-indicador:hover {
+    border-color: #FAE17A;
+}
+
+/* ====================================================*
+   EXPLORE POR CATEGORIA*
+   ===================================================== */
+
+.explorar-categorias {
+    width: 100%;
+    padding: 55px 6% 55px;
+    background-color: #F7F2ED;
+}
+
+/* =====================================================*
+   TÍTULO*
+   ===================================================== */
+
+.explorar-titulo {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.explorar-subtitulo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 12px;
+}
+
+.explorar-linha {
+    display: block;
+    width: 58px;
+    height: 1px;
+    flex-shrink: 0;
+    background-color: #CFA84E;
+}
+
+.explorar-subtitulo-texto {
+    display: block;
+    margin: 0;
+    color: #CFA84E;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 2.4px;
+    line-height: 1;
+}
+
+.explorar-titulo h2 {
+    margin: 0;
+    color: #07152D;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 1.12;
+}
+
+/* =====================================================*
+   CATEGORIAS*
+   ===================================================== */
+
+.explorar-filtros {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 34px;
+}
+
+/* BOTÃO NORMAL */
+.explorar-filtro {
+    width: 112px;
+    height: 38px;
+    padding: 0;
+    border: none;
+    border-radius: 22px;
+    background-color: #FBF7F0;
+    color: #CFA84E;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 14px;
+    font-weight: 400;
+    cursor: pointer;
+    transition:
+        background-color 0.25s ease,
+        color 0.25s ease;
+}
+
+/* HOVER */
+.explorar-filtro:hover {
+    background-color: #F3E8C8;
+    color: #CFA84E;
+}
+
+/* SELECIONADO */
+.explorar-filtro.ativo {
+    background-color: #CFA84E;
+    color: #FBF7F0;
+}
+
+/* SELECIONADO + HOVER */
+.explorar-filtro.ativo:hover {
+    background-color: #CFA84E;
+    color: #FBF7F0;
+}
+
+/* =====================================================
+   BANNER + PRODUTOS
+   ===================================================== */
+
+.explorar-conteudo {
+    width: 100%;
+    height: 250px;
+    display: grid;
+    grid-template-columns: 1.55fr 1fr;
+    gap: 22px;
+    align-items: stretch;
+}
+
+/* =====================================================
+   BANNER
+   ===================================================== */
+
+.explorar-banner {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+    border-radius: 16px;
+    background-color: #EEE8E1;
+}
+
+.explorar-banner img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* =====================================================
+   PRODUTOS
+   ===================================================== */
+
+.explorar-produtos {
+    height: 250px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.explorar-produto {
+    display: none;
+    height: 250px;
+    overflow: hidden;
+    border-radius: 15px;
+    background-color: #EEE8E1;
+}
+
+.explorar-produto.mostrar {
+    display: block;
+}
+
+/* =====================================================
+   IMAGEM DO PRODUTO
+   ===================================================== */
+
+.explorar-produto-imagem {
+    position: relative;
+    width: 100%;
+    height: 185px;
+    display: block;
+    overflow: hidden;
+    background-color: #FBF7F0;
+    text-decoration: none;
+}
+
+.explorar-produto-imagem img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    transition: opacity 0.45s ease;
+}
+
+.produto-imagem-principal {
+    opacity: 1;
+}
+
+.produto-imagem-secundaria {
+    opacity: 0;
+}
+
+.explorar-produto-imagem:hover .produto-imagem-principal {
+    opacity: 0;
+}
+
+.explorar-produto-imagem:hover .produto-imagem-secundaria {
+    opacity: 1;
+}
+
+/* =====================================================
+   NOME + PREÇO
+   ===================================================== */
+
+.explorar-produto-info {
+    width: 100%;
+    height: 65px;
+    padding: 10px 14px;
+    box-sizing: border-box;
+    background-color: #EEE8E1;
+    text-align: left;
+}
+
+.explorar-produto-info h3 {
+    margin: 0 0 5px;
+    color: #07152D;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 1px;
+}
+
+.explorar-produto-info span {
+    color: #07152D;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 0.3px;
+}
+
+/* =====================================================
+   BOLINHAS DO HERO
+   ===================================================== */
+
+.hero-indicador {
+    min-width: 8px;
+    min-height: 8px;
+    max-width: 8px;
+    max-height: 8px;
+    flex: 0 0 8px;
+    padding: 0;
+    border-radius: 50%;
+    box-sizing: border-box;
+}
+
+
+/* =====================================================
+   NOVIDADES
+   ===================================================== */
+
+.novidades {
+    width: 100%;
+    padding: 55px 6% 55px;
+    background-color: #F7F2ED;
+}
+
+/* TÍTULO */
+
+.novidades-titulo {
+    margin-bottom: 34px;
+    text-align: center;
+}
+
+.novidades-subtitulo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 12px;
+
+    color: #CFA84E;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 2.4px;
+}
+
+.novidades-linha {
+    width: 58px;
+    height: 1px;
+    background-color: #CFA84E;
+}
+
+.novidades-titulo h2 {
+    margin: 0;
+    color: #07152D;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 1.1;
+}
+
+/* =====================================================
+   CARROSSEL
+   ===================================================== */
+.novidades-carrossel {
+    position: relative;
+    width: 100%;
+}
+
+.novidades-janela {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 13px;
+}
+
+.novidades-lista {
+    width: 100%;
+    display: flex;
+    gap: 18px;
+    transition: transform 0.45s ease;
+}
+
+/* =====================================================
+   CARD
+   ===================================================== */
+
+.novidade-card {
+    flex: 0 0 calc((100% - 54px) / 4);
+    min-width: 0;
+    max-width: calc((100% - 54px) / 4);
+    overflow: hidden;
+    border-radius: 13px;
+    background-color: #EEE8E1;
+}
+
+.novidade-imagem {
+    position: relative;
+    width: 100%;
+    height: 210px;
+    display: block;
+    overflow: hidden;
+    background-color: #FBF7F0;
+}
+
+.novidade-imagem img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    transition: opacity 0.45s ease;
+}
+
+.novidade-imagem-principal {
+    opacity: 1;
+}
+
+.novidade-imagem-secundaria {
+    opacity: 0;
+}
+
+.novidade-imagem.tem-secundaria:hover .novidade-imagem-principal {
+    opacity: 0;
+}
+
+.novidade-imagem.tem-secundaria:hover .novidade-imagem-secundaria {
+    opacity: 1;
+}
+
+/* =====================================================
+   NOME + PREÇO
+   ===================================================== */
+
+.novidade-info {
+    height: 78px;
+    padding: 13px 16px;
+    box-sizing: border-box;
+    background-color: #EEE8E1;
+}
+
+.novidade-info h3 {
+    margin: 0 0 7px;
+    color: #07152D;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 1px;
+}
+
+.novidade-info span {
+    color: #07152D;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+/* =====================================================
+   SETAS
+   ===================================================== */
+
+.novidades-seta {
+    position: absolute;
+    z-index: 20;
+
+    top: 144px;
+    transform: translateY(-50%);
+
+    width: 36px;
+    height: 36px;
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 50%;
+
+    background-color: #FBF7F0;
+    color: #CFA84E;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 26px;
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+.novidades-seta-esquerda {
+    left: -18px;
+}
+
+.novidades-seta-direita {
+    right: -18px;
+}
+
+
+/* =====================================================
+   MAIS VENDIDAS
+   ===================================================== */
+
+.mais-vendidas {
+    width: 100%;
+    max-width: 100%;
+    padding: 55px 6% 55px;
+    box-sizing: border-box;
+    background-color: #F7F2ED;
+    overflow: hidden;
+}
+
+/* TÍTULO */
+
+.mais-vendidas-titulo {
+    margin-bottom: 26px;
+    text-align: center;
+}
+
+.mais-vendidas-subtitulo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    color: #CFA84E;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 2.3px;
+}
+
+.mais-vendidas-linha {
+    display: block;
+    width: 45px;
+    min-width: 45px;
+    height: 1px;
+    background-color: #CFA84E;
+}
+
+.mais-vendidas-titulo h2 {
+    margin: 0;
+    color: #07152D;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 32px;
+    font-weight: 400;
+}
+
+/* 5 CARDS */
+
+.mais-vendidas-lista {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 18px;
+    box-sizing: border-box;
+    overflow: visible;
+}
+
+
+/* VÍDEO */
+
+.mais-vendida-video {
+    position: relative;
+    width: 100%;
+    height: 425px;
+    overflow: hidden;
+    border-radius: 13px;
+    background-color: #EEE8E1;
+}
+
+.mais-vendida-video video,
+.mais-vendida-sem-video {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.mais-vendida-info {
+    width: 100%;
+    height: 64px;
+    margin-top: 8px;
+    padding: 7px 9px;
+
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    box-sizing: border-box;
+    border-radius: 8px;
+    background-color: #EEE8E1;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+.mais-vendida-miniatura {
+    width: 54px;
+    height: 44px;
+    flex: 0 0 54px;
+    overflow: hidden;
+    border-radius: 5px;
+    background-color: #FBF7F0;
+}
+
+.mais-vendida-miniatura img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.mais-vendida-texto {
+    flex: 1;
+    min-width: 0;
+    text-align: left;
+}
+
+.mais-vendida-texto h3 {
+    margin: 0 0 5px;
+    color: #07152D;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 1.15;
+}
+
+.mais-vendida-texto span {
+    display: block;
+    color: #07152D;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 9px;
+    font-weight: 400;
+}
+
+.mais-vendida-card {
+    position: relative;
+    z-index: 1;
+    transition: transform 0.35s ease, z-index 0s;
+    transform-origin: center;
+}
+
+.mais-vendida-card:hover {
+    transform: scale(1.06);
+    z-index: 10;
+}
+
+
+/* =====================================================
+   OURO
+   ===================================================== */
+
+.ouro {
+    width: 100%;
+    padding: 52px 5% 58px;
+    box-sizing: border-box;
+    background-color: #F7F2ED;
+}
+
+/* =====================================================
+   TÍTULO
+   ===================================================== */
+
+.ouro-titulo {
+    margin-bottom: 28px;
+    text-align: center;
+}
+
+.ouro-subtitulo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 12px;
+
+    color: #CFA84E;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 2.3px;
+}
+
+.ouro-linha {
+    display: block;
+    width: 45px;
+    min-width: 45px;
+    height: 1px;
+    background-color: #CFA84E;
+}
+
+.ouro-titulo h2 {
+    margin: 0;
+    color: #07152D;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 1.1;
+}
+
+/* =====================================================
+   CARROSSEL
+   ===================================================== */
+
+.ouro-carrossel {
+    position: relative;
+    width: 100%;
+}
+
+.ouro-janela {
+    width: 100%;
+    overflow: hidden;
+}
+
+.ouro-lista {
+    display: flex;
+    gap: 18px;
+    transition: transform 0.45s ease;
+}
+
+/* =====================================================
+   CARD
+   ===================================================== */
+
+.ouro-card {
+    flex: 0 0 calc((100% - 54px) / 4);
+    min-width: 0;
+    overflow: hidden;
+    border-radius: 13px;
+    background-color: #EEE8E1;
+}
+
+/* =====================================================
+   IMAGEM
+   ===================================================== */
+
+.ouro-imagem {
+    position: relative;
+    width: 100%;
+    height: 225px;
+    display: block;
+    overflow: hidden;
+    background-color: #FBF7F0;
+}
+
+.ouro-imagem img {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+    display: block;
+
+    object-fit: cover;
+
+    transition:
+        opacity 0.45s ease,
+        transform 0.45s ease;
+}
+
+.ouro-imagem-principal {
+    opacity: 1;
+}
+
+.ouro-imagem-secundaria {
+    opacity: 0;
+}
+
+/* SEGUNDA FOTO NO HOVER */
+
+.ouro-imagem.tem-secundaria:hover .ouro-imagem-principal {
+    opacity: 0;
+}
+
+.ouro-imagem.tem-secundaria:hover .ouro-imagem-secundaria {
+    opacity: 1;
+}
+
+/* =====================================================
+   INFORMAÇÕES
+   ===================================================== */
+
+.ouro-info {
+    width: 100%;
+    height: 78px;
+    padding: 14px 16px;
+    box-sizing: border-box;
+    text-align: left;
+    background-color: #EEE8E1;
+}
+
+.ouro-info h3 {
+    margin: 0 0 9px;
+
+    color: #07152D;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 1.5px;
+}
+
+.ouro-info span {
+    display: block;
+
+    color: #07152D;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 10px;
+    font-weight: 400;
+}
+
+/* =====================================================
+   SETAS
+   ===================================================== */
+
+.ouro-seta {
+    position: absolute;
+    z-index: 20;
+
+    top: 112px;
+    transform: translateY(-50%);
+
+    width: 36px;
+    height: 36px;
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 50%;
+
+    background-color: #FBF7F0;
+    color: #CFA84E;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 26px;
+    font-weight: 400;
+    line-height: 1;
+
+    cursor: pointer;
+
+    box-shadow: 0 2px 8px rgba(7, 21, 45, 0.06);
+}
+
+.ouro-seta:hover {
+    background-color: #EEE8E1;
+}
+
+.ouro-seta-esquerda {
+    left: -18px;
+}
+
+.ouro-seta-direita {
+    right: -18px;
+}
+
+/* =====================================================
+   EXPERIÊNCIA VOIEHAUTE
+   ===================================================== */
+
+.experiencia {
+    width: 100%;
+    padding: 52px 5% 55px;
+    box-sizing: border-box;
+    background-color: #F7F2ED;
+}
+
+/* =====================================================
+   TÍTULO
+   ===================================================== */
+
+.experiencia-titulo {
+    margin-bottom: 38px;
+    text-align: center;
+}
+
+.experiencia-subtitulo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 12px;
+
+    color: #CFA84E;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 2.3px;
+}
+
+.experiencia-linha {
+    display: block;
+    width: 45px;
+    min-width: 45px;
+    height: 1px;
+    background-color: #CFA84E;
+}
+
+.experiencia-titulo h2 {
+    margin: 0;
+    color: #07152D;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 1.1;
+}
+
+/* =====================================================
+   4 ITENS
+   ===================================================== */
+
+.experiencia-itens {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 45px;
+}
+
+.experiencia-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* =====================================================
+   CÍRCULO + ÍCONE
+   ===================================================== */
+
+.experiencia-icone {
+    width: 72px;
+    height: 72px;
+    margin-bottom: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    background-color: #FBF7F0;
+
+    box-shadow: 0 0 25px rgba(250, 225, 122, 0.28);
+}
+
+.experiencia-icone img {
+    width: 31px;
+    height: 31px;
+    display: block;
+    object-fit: contain;
+}
+
+/* =====================================================
+   TEXTO
+   ===================================================== */
+
+.experiencia-item h3 {
+    margin: 0 0 8px;
+
+    color: #07152D;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+.experiencia-item p {
+    margin: 0;
+
+    color: #8A8A8A;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+/* =====================================================
+   TRACINHO EMBAIXO
+   ===================================================== */
+
+.experiencia-detalhe {
+    display: block;
+    width: 70px;
+    height: 1px;
+    margin-top: 18px;
+    background-color: #CFA84E;
+}
+
+
+
+
+/* =====================================================
+   FOOTER CLIENTE
+   ===================================================== */
+
+.footer-cliente {
+    width: 100%;
+    padding: 45px 5% 24px;
+    box-sizing: border-box;
+    background-color: #07152D;
+    color: #FBF7F0;
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+/* =====================================================
+   NEWSLETTER
+   ===================================================== */
+
+.footer-newsletter {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    align-items: center;
+    gap: 70px;
+    padding: 0 7%;
+    box-sizing: border-box;
+}
+
+.footer-newsletter-texto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.footer-newsletter-texto h2 {
+    margin: 0 0 12px;
+    color: #FAE17A;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 25px;
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: 0.3px;
+    text-align: center;
+}
+
+.footer-newsletter-texto p {
+    margin: 0;
+    color: #FBF7F0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* CAMPO DE E-MAIL */
+
+.footer-newsletter-form {
+    width: 100%;
+}
+
+.footer-email {
+    width: 100%;
+    height: 42px;
+    padding: 0 16px;
+
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    box-sizing: border-box;
+    border: 1px solid #FAE17A;
+    border-radius: 25px;
+}
+
+.footer-email i {
+    color: #FAE17A;
+    font-size: 20px;
+}
+
+.footer-email input {
+    width: 100%;
+    padding: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #FBF7F0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.footer-email input::placeholder {
+    color: #8A8A8A;
+}
+
+/* CHECKBOX */
+
+.footer-consentimento {
+    margin-top: 9px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: #FBF7F0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 11px;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.footer-consentimento input {
+    width: 14px;
+    height: 14px;
+    margin: 0;
+    accent-color: #FAE17A;
+}
+
+/* =====================================================
+   DIVISÓRIAS
+   ===================================================== */
+
+.footer-divisor {
+    width: 100%;
+    margin: 30px 0 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+}
+
+.footer-divisor span {
+    height: 1px;
+    flex: 1;
+    background-color: #CFA84E;
+}
+
+.footer-divisor i {
+    color: #FAE17A;
+    font-size: 10px;
+    font-style: normal;
+}
+
+/* =====================================================
+   CONTEÚDO PRINCIPAL
+   ===================================================== */
+
+.footer-conteudo {
+    width: 100%;
+    padding: 0 3%;
+    box-sizing: border-box;
+
+    display: grid;
+    grid-template-columns: 1.35fr 1fr 1.1fr 1fr 1.15fr;
+    gap: 38px;
+    align-items: start;
+}
+
+/* =====================================================
+   MARCA
+   ===================================================== */
+
+.footer-marca {
+    text-align: center;
+}
+
+.footer-logo {
+    width: 155px;
+    height: auto;
+    display: block;
+    margin: 0 auto 10px;
+}
+
+.footer-marca p {
+    margin: 0 0 12px;
+    color: #FBF7F0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 12px;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+
+.footer-instagram {
+    color: #FAE17A;
+    font-size: 19px;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+}
+
+.footer-instagram:hover {
+    color: #FAE17A;
+    opacity: 0.7;
+}
+
+/* =====================================================
+   COLUNAS
+   ===================================================== */
+
+.footer-coluna {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.footer-coluna h3 {
+    margin: 5px 0 8px;
+    color: #FAE17A;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 2px;
+}
+
+/* DETALHE ABAIXO DOS TÍTULOS */
+
+.footer-coluna-detalhe {
+    width: 100%;
+    margin-bottom: 13px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+}
+
+.footer-coluna-detalhe span {
+    width: 38px;
+    height: 1px;
+    background-color: #CFA84E;
+}
+
+.footer-coluna-detalhe i {
+    color: #FAE17A;
+    font-size: 7px;
+    font-style: normal;
+}
+
+/* LINKS */
+
+.footer-coluna a {
+    margin-bottom: 7px;
+    color: #FBF7F0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 1.3;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer-coluna a:hover {
+    color: #FAE17A;
+}
+
+/* =====================================================
+   PARTE FINAL
+   ===================================================== */
+
+.footer-final {
+    width: 100%;
+    text-align: center;
+}
+
+.footer-divisor-final {
+    margin: 24px 0 22px;
+}
+
+.footer-final p {
+    margin: 0;
+
+    color: #FBF7F0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 9px;
+    font-weight: 400;
+}
+
+
+
+
+
+/* =====================================================
+   PÁGINA INDIVIDUAL DO PRODUTO
+===================================================== */
+
+.produto-pagina {
+    width: 100%;
+
+    padding: 65px 5% 70px;
+
+    background-color: #F7F2ED;
+}
+
+.produto-principal {
+    width: 100%;
+    max-width: 1450px;
+
+    display: grid;
+    grid-template-columns: 58% 42%;
+
+    margin: 0 auto;
+}
+
+
+/* =====================================================
+   GALERIA
+===================================================== */
+
+.produto-galeria {
+    display: grid;
+    grid-template-columns: 82px 1fr;
+
+    gap: 14px;
+
+    padding-right: 35px;
+}
+
+
+/* MINIATURAS */
+
+.produto-miniaturas {
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.produto-miniatura {
+    width: 82px;
+    height: 82px;
+
+    padding: 0;
+
+    border: 1px solid transparent;
+    border-radius: 6px;
+
+    background-color: transparent;
+
+    cursor: pointer;
+
+    overflow: hidden;
+
+    transition: border-color 0.2s ease;
+}
+
+.produto-miniatura img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+.produto-miniatura:hover,
+.produto-miniatura.ativo {
+    border-color: #CFA84E;
+}
+
+
+/* IMAGEM PRINCIPAL */
+
+.produto-imagem-principal {
+    width: 100%;
+    height: 560px;
+
+    overflow: hidden;
+
+    border-radius: 7px;
+
+    background-color: #FBF7F0;
+}
+
+.produto-imagem-principal img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+
+/* =====================================================
+   INFORMAÇÕES
+===================================================== */
+
+.produto-informacoes {
+    padding: 3px 0 0 35px;
+}
+
+
+/* CAMINHO */
+
+.produto-caminho {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    margin-bottom: 35px;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 10px;
+}
+
+.produto-caminho a {
+    color: #CFA84E;
+
+    text-decoration: none;
+
+    transition: color 0.2s ease;
+}
+
+.produto-caminho a:hover {
+    color: #07152D;
+}
+
+.produto-caminho>span {
+    color: #CFA84E;
+
+    font-size: 7px;
+}
+
+.produto-caminho .atual {
+    color: #CFA84E;
+}
+
+/* COLEÇÃO */
+
+.produto-colecao {
+    display: block;
+
+    margin-bottom: 13px;
+
+    color: #CFA84E;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 12px;
+
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+
+/* NOME */
+
+.produto-informacoes h1 {
+    margin: 0 0 42px;
+
+    color: #07152D;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 43px;
+    font-weight: 400;
+
+    line-height: 1.08;
+
+    text-transform: uppercase;
+}
+
+
+/* DESCRIÇÃO */
+
+.produto-descricao-curta {
+    max-width: 530px;
+
+    margin: 0 0 20px;
+
+    color: #4A4A4A;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 12px;
+
+    line-height: 1.55;
+}
+
+
+/* PREÇO */
+
+.produto-preco {
+    margin-bottom: 34px;
+
+    color: #CFA84E;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 27px;
+    font-weight: 400;
+}
+
+
+/* =====================================================
+   PRÉVIA CIRCULAR DO VÍDEO
+===================================================== */
+
+.produto-video-preview {
+    width: 62px;
+    height: 62px;
+
+    display: block;
+
+    margin: 28px 0 18px;
+    padding: 0;
+
+    border: 1px solid #CFA84E;
+    border-radius: 50%;
+
+    background-color: #FBF7F0;
+
+    overflow: hidden;
+
+    cursor: pointer;
+
+    transition: transform 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.produto-video-preview {
+    width: 72px;
+    height: 72px;
+
+    display: block;
+
+    margin: 28px 0 18px;
+    padding: 0;
+
+    border: none;
+    border-radius: 50%;
+
+    background-color: transparent;
+
+    overflow: hidden;
+
+    cursor: pointer;
+
+    transition: transform 0.25s ease;
+}
+
+.produto-video-preview video {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+    border-radius: 50%;
+
+    pointer-events: none;
+}
+
+.produto-video-preview:hover {
+    transform: scale(1.05);
+}
+
+/* =====================================================
+   BOTÕES
+===================================================== */
+
+.produto-acoes {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    margin-top: 20px;
+}
+
+.produto-btn-sacola {
+    width: 100%;
+    max-width: 420px;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #07152D;
+    border-radius: 26px;
+
+    background-color: #07152D;
+
+    color: #FAE17A;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 12px;
+
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+    transition: 0.25s;
+}
+
+.produto-btn-sacola:hover {
+    background-color: #102344;
+}
+
+.produto-btn-favorito {
+    width: 58px;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border: 1px solid #07152D;
+    border-radius: 26px;
+
+    background-color: #07152D;
+
+    color: #FAE17A;
+
+    font-size: 18px;
+
+    cursor: pointer;
+
+    transition: 0.25s;
+}
+
+.produto-btn-favorito:hover {
+    background-color: #102344;
+}
+
+
+
+/* =====================================================
+   MODAL DO VÍDEO DO PRODUTO
+===================================================== */
+
+.produto-video-modal {
+    position: fixed;
+    inset: 0;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    padding: 35px;
+
+    background-color: rgba(0, 0, 0, 0.96);
+
+    z-index: 99999;
+}
+
+.produto-video-modal.aberto {
+    display: flex;
+}
+
+.produto-video-modal-conteudo {
+    width: 710px;
+}
+
+
+/* VÍDEO */
+
+.produto-video-modal-area {
+    width: 100%;
+    height: 400px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: 17px;
+
+    background-color: #000;
+}
+
+.produto-video-modal-area video {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+/* INFORMAÇÕES ABAIXO */
+
+.produto-video-modal-info {
+    width: 100%;
+    height: 80px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    margin-top: 10px;
+    padding: 9px 12px;
+
+    border-radius: 10px;
+
+    background-color: #F7F2ED;
+}
+
+.produto-video-modal-info img {
+    width: 130px;
+    height: 62px;
+
+    display: block;
+
+    object-fit: cover;
+
+    border-radius: 6px;
+}
+
+.produto-video-modal-info h3 {
+    margin: 0 0 10px;
+
+    color: #07152D;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.produto-video-modal-info span {
+    color: #4A4A4A;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 11px;
+}
+
+/* =====================================================
+   INFORMAÇÕES DA JOIA
+===================================================== */
+
+.produto-conteudo {
+    width: 100%;
+    max-width: 1450px;
+
+    margin: 38px auto 0;
+}
+
+
+/* ABAS */
+
+.produto-abas {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    margin-bottom: 27px;
+}
+
+.produto-aba {
+    min-width: 115px;
+    height: 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 20px;
+
+    border: none;
+    border-radius: 18px;
+
+    background-color: #FBF7F0;
+
+    color: #CFA84E;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 9px;
+    font-weight: 400;
+
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.produto-aba:hover {
+    background-color: rgba(250, 225, 122, 0.22);
+}
+
+.produto-aba.ativo {
+    background-color: #CFA84E;
+    color: #FBF7F0;
+}
+
+
+/* CONTEÚDO */
+
+.produto-aba-conteudo {
+    display: none;
+
+    max-width: 1050px;
+
+    color: #4A4A4A;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 11px;
+
+    line-height: 1.65;
+}
+
+.produto-aba-conteudo.ativo {
+    display: block;
+}
+
+.produto-aba-conteudo>p {
+    margin: 0 0 7px;
+}
+
+
+/* =====================================================
+   ABA DETALHES
+===================================================== */
+
+.produto-detalhes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    gap: 80px;
+
+    max-width: 750px;
+}
+
+.produto-detalhes-coluna {
+    display: flex;
+    flex-direction: column;
+
+    gap: 9px;
+}
+
+.produto-detalhe-item {
+    display: grid;
+    grid-template-columns: 145px 1fr;
+
+    align-items: baseline;
+
+    gap: 15px;
+}
+
+.produto-detalhe-item span {
+    color: #07152D;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 9px;
+
+    letter-spacing: 1px;
+}
+
+.produto-detalhe-item p {
+    margin: 0;
+
+    color: #4A4A4A;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 10px;
+}
+
+
+/* =====================================================
+   OUTRAS CRIAÇÕES DA COLEÇÃO
+===================================================== */
+
+.produto-outras-criacoes {
+    width: 100%;
+    max-width: 1450px;
+
+    margin: 70px auto 0;
+    padding-bottom: 80px;
+}
+
+/* =====================================================
+   TÍTULO
+===================================================== */
+
+.produto-outras-titulo {
+    margin-bottom: 30px;
+
+    text-align: center;
+}
+
+#aba-joia p {
+    white-space: pre-line;
+}
+
+.produto-outras-colecao {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    margin-bottom: 10px;
+}
+
+.produto-outras-colecao span {
+    width: 45px;
+    height: 1px;
+
+    background-color: #CFA84E;
+}
+
+.produto-outras-colecao p {
+    margin: 0;
+
+    color: #CFA84E;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 11px;
+
+    letter-spacing: 3px;
+
+    text-transform: uppercase;
+}
+
+.produto-outras-titulo h2 {
+    margin: 0;
+
+    color: #07152D;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 31px;
+    font-weight: 400;
+}
+
+
+/* =====================================================
+   CARROSSEL
+===================================================== */
+
+.produto-outras-carrossel {
+    width: 100%;
+
+    position: relative;
+}
+
+.produto-outras-janela {
+    width: 100%;
+
+    overflow: hidden;
+}
+
+.produto-outras-lista {
+    display: flex;
+
+    gap: 18px;
+
+    transition: transform 0.4s ease;
+}
+
+
+/* =====================================================
+   CARD
+===================================================== */
+
+.produto-outra-card {
+    min-width: calc((100% - 54px) / 4);
+
+    display: block;
+
+    overflow: hidden;
+
+    border-radius: 8px;
+
+    background-color: #EFE7DE;
+
+    text-decoration: none;
+}
+
+.produto-outra-imagem {
+    width: 100%;
+    height: 285px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background-color: #FBF7F0;
+}
+
+.produto-outra-imagem img {
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+    inset: 0;
+
+    display: block;
+
+    object-fit: cover;
+
+    transition:
+        opacity 0.4s ease,
+        transform 0.45s ease;
+}
+
+
+/* PRIMEIRA FOTO */
+
+.produto-outra-principal {
+    opacity: 1;
+}
+
+
+/* SEGUNDA FOTO */
+
+.produto-outra-secundaria {
+    opacity: 0;
+}
+
+
+/* TROCA NO HOVER */
+
+.produto-outra-card:hover .produto-outra-principal {
+    opacity: 0;
+}
+
+.produto-outra-card:hover .produto-outra-secundaria {
+    opacity: 1;
+}
+
+.produto-outra-card:hover .produto-outra-imagem img {
+    transform: scale(1.025);
+}
+
+
+/* =====================================================
+   INFORMAÇÕES DO CARD
+===================================================== */
+
+.produto-outra-info {
+    min-height: 95px;
+
+    padding: 20px 20px 17px;
+}
+
+.produto-outra-info h3 {
+    margin: 0 0 13px;
+
+    color: #07152D;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 13px;
+    font-weight: 400;
+
+    letter-spacing: 1.5px;
+}
+
+.produto-outra-info p {
+    margin: 0;
+
+    color: #4A4A4A;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 10px;
+}
+
+
+
+
+
+/* =====================================================
+   PÁGINA DE BUSCA / FILTROS
+===================================================== */
+
+.pagina-busca {
+    width: 100%;
+    max-width: 100%;
+    background-color: #F7F2ED;
+    box-sizing: border-box;
+}
+
+.busca-conteudo {
+    width: 100%;
+    padding: 48px 4.5% 60px;
+    box-sizing: border-box;
+}
+
+.busca-conteudo,
+.filtros-barra,
+.busca-produtos {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.busca-titulo {
+    margin: 0 0 34px;
+    color: #07152D;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 31px;
+    font-weight: 400;
+    text-align: center;
+}
+
+
+/* =====================================================
+   BARRA DE FILTROS
+===================================================== */
+
+.filtros-barra {
+    width: 100%;
+    height: 48px;
+    margin-bottom: 34px;
+    padding: 0 20px;
+
+    display: flex;
+    align-items: center;
+
+    box-sizing: border-box;
+
+    background-color: #FBF7F0;
+    border: 1px solid #EEE8E1;
+    border-radius: 24px;
+}
+
+.filtro-botao {
+    height: 100%;
+    padding: 0 22px;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    border: none;
+    outline: none;
+    background: transparent;
+
+    color: #4A4A4A;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 13px;
+    font-weight: 400;
+
+    cursor: pointer;
+
+    transition: color 0.2s ease;
+}
+
+.filtro-botao i {
+    font-size: 11px;
+}
+
+.filtro-botao:hover {
+    color: #CFA84E;
+}
+
+.filtros-limpar {
+    height: 28px;
+    margin-left: auto;
+    padding: 0 4px 0 20px;
+
+    border: none;
+    border-left: 1px solid #CFA84E;
+    background: transparent;
+
+    color: #CFA84E;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 12px;
+    font-weight: 400;
+    text-transform: uppercase;
+
+    cursor: pointer;
+}
+
+
+/* =====================================================
+   GRADE DE PRODUTOS
+===================================================== */
+
+.busca-produtos {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 28px 22px;
+}
+
+
+/* =====================================================
+   CARD
+===================================================== */
+
+.busca-produto-card {
+    width: 100%;
+
+    display: block;
+    overflow: hidden;
+
+    border-radius: 14px;
+
+    background-color: #EEE8E1;
+
+    color: #07152D;
+    text-decoration: none;
+}
+
+
+/* =====================================================
+   IMAGEM
+===================================================== */
+
+.busca-produto-imagem {
+    position: relative;
+
+    width: 100%;
+    height: 280px;
+
+    overflow: hidden;
+
+    background-color: #FBF7F0;
+}
+
+.busca-produto-imagem img {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    transition:
+        opacity 0.4s ease,
+        transform 0.4s ease;
+}
+
+.busca-imagem-principal {
+    opacity: 1;
+}
+
+.busca-imagem-secundaria {
+    opacity: 0;
+}
+
+.busca-produto-card:hover .busca-produto-imagem.tem-secundaria .busca-imagem-principal {
+    opacity: 0;
+}
+
+.busca-produto-card:hover .busca-produto-imagem.tem-secundaria .busca-imagem-secundaria {
+    opacity: 1;
+    transform: scale(1.025);
+}
+
+.busca-produto-card:hover .busca-produto-imagem:not(.tem-secundaria) .busca-imagem-principal {
+    transform: scale(1.025);
+}
+
+
+/* =====================================================
+   INFORMAÇÕES
+===================================================== */
+
+.busca-produto-info {
+    min-height: 86px;
+    padding: 17px 20px;
+
+    box-sizing: border-box;
+
+    background-color: #EEE8E1;
+}
+
+.busca-produto-info h2 {
+    margin: 0 0 10px;
+
+    color: #07152D;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 15px;
+    font-weight: 400;
+
+    letter-spacing: 1.4px;
+    line-height: 1.25;
+}
+
+.busca-produto-info span {
+    color: #4A4A4A;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+/* =====================================================
+   PAINEL DOS FILTROS
+===================================================== */
+
+.filtro-painel {
+    width: 100%;
+    min-height: 125px;
+    margin-top: -24px;
+    margin-bottom: 34px;
+    padding: 24px 28px;
+
+    display: none;
+    grid-template-columns: repeat(2, max-content);
+    align-content: start;
+    column-gap: 70px;
+    row-gap: 14px;
+
+    box-sizing: border-box;
+
+    background-color: #FBF7F0;
+    border: 1px solid #EEE8E1;
+    border-radius: 20px;
+}
+
+.filtro-painel.ativo {
+    display: grid;
+}
+
+.filtro-painel-tamanho.ativo {
+    grid-template-columns: repeat(5, 1fr);
+    column-gap: 28px;
+    row-gap: 14px;
+}
+
+.filtro-painel-preco.ativo {
+    grid-template-columns: 170px max-content;
+    column-gap: 28px;
+    row-gap: 14px;
+}
+
+/* OPÇÕES */
+
+.filtro-opcao {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    margin: 0;
+
+    color: #4A4A4A;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 13px;
+    font-weight: 400;
+
+    cursor: pointer;
+}
+
+
+/* ESCONDE CHECKBOX PADRÃO */
+
+.filtro-opcao input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+
+/* CHECKBOX PERSONALIZADO */
+
+.filtro-checkbox {
+    width: 13px;
+    height: 13px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+
+    border: 1px solid #CFA84E;
+    border-radius: 3px;
+
+    background-color: transparent;
+}
+
+
+/* MARCADO */
+
+.filtro-opcao input:checked+.filtro-checkbox {
+    background-color: #CFA84E;
+}
+
+.filtro-opcao input:checked+.filtro-checkbox::after {
+    content: "✓";
+
+    color: #FBF7F0;
+
+    font-size: 9px;
+    line-height: 1;
+}
+
+
+/* BOTÃO ATIVO */
+
+.filtro-botao.ativo {
+    color: #CFA84E;
+}
+
+.cabecalho-pesquisa-botao {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #FAE17A;
+    cursor: pointer;
+}
+
+.cabecalho-pesquisa-botao i {
+    font-size: inherit;
+}
+
+/* =====================================================
+   BUSCA SEM RESULTADOS
+===================================================== */
+
+.busca-vazia {
+    grid-column: 1 / -1;
+    width: 100%;
+    padding: 65px 20px 75px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.busca-vazia-icone {
+    width: 54px;
+    height: 54px;
+    margin: 0 auto 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #CFA84E;
+    border-radius: 50%;
+    color: #CFA84E;
+}
+
+.busca-vazia-icone i {
+    font-size: 20px;
+}
+
+.busca-vazia h2 {
+    margin: 0 0 14px;
+    color: #07152D;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 25px;
+    font-weight: 400;
+}
+
+.busca-vazia p {
+    margin: 0 auto 28px;
+    color: #8A8A8A;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.7;
+}
+
+.busca-vazia p span {
+    color: #CFA84E;
+}
+
+.busca-vazia-botao {
+    min-width: 205px;
+    height: 43px;
+    padding: 0 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    border: 1px solid #07152D;
+    border-radius: 24px;
+    background-color: #07152D;
+    color: #FBF7F0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.8px;
+    text-decoration: none;
+    transition: 0.25s ease;
+}
+
+.busca-vazia-botao:hover {
+    background-color: #102344;
+    color: #FBF7F0;
+}
+
+
+
+/* =====================================================
+   PESQUISAS RECENTES
+===================================================== */
+
+.cabecalho-pesquisa-area {
+    position: relative;
+}
+
+.pesquisas-recentes {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    z-index: 2000;
+
+    width: 320px;
+    padding: 18px 20px;
+
+    display: none;
+
+    box-sizing: border-box;
+
+    background-color: #FBF7F0;
+    border: 1px solid #EEE8E1;
+    border-radius: 16px;
+
+    box-shadow: 0 10px 30px rgba(7, 21, 45, 0.12);
+}
+
+.pesquisas-recentes.ativo {
+    display: block;
+}
+
+.pesquisas-recentes-topo {
+    margin-bottom: 14px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.pesquisas-recentes-topo span {
+    color: #07152D;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 1.2px;
+}
+
+.pesquisas-recentes-topo button {
+    padding: 0;
+
+    border: none;
+    background: transparent;
+
+    color: #CFA84E;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 11px;
+
+    cursor: pointer;
+}
+
+.pesquisas-recentes-lista {
+    display: flex;
+    flex-direction: column;
+}
+
+.pesquisa-recente-item {
+    width: 100%;
+    padding: 9px 0;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    border: none;
+    border-bottom: 1px solid #EEE8E1;
+
+    background: transparent;
+
+    color: #4A4A4A;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 13px;
+    text-align: left;
+
+    cursor: pointer;
+}
+
+.pesquisa-recente-item:last-child {
+    border-bottom: none;
+}
+
+.pesquisa-recente-item i {
+    color: #CFA84E;
+    font-size: 12px;
+}
+
+.pesquisa-recente-item:hover {
+    color: #CFA84E;
+}
+
+.pesquisas-recentes-vazio {
+    margin: 6px 0 2px;
+
+    color: #8A8A8A;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 12px;
+}
+
+
+
+
+
+
+
+/* =========================================================
+   PÁGINA JOIAS - ANÉIS
+========================================================= */
+
+.pagina-joia {
+    width: 100%;
+    padding: 55px 6% 75px;
+    background-color: #F7F2ED;
+}
+
+
+/* =========================================================
+   ABERTURA
+========================================================= */
+
+.joia-abertura {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1.55fr 0.85fr;
+    gap: 65px;
+    align-items: center;
+}
+
+.joia-abertura-imagem {
+    width: 100%;
+    height: 430px;
+    overflow: hidden;
+    border-radius: 22px;
+}
+
+.joia-abertura-imagem img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.joia-abertura-texto {
+    max-width: 440px;
+}
+
+.joia-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.joia-eyebrow span {
+    width: 30px;
+    height: 1px;
+    background-color: #CFA84E;
+}
+
+.joia-eyebrow p {
+    margin: 0;
+    font-family: Georgia, serif;
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: #CFA84E;
+}
+
+.joia-abertura-texto h1 {
+    margin: 0 0 20px;
+    font-family: Georgia, serif;
+    font-size: 48px;
+    line-height: 1;
+    font-weight: 400;
+    letter-spacing: 3px;
+    color: #07152D;
+}
+
+.joia-descricao {
+    margin: 0;
+    font-family: Georgia, serif;
+    font-size: 15px;
+    line-height: 1.85;
+    color: #4A4A4A;
+}
+
+
+/* =========================================================
+   VITRINE
+========================================================= */
+
+.joia-vitrine {
+    position: relative;
+    width: 100%;
+    height: 620px;
+    margin-top: 70px;
+    overflow: hidden;
+    border-radius: 24px;
+    background-color: #EEE8E1;
+}
+
+
+/* =========================================================
+   FUNDOS
+========================================================= */
+
+.joia-vitrine-fundo {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.joia-vitrine-fundo img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.joia-vitrine-fundo-modelo {
+    left: 0;
+    width: 70%;
+}
+
+.joia-vitrine-fundo-produto {
+    right: 0;
+    width: 34%;
+    z-index: 2;
+}
+
+
+/* =========================================================
+   LISTA DE ANÉIS
+========================================================= */
+
+.joia-vitrine-lista {
+    position: absolute;
+    z-index: 5;
+    top: 0;
+    left: 0;
+    width: 27%;
+    height: 100%;
+    padding: 0 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.joia-vitrine-titulo {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 42px;
+}
+
+.joia-vitrine-titulo span {
+    width: 34px;
+    height: 1px;
+    background-color: #CFA84E;
+}
+
+.joia-vitrine-titulo h2 {
+    margin: 0;
+    font-family: Georgia, serif;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    color: #CFA84E;
+}
+
+.joia-vitrine-nomes {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+}
+
+.joia-vitrine-nome {
+    position: relative;
+    padding: 4px 0;
+    border: 0;
+    background: transparent;
+    font-family: Georgia, serif;
+    font-size: 17px;
+    font-weight: 400;
+    color: #59606A;
+    text-align: center;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.joia-vitrine-nome:hover {
+    color: #CFA84E;
+}
+
+.joia-vitrine-nome.ativo {
+    color: #CFA84E;
+    transform: scale(1.08);
+}
+
+.joia-vitrine-nome.ativo::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -5px;
+    width: 26px;
+    height: 1px;
+    background-color: #CFA84E;
+    transform: translateX(-50%);
+}
+
+
+/* =========================================================
+   MODELO / MULHER
+========================================================= */
+
+.joia-vitrine-modelo {
+    position: absolute;
+    z-index: 6;
+    left: 29%;
+    bottom: 0;
+    width: 43%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+}
+
+.joia-vitrine-modelo .vitrine-camada {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+    object-position: center bottom;
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
+}
+
+
+/* =========================================================
+   ÁREA DO PRODUTO
+========================================================= */
+
+.joia-vitrine-produto {
+    position: absolute;
+    z-index: 7;
+    top: 0;
+    right: 5%;
+    width: 27%;
+    height: 100%;
+    padding: 55px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.joia-vitrine-produto-imagem {
+    position: relative;
+    width: 100%;
+    height: 280px;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.joia-vitrine-produto-imagem .vitrine-camada {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+    object-position: center center;
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
+}
+
+
+/* =========================================================
+   INFORMAÇÕES DO PRODUTO
+========================================================= */
+
+.joia-vitrine-info {
+    width: 100%;
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.joia-vitrine-info h3 {
+    margin: 0 0 10px;
+    font-family: Georgia, serif;
+    font-size: 21px;
+    font-weight: 400;
+    color: #07152D;
+    text-transform: uppercase;
+}
+
+.joia-vitrine-info p {
+    margin: 0 0 25px;
+    font-family: Georgia, serif;
+    font-size: 14px;
+    color: #4A4A4A;
+    text-align: center;
+}
+
+.joia-vitrine-info a {
+    min-width: 155px;
+    height: 42px;
+    padding: 0 22px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #07152D;
+    border-radius: 10px;
+    background-color: transparent;
+    font-family: Georgia, serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 1.8px;
+    color: #07152D;
+    text-decoration: none;
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.joia-vitrine-info a:hover {
+    background-color: #07152D;
+    color: #FBF7F0;
+}
+
+
+/* =========================================================
+   SETAS
+========================================================= */
+
+.joia-vitrine-setas {
+    position: absolute;
+    z-index: 10;
+    top: 50%;
+    right: 18px;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 11px;
+}
+
+.joia-vitrine-setas div {
+    width: 1px;
+    height: 42px;
+    background-color: #CFA84E;
+}
+
+.joia-vitrine-setas button {
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #CFA84E;
+    border-radius: 50%;
+    background: rgba(247, 242, 237, 0.7);
+    color: #CFA84E;
+    cursor: pointer;
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.joia-vitrine-setas button:hover {
+    background-color: #CFA84E;
+    color: #FBF7F0;
+}
+
+
+/* =========================================================
+   CAMADAS DA ANIMAÇÃO
+========================================================= */
+
+.vitrine-camada {
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
+}
+
+
+
+
+/* =========================================================
+   PÁGINAS DE COLEÇÕES
+========================================================= */
+
+/* HERO */
+
+.colecao-hero {
+    width: 100%;
+    background-color: #F7F2ED;
+    overflow: hidden;
+}
+
+.colecao-hero-video {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+
+
+/* =========================
+   APRESENTAÇÃO DA COLEÇÃO
+========================= */
+
+.colecao-apresentacao {
+    width: 100%;
+    padding: 55px 5%;
+    display: grid;
+    grid-template-columns: 0.8fr 1.5fr;
+    gap: 70px;
+    align-items: center;
+    background-color: #F7F2ED;
+    box-sizing: border-box;
+}
+
+.colecao-apresentacao-texto {
+    width: 100%;
+    padding-left: 15px;
+}
+
+.colecao-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+}
+
+.colecao-eyebrow span {
+    width: 42px;
+    height: 1px;
+    background-color: #CFA84E;
+}
+
+.colecao-eyebrow p {
+    margin: 0;
+    font-family: Georgia, serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 2.5px;
+    color: #CFA84E;
+}
+
+.colecao-apresentacao-texto h2 {
+    margin: 0 0 28px;
+    font-family: Georgia, serif;
+    font-size: 36px;
+    line-height: 1;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: #07152D;
+}
+
+.colecao-apresentacao-descricao {
+    max-width: 430px;
+    margin: 0;
+    font-family: Georgia, serif;
+    font-size: 14px;
+    line-height: 1.7;
+    font-weight: 400;
+    color: #4A4A4A;
+}
+
+.colecao-apresentacao-imagem {
+    width: 100%;
+    height: 370px;
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.colecao-apresentacao-imagem img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+
+/* =========================
+   CRIAÇÕES DA COLEÇÃO
+========================= */
+
+.colecao-criacoes {
+    width: 100%;
+    padding: 25px 5% 55px;
+    box-sizing: border-box;
+    background-color: #F7F2ED;
+}
+
+.colecao-criacoes-cabecalho {
+    width: 100%;
+    margin-bottom: 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.colecao-criacoes-eyebrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    margin-bottom: 10px;
+}
+
+.colecao-criacoes-eyebrow span {
+    width: 42px;
+    height: 1px;
+    background-color: #CFA84E;
+}
+
+.colecao-criacoes-eyebrow p {
+    margin: 0;
+    font-family: Georgia, serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 2.5px;
+    color: #CFA84E;
+}
+
+.colecao-criacoes-cabecalho h2 {
+    margin: 0;
+    font-family: Georgia, serif;
+    font-size: 27px;
+    line-height: 1.1;
+    font-weight: 400;
+    color: #07152D;
+}
+
+.colecao-criacoes-carrossel {
+    position: relative;
+    width: 100%;
+}
+
+.colecao-criacoes-viewport {
+    width: 100%;
+    overflow: hidden;
+}
+
+.colecao-criacoes-trilho {
+    display: flex;
+    gap: 16px;
+    transition: transform .55s ease;
+}
+
+.colecao-criacao-card {
+    min-width: calc((100% - 48px) / 4);
+    overflow: hidden;
+    display: block;
+    border-radius: 14px;
+    background-color: #EEE6DE;
+    text-decoration: none;
+}
+
+.colecao-criacao-imagem {
+    width: 100%;
+    height: 245px;
+    overflow: hidden;
+    background-color: #F3ECE4;
+}
+
+.colecao-criacao-imagem {
+    position: relative;
+    width: 100%;
+    height: 245px;
+    overflow: hidden;
+    background-color: #F3ECE4;
+}
+
+.colecao-criacao-foto {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    transition: opacity .45s ease, transform .45s ease;
+}
+
+.colecao-criacao-foto-principal {
+    z-index: 1;
+    opacity: 1;
+}
+
+.colecao-criacao-foto-secundaria {
+    z-index: 2;
+    opacity: 0;
+}
+
+.colecao-criacao-card:hover .colecao-criacao-foto-principal {
+    transform: scale(1.025);
+}
+
+.colecao-criacao-card:hover .colecao-criacao-foto-secundaria {
+    opacity: 1;
+    transform: scale(1.025);
+}
+
+.colecao-criacao-info {
+    height: 78px;
+    padding: 14px 17px;
+    box-sizing: border-box;
+    background-color: #EEE6DE;
+}
+
+.colecao-criacao-info h3 {
+    margin: 0 0 9px;
+    overflow: hidden;
+    font-family: Georgia, serif;
+    font-size: 13px;
+    line-height: 1.2;
+    font-weight: 400;
+    letter-spacing: .8px;
+    color: #07152D;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.colecao-criacao-info p {
+    margin: 0;
+    font-family: Georgia, serif;
+    font-size: 11px;
+    font-weight: 400;
+    color: #4A4A4A;
+}
+
+.colecao-criacoes-seta {
+    position: absolute;
+    z-index: 5;
+    top: 50%;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 50%;
+    background-color: #FBF7F0;
+    font-family: Georgia, serif;
+    font-size: 27px;
+    font-weight: 400;
+    line-height: 1;
+    color: #CFA84E;
+    cursor: pointer;
+    transform: translateY(-50%);
+    box-shadow: 0 2px 8px rgba(7, 21, 45, .06);
+}
+
+.colecao-criacoes-seta-esquerda {
+    left: -18px;
+}
+
+.colecao-criacoes-seta-direita {
+    right: -18px;
+}
+
+.colecao-criacoes-seta:hover {
+    background-color: #CFA84E;
+    color: #FBF7F0;
+}
+
+/* =========================
+   INSPIRAÇÃO DA COLEÇÃO
+========================= */
+
+.colecao-inspiracao {
+    width: 100%;
+    padding: 35px 5% 65px;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 1.35fr .85fr;
+    gap: 55px;
+    align-items: center;
+    background-color: #F7F2ED;
+}
+
+.colecao-inspiracao-imagem {
+    width: 100%;
+    height: 430px;
+    overflow: hidden;
+    border-radius: 18px;
+}
+
+.colecao-inspiracao-imagem img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.colecao-inspiracao-texto {
+    width: 100%;
+    max-width: 480px;
+}
+
+.colecao-inspiracao-texto .colecao-eyebrow {
+    margin-bottom: 18px;
+}
+
+.colecao-inspiracao-texto h2 {
+    margin: 0 0 24px;
+    font-family: Georgia, serif;
+    font-size: 38px;
+    line-height: 1.25;
+    font-weight: 400;
+    letter-spacing: .5px;
+    color: #07152D;
+}
+
+.colecao-inspiracao-texto>p {
+    margin: 0;
+    max-width: 450px;
+    font-family: Georgia, serif;
+    font-size: 14px;
+    line-height: 1.75;
+    font-weight: 400;
+    color: #4A4A4A;
+}
+
+
+/* =========================
+   DA IDEIA À JOIA
+========================= */
+
+.colecao-processo {
+    width: 100%;
+    padding: 30px 5% 75px;
+    box-sizing: border-box;
+    background-color: #F7F2ED;
+}
+
+.colecao-processo-cabecalho {
+    width: 100%;
+    margin-bottom: 35px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.colecao-processo-cabecalho .colecao-eyebrow {
+    margin-bottom: 12px;
+}
+
+.colecao-processo-cabecalho h2 {
+    margin: 0;
+    font-family: Georgia, serif;
+    font-size: 29px;
+    line-height: 1.2;
+    font-weight: 400;
+    color: #07152D;
+}
+
+.colecao-processo-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 55px;
+}
+
+.colecao-processo-item {
+    width: 100%;
+    text-align: center;
+}
+
+.colecao-processo-imagem {
+    width: 100%;
+    height: 230px;
+    overflow: hidden;
+    border-radius: 16px;
+    box-shadow:
+        0 0 12px rgba(250, 225, 122, 0.95),
+        0 0 25px rgba(250, 225, 122, 0.75),
+        0 0 38px rgba(207, 168, 78, 0.38);
+}
+
+.colecao-processo-imagem img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    transition: transform .45s ease;
+}
+
+.colecao-processo-item:hover .colecao-processo-imagem img {
+    transform: scale(1.025);
+}
+
+.colecao-processo-item h3 {
+    margin: 20px 0 10px;
+    font-family: Georgia, serif;
+    font-size: 20px;
+    line-height: 1;
+    font-weight: 400;
+    color: #CFA84E;
+}
+
+.colecao-processo-item p {
+    max-width: 380px;
+    margin: 0 auto;
+    font-family: Georgia, serif;
+    font-size: 14px;
+    line-height: 1.6;
+    font-weight: 400;
+    color: #4A4A4A;
+}
+
+
+/* =========================
+   BANNER EDITORIAL
+========================= */
+
+.colecao-banner {
+    width: 100%;
+    overflow: hidden;
+    background-color: #F7F2ED;
+}
+
+.colecao-banner img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+
+/* =========================
+   O LEGADO CONTINUA
+========================= */
+
+.colecao-legado {
+    width: 100%;
+    padding: 55px 5% 70px;
+    box-sizing: border-box;
+    background-color: #F7F2ED;
+}
+
+.colecao-legado-cabecalho {
+    width: 100%;
+    margin-bottom: 45px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.colecao-legado-cabecalho .colecao-eyebrow {
+    margin-bottom: 14px;
+}
+
+.colecao-legado-cabecalho h2 {
+    margin: 0;
+    font-family: Georgia, serif;
+    font-size: 29px;
+    line-height: 1.2;
+    font-weight: 400;
+    color: #07152D;
+}
+
+.colecao-legado-conteudo {
+    width: 100%;
+    display: grid;
+    grid-template-columns: .9fr 1.1fr;
+    gap: 70px;
+    align-items: center;
+}
+
+.colecao-legado-texto {
+    width: 100%;
+}
+
+.colecao-legado-texto p {
+    margin: 0 0 17px;
+    font-family: Georgia, serif;
+    font-size: 13px;
+    line-height: 1.7;
+    font-weight: 400;
+    color: #4A4A4A;
+}
+
+.colecao-legado-texto p:last-child {
+    margin-bottom: 0;
+}
+
+.colecao-legado-imagem {
+    position: relative;
+    width: 100%;
+    height: 350px;
+    overflow: hidden;
+    border-radius: 18px;
+}
+
+.colecao-legado-imagem::before {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 32%;
+    height: 100%;
+    pointer-events: none;
+    background: linear-gradient(to right,
+            #F7F2ED 0%,
+            rgba(247, 242, 237, 0.95) 18%,
+            rgba(247, 242, 237, 0.65) 45%,
+            rgba(247, 242, 237, 0.25) 72%,
+            rgba(247, 242, 237, 0) 100%);
+}
+
+.colecao-legado-imagem img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+
+
+
+/* =====================================================
+   LA MAISON
+===================================================== */
+
+.maison {
+    width: 100%;
+    background-color: #F7F2ED;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.maison-hero {
+    width: 100%;
+    overflow: hidden;
+}
+
+.maison-hero img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* =====================================================
+   MAISON — HISTÓRIA
+===================================================== */
+
+.maison-historia {
+    position: relative;
+    width: 100%;
+    padding: 65px 7% 75px;
+    box-sizing: border-box;
+    background-color: #F7F2ED;
+}
+
+.maison-historia-cabecalho {
+    max-width: 760px;
+    margin: 0 auto 45px;
+    text-align: center;
+}
+
+.maison-eyebrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 12px;
+}
+
+.maison-eyebrow span {
+    width: 34px;
+    height: 1px;
+    background-color: #CFA84E;
+}
+
+.maison-eyebrow p {
+    margin: 0;
+    font-family: Georgia, serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    color: #CFA84E;
+}
+
+.maison-historia-cabecalho h2 {
+    margin: 0 0 15px;
+    font-family: Georgia, serif;
+    font-size: 30px;
+    line-height: 1.2;
+    font-weight: 400;
+    color: #07152D;
+}
+
+.maison-historia-cabecalho>p {
+    max-width: 600px;
+    margin: 0 auto;
+    font-family: Georgia, serif;
+    font-size: 13px;
+    line-height: 1.7;
+    color: #8A8A8A;
+}
+
+/* =====================================================
+   LINHA DO TEMPO FIXA
+===================================================== */
+
+.maison-timeline-wrapper {
+    width: 100%;
+    margin: 0;
+    padding: 20px 7% 16px;
+    box-sizing: border-box;
+    background-color: #F7F2ED;
+}
+
+.maison-timeline-wrapper.timeline-fixa {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transform: none;
+    z-index: 999;
+}
+
+
+.maison-timeline {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+.maison-timeline-linha {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: #CFA84E;
+}
+
+.maison-ano {
+    position: relative;
+    z-index: 2;
+    width: 120px;
+    padding: 0;
+    border: 0;
+    outline: none;
+    background: transparent;
+    cursor: default;
+    font-family: Georgia, serif;
+}
+
+.maison-estrela {
+    position: relative;
+    width: 24px;
+    height: 20px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Georgia, serif;
+    font-style: normal;
+    font-size: 22px;
+    line-height: 1;
+    color: #CFA84E;
+    background-color: #F7F2ED;
+    transition:
+        color .45s ease,
+        text-shadow .45s ease,
+        transform .45s ease;
+}
+
+.maison-ano span {
+    display: block;
+    margin-top: 13px;
+    font-family: Georgia, serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: #CFA84E;
+    transition:
+        color .45s ease,
+        text-shadow .45s ease;
+}
+
+/* ANO ATUAL */
+
+.maison-ano.ativo span {
+    color: #051642;
+    text-shadow: 0 0 8px rgba(5, 22, 66, .16);
+}
+
+.maison-ano.ativo .maison-estrela {
+    color: #051642;
+    transform: scale(1.12);
+    text-shadow:
+        0 0 5px rgba(5, 22, 66, .40),
+        0 0 11px rgba(5, 22, 66, .22);
+}
+
+
+/* =====================================================
+   MAISON — MARCOS DA HISTÓRIA
+===================================================== */
+
+.maison-marco {
+    width: 100%;
+    padding: 55px 0 35px;
+    box-sizing: border-box;
+}
+
+.maison-marco-cabecalho {
+    width: 100%;
+    margin: 0 auto 30px;
+    text-align: center;
+}
+
+.maison-marco-ano {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 13px;
+    margin-bottom: 15px;
+}
+
+.maison-marco-ano span {
+    width: 28px;
+    height: 1px;
+    background-color: #CFA84E;
+}
+
+.maison-marco-ano p {
+    margin: 0;
+    font-family: Georgia, serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 4px;
+    color: #CFA84E;
+}
+
+.maison-marco-cabecalho h2 {
+    margin: 0 0 17px;
+    font-family: Georgia, serif;
+    font-size: 43px;
+    line-height: 1;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: #051642;
+}
+
+.maison-marco-cabecalho h3 {
+    margin: 0 0 28px;
+    font-family: Georgia, serif;
+    font-size: 14px;
+    line-height: 1;
+    font-weight: 400;
+    letter-spacing: 6px;
+    color: #8A8A8A;
+}
+
+.maison-marco-texto {
+    width: 78%;
+    max-width: 920px;
+    margin: 0 auto;
+}
+
+.maison-marco-texto p {
+    margin: 0 0 13px;
+    font-family: Georgia, serif;
+    font-size: 13px;
+    line-height: 1.45;
+    font-weight: 400;
+    color: #6B6864;
+    text-align: center;
+}
+
+.maison-marco-texto p:last-child {
+    margin-bottom: 0;
+}
+
+.maison-marco-imagem {
+    width: 100%;
+    height: 335px;
+    overflow: hidden;
+    border-radius: 22px;
+}
+
+.maison-marco-imagem img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* =====================================================
+   MAISON — DO PRIMEIRO TRAÇO À JOIA
+===================================================== */
+
+.maison-savoir {
+    width: 100%;
+    padding: 60px 7% 85px;
+    box-sizing: border-box;
+    background-color: #F7F2ED;
+}
+
+.maison-savoir-cabecalho {
+    width: 100%;
+    margin-bottom: 55px;
+    text-align: center;
+}
+
+.maison-savoir-eyebrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.maison-savoir-eyebrow span {
+    width: 28px;
+    height: 1px;
+    background-color: #CFA84E;
+}
+
+.maison-savoir-eyebrow p {
+    margin: 0;
+    font-family: Georgia, serif;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    color: #CFA84E;
+}
+
+.maison-savoir-cabecalho h2 {
+    margin: 0 0 20px;
+    font-family: Georgia, serif;
+    font-size: 32px;
+    line-height: 1.15;
+    font-weight: 400;
+    color: #051642;
+}
+
+.maison-savoir-cabecalho>p {
+    margin: 0 auto;
+    font-family: Georgia, serif;
+    font-size: 11px;
+    line-height: 1.6;
+    font-weight: 400;
+    color: #6B6864;
+}
+
+
+/* =========================
+   COMPOSIÇÃO
+========================= */
+
+.maison-savoir-composicao {
+    position: relative;
+    width: 100%;
+    height: 650px;
+    max-width: 1120px;
+    margin: 0 auto;
+}
+
+.maison-savoir-item {
+    position: absolute;
+    width: 290px;
+    text-align: center;
+}
+
+.maison-savoir-traco {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.maison-savoir-inspiracao {
+    top: 235px;
+    left: 0;
+}
+
+.maison-savoir-pedra {
+    top: 235px;
+    right: 0;
+}
+
+.maison-savoir-criacao {
+    top: 410px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+/* =========================
+   IMAGENS
+========================= */
+
+.maison-savoir-imagem {
+    width: 100%;
+    height: 165px;
+    overflow: hidden;
+    border-radius: 16px;
+    box-shadow:
+        0 0 10px rgba(250, 225, 122, .95),
+        0 0 22px rgba(250, 225, 122, .65),
+        0 0 32px rgba(207, 168, 78, .30);
+}
+
+.maison-savoir-imagem img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+
+/* =========================
+   TEXTOS
+========================= */
+
+.maison-savoir-item h3 {
+    margin: 18px 0 11px;
+    font-family: Georgia, serif;
+    font-size: 19px;
+    line-height: 1;
+    font-weight: 400;
+    color: #CFA84E;
+}
+
+.maison-savoir-item>p {
+    margin: 0 auto;
+    font-family: Georgia, serif;
+    font-size: 13px;
+    line-height: 1.55;
+    font-weight: 400;
+    color: #4A4A4A;
+}
+
+
+/* =====================================================
+   MAISON — A RARIDADE COMO MATÉRIA-PRIMA
+===================================================== */
+
+.maison-materias {
+    width: 100%;
+    padding: 55px 7% 80px;
+    box-sizing: border-box;
+    background-color: #F7F2ED;
+}
+
+.maison-materias-cabecalho {
+    width: 100%;
+    margin-bottom: 45px;
+    text-align: center;
+}
+
+.maison-materias-eyebrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.maison-materias-eyebrow span {
+    width: 28px;
+    height: 1px;
+    background-color: #CFA84E;
+}
+
+.maison-materias-eyebrow p {
+    margin: 0;
+    font-family: Georgia, serif;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    color: #CFA84E;
+}
+
+.maison-materias-cabecalho h2 {
+    margin: 0 0 20px;
+    font-family: Georgia, serif;
+    font-size: 32px;
+    line-height: 1.15;
+    font-weight: 400;
+    color: #051642;
+}
+
+.maison-materias-cabecalho>p {
+    margin: 0 auto;
+    font-family: Georgia, serif;
+    font-size: 11px;
+    line-height: 1.6;
+    font-weight: 400;
+    color: #8A8A8A;
+}
+
+
+/* =========================
+   CARDS
+========================= */
+
+.maison-materias-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 55px;
+    align-items: start;
+}
+
+.maison-materias-item {
+    width: 100%;
+    text-align: center;
+}
+
+.maison-materias-imagem {
+    width: 100%;
+    height: 190px;
+    overflow: hidden;
+    border-radius: 16px;
+    box-shadow:
+        0 0 10px rgba(250, 225, 122, .95),
+        0 0 22px rgba(250, 225, 122, .65),
+        0 0 32px rgba(207, 168, 78, .30);
+}
+
+.maison-materias-imagem img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.maison-materias-item h3 {
+    margin: 20px 0 12px;
+    font-family: Georgia, serif;
+    font-size: 19px;
+    line-height: 1;
+    font-weight: 400;
+    color: #CFA84E;
+}
+
+.maison-materias-item>p {
+    max-width: 330px;
+    margin: 0 auto;
+    font-family: Georgia, serif;
+    font-size: 13px;
+    line-height: 1.55;
+    font-weight: 400;
+    color: #4A4A4A;
+}
+
+/* =====================================================
+   MAISON — LUXO COM RESPONSABILIDADE
+===================================================== */
+
+.maison-engagement {
+    width: 100%;
+    padding: 60px 7% 110px;
+    box-sizing: border-box;
+    background-color: #F7F2ED;
+}
+
+.maison-engagement-cabecalho {
+    width: 100%;
+    margin-bottom: 42px;
+    text-align: center;
+}
+
+.maison-engagement-eyebrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.maison-engagement-eyebrow span {
+    width: 28px;
+    height: 1px;
+    background-color: #CFA84E;
+}
+
+.maison-engagement-eyebrow p {
+    margin: 0;
+    font-family: Georgia, serif;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    color: #CFA84E;
+}
+
+.maison-engagement-cabecalho h2 {
+    margin: 0 0 20px;
+    font-family: Georgia, serif;
+    font-size: 32px;
+    line-height: 1.15;
+    font-weight: 400;
+    color: #051642;
+}
+
+.maison-engagement-cabecalho>p {
+    max-width: 720px;
+    margin: 0 auto;
+    font-family: Georgia, serif;
+    font-size: 11px;
+    line-height: 1.55;
+    font-weight: 400;
+    color: #6B6864;
+}
+
+
+/* IMAGEM PRINCIPAL */
+
+.maison-engagement-principal {
+    width: 100%;
+    height: 330px;
+    margin-bottom: 70px;
+    overflow: hidden;
+    border-radius: 18px;
+}
+
+.maison-engagement-principal img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+
+/* TRÊS PILARES */
+
+.maison-engagement-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    align-items: start;
+}
+
+.maison-engagement-coluna {
+    width: 100%;
+}
+
+.maison-engagement-coluna h3 {
+    min-height: 48px;
+    margin: 0 0 16px;
+    font-family: Georgia, serif;
+    font-size: 18px;
+    line-height: 1.2;
+    font-weight: 400;
+    color: #051642;
+}
+
+.maison-engagement-coluna h3 span {
+    margin-right: 7px;
+    font-size: 12px;
+}
+
+
+/* CARDS */
+
+.maison-engagement-card {
+    position: relative;
+    width: 100%;
+    height: 205px;
+    overflow: hidden;
+    border-radius: 14px;
+}
+
+.maison-engagement-card>img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    transition:
+        transform .5s ease,
+        filter .5s ease;
+}
+
+
+/* TEXTO SOBRE A IMAGEM */
+
+.maison-engagement-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    padding: 22px 25px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    background: rgba(5, 22, 66, .88);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+        opacity .4s ease,
+        visibility .4s ease;
+}
+
+.maison-engagement-overlay h4 {
+    margin: 0 0 12px;
+    font-family: Georgia, serif;
+    font-size: 15px;
+    line-height: 1.3;
+    font-weight: 400;
+    color: #FAE17A;
+}
+
+.maison-engagement-overlay p {
+    margin: 0 0 8px;
+    font-family: Georgia, serif;
+    font-size: 11px;
+    line-height: 1.4;
+    font-weight: 400;
+    color: #FBF7F0;
+}
+
+.maison-engagement-overlay p:last-child {
+    margin-bottom: 0;
+}
+
+
+/* HOVER */
+
+.maison-engagement-card:hover .maison-engagement-overlay {
+    opacity: 1;
+    visibility: visible;
+}
+
+.maison-engagement-card:hover>img {
+    transform: scale(1.04);
+    filter: brightness(.55);
+}
+
+
+
+
+
+/* =====================================================
+   VOIEHAUTE — SACOLA VAZIA
+===================================================== */
+
+.sacola-pagina {
+    width: 100%;
+    background-color: #F7F2ED;
+}
+
+.sacola-vazia {
+    position: relative;
+    width: 100%;
+    min-height: 775px;
+    padding: 118px 7% 100px;
+    box-sizing: border-box;
+    overflow: hidden;
+    background-color: #F7F2ED;
+}
+
+/* PENA DECORATIVA — SACOLA VAZIA */
+
+.sacola-vazia-pena {
+    position: absolute;
+    width: 470px;
+    height: auto;
+    left: -155px;
+    bottom: -15px;
+    object-fit: contain;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* CONTEÚDO CENTRAL */
+
+.sacola-vazia-conteudo {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* SUA SACOLA */
+
+.sacola-vazia-eyebrow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 36px;
+}
+
+.sacola-vazia-eyebrow span {
+    width: 23px;
+    height: 1px;
+    background-color: #CFA84E;
+}
+
+.sacola-vazia-eyebrow p {
+    margin: 0;
+    font-family: Georgia, serif;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    color: #CFA84E;
+}
+
+/* ÍCONE */
+
+.sacola-vazia-icone {
+    width: 110px;
+    height: 135px;
+    margin: 0 auto 32px;
+}
+
+.sacola-vazia-icone svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* TÍTULO */
+
+.sacola-vazia-conteudo h1 {
+    margin: 0 0 15px;
+    font-family: Georgia, serif;
+    font-size: 37px;
+    line-height: 1.2;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: #06172D;
+}
+
+/* SUBTÍTULO */
+
+.sacola-vazia-subtitulo {
+    margin: 0;
+    font-family: Georgia, serif;
+    font-size: 14px;
+    line-height: 1.5;
+    font-style: italic;
+    color: #06172D;
+}
+
+/* DESCRIÇÃO */
+
+.sacola-vazia-descricao {
+    margin: 62px auto 73px;
+    font-family: Georgia, serif;
+    font-size: 15px;
+    line-height: 1.5;
+    font-weight: 400;
+    color: #06172D;
+}
+
+/* BOTÃO */
+
+.sacola-vazia-botao {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 375px;
+    height: 52px;
+    margin: 0 auto;
+    border-radius: 7px;
+    background-color: #06172D;
+    color: #F7F2ED;
+    text-decoration: none;
+    font-family: Georgia, serif;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    transition: background-color .3s ease;
+}
+
+.sacola-vazia-botao:hover {
+    background-color: #0D1C42;
+}
+
+
+
+/* =====================================================
+   VOIEHAUTE — SACOLA COM PRODUTOS
+===================================================== */
+
+.sacola-cheia {
+    width: 100%;
+    min-height: 775px;
+    padding: 55px 5% 95px;
+    box-sizing: border-box;
+    background: #F7F2ED;
+}
+
+/* CABEÇALHO */
+
+.sacola-cheia-cabecalho {
+    text-align: center;
+    margin-bottom: 37px;
+}
+
+.sacola-cheia-eyebrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 10px;
+}
+
+.sacola-cheia-eyebrow span {
+    width: 23px;
+    height: 1px;
+    background: #CFA84E;
+}
+
+.sacola-cheia-eyebrow p {
+    margin: 0;
+    font: 400 12px Georgia, serif;
+    letter-spacing: 3px;
+    color: #CFA84E;
+}
+
+.sacola-cheia-cabecalho h1 {
+    margin: 0 0 23px;
+    font: 400 37px Georgia, serif;
+    color: #06172D;
+}
+
+.sacola-cheia-cabecalho>p {
+    margin: 0 auto;
+    font: 400 11px Georgia, serif;
+    line-height: 1.5;
+    color: #77716C;
+}
+
+/* LAYOUT PRINCIPAL */
+
+.sacola-cheia-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.75fr) minmax(310px, 1fr);
+    gap: 7%;
+    align-items: start;
+}
+
+/* LISTA */
+
+.sacola-cheia-colunas {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 110px 135px 22px;
+    gap: 15px;
+    padding: 42px 0 30px 20px;
+    font: 400 13px Georgia, serif;
+    letter-spacing: 2px;
+    color: #4A4A4A;
+}
+
+.sacola-cheia-colunas span:first-child {
+    grid-column: 1;
+}
+
+.sacola-cheia-colunas span:nth-child(2) {
+    grid-column: 2;
+    text-align: center;
+}
+
+.sacola-cheia-colunas span:nth-child(3) {
+    grid-column: 3;
+    text-align: center;
+}
+
+/* PRODUTO */
+
+.sacola-cheia-produto {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 110px 135px 22px;
+    gap: 15px;
+    align-items: center;
+    padding: 18px 0 28px;
+    border-bottom: 1px solid rgba(6, 23, 45, .055);
+}
+
+.sacola-cheia-produto:last-child {
+    border-bottom: none;
+}
+
+.sacola-cheia-detalhes {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    min-width: 0;
+}
+
+.sacola-cheia-imagem {
+    width: 165px;
+    height: 136px;
+    flex-shrink: 0;
+    display: block;
+    object-fit: contain;
+    object-position: center;
+    border-radius: 13px;
+    background-color: #FBF7F0;
+}
+
+.sacola-cheia-informacoes {
+    min-width: 0;
+}
+
+.sacola-cheia-informacoes h2 {
+    margin: 0 0 8px;
+    font: 400 16px Georgia, serif;
+    line-height: 1.3;
+    color: #06172D;
+}
+
+.sacola-cheia-colecao {
+    margin: 0 0 18px;
+    font: italic 13px Georgia, serif;
+    color: #06172D;
+}
+
+.sacola-cheia-caracteristicas p {
+    margin: 0;
+    font: 400 11px Georgia, serif;
+    line-height: 1.25;
+    color: #77716C;
+}
+
+/* QUANTIDADE */
+
+.sacola-cheia-quantidade {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 30px;
+    border: 1px solid #EAE5DE;
+    border-radius: 30px;
+}
+
+.sacola-cheia-quantidade form {
+    margin: 0;
+}
+
+.sacola-cheia-quantidade button {
+    border: 0;
+    background: transparent;
+    color: #06172D;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.sacola-cheia-quantidade span {
+    font: 400 13px Georgia, serif;
+    color: #06172D;
+}
+
+/* PREÇO */
+
+.sacola-cheia-preco {
+    margin: 0;
+    text-align: center;
+    white-space: nowrap;
+    font: 400 13px Georgia, serif;
+    color: #06172D;
+}
+
+/* REMOVER */
+
+.sacola-cheia-remover {
+    margin: 0;
+    text-align: right;
+}
+
+.sacola-cheia-remover button {
+    border: 0;
+    background: transparent;
+    font-size: 20px;
+    font-weight: 600;
+    color: #06172D;
+    cursor: pointer;
+}
+
+/* =====================================================
+   RESUMO
+===================================================== */
+
+.sacola-cheia-resumo {
+    padding: 40px 32px 38px;
+    border-radius: 16px;
+    background: #EEE7DF;
+}
+
+.sacola-cheia-resumo>h2 {
+    margin: 0 0 22px;
+    font: 400 13px Georgia, serif;
+    letter-spacing: 2px;
+    color: #06172D;
+}
+
+.sacola-resumo-linha {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 10px;
+    font: 400 11px Georgia, serif;
+    color: #4A4A4A;
+}
+
+.sacola-resumo-total {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 24px;
+    padding: 27px 0 25px;
+    border-top: 1px solid #E3DAD0;
+    font: 400 21px Georgia, serif;
+    color: #06172D;
+}
+
+.sacola-resumo-total strong {
+    font-weight: 400;
+    font-size: 19px;
+    white-space: nowrap;
+}
+
+.sacola-resumo-finalizar {
+    width: 100%;
+    height: 35px;
+    border: 0;
+    border-radius: 7px;
+    background: #06172D;
+    color: #F7F2ED;
+    font: 400 11px Georgia, serif;
+    cursor: pointer;
+    transition: background .3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.sacola-resumo-finalizar:hover {
+    background: #0D1C42;
+}
+
+.sacola-resumo-finalizar:link,
+.sacola-resumo-finalizar:visited {
+    color: #F7F2ED;
+    text-decoration: none;
+}
+
+.sacola-resumo-finalizar:hover {
+    background: #0D1C42;
+    color: #F7F2ED;
+    text-decoration: none;
+}
+
+.sacola-resumo-seguranca {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 12px 0 24px;
+    font: 400 11px Georgia, serif;
+    color: #06172D;
+}
+
+.sacola-resumo-seguranca svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+}
+
+.sacola-resumo-beneficios {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding-top: 22px;
+    border-top: 1px solid #E3DAD0;
+}
+
+.sacola-resumo-beneficio {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+}
+
+.sacola-beneficio-icone {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    color: #06172D;
+}
+
+.sacola-beneficio-icone svg {
+    width: 100%;
+    height: 100%;
+}
+
+.sacola-resumo-beneficio h3 {
+    margin: 0 0 3px;
+    font: 400 15px Georgia, serif;
+    color: #06172D;
+}
+
+.sacola-resumo-beneficio p {
+    margin: 0;
+    font: 400 11px Georgia, serif;
+    color: #77716C;
+}
+
+/* FORMULÁRIO DO BOTÃO ADICIONAR À SACOLA */
+
+.produto-form-sacola {
+    margin: 0;
+    padding: 0;
+    flex: 1;
+    display: flex;
+}
+
+.produto-form-sacola .produto-btn-sacola {
+    width: 100%;
+}
+
+
+
+
+/* =====================================================
+   VOIEHAUTE — CARRINHO MINIMIZADO
+   PAINEL COMPACTO, ALTURA DA TELA, SEM ROLAGEM
+===================================================== */
+
+/* FUNDO ESCURECIDO */
+
+.mini-sacola {
+    width: 32%;
+    max-width: 480px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.mini-sacola-fundo {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .82);
+    z-index: 9998;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition: opacity .35s ease, visibility .35s ease;
+}
+
+.mini-sacola-fundo.aberto {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* =====================================================
+   PAINEL LATERAL
+===================================================== */
+
+.mini-sacola {
+    position: fixed;
+    top: 0;
+    right: 0;
+
+    width: 38%;
+    max-width: 560px;
+    height: 100vh;
+    height: 100dvh;
+
+    padding: clamp(22px, 3.5vh, 34px) 30px 18px;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+
+    background: #F7F2ED;
+    z-index: 9999;
+
+    transform: translateX(100%);
+    visibility: hidden;
+
+    transition: transform .4s ease, visibility .4s ease;
+
+    font-family: Georgia, serif;
+}
+
+.mini-sacola.aberto {
+    transform: translateX(0);
+    visibility: visible;
+}
+
+/* BOTÃO FECHAR */
+
+.mini-sacola-fechar {
+    position: absolute;
+    top: 13px;
+    right: 18px;
+
+    padding: 0;
+    border: none;
+    background: transparent;
+
+    font-size: 24px;
+    line-height: 1;
+    font-weight: 300;
+    color: #06172D;
+
+    cursor: pointer;
+    z-index: 2;
+}
+
+/* =====================================================
+   CONFIRMAÇÃO
+===================================================== */
+
+.mini-sacola-confirmacao {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    margin: 14px 0 clamp(14px, 2.5vh, 25px);
+    flex-shrink: 0;
+}
+
+.mini-sacola-check {
+    width: clamp(48px, 7vh, 62px);
+    height: clamp(48px, 7vh, 62px);
+
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #CFA84E;
+    border-radius: 50%;
+
+    color: #CFA84E;
+}
+
+.mini-sacola-check svg {
+    width: 30px;
+    height: 30px;
+}
+
+.mini-sacola-confirmacao h2 {
+    margin: 0;
+
+    font: 400 clamp(16px, 2.4vh, 22px) Georgia, serif;
+    line-height: 1.2;
+    color: #06172D;
+}
+
+/* =====================================================
+   PRODUTO ADICIONADO
+===================================================== */
+
+.mini-sacola-produto {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+
+    margin-bottom: clamp(14px, 2.8vh, 27px);
+    flex-shrink: 0;
+}
+
+/* FOTO DA JOIA ADICIONADA */
+
+.mini-sacola-produto>img {
+    width: clamp(100px, 13vh, 135px);
+    height: clamp(85px, 12vh, 115px);
+
+    flex-shrink: 0;
+    display: block;
+
+    object-fit: cover;
+    object-position: center;
+
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
+}
+
+/* INFORMAÇÕES DA JOIA */
+
+.mini-sacola-produto-info {
+    min-width: 0;
+}
+
+.mini-sacola-produto-info h3 {
+    margin: 0 0 7px;
+
+    font: 400 clamp(16px, 2.5vh, 22px) Georgia, serif;
+    line-height: 1.2;
+    color: #06172D;
+}
+
+.mini-sacola-colecao {
+    margin: 0 0 12px;
+
+    font: italic clamp(12px, 1.8vh, 15px) Georgia, serif;
+    color: #4A4A4A;
+}
+
+.mini-sacola-preco {
+    margin: 0;
+
+    font: 400 clamp(13px, 2vh, 17px) Georgia, serif;
+    color: #4A4A4A;
+}
+
+/* =====================================================
+   BOTÕES
+===================================================== */
+
+.mini-sacola-acoes {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+
+    flex-shrink: 0;
+}
+
+.mini-sacola-ver,
+.mini-sacola-continuar {
+    width: 100%;
+    height: clamp(40px, 5.7vh, 50px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+
+    border-radius: 8px;
+
+    font: 400 clamp(12px, 1.8vh, 15px) Georgia, serif;
+    letter-spacing: 2.5px;
+    text-decoration: none;
+
+    cursor: pointer;
+    transition: background .25s ease;
+}
+
+.mini-sacola-ver {
+    border: 1px solid #06172D;
+    background: #06172D;
+    color: #F7F2ED;
+}
+
+.mini-sacola-continuar {
+    border: 1px solid #06172D;
+    background: transparent;
+    color: #06172D;
+}
+
+.mini-sacola-ver:hover {
+    background: #0D1C42;
+    color: #FFFFFF;
+}
+
+.mini-sacola-continuar:hover {
+    background: #EDE6DD;
+}
+
+/* =====================================================
+   SUGESTÕES — VOCÊ TAMBÉM PODE GOSTAR
+===================================================== */
+
+.mini-sacola-sugestoes {
+    margin-top: clamp(18px, 3.5vh, 32px);
+    min-height: 0;
+}
+
+.mini-sacola-sugestoes>h3 {
+    margin: 0 0 clamp(10px, 1.8vh, 16px);
+
+    font: 400 clamp(13px, 2vh, 17px) Georgia, serif;
+    letter-spacing: 2px;
+    line-height: 1.2;
+
+    color: #06172D;
+}
+
+/* DOIS CARDS LADO A LADO */
+
+.mini-sacola-sugestoes-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    align-items: start;
+}
+
+.mini-sacola-sugestao {
+    display: block;
+    min-width: 0;
+
+    overflow: hidden;
+    border-radius: 12px;
+
+    background: #EEE7DF;
+    text-decoration: none;
+    color: #06172D;
+}
+
+/* IMAGENS DAS SUGESTÕES */
+
+.mini-sacola-sugestao img {
+    width: 100%;
+    height: clamp(90px, 16vh, 145px);
+
+    display: block;
+
+    object-fit: cover;
+    object-position: center;
+
+    transition: transform .3s ease;
+}
+
+.mini-sacola-sugestao:hover img {
+    transform: scale(1.04);
+}
+
+/* NOME E PREÇO DAS SUGESTÕES */
+
+.mini-sacola-sugestao-info {
+    padding: 10px 12px 12px;
+}
+
+.mini-sacola-sugestao-info h4 {
+    margin: 0 0 6px;
+
+    font: 400 clamp(11px, 1.7vh, 13px) Georgia, serif;
+    letter-spacing: 1px;
+    line-height: 1.25;
+    color: #06172D;
+}
+
+.mini-sacola-sugestao-info p {
+    margin: 0;
+
+    font: 400 clamp(10px, 1.5vh, 12px) Georgia, serif;
+    color: #4A4A4A;
+}
+
+
+/* =====================================================
+   CARRINHO MINIMIZADO — DISTRIBUIÇÃO VERTICAL
+===================================================== */
+
+/* PAINEL */
+
+.mini-sacola {
+    justify-content: space-evenly;
+    padding-top: 35px;
+    padding-bottom: 35px;
+}
+
+/* CONFIRMAÇÃO */
+
+.mini-sacola-confirmacao {
+    margin: 0;
+}
+
+/* PRODUTO ADICIONADO */
+
+.mini-sacola-produto {
+    margin: 0;
+}
+
+/* BOTÕES */
+
+.mini-sacola-acoes {
+    margin: 0;
+}
+
+/* SUGESTÕES */
+
+.mini-sacola-sugestoes {
+    margin: 0;
+    flex-shrink: 0;
+}
+
+
+
+/* =====================================================
+   SACOLA PRINCIPAL — IMAGENS SEM BORDAS BRANCAS
+===================================================== */
+
+.sacola-cheia-detalhes>a {
+    display: block;
+    flex-shrink: 0;
+    padding: 0;
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    overflow: hidden;
+}
+
+.sacola-cheia-imagem {
+    width: 200px;
+    height: 150px;
+    display: block;
+    padding: 0;
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    object-fit: cover;
+    object-position: center;
+}
+
+
+
+
+
+
+
+
+/* =====================================================
+   VOIEHAUTE — CHECKOUT / ENTREGA
+===================================================== */
+
+.pagina-entrega {
+    background: #F7F2ED;
+    color: #06172D;
+    font-family: Georgia, serif;
+}
+
+.entrega-pagina {
+    max-width: 1450px;
+    margin: 0 auto;
+    padding: 60px 5% 45px;
+}
+
+/* ETAPAS */
+
+.entrega-etapas {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 58px;
+    margin-bottom: 40px;
+}
+
+.entrega-etapa {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 21px;
+    white-space: nowrap;
+}
+
+.entrega-etapa span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    border: 1px solid #06172D;
+    border-radius: 50%;
+    font-size: 16px;
+}
+
+.entrega-etapa.ativa span {
+    background: #06172D;
+    color: #fff;
+}
+
+/* CABEÇALHO */
+
+.entrega-cabecalho {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.entrega-eyebrow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 22px;
+    color: #C99D47;
+    font-size: 12px;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+}
+
+.entrega-eyebrow span {
+    width: 24px;
+    height: 1px;
+    background: #C99D47;
+}
+
+.entrega-cabecalho h1 {
+    font-family: Georgia, serif;
+    font-size: 38px;
+    font-weight: 400;
+    margin-bottom: 18px;
+}
+
+.entrega-cabecalho p {
+    font-size: 12px;
+    color: #77716C;
+}
+
+/* ESTRUTURA */
+
+.entrega-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.85fr) minmax(300px, 1fr);
+    gap: 38px;
+    align-items: stretch;
+}
+
+.entrega-conteudo {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.entrega-erro {
+    color: #A73535;
+    font-size: 13px;
+}
+
+/* FORMULÁRIO */
+
+.entrega-formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.entrega-campos {
+    display: grid;
+    gap: 9px;
+}
+
+.entrega-campos.duas-colunas {
+    grid-template-columns: 1fr 1fr;
+}
+
+.entrega-campos.endereco-numero {
+    grid-template-columns: 1.8fr 1fr;
+}
+
+.entrega-campos.tres-colunas {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.entrega-campo {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    min-width: 0;
+}
+
+.entrega-campo label {
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.entrega-campo input {
+    width: 100%;
+    height: 41px;
+    border: 1px solid #D3A653;
+    border-radius: 8px;
+    background: transparent;
+    padding: 0 14px;
+    font-family: Georgia, serif;
+    font-size: 12px;
+    color: #06172D;
+    outline: none;
+}
+
+.entrega-campo input:focus {
+    border-color: #06172D;
+}
+
+.entrega-campo input::placeholder {
+    color: #9A9690;
+}
+
+.entrega-salvar-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 5px 0 18px;
+    font-size: 12px;
+    color: #77716C;
+    cursor: pointer;
+}
+
+.entrega-salvar-checkbox input {
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border: 1px solid #D3A653;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.entrega-salvar-checkbox input:checked {
+    background: #06172D;
+    border-color: #06172D;
+    box-shadow: inset 0 0 0 3px #F7F2ED;
+}
+
+/* BOTÕES */
+
+.entrega-botao-principal,
+.entrega-botao-cancelar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 51px;
+    border-radius: 7px;
+    font-family: Georgia, serif;
+    font-size: 15px;
+    letter-spacing: 3px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.entrega-botao-principal {
+    border: 1px solid #06172D;
+    background: #06172D;
+    color: #fff;
+}
+
+.entrega-botao-principal:hover {
+    background: #142944;
+    color: #fff;
+}
+
+.entrega-botao-cancelar {
+    border: 1px solid #06172D;
+    background: transparent;
+    color: #06172D;
+}
+
+.entrega-botoes-edicao {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 9px;
+}
+
+.entrega-acao-final {
+    margin-top: auto;
+    padding-top: 70px;
+}
+
+/* ENDEREÇO SALVO */
+
+.entrega-secao-titulo {
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    margin-bottom: 17px;
+}
+
+.entrega-endereco-card {
+    display: flex;
+    align-items: center;
+    position: relative;
+    gap: 25px;
+    min-height: 145px;
+    padding: 24px 32px;
+    border: 1px solid #D3A653;
+    border-radius: 12px;
+}
+
+.entrega-icone-local {
+    font-size: 39px;
+}
+
+.entrega-endereco-dados h3 {
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+
+.entrega-endereco-dados p {
+    font-size: 12px;
+    line-height: 1.3;
+    margin: 0;
+}
+
+.entrega-editar {
+    position: absolute;
+    right: 18px;
+    bottom: 13px;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    color: #06172D;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.entrega-titulo-frete {
+    margin-top: 38px;
+}
+
+.entrega-frete-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 22px 25px;
+    min-height: 90px;
+    border: 1px solid #D3A653;
+    border-radius: 12px;
+}
+
+.entrega-frete-card>i {
+    font-size: 42px;
+}
+
+.entrega-frete-card h3 {
+    font-size: 15px;
+    margin-bottom: 6px;
+}
+
+.entrega-frete-card p {
+    font-size: 12px;
+    margin: 0;
+}
+
+.entrega-frete-card strong {
+    margin-left: auto;
+    align-self: flex-end;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+/* RESUMO DO PEDIDO */
+
+.entrega-resumo {
+    background: #EFE7DF;
+    border-radius: 17px;
+    padding: 38px 32px;
+}
+
+.entrega-resumo-cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 28px;
+}
+
+.entrega-resumo-cabecalho h2 {
+    font-size: 13px;
+    letter-spacing: 2px;
+    font-weight: 400;
+}
+
+.entrega-resumo-cabecalho a {
+    font-size: 11px;
+    color: #9B948D;
+    text-decoration: none;
+}
+
+.entrega-resumo-produtos {
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+}
+
+.entrega-resumo-produto {
+    display: flex;
+    gap: 13px;
+    align-items: center;
+}
+
+.entrega-resumo-produto img {
+    width: 86px;
+    height: 86px;
+    object-fit: cover;
+    border: none;
+    border-radius: 8px;
+    padding: 0;
+    background: transparent;
+    flex-shrink: 0;
+}
+
+.entrega-resumo-info {
+    min-width: 0;
+}
+
+.entrega-resumo-info h3 {
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 7px;
+}
+
+.entrega-resumo-info strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 8px;
+}
+
+.entrega-resumo-info p {
+    font-size: 11px;
+    color: #77716C;
+    margin: 0;
+}
+
+.entrega-resumo-valores {
+    border-top: 1px solid #DED6CF;
+    border-bottom: 1px solid #DED6CF;
+    padding: 24px 0;
+    margin-top: 28px;
+}
+
+.entrega-resumo-valores>div {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.entrega-resumo-valores>div:last-child {
+    margin-bottom: 0;
+}
+
+.entrega-resumo-total {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: center;
+    padding-top: 28px;
+    font-size: 21px;
+}
+
+.entrega-resumo-total strong {
+    font-weight: 400;
+}
+
+@media (max-width: 850px) {
+    .entrega-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .entrega-etapas {
+        gap: 16px;
+        flex-wrap: wrap;
+    }
+
+    .entrega-resumo {
+        order: 2;
+    }
+}
+
+
+
+
+/* =====================================================
+   VOIEHAUTE — CHECKOUT / PAGAMENTO
+   ETAPA 3 — FORMA DE PAGAMENTO
+===================================================== */
+
+/* =====================================================
+   1. CONFIGURAÇÃO GERAL
+===================================================== */
+
+.pagina-pagamento {
+    background: #F7F2ED;
+    color: #06172D;
+    font-family: Georgia, serif;
+}
+
+.pagina-pagamento .pagamento-conteudo {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.pagina-pagamento .pagamento-secao-titulo {
+    margin: 0 0 20px;
+
+    color: #06172D;
+    font-family: Georgia, serif;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 2.5px;
+    line-height: 1.5;
+}
+
+.pagina-pagamento #formPagamento {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+
+/* =====================================================
+   2. OPÇÕES DE PAGAMENTO
+   CARTÃO DE CRÉDITO E PIX
+===================================================== */
+
+.pagina-pagamento .pagamento-opcao {
+    width: 100%;
+    margin: 0 0 12px;
+
+    border: 1px solid #D3A653;
+    border-radius: 10px;
+
+    background: transparent;
+    box-sizing: border-box;
+
+    transition: border-color .25s ease;
+}
+
+.pagina-pagamento .pagamento-opcao.selecionado {
+    border-color: #C99D47;
+}
+
+
+/* =====================================================
+   3. CABEÇALHO DAS OPÇÕES
+===================================================== */
+
+.pagina-pagamento .pagamento-opcao-cabecalho {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+
+    width: 100%;
+    min-height: 65px;
+
+    margin: 0;
+    padding: 15px 23px;
+
+    color: #06172D;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.pagina-pagamento .pagamento-opcao-nome {
+    flex: 1;
+    min-width: 0;
+
+    margin: 0;
+
+    color: #06172D;
+    font-family: Georgia, serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+
+/* =====================================================
+   4. RADIO PERSONALIZADO
+===================================================== */
+
+.pagina-pagamento .pagamento-radio {
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    opacity: 0;
+}
+
+.pagina-pagamento .pagamento-radio-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 18px;
+    height: 18px;
+
+    flex-shrink: 0;
+
+    border: 1px solid #D3A653;
+    border-radius: 50%;
+
+    background: transparent;
+    box-sizing: border-box;
+}
+
+.pagina-pagamento
+.pagamento-opcao.selecionado
+.pagamento-radio-visual::after {
+    content: "";
+
+    width: 9px;
+    height: 9px;
+
+    border-radius: 50%;
+    background: #06172D;
+}
+
+.pagina-pagamento
+.pagamento-radio:focus-visible
++ .pagamento-radio-visual {
+    outline: 2px solid #06172D;
+    outline-offset: 4px;
+}
+
+
+/* =====================================================
+   5. BANDEIRAS VISA E MASTERCARD
+===================================================== */
+
+.pagina-pagamento .pagamento-bandeiras {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.pagina-pagamento .pagamento-visa {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 29px;
+    height: 19px;
+
+    padding: 0 3px;
+
+    border-radius: 3px;
+    background: #FFFFFF;
+
+    color: #1645B5;
+
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    font-style: italic;
+    font-weight: 900;
+    letter-spacing: -1px;
+    line-height: 1;
+}
+
+.pagina-pagamento .pagamento-mastercard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 32px;
+    height: 19px;
+
+    padding: 0 3px;
+
+    border-radius: 3px;
+    background: #FFFFFF;
+
+    box-sizing: border-box;
+}
+
+.pagina-pagamento .pagamento-mastercard span {
+    display: block;
+
+    width: 15px;
+    height: 15px;
+
+    border-radius: 50%;
+    background: #EB001B;
+}
+
+.pagina-pagamento .pagamento-mastercard span + span {
+    margin-left: -6px;
+
+    background: #F79E1B;
+    opacity: .9;
+}
+
+
+/* =====================================================
+   6. LOGOTIPO PIX
+===================================================== */
+
+.pagina-pagamento .pagamento-pix-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 3px;
+    flex-shrink: 0;
+
+    padding: 3px 5px;
+
+    border-radius: 3px;
+    background: #FFFFFF;
+
+    color: #32BCAD;
+
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1;
+}
+
+.pagina-pagamento .pagamento-pix-logo svg {
+    display: block;
+
+    width: 18px;
+    height: 18px;
+
+    flex-shrink: 0;
+}
+
+
+/* =====================================================
+   7. CONTEÚDO EXPANSÍVEL
+===================================================== */
+
+.pagina-pagamento .pagamento-opcao-conteudo {
+    display: none;
+
+    width: 100%;
+    padding: 0 23px 25px;
+
+    box-sizing: border-box;
+}
+
+.pagina-pagamento
+.pagamento-opcao.selecionado
+.pagamento-opcao-conteudo {
+    display: block;
+}
+
+.pagina-pagamento
+.pagamento-opcao:not(.selecionado)
+.pagamento-opcao-conteudo {
+    display: none;
+}
+
+
+/* =====================================================
+   8. FORMULÁRIO DO CARTÃO
+===================================================== */
+
+.pagina-pagamento .pagamento-campos {
+    display: flex;
+    flex-direction: column;
+
+    gap: 16px;
+    width: 100%;
+}
+
+.pagina-pagamento .pagamento-campo {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+    min-width: 0;
+}
+
+.pagina-pagamento .pagamento-campo label {
+    margin: 0;
+
+    color: #06172D;
+
+    font-family: Georgia, serif;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+.pagina-pagamento .pagamento-campo input:not([type="hidden"]),
+.pagina-pagamento .pagamento-campo select {
+    display: block;
+
+    width: 100%;
+    height: 43px;
+
+    padding: 0 14px;
+
+    border: 1px solid #D3A653;
+    border-radius: 8px;
+
+    background: transparent;
+    color: #06172D;
+
+    font-family: Georgia, serif;
+    font-size: 12px;
+    font-weight: 400;
+
+    outline: none;
+    box-shadow: none;
+    box-sizing: border-box;
+
+    transition: border-color .2s ease;
+}
+
+.pagina-pagamento
+.pagamento-campo input:not([type="hidden"])::placeholder {
+    color: #9A9690;
+    opacity: 1;
+}
+
+.pagina-pagamento
+.pagamento-campo input:not([type="hidden"]):focus,
+.pagina-pagamento
+.pagamento-campo select:focus {
+    border-color: #06172D;
+    outline: none;
+    box-shadow: none;
+}
+
+
+/* =====================================================
+   9. VALIDADE E CVC LADO A LADO
+===================================================== */
+
+.pagina-pagamento .pagamento-campos-duplos {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+
+    gap: 15px;
+    width: 100%;
+}
+
+
+/* =====================================================
+   10. PARCELAMENTO PERSONALIZADO
+===================================================== */
+
+.pagina-pagamento .pagamento-parcelamento {
+    position: relative;
+}
+
+.pagina-pagamento .pagamento-dropdown {
+    position: relative;
+    width: 100%;
+}
+
+.pagina-pagamento .pagamento-dropdown-botao {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    width: 100%;
+    min-height: 51px;
+
+    padding: 0 17px;
+
+    border: 1px solid #CFA84E;
+    border-radius: 10px;
+
+    background: transparent;
+    color: #06172D;
+
+    font-family: Georgia, serif;
+    font-size: 13px;
+    font-weight: 400;
+    text-align: left;
+
+    box-sizing: border-box;
+    cursor: pointer;
+
+    transition: border-color .2s ease;
+}
+
+.pagina-pagamento .pagamento-dropdown-botao:hover,
+.pagina-pagamento .pagamento-dropdown-botao:focus-visible {
+    border-color: #B58A40;
+    outline: none;
+}
+
+.pagina-pagamento .pagamento-dropdown-botao > span {
+    min-width: 0;
+}
+
+.pagina-pagamento .pagamento-dropdown-botao i {
+    flex-shrink: 0;
+
+    color: #06172D;
+    font-size: 15px;
+
+    transition: transform .25s ease;
+}
+
+.pagina-pagamento
+.pagamento-dropdown.aberto
+.pagamento-dropdown-botao i {
+    transform: rotate(180deg);
+}
+
+
+/* =====================================================
+   11. LISTA ABERTA DE PARCELAS
+===================================================== */
+
+.pagina-pagamento .pagamento-dropdown-lista {
+    display: none;
+
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+
+    width: 100%;
+    max-height: 260px;
+
+    padding: 5px 0;
+
+    border: 1px solid #CFA84E;
+    border-radius: 10px;
+
+    background: #F7F2ED;
+
+    box-shadow: 0 7px 20px rgba(6, 23, 45, .06);
+
+    box-sizing: border-box;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    scrollbar-width: thin;
+    scrollbar-color: #CFA84E #F7F2ED;
+
+    z-index: 50;
+}
+
+.pagina-pagamento
+.pagamento-dropdown.aberto
+.pagamento-dropdown-lista {
+    display: flex;
+    flex-direction: column;
+}
+
+.pagina-pagamento .pagamento-dropdown-item {
+    display: block;
+
+    width: 100%;
+    min-height: 43px;
+
+    padding: 11px 17px;
+
+    border: none;
+    border-radius: 0;
+
+    background: transparent;
+    color: #77716C;
+
+    font-family: Georgia, serif;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: left;
+
+    cursor: pointer;
+    box-sizing: border-box;
+
+    transition: background .2s ease;
+}
+
+.pagina-pagamento .pagamento-dropdown-item:hover,
+.pagina-pagamento .pagamento-dropdown-item.ativo,
+.pagina-pagamento .pagamento-dropdown-item:focus-visible {
+    background: #E1CBA0;
+    color: #06172D;
+    outline: none;
+}
+
+/* Permite que o menu ultrapasse a caixa do cartão */
+
+.pagina-pagamento
+.pagamento-opcao.selecionado:has(.pagamento-dropdown.aberto) {
+    overflow: visible;
+}
+
+
+/* =====================================================
+   12. INFORMAÇÕES DO PIX
+===================================================== */
+
+.pagina-pagamento .pagamento-pix-informacao {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 12px;
+
+    padding: 15px 17px;
+
+    border-radius: 8px;
+    background: #EFE7DF;
+}
+
+.pagina-pagamento .pagamento-pix-informacao i {
+    flex-shrink: 0;
+
+    color: #C99D47;
+    font-size: 20px;
+}
+
+.pagina-pagamento .pagamento-pix-informacao p {
+    margin: 0;
+
+    color: #77716C;
+
+    font-family: Georgia, serif;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+
+/* =====================================================
+   13. BOTÃO REVISAR PEDIDO
+===================================================== */
+
+.pagina-pagamento .pagamento-botao-revisar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    min-height: 51px;
+
+    margin-top: 35px;
+    padding: 12px 20px;
+
+    border: 1px solid #06172D;
+    border-radius: 7px;
+
+    background: #06172D;
+    color: #FFFFFF;
+
+    font-family: Georgia, serif;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 3px;
+
+    text-align: center;
+
+    cursor: pointer;
+    transition: background .25s ease;
+}
+
+.pagina-pagamento .pagamento-botao-revisar:hover {
+    background: #142944;
+    color: #FFFFFF;
+}
+
+
+/* =====================================================
+   14. INFORMAÇÃO DE SEGURANÇA
+===================================================== */
+
+.pagina-pagamento .pagamento-seguranca {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    margin: 15px 0 0;
+
+    color: #77716C;
+
+    font-family: Georgia, serif;
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.pagina-pagamento .pagamento-seguranca i {
+    flex-shrink: 0;
+    font-size: 13px;
+}
+
+
+/* =====================================================
+   15. RESPONSIVIDADE — TABLET
+===================================================== */
+
+@media (max-width: 850px) {
+
+    .pagina-pagamento .pagamento-conteudo {
+        width: 100%;
+    }
+
+    .pagina-pagamento .pagamento-secao-titulo {
+        font-size: 12px;
+    }
+
+    .pagina-pagamento .pagamento-dropdown-lista {
+        max-height: 250px;
+    }
+}
+
+
+/* =====================================================
+   16. RESPONSIVIDADE — CELULAR
+===================================================== */
+
+@media (max-width: 600px) {
+
+    .pagina-pagamento .pagamento-secao-titulo {
+        margin-bottom: 16px;
+        font-size: 11px;
+        letter-spacing: 1.5px;
+    }
+
+    .pagina-pagamento .pagamento-opcao {
+        margin-bottom: 11px;
+        border-radius: 9px;
+    }
+
+    .pagina-pagamento .pagamento-opcao-cabecalho {
+        min-height: 58px;
+        padding: 12px 15px;
+        gap: 11px;
+    }
+
+    .pagina-pagamento .pagamento-opcao-nome {
+        font-size: 13px;
+    }
+
+    .pagina-pagamento .pagamento-opcao-conteudo {
+        padding: 0 15px 20px;
+    }
+
+    .pagina-pagamento .pagamento-bandeiras {
+        gap: 5px;
+    }
+
+    .pagina-pagamento .pagamento-visa {
+        min-width: 25px;
+        font-size: 11px;
+    }
+
+    .pagina-pagamento .pagamento-mastercard {
+        width: 29px;
+    }
+
+    .pagina-pagamento .pagamento-campos {
+        gap: 14px;
+    }
+
+    .pagina-pagamento .pagamento-campos-duplos {
+        gap: 9px;
+    }
+
+    .pagina-pagamento .pagamento-campo label {
+        font-size: 12px;
+    }
+
+    .pagina-pagamento
+    .pagamento-campo input:not([type="hidden"]) {
+        height: 42px;
+        font-size: 12px;
+    }
+
+    .pagina-pagamento .pagamento-dropdown-botao {
+        min-height: 46px;
+        padding: 0 12px;
+        font-size: 11px;
+    }
+
+    .pagina-pagamento .pagamento-dropdown-item {
+        padding: 11px 12px;
+        font-size: 11px;
+    }
+
+    .pagina-pagamento .pagamento-dropdown-lista {
+        max-height: 235px;
+    }
+
+    .pagina-pagamento .pagamento-botao-revisar {
+        min-height: 48px;
+        margin-top: 25px;
+        font-size: 12px;
+        letter-spacing: 2px;
+    }
+
+    .pagina-pagamento .pagamento-seguranca {
+        font-size: 10px;
+    }
+}
+
+
+/* ==========================================
+   VOIEHAUTE — LOGOTIPOS DO PAGAMENTO
+========================================== */
+
+.pagina-pagamento .pagamento-bandeiras {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 20px;
+    flex-shrink: 0;
+}
+
+.pagina-pagamento .pagamento-logo-visa,
+.pagina-pagamento .pagamento-logo-mastercard {
+    display: block;
+    width: 70px;
+    height: 40px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 9px;
+    overflow: hidden;
+    background: #FFFFFF;
+}
+
+.pagina-pagamento .pagamento-pix-logo {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+}
+
+.pagina-pagamento .pagamento-logo-pix {
+    display: block;
+    width: 70px;
+    height: 40px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 9px;
+    overflow: hidden;
+    background: #FFFFFF;
+}
+
+
+/* =====================================================
+   VOIEHAUTE — REVISÃO DO PEDIDO
+   ETAPA 4 DO CHECKOUT
+===================================================== */
+
+.pagina-revisao {
+    background: #F7F2ED;
+    color: #06172D;
+    font-family: Georgia, serif;
+}
+
+/* LAYOUT */
+
+.pagina-revisao .revisao-layout {
+    align-items: stretch;
+}
+
+.pagina-revisao .revisao-conteudo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+    min-width: 0;
+    min-height: 460px;
+}
+
+/* BLOCOS DE INFORMAÇÕES */
+
+.pagina-revisao .revisao-informacoes {
+    display: flex;
+    flex-direction: column;
+}
+
+.pagina-revisao .revisao-bloco {
+    padding: 0 0 24px;
+}
+
+.pagina-revisao .revisao-bloco + .revisao-bloco {
+    padding-top: 25px;
+    border-top: 1px solid #DDD5CC;
+}
+
+.pagina-revisao .revisao-bloco-cabecalho {
+    display: flex;
+    align-items: center;
+    gap: 23px;
+    margin-bottom: 25px;
+}
+
+.pagina-revisao .revisao-bloco-cabecalho h2 {
+    margin: 0;
+    color: #06172D;
+    font-family: Georgia, serif;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: .5px;
+}
+
+.pagina-revisao .revisao-icone {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    flex-shrink: 0;
+    font-size: 34px;
+    color: #06172D;
+}
+
+/* DADOS E BOTÃO EDITAR */
+
+.pagina-revisao .revisao-bloco-corpo {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    max-width: 270px;
+}
+
+.pagina-revisao .revisao-dados {
+    min-width: 0;
+}
+
+.pagina-revisao .revisao-dados p {
+    margin: 0;
+    color: #06172D;
+    font-family: Georgia, serif;
+    font-size: 11px;
+    line-height: 1.35;
+}
+
+.pagina-revisao .revisao-dados .revisao-nome {
+    font-weight: 500;
+}
+
+.pagina-revisao .revisao-editar {
+    flex-shrink: 0;
+    color: #06172D;
+    font-family: Georgia, serif;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.pagina-revisao .revisao-editar:hover {
+    color: #C99D47;
+    text-decoration: underline;
+}
+
+/* BOTÃO FINALIZAR */
+
+.pagina-revisao .revisao-form-finalizar {
+    width: 100%;
+    margin-top: 45px;
+}
+
+.pagina-revisao .revisao-botao-finalizar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 51px;
+    padding: 12px 20px;
+    border: 1px solid #06172D;
+    border-radius: 7px;
+    background: #06172D;
+    color: #FFFFFF;
+    font-family: Georgia, serif;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    cursor: pointer;
+    transition: background .25s ease;
+}
+
+.pagina-revisao .revisao-botao-finalizar:hover {
+    background: #142944;
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 850px) {
+    .pagina-revisao .revisao-layout {
+        flex-direction: column;
+    }
+
+    .pagina-revisao .revisao-conteudo {
+        min-height: 0;
+    }
+
+    .pagina-revisao .revisao-form-finalizar {
+        margin-top: 35px;
+    }
+}
+
+@media (max-width: 600px) {
+    .pagina-revisao .revisao-bloco-cabecalho {
+        gap: 13px;
+        margin-bottom: 18px;
+    }
+
+    .pagina-revisao .revisao-icone {
+        width: 34px;
+        font-size: 27px;
+    }
+
+    .pagina-revisao .revisao-bloco-cabecalho h2 {
+        font-size: 12px;
+    }
+
+    .pagina-revisao .revisao-bloco-corpo {
+        max-width: 100%;
+    }
+
+    .pagina-revisao .revisao-dados p {
+        font-size: 11px;
+    }
+
+    .pagina-revisao .revisao-botao-finalizar {
+        min-height: 48px;
+        font-size: 12px;
+        letter-spacing: 2px;
+    }
+}
+
+
+
+/* ==========================================================
+   VOIEHAUTE — PÁGINA DE PEDIDO CONFIRMADO
+   ========================================================== */
+
+/* CONFIGURAÇÕES GERAIS */
+
+body.pagina-confirmacao {
+    margin: 0;
+    padding: 0;
+
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    background-color: #F7F2ED;
+    background-image: url('/uploads/fundo.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    color: #06172D;
+    font-family: Georgia, 'Times New Roman', serif;
+}
+
+.pagina-confirmacao *,
+.pagina-confirmacao *::before,
+.pagina-confirmacao *::after {
+    box-sizing: border-box;
+}
+
+/* ==========================================================
+   CONTEÚDO CENTRAL
+   ========================================================== */
+
+body.pagina-confirmacao .confirmacao-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    max-width: 850px;
+
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    margin: 0 auto;
+    padding: 20px 25px;
+
+    text-align: center;
+}
+
+/* ==========================================================
+   LOGO
+   ========================================================== */
+
+body.pagina-confirmacao .confirmacao-logo {
+    display: block;
+
+    width: 145px;
+    height: 115px;
+
+    margin: 0 0 16px;
+
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+/* ==========================================================
+   TÍTULO — PEDIDO CONFIRMADO
+   ========================================================== */
+
+body.pagina-confirmacao .confirmacao-titulo {
+    margin: 0;
+
+    color: #06172D;
+
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 44px;
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.5px;
+}
+
+/* ==========================================================
+   SUBTÍTULO — OBRIGADA POR ESCOLHER A VOIEHAUTE
+   ========================================================== */
+
+body.pagina-confirmacao .confirmacao-subtitulo {
+    margin: 22px 0 0;
+
+    color: #343434;
+
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: 3.5px;
+}
+
+/* ==========================================================
+   MENSAGEM DO PEDIDO
+   ========================================================== */
+
+body.pagina-confirmacao .confirmacao-mensagem {
+    width: 100%;
+    max-width: 380px;
+
+    margin: 35px 0 0;
+
+    color: #69625F;
+
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+/* ==========================================================
+   CAIXA DO NÚMERO DO PEDIDO
+   ========================================================== */
+
+body.pagina-confirmacao .confirmacao-container .confirmacao-pedido {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 435px;
+    max-width: 100%;
+
+    height: 185px;
+    min-height: 0;
+
+    margin: 30px auto 0;
+    padding: 25px;
+
+    background-color: rgba(247, 242, 237, 0.38);
+
+    border: 1px solid rgba(207, 168, 78, 0.22);
+    border-radius: 15px;
+
+    box-shadow: none;
+}
+
+/* TEXTO — NÚMERO DO PEDIDO */
+
+body.pagina-confirmacao .confirmacao-pedido-label {
+    display: block;
+
+    color: #06172D;
+
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 1.4;
+    text-align: center;
+}
+
+/* NÚMERO GERADO */
+
+body.pagina-confirmacao .confirmacao-pedido-numero {
+    display: block;
+
+    margin-top: 22px;
+
+    color: #06172D;
+
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 34px;
+    font-weight: 400;
+    line-height: 1.3;
+    letter-spacing: 0.5px;
+    text-align: center;
+}
+
+/* ==========================================================
+   BOTÃO — CONTINUAR COMPRANDO
+   ========================================================== */
+
+body.pagina-confirmacao .confirmacao-container a.confirmacao-botao,
+body.pagina-confirmacao .confirmacao-container a.confirmacao-botao:visited {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 500px;
+    max-width: 100%;
+
+    height: 60px;
+    min-height: 60px;
+
+    margin: 30px auto 0;
+    padding: 12px 20px;
+
+    background-color: #06172D;
+    color: #FFFFFF;
+
+    border: none;
+    border-radius: 10px;
+
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.3;
+    letter-spacing: 3px;
+    text-align: center;
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition: background-color 0.25s ease;
+}
+
+/* EFEITO HOVER */
+
+body.pagina-confirmacao .confirmacao-container a.confirmacao-botao:hover {
+    background-color: #142944;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+/* ==========================================================
+   AVISO — PEDIDO DEMONSTRATIVO
+   ========================================================== */
+
+body.pagina-confirmacao .confirmacao-aviso {
+    margin: 15px 0 0;
+
+    color: #77716C;
+
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* ==========================================================
+   TELAS DE COMPUTADOR MAIS BAIXAS
+   ========================================================== */
+
+@media (max-height: 750px) {
+
+    body.pagina-confirmacao .confirmacao-container {
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+
+    body.pagina-confirmacao .confirmacao-logo {
+        width: 115px;
+        height: 85px;
+        margin-bottom: 10px;
+    }
+
+    body.pagina-confirmacao .confirmacao-titulo {
+        font-size: 35px;
+        line-height: 1.1;
+    }
+
+    body.pagina-confirmacao .confirmacao-subtitulo {
+        margin-top: 14px;
+        font-size: 12px;
+        letter-spacing: 2.5px;
+    }
+
+    body.pagina-confirmacao .confirmacao-mensagem {
+        margin-top: 20px;
+        font-size: 12px;
+    }
+
+    body.pagina-confirmacao .confirmacao-container .confirmacao-pedido {
+        height: 135px;
+        margin-top: 20px;
+        padding: 18px;
+    }
+
+    body.pagina-confirmacao .confirmacao-pedido-label {
+        font-size: 16px;
+    }
+
+    body.pagina-confirmacao .confirmacao-pedido-numero {
+        margin-top: 12px;
+        font-size: 28px;
+    }
+
+    body.pagina-confirmacao .confirmacao-container a.confirmacao-botao {
+        height: 52px;
+        min-height: 52px;
+        margin-top: 20px;
+        font-size: 15px;
+    }
+
+    body.pagina-confirmacao .confirmacao-aviso {
+        margin-top: 10px;
+        font-size: 9px;
+    }
+}
+
+/* ==========================================================
+   CELULARES
+   ========================================================== */
+
+@media (max-width: 600px) {
+
+    body.pagina-confirmacao {
+        background-position: center;
+    }
+
+    body.pagina-confirmacao .confirmacao-container {
+        padding: 20px 18px;
+    }
+
+    body.pagina-confirmacao .confirmacao-logo {
+        width: 115px;
+        height: 90px;
+        margin-bottom: 12px;
+    }
+
+    body.pagina-confirmacao .confirmacao-titulo {
+        font-size: clamp(29px, 8vw, 36px);
+        line-height: 1.15;
+    }
+
+    body.pagina-confirmacao .confirmacao-subtitulo {
+        margin-top: 18px;
+        font-size: 10px;
+        letter-spacing: 2px;
+    }
+
+    body.pagina-confirmacao .confirmacao-mensagem {
+        max-width: 310px;
+        margin-top: 25px;
+        font-size: 12px;
+    }
+
+    body.pagina-confirmacao .confirmacao-container .confirmacao-pedido {
+        width: 100%;
+        height: 145px;
+        margin-top: 25px;
+        padding: 20px;
+    }
+
+    body.pagina-confirmacao .confirmacao-pedido-label {
+        font-size: 16px;
+    }
+
+    body.pagina-confirmacao .confirmacao-pedido-numero {
+        margin-top: 15px;
+        font-size: 27px;
+    }
+
+    body.pagina-confirmacao .confirmacao-container a.confirmacao-botao {
+        width: 100%;
+        height: 55px;
+        min-height: 55px;
+
+        margin-top: 25px;
+
+        font-size: 13px;
+        letter-spacing: 2px;
+    }
+
+    body.pagina-confirmacao .confirmacao-aviso {
+        margin-top: 12px;
+        font-size: 9px;
+    }
+}
