@@ -1,0 +1,111 @@
+
+<!-- MODAL DE CONFIRMAÇÃO DE SAÍDA -->
+<div class="vh-logout-overlay" id="vhLogoutModal" aria-hidden="true">
+
+    <div
+        class="vh-logout-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="vhLogoutTitulo"
+        aria-describedby="vhLogoutDescricao"
+        tabindex="-1"
+    >
+
+        <i class="bi bi-heart vh-logout-coracao" aria-hidden="true"></i>
+
+        <h2 id="vhLogoutTitulo">Sair da Conta</h2>
+
+        <p id="vhLogoutDescricao">
+            Tem certeza que deseja encerrar sua sessão?
+        </p>
+
+        <div class="vh-logout-acoes">
+
+            <button
+                type="button"
+                class="vh-logout-cancelar"
+                data-fechar-logout
+            >
+                CANCELAR
+            </button>
+
+            <form action="/cliente/logout" method="POST">
+                <button type="submit" class="vh-logout-confirmar">
+                    SAIR
+                </button>
+            </form>
+
+        </div>
+
+    </div>
+</div>
+
+<script>
+(function () {
+    const modal = document.getElementById('vhLogoutModal');
+    if (!modal) return;
+
+    const caixa = modal.querySelector('.vh-logout-modal');
+    const cancelar = modal.querySelector('[data-fechar-logout]');
+    const botoesAbrir = document.querySelectorAll('[data-abrir-logout]');
+
+    let elementoAnterior = null;
+
+    function abrirModal() {
+        elementoAnterior = document.activeElement;
+
+        modal.classList.add('aberto');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('vh-logout-bloqueado');
+
+        cancelar.focus();
+    }
+
+    function fecharModal() {
+        modal.classList.remove('aberto');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('vh-logout-bloqueado');
+
+        if (elementoAnterior && elementoAnterior.isConnected) {
+            elementoAnterior.focus();
+        }
+    }
+
+    botoesAbrir.forEach(botao => {
+        botao.addEventListener('click', abrirModal);
+    });
+
+    cancelar.addEventListener('click', fecharModal);
+
+    modal.addEventListener('click', evento => {
+        if (evento.target === modal) {
+            fecharModal();
+        }
+    });
+
+    document.addEventListener('keydown', evento => {
+        if (!modal.classList.contains('aberto')) return;
+
+        if (evento.key === 'Escape') {
+            fecharModal();
+        }
+
+        if (evento.key === 'Tab') {
+            const focaveis = Array.from(
+                modal.querySelectorAll('button:not([disabled])')
+            );
+
+            const primeiro = focaveis[0];
+            const ultimo = focaveis[focaveis.length - 1];
+
+            if (evento.shiftKey && document.activeElement === primeiro) {
+                evento.preventDefault();
+                ultimo.focus();
+            } else if (!evento.shiftKey && document.activeElement === ultimo) {
+                evento.preventDefault();
+                primeiro.focus();
+            }
+        }
+    });
+})();
+</script>

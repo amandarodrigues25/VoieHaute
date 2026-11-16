@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Meus Favoritos | VoieHaute</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/perfil.css">
+</head>
+
+<body>
+
+    <%- include('partials/header') %>
+
+        <main class="perfil-pagina">
+            <div class="perfil-container">
+
+                <!-- MENU LATERAL -->
+                <aside class="perfil-menu">
+
+                    <div class="perfil-menu-topo">
+                        <img src="/uploads/logo.png" alt="VoieHaute">
+                        <h2>MINHA CONTA</h2>
+                    </div>
+
+                    <nav class="perfil-links">
+                        <a href="/perfil">
+                            <i class="bi bi-person"></i>
+                            Dados Pessoais
+                        </a>
+
+                        <a href="/perfil/enderecos">
+                            <i class="bi bi-geo-alt"></i>
+                            Endereços
+                        </a>
+
+                        <a href="/perfil/pedidos">
+                            <i class="bi bi-box-seam"></i>
+                            Pedidos
+                        </a>
+
+                        <a href="/favoritos" class="ativo">
+                            <i class="bi bi-heart"></i>
+                            Favoritos
+                        </a>
+                    </nav>
+
+
+                    <div class="perfil-menu-inferior">
+                        <img src="/uploads/pena.png" alt="" class="perfil-pena">
+
+                        <div class="perfil-sair-area">
+                            <button type="button" class="perfil-btn-sair" data-abrir-logout>
+                                <i class="bi bi-box-arrow-right"></i>
+                                Sair
+                            </button>
+                        </div>
+                    </div>
+
+
+                </aside>
+
+                <!-- CONTEÚDO DOS FAVORITOS -->
+                <section class="perfil-conteudo favoritos-pagina">
+
+                    <!-- CABEÇALHO -->
+                    <div class="perfil-titulo">
+                        <p>— FAVORITOS —</p>
+
+                        <h1>
+                            Suas Jóias Selecionadas com Elegância
+                        </h1>
+
+                        <div class="perfil-divisor">
+                            <span>✦</span>
+                        </div>
+                    </div>
+
+                    <% if (!favoritos || favoritos.length===0) { %>
+
+                        <!-- ESTADO VAZIO -->
+                        <div class="favoritos-vazio">
+
+                            <i class="bi bi-heart favoritos-vazio-icone"></i>
+
+                            <h2>
+                                Você ainda não adicionou joias<br>
+                                aos favoritos
+                            </h2>
+
+                            <p>
+                                As joias que você selecionar como favoritas
+                                aparecerão aqui.
+                            </p>
+
+                            <a href="/busca" class="favoritos-conhecer">
+                                CONHECER JOIAS
+                            </a>
+
+                        </div>
+
+                        <% } else { %>
+
+                            <!-- CONTADOR -->
+                            <div class="favoritos-contador">
+                                <span>✦</span>
+                                <%= favoritos.length %>
+                                    <%= favoritos.length===1 ? 'item salvo' : 'itens salvos' %>
+                            </div>
+
+                            <!-- GRADE DE JOIAS -->
+                            <div class="favoritos-grid">
+
+                                <% favoritos.forEach(function(produto) { %>
+
+                                    <a href="/produto/<%= produto.id %>" class="favoritos-card">
+
+
+
+                                        <div class="favoritos-card-imagem">
+
+                                            <!-- IMAGEM PRINCIPAL -->
+                                            <img src="/uploads/<%= produto.imagem %>" alt="<%= produto.nome %>"
+                                                class="favoritos-img-principal" loading="lazy">
+
+                                            <!-- IMAGEM SECUNDÁRIA -->
+                                            <% if (produto.imagem_secundaria) { %>
+                                                <img src="/uploads/<%= produto.imagem_secundaria %>"
+                                                    alt="<%= produto.nome %> - segunda imagem"
+                                                    class="favoritos-img-secundaria" loading="lazy">
+                                                <% } %>
+
+                                        </div>
+
+
+                                        <div class="favoritos-card-info">
+
+                                            <h2>
+                                                <%= produto.nome %>
+                                            </h2>
+
+                                            <p>
+                                                <%= Number(produto.valor || 0).toLocaleString('pt-BR', {
+                                                    style: 'currency' , currency: 'BRL' }) %>
+                                            </p>
+
+                                        </div>
+
+                                    </a>
+
+                                    <% }); %>
+
+                            </div>
+
+                            <% } %>
+
+                </section>
+
+            </div>
+        </main>
+
+        <%- include('partials/footer') %>
+        <%- include('partials/modal-logout') %>
+
+</body>
+
+</html>

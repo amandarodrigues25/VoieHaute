@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Minha Conta | VoieHaute</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/perfil.css">
+</head>
+
+<body>
+
+    <%- include('partials/header') %>
+
+        <main class="perfil-pagina">
+
+            <div class="perfil-container">
+
+                <!-- MENU LATERAL -->
+                <aside class="perfil-menu">
+
+                    <div class="perfil-menu-topo">
+                        <img src="/uploads/logo.png" alt="VoieHaute">
+                        <h2>MINHA CONTA</h2>
+                    </div>
+
+                    <nav class="perfil-links">
+
+                        <a href="/perfil" class="ativo">
+                            <i class="bi bi-person"></i>
+                            Dados Pessoais
+                        </a>
+
+                        <a href="/perfil/enderecos">
+                            <i class="bi bi-geo-alt"></i>
+                            Endereços
+                        </a>
+
+                        <a href="/perfil/pedidos">
+                            <i class="bi bi-box-seam"></i>
+                            Pedidos
+                        </a>
+
+                        <a href="/favoritos">
+                            <i class="bi bi-heart"></i>
+                            Favoritos
+                        </a>
+
+                    </nav>
+
+
+                    <div class="perfil-menu-inferior">
+                        <img src="/uploads/pena.png" alt="" class="perfil-pena">
+
+                        <div class="perfil-sair-area">
+                            <button type="button" class="perfil-btn-sair" data-abrir-logout>
+                                <i class="bi bi-box-arrow-right"></i>
+                                Sair
+                            </button>
+                        </div>
+                    </div>
+
+
+                </aside>
+
+                <!-- CONTEÚDO -->
+                <section class="perfil-conteudo">
+
+
+                    <div class="perfil-titulo">
+                        <p>— DADOS PESSOAIS —</p>
+
+                        <h1>Gerencie suas Informações da Conta</h1>
+
+                        <div class="perfil-divisor">
+                            <span>✦</span>
+                        </div>
+                    </div>
+
+
+                    <div class="perfil-card">
+
+                        <div class="perfil-avatar">
+
+                            <div class="perfil-avatar-circulo">
+
+                                <% if (cliente.foto) { %>
+
+                                    <img src="<%= cliente.foto %>" alt="Foto de perfil">
+
+                                    <% } else { %>
+
+                                        <i class="bi bi-person"></i>
+
+                                        <% } %>
+
+                            </div>
+
+                        </div>
+
+                        <div class="perfil-dados">
+
+                            <div class="perfil-campo">
+                                <label>Nome completo</label>
+                                <div>
+                                    <%= cliente.nome %>
+                                </div>
+                            </div>
+
+                            <div class="perfil-linha">
+
+                                <div class="perfil-campo">
+                                    <label>Email</label>
+                                    <div>
+                                        <%= cliente.email %>
+                                    </div>
+                                </div>
+
+                                <div class="perfil-campo">
+                                    <label>Telefone</label>
+                                    <div>
+                                        <%= cliente.telefone %>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="perfil-linha">
+
+                                <div class="perfil-campo">
+                                    <label>Data de nascimento</label>
+                                    <div>
+                                        <%= cliente.nascimento %>
+                                    </div>
+                                </div>
+
+                                <div class="perfil-campo">
+                                    <label>CPF</label>
+                                    <div>
+                                        <%= cliente.cpf %>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="perfil-editar">
+                                <a href="/perfil/editar">Editar</a>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </main>
+
+        <%- include('partials/footer') %>
+        <%- include('partials/modal-logout') %>
+
+</body>
+
+</html>

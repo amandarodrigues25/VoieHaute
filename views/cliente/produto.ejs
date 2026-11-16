@@ -159,11 +159,15 @@
                                     </button>
                                 </form>
 
+
                                 <!-- FAVORITOS -->
 
-                                <button type="button" class="produto-btn-favorito" aria-label="Adicionar aos favoritos">
+                                <button type="button" class="produto-btn-favorito" id="botaoFavorito"
+                                    data-produto-id="<%= produto.id %>" aria-label="Adicionar aos favoritos"
+                                    aria-pressed="false">
                                     <i class="bi bi-heart"></i>
                                 </button>
+
 
                             </div>
 
@@ -761,6 +765,80 @@
 
 
                             </script>
+
+
+                            <script>
+                                document.addEventListener('DOMContentLoaded', async () => {
+                                    const botao = document.getElementById('botaoFavorito');
+                                    if (!botao) return;
+
+                                    const produtoId = botao.dataset.produtoId;
+                                    const icone = botao.querySelector('i');
+
+                                    function atualizarCoracao(favorito) {
+                                        icone.className = favorito
+                                            ? 'bi bi-heart-fill'
+                                            : 'bi bi-heart';
+
+                                        botao.classList.toggle('ativo', favorito);
+                                        botao.setAttribute('aria-pressed', String(favorito));
+                                        botao.setAttribute(
+                                            'aria-label',
+                                            favorito ? 'Remover dos favoritos' : 'Adicionar aos favoritos'
+                                        );
+                                    }
+
+                                    try {
+                                        const resposta = await fetch(
+                                            `/favoritos/verificar/${produtoId}`
+                                        );
+
+                                        if (resposta.ok) {
+                                            const dados = await resposta.json();
+                                            atualizarCoracao(dados.favorito);
+                                        }
+                                    } catch (erro) {
+                                        console.error('Erro ao verificar favorito:', erro);
+                                    }
+
+                                    botao.addEventListener('click', async () => {
+                                        botao.disabled = true;
+
+                                        try {
+                                            const resposta = await fetch(
+                                                `/favoritos/alternar/${produtoId}`,
+                                                {
+                                                    method: 'POST',
+                                                    headers: {
+                                                        'Accept': 'application/json'
+                                                    }
+                                                }
+                                            );
+
+                                            if (resposta.redirected) {
+                                                window.location.href = resposta.url;
+                                                return;
+                                            }
+
+                                            const dados = await resposta.json();
+
+                                            if (!resposta.ok) {
+                                                throw new Error(
+                                                    dados.erro || 'Não foi possível atualizar o favorito.'
+                                                );
+                                            }
+
+                                            atualizarCoracao(dados.favorito);
+
+                                        } catch (erro) {
+                                            alert(erro.message);
+                                        } finally {
+                                            botao.disabled = false;
+                                        }
+                                    });
+                                });
+                            </script>
+
 
 </body>
 

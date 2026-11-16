@@ -4,63 +4,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Entrar na Conta | VoieHaute</title>
 
     <link rel="stylesheet" href="/css/autenticacao.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<main class="auth-layout">
+<main class="auth-layout auth-layout-login">
 
-    <!-- PAINEL FOTOGRÁFICO -->
-    <section class="auth-visual auth-visual-login">
-        <div class="auth-visual-conteudo">
-            <h2>BELEZA QUE<br>PERMANECE</h2>
-            <span class="auth-linha"></span>
-            <p>BEM-VINDA À VOIEHAUTE</p>
-        </div>
+    <!-- BANNER ESQUERDO -->
+    <section class="auth-visual auth-visual-login"
+             aria-label="Beleza que permanece — VoieHaute">
     </section>
 
     <!-- FORMULÁRIO -->
-    <section class="auth-painel">
+    <section class="auth-painel auth-painel-login">
+
         <div class="auth-conteudo">
 
-            <a href="/" class="auth-marca" aria-label="VoieHaute — Página inicial">
-                <span class="auth-pena">✧</span>
-                <span class="auth-nome-marca">VOIEHAUTE</span>
-                <span class="auth-submarca">JOAILLERIE DE LUXE</span>
+            <!-- IDENTIDADE DA MARCA -->
+            <a href="/" class="auth-marca"
+               aria-label="VoieHaute — Página inicial">
+
+                <img
+                    src="/uploads/Logo.png"
+                    alt="Pavão dourado VoieHaute"
+                    class="auth-logo"
+                >
+
+                <span class="auth-nome-marca">
+                    VOIEHAUTE
+                </span>
+
+                <span class="auth-submarca">
+                    JOAILLERIE DE LUXE
+                </span>
+
+                <div class="auth-ornamento" aria-hidden="true">
+                    <span class="auth-ornamento-linha"></span>
+                    <span class="auth-ornamento-estrela">✦</span>
+                    <span class="auth-ornamento-linha"></span>
+                </div>
             </a>
 
-            <div class="auth-introducao">
-                <h1>ENTRE NA SUA CONTA</h1>
-                <p>Bem-vinda de volta ao universo VoieHaute.</p>
-            </div>
-
-            <% if (erro) { %>
+            <% if (typeof erro !== 'undefined' && erro) { %>
                 <div class="auth-erro" role="alert">
                     <%= erro %>
                 </div>
             <% } %>
 
-            <form action="/cliente/login" method="POST" class="auth-formulario">
+            <!-- LOGIN -->
+            <form action="/cliente/login"
+                  method="POST"
+                  class="auth-formulario">
 
                 <div class="auth-campo">
-                    <label for="email">E-MAIL</label>
+                    <label for="email">E-mail</label>
+
                     <input
                         type="email"
                         id="email"
                         name="email"
-                        placeholder="Seu endereço de e-mail"
-                        value="<%= email || '' %>"
+                        placeholder="seu@email.com"
+                        value="<%= typeof email !== 'undefined' ? email : '' %>"
                         autocomplete="email"
                         required
                     >
                 </div>
 
                 <div class="auth-campo">
-                    <label for="senha">SENHA</label>
+                    <label for="senha">Senha</label>
+
                     <div class="auth-senha-wrapper">
+
                         <input
                             type="password"
                             id="senha"
@@ -69,6 +88,7 @@
                             autocomplete="current-password"
                             required
                         >
+
                         <button
                             type="button"
                             class="auth-mostrar-senha"
@@ -76,48 +96,74 @@
                             aria-label="Mostrar senha"
                             aria-pressed="false"
                         >
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 stroke-width="1.5"
+                                 stroke-linecap="round"
+                                 stroke-linejoin="round"
+                                 aria-hidden="true">
+
                                 <path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6S2 12 2 12Z"/>
                                 <circle cx="12" cy="12" r="3"/>
+                                <path class="auth-olho-risco"
+                                      d="M3 3l18 18"/>
                             </svg>
                         </button>
+
                     </div>
                 </div>
 
                 <div class="auth-recuperar">
-                    <span>Esqueceu sua senha? Entre em contato com nossa equipe.</span>
+                    <a href="/cliente/recuperar-senha">
+                        Esqueci minha senha
+                    </a>
                 </div>
 
                 <button type="submit" class="auth-botao-principal">
-                    ENTRAR <span aria-hidden="true">→</span>
+                    ENTRAR
                 </button>
+
             </form>
 
-            <div class="auth-separador">
-                <span>Ainda não tem uma conta?</span>
-            </div>
-
-            <a href="/cliente/cadastro" class="auth-botao-secundario">
+            <a href="/cliente/cadastro"
+               class="auth-botao-secundario">
                 CRIAR UMA CONTA
             </a>
 
         </div>
+
     </section>
 
 </main>
 
 <script>
 document.querySelectorAll('.auth-mostrar-senha').forEach(botao => {
-    botao.addEventListener('click', () => {
-        const campo = document.getElementById(botao.dataset.alvo);
-        const visivel = campo.type === 'password';
+    const campo = document.getElementById(botao.dataset.alvo);
+    if (!campo) return;
 
-        campo.type = visivel ? 'text' : 'password';
-        botao.setAttribute('aria-pressed', String(visivel));
+    const atualizarOlho = () => {
+        const senhaOculta = campo.type === 'password';
+
+        botao.classList.toggle('senha-oculta', senhaOculta);
         botao.setAttribute(
             'aria-label',
-            visivel ? 'Ocultar senha' : 'Mostrar senha'
+            senhaOculta ? 'Mostrar senha' : 'Ocultar senha'
         );
+        botao.setAttribute(
+            'aria-pressed',
+            String(!senhaOculta)
+        );
+    };
+
+    atualizarOlho();
+
+    botao.addEventListener('click', () => {
+        campo.type = campo.type === 'password'
+            ? 'text'
+            : 'password';
+
+        atualizarOlho();
     });
 });
 </script>

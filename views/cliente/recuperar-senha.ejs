@@ -1,0 +1,227 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Recuperação de Senha | VoieHaute</title>
+
+    <link rel="stylesheet" href="/css/autenticacao.css">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap"
+        rel="stylesheet"
+    >
+</head>
+
+<body>
+
+<main class="auth-layout auth-layout-recuperacao">
+
+    <!-- BANNER ESQUERDO -->
+    <section
+        class="auth-visual auth-visual-recuperacao"
+        aria-label="Recuperação de senha VoieHaute">
+    </section>
+
+    <!-- PAINEL DIREITO -->
+    <section class="auth-painel auth-painel-recuperacao">
+
+        <div class="auth-conteudo">
+
+            <!-- LOGO -->
+            <a href="/" class="auth-marca"
+               aria-label="VoieHaute — Página inicial">
+
+                <img
+                    src="/uploads/logo.png"
+                    alt="Pavão dourado VoieHaute"
+                    class="auth-logo"
+                >
+
+                <span class="auth-nome-marca">
+                    VOIEHAUTE
+                </span>
+
+                <span class="auth-submarca">
+                    JOAILLERIE DE LUXE
+                </span>
+
+                <div class="auth-ornamento" aria-hidden="true">
+                    <span class="auth-ornamento-linha"></span>
+                    <span class="auth-ornamento-estrela">✦</span>
+                    <span class="auth-ornamento-linha"></span>
+                </div>
+            </a>
+
+            <!-- DESCRIÇÃO -->
+            <p class="auth-recuperacao-descricao">
+                Digite seu e-mail e sua nova senha
+            </p>
+
+            <!-- MENSAGEM DE ERRO -->
+            <% if (typeof erro !== 'undefined' && erro) { %>
+                <div class="auth-erro" role="alert">
+                    <%= erro %>
+                </div>
+            <% } %>
+
+            <!-- FORMULÁRIO -->
+            <form
+                action="/cliente/recuperar-senha"
+                method="POST"
+                class="auth-formulario"
+                id="formRecuperacao"
+            >
+
+                <div class="auth-campo">
+                    <label for="email">E-mail</label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="seu@email.com"
+                        autocomplete="email"
+                        required
+                    >
+                </div>
+
+                <div class="auth-campo">
+                    <label for="senha">Nova senha</label>
+
+                    <div class="auth-senha-wrapper">
+                        <input
+                            type="password"
+                            id="senha"
+                            name="senha"
+                            placeholder="Digite sua nova senha"
+                            autocomplete="new-password"
+                            minlength="8"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="auth-mostrar-senha"
+                            data-alvo="senha"
+                            aria-label="Mostrar senha"
+                            aria-pressed="false"
+                        >
+                            <svg viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 stroke-width="1.5"
+                                 aria-hidden="true">
+                                <path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6S2 12 2 12Z"/>
+                                <circle cx="12" cy="12" r="3"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="auth-campo">
+                    <label for="confirmarSenha">
+                        Confirmar nova senha
+                    </label>
+
+                    <div class="auth-senha-wrapper">
+                        <input
+                            type="password"
+                            id="confirmarSenha"
+                            name="confirmarSenha"
+                            placeholder="Digite sua senha novamente"
+                            autocomplete="new-password"
+                            minlength="8"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="auth-mostrar-senha"
+                            data-alvo="confirmarSenha"
+                            aria-label="Mostrar senha"
+                            aria-pressed="false"
+                        >
+                            <svg viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 stroke-width="1.5"
+                                 aria-hidden="true">
+                                <path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6S2 12 2 12Z"/>
+                                <circle cx="12" cy="12" r="3"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <button
+                    type="submit"
+                    class="auth-botao-principal"
+                >
+                    CONTINUAR
+                </button>
+
+            </form>
+
+            <a href="/cliente/login"
+               class="auth-recuperacao-voltar">
+                Voltar para o login
+            </a>
+
+        </div>
+    </section>
+
+</main>
+
+<script>
+/* MOSTRAR E OCULTAR SENHAS */
+
+
+document.querySelectorAll('.auth-mostrar-senha').forEach(botao => {
+
+    const campo = document.getElementById(botao.dataset.alvo);
+
+    // Inicialmente: senha oculta e olho riscado
+    botao.classList.add('senha-oculta');
+
+    botao.addEventListener('click', () => {
+
+        const mostrar = campo.type === 'password';
+
+        campo.type = mostrar ? 'text' : 'password';
+
+        botao.classList.toggle('senha-oculta', !mostrar);
+
+        botao.setAttribute('aria-pressed', String(mostrar));
+
+        botao.setAttribute(
+            'aria-label',
+            mostrar ? 'Ocultar senha' : 'Mostrar senha'
+        );
+    });
+});
+
+/* VERIFICAR SE AS SENHAS COINCIDEM */
+
+const senha = document.getElementById('senha');
+const confirmarSenha = document.getElementById('confirmarSenha');
+
+function validarSenhas() {
+    if (confirmarSenha.value &&
+        senha.value !== confirmarSenha.value) {
+        confirmarSenha.setCustomValidity(
+            'As senhas não coincidem.'
+        );
+    } else {
+        confirmarSenha.setCustomValidity('');
+    }
+}
+
+senha.addEventListener('input', validarSenhas);
+confirmarSenha.addEventListener('input', validarSenhas);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Meus Pedidos | VoieHaute</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/perfil.css">
+</head>
+
+<body>
+
+    <%- include('partials/header') %>
+
+        <main class="perfil-pagina">
+
+            <div class="perfil-container">
+
+                <!-- MENU LATERAL -->
+
+                <aside class="perfil-menu">
+
+                    <div class="perfil-menu-topo">
+
+                        <img src="/uploads/logo.png" alt="VoieHaute">
+
+                        <h2>MINHA CONTA</h2>
+
+                    </div>
+
+                    <nav class="perfil-links">
+
+                        <a href="/perfil">
+                            <i class="bi bi-person"></i>
+                            Dados Pessoais
+                        </a>
+
+                        <a href="/perfil/enderecos">
+                            <i class="bi bi-geo-alt"></i>
+                            Endereços
+                        </a>
+
+                        <a href="/perfil/pedidos" class="ativo">
+                            <i class="bi bi-box-seam"></i>
+                            Pedidos
+                        </a>
+
+                        <a href="/favoritos">
+                            <i class="bi bi-heart"></i>
+                            Favoritos
+                        </a>
+
+                    </nav>
+
+
+                    <div class="perfil-menu-inferior">
+                        <img src="/uploads/pena.png" alt="" class="perfil-pena">
+
+                        <div class="perfil-sair-area">
+                            <button type="button" class="perfil-btn-sair" data-abrir-logout>
+                                <i class="bi bi-box-arrow-right"></i>
+                                Sair
+                            </button>
+                        </div>
+                    </div>
+
+
+                </aside>
+
+                <!-- CONTEÚDO -->
+
+                <section class="perfil-conteudo">
+
+                    <div class="perfil-titulo">
+
+                        <p>— PEDIDOS —</p>
+
+                        <h1>
+                            Acompanhe o Status e o Histórico
+                            das Suas Compras
+                        </h1>
+
+                        <div class="perfil-divisor">
+                            <span>✦</span>
+                        </div>
+
+                    </div>
+
+                    <!-- FILTROS -->
+
+                    <nav class="pedidos-filtros" aria-label="Filtrar pedidos">
+
+                        <a href="/perfil/pedidos?filtro=todos" class="<%= filtro === 'todos' ? 'ativo' : '' %>">
+                            Todos
+                        </a>
+
+                        <a href="/perfil/pedidos?filtro=andamento" class="<%= filtro === 'andamento' ? 'ativo' : '' %>">
+                            Em andamento
+                        </a>
+
+                        <a href="/perfil/pedidos?filtro=entregues" class="<%= filtro === 'entregues' ? 'ativo' : '' %>">
+                            Entregues
+                        </a>
+
+                        <a href="/perfil/pedidos?filtro=cancelados"
+                            class="<%= filtro === 'cancelados' ? 'ativo' : '' %>">
+                            Cancelados
+                        </a>
+
+                    </nav>
+
+                    <!-- PEDIDOS -->
+
+                    <% if (pedidos.length===0) { %>
+
+                        <!-- NENHUM PEDIDO -->
+
+                        <div class="pedidos-vazio">
+
+                            <i class="bi bi-box-seam pedidos-vazio-icone"></i>
+
+                            <h2>
+                                Você não tem nenhum<br>
+                                pedido nessa área
+                            </h2>
+
+                            <p>
+                                Quando você realizar alguma compra
+                                ela aparecerá aqui
+                            </p>
+
+                            <a href="/" class="pedidos-conhecer">
+                                CONHECER JÓIAS
+                            </a>
+
+                        </div>
+
+                        <% } else { %>
+
+                            <!-- LISTA DE PEDIDOS -->
+
+                            <div class="pedidos-lista">
+
+                                <% pedidos.forEach(function(pedido) { %>
+
+                                    <% const statusAndamento=[ 'confirmado' , 'preparando' , 'enviado' ]; const
+                                        etapas=[ 'confirmado' , 'preparando' , 'enviado' , 'entregue' ]; const
+                                        nomesEtapas=[ 'Confirmado' , 'Preparado' , 'Enviado' , 'Entregue' ]; const
+                                        etapaAtual=etapas.indexOf( pedido.status ); const dataTexto=String(
+                                        pedido.criado_em || '' ).slice(0, 10); const dataPartes=dataTexto.split('-');
+                                        const dataFormatada=dataPartes.length===3 ? dataPartes.reverse().join('/')
+                                        : 'Data indisponível' ; const valorFormatado=Number( pedido.valor_total || 0
+                                        ).toLocaleString('pt-BR', { style: 'currency' , currency: 'BRL' }); const
+                                        numeroPedido=String( pedido.id ).padStart(4, '0' ); let
+                                        imagemPedido=pedido.imagem_produto || '' ; if (imagemPedido) {
+                                        imagemPedido=String( imagemPedido ).replace(/\\/g, '/' ); if (
+                                        !imagemPedido.startsWith('/') && !imagemPedido.startsWith('http://') &&
+                                        !imagemPedido.startsWith('https://') ) { imagemPedido='/uploads/' +
+                                        imagemPedido; } } const produtoId=pedido.produto_id; %>
+
+                                        <article class="pedidos-card">
+
+                                            <!-- IMAGEM DO PRODUTO -->
+
+                                            <div class="pedidos-card-imagem">
+
+                                                <% if (imagemPedido) { %>
+
+                                                    <img src="<%= imagemPedido %>"
+                                                        alt="<%= pedido.nome_produto || 'Joia VoieHaute' %>">
+
+                                                    <% } else { %>
+
+                                                        <i class="bi bi-gem"></i>
+
+                                                        <% } %>
+
+                                            </div>
+
+                                            <!-- INFORMAÇÕES DO PEDIDO -->
+
+                                            <div class="pedidos-card-dados">
+
+                                                <h2>
+                                                    <%= pedido.nome_produto || 'Pedido VoieHaute' %>
+                                                </h2>
+
+                                                <% if (pedido.colecao_produto) { %>
+
+                                                    <p class="pedidos-card-colecao">
+                                                        Coleção <%= pedido.colecao_produto %>
+                                                    </p>
+
+                                                    <% } %>
+
+                                                        <% if (pedido.quantidade_itens> 1) { %>
+
+                                                            <p class="pedidos-card-quantidade">
+
+                                                                + <%= pedido.quantidade_itens - 1 %>
+
+                                                                    <%= pedido.quantidade_itens - 1===1 ? 'outra joia'
+                                                                        : 'outras joias' %>
+
+                                                            </p>
+
+                                                            <% } %>
+
+                                                                <div class="pedidos-card-meta">
+
+                                                                    <span>
+                                                                        Pedido: #VH<%= numeroPedido %>
+                                                                    </span>
+
+                                                                    <span class="pedidos-meta-ponto">
+                                                                        •
+                                                                    </span>
+
+                                                                    <span>
+                                                                        <%= dataFormatada %>
+                                                                    </span>
+
+                                                                    <span class="pedidos-meta-ponto">
+                                                                        •
+                                                                    </span>
+
+                                                                    <span>
+                                                                        <%= valorFormatado %>
+                                                                    </span>
+
+                                                                </div>
+
+                                            </div>
+
+                                            <!-- STATUS E AÇÕES -->
+
+                                            <div class="pedidos-card-lateral">
+
+                                                <span class="pedidos-status">
+
+                                                    <% if (pedido.status==='entregue' ) { %>
+
+                                                        Entregue
+
+                                                        <% } else if (pedido.status==='cancelado' ) { %>
+
+                                                            Cancelado
+
+                                                            <% } else { %>
+
+                                                                Em andamento
+
+                                                                <% } %>
+
+                                                </span>
+
+
+                                                <div class="pedidos-card-acoes">
+
+                                                    <% if (pedido.status==='entregue' ) { %>
+
+                                                        <a href="<%= pedido.produto_id ? '/produto/' + pedido.produto_id : '#' %>"
+                                                            class="pedidos-comprar-novamente">
+                                                            COMPRAR NOVAMENTE
+                                                        </a>
+
+                                                        <% } %>
+
+                                                            <a href="/perfil/pedidos/<%= pedido.id %>"
+                                                                class="pedidos-detalhes">
+                                                                DETALHES
+                                                            </a>
+
+                                                </div>
+
+
+                                            </div>
+
+                                            <!-- ACOMPANHAMENTO -->
+
+                                            <% if ( filtro==='andamento' && statusAndamento.includes(pedido.status) ) {
+                                                %>
+
+                                                <div class="pedidos-acompanhamento">
+
+                                                    <% etapas.forEach(function(etapa, indice) { %>
+
+                                                        <div class="pedidos-etapa">
+
+                                                            <div
+                                                                class="pedidos-etapa-circulo <%= indice <= etapaAtual ? 'concluida' : '' %>">
+
+                                                                <% if (indice <=etapaAtual) { %>
+
+                                                                    <i class="bi bi-check-lg"></i>
+
+                                                                    <% } %>
+
+                                                            </div>
+
+                                                            <span>
+                                                                <%= nomesEtapas[indice] %>
+                                                            </span>
+
+                                                        </div>
+
+                                                        <% }); %>
+
+                                                </div>
+
+                                                <% } %>
+
+                                        </article>
+
+                                        <% }); %>
+
+                            </div>
+
+                            <% } %>
+
+                </section>
+
+            </div>
+
+        </main>
+
+        <%- include('partials/footer') %>
+        <%- include('partials/modal-logout') %>
+
+</body>
+
+</html>

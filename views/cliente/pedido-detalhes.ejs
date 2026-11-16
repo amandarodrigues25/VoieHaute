@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Detalhes do Pedido | VoieHaute</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/perfil.css">
+</head>
+
+<body>
+    <%- include('partials/header') %>
+
+        <% const nomesStatus={ confirmado: 'Confirmado' , preparando: 'Preparando' , enviado: 'Enviado' ,
+            entregue: 'Entregue' , cancelado: 'Cancelado' }; const etapas=[ { status: 'confirmado' , nome: 'Confirmado'
+            }, { status: 'preparando' , nome: 'Preparado' }, { status: 'enviado' , nome: 'Enviado' }, {
+            status: 'entregue' , nome: 'Entregue' } ]; const ordemStatus={ confirmado: 0, preparando: 1, enviado: 2,
+            entregue: 3 }; const indiceAtual=ordemStatus[pedido.status] ?? -1; const formatarMoeda=valor=>
+            Number(valor || 0).toLocaleString('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+            });
+
+            const formatarData = valor => {
+            if (!valor) return '';
+
+            const texto = String(valor);
+            const data = texto.slice(0, 10);
+
+            if (/^\d{4}-\d{2}-\d{2}$/.test(data)) {
+            return data.split('-').reverse().join('/');
+            }
+
+            return texto;
+            };
+
+            const resolverImagem = valor => {
+            let imagem = String(valor || '')
+            .trim()
+            .replace(/\\/g, '/');
+
+            if (!imagem) return '';
+
+            if (/^https?:\/\//i.test(imagem)) {
+            return imagem;
+            }
+
+            if (imagem.startsWith('/')) {
+            return imagem;
+            }
+
+            if (imagem.startsWith('uploads/')) {
+            return '/' + imagem;
+            }
+
+            if (imagem.startsWith('public/')) {
+            return '/' + imagem.slice(7);
+            }
+
+            return '/uploads/' + imagem;
+            };
+
+            const formaPagamento =
+            pedido.forma_pagamento === 'pix'
+            ? 'Pix'
+            : pedido.forma_pagamento === 'cartao'
+            ? 'Cartão'
+            : pedido.forma_pagamento || 'Não informada';
+            %>
+
+            <main class="perfil-pagina">
+                <div class="perfil-container">
+
+                    <!-- MENU LATERAL -->
+                    <aside class="perfil-menu">
+                        <div class="perfil-menu-topo">
+                            <img src="/uploads/logo.png" alt="VoieHaute">
+                            <h2>MINHA CONTA</h2>
+                        </div>
+
+                        <nav class="perfil-links">
+                            <a href="/perfil">
+                                <i class="bi bi-person"></i>
+                                Dados Pessoais
+                            </a>
+
+                            <a href="/perfil/enderecos">
+                                <i class="bi bi-geo-alt"></i>
+                                Endereços
+                            </a>
+
+                            <a href="/perfil/pedidos" class="ativo">
+                                <i class="bi bi-box-seam"></i>
+                                Pedidos
+                            </a>
+
+                            <a href="/favoritos">
+                                <i class="bi bi-heart"></i>
+                                Favoritos
+                            </a>
+                        </nav>
+
+
+                        <div class="perfil-menu-inferior">
+                            <img src="/uploads/pena.png" alt="" class="perfil-pena">
+
+                            <div class="perfil-sair-area">
+                                <button type="button" class="perfil-btn-sair" data-abrir-logout>
+                                    <i class="bi bi-box-arrow-right"></i>
+                                    Sair
+                                </button>
+                            </div>
+                        </div>
+
+                    </aside>
+
+                    <!-- CONTEÚDO -->
+                    <section class="perfil-conteudo pedido-detalhes-pagina">
+
+                        <!-- TÍTULO -->
+                        <div class="perfil-titulo">
+                            <p>— PEDIDOS —</p>
+                            <h1>Detalhes do Pedido</h1>
+
+                            <div class="perfil-divisor">
+                                <span>✦</span>
+                            </div>
+                        </div>
+
+                        <!-- INFORMAÇÕES DO PEDIDO -->
+                        <div class="pedido-detalhes-topo">
+
+                            <div class="pedido-detalhes-identificacao">
+                                <span>
+                                    Pedido #VH<%= String(pedido.id).padStart(4, '0' ) %>
+                                </span>
+
+                                <span class="pedido-detalhes-separador">•</span>
+
+                                <span>
+                                    <%= nomesStatus[pedido.status] || pedido.status %>
+                                </span>
+                            </div>
+
+                            <span class="pedido-detalhes-status">
+                                <%= nomesStatus[pedido.status] || pedido.status %>
+                            </span>
+                        </div>
+
+                        <!-- ACOMPANHAMENTO -->
+                        <div class="pedido-detalhes-acompanhamento">
+
+                            <h2>ACOMPANHE O PEDIDO</h2>
+
+                            <div class="pedido-detalhes-etapas">
+
+                                <% etapas.forEach(function(etapa, indice) { %>
+
+                                    <div class="pedido-detalhes-etapa">
+
+                                        <div
+                                            class="pedido-detalhes-circulo <%= indice <= indiceAtual ? 'concluida' : '' %>">
+                                            <% if (indice <=indiceAtual) { %>
+                                                <i class="bi bi-check-lg"></i>
+                                                <% } %>
+                                        </div>
+
+                                        <span>
+                                            <%= etapa.nome %>
+                                        </span>
+
+                                    </div>
+
+                                    <% }); %>
+
+                            </div>
+
+                            <% if (pedido.status==='cancelado' ) { %>
+                                <p class="pedido-detalhes-cancelado">
+                                    <i class="bi bi-x-circle"></i>
+                                    Este pedido foi cancelado.
+                                </p>
+                                <% } %>
+
+                        </div>
+
+                        <!-- JOIAS DO PEDIDO -->
+                        <div class="pedido-detalhes-joias">
+
+                            <% itens.forEach(function(item) { %>
+
+                                <% const imagem=resolverImagem(item.imagem_produto); %>
+
+                                    <div class="pedido-detalhes-joia-card">
+
+                                        <div class="pedido-detalhes-joia-imagem">
+                                            <% if (imagem) { %>
+                                                <img src="<%= imagem %>" alt="<%= item.nome_produto %>">
+                                                <% } else { %>
+                                                    <i class="bi bi-gem"></i>
+                                                    <% } %>
+                                        </div>
+
+                                        <div class="pedido-detalhes-joia-info">
+
+                                            <h3>
+                                                <%= item.nome_produto %>
+                                            </h3>
+
+                                            <% if (item.colecao_produto) { %>
+                                                <p>
+                                                    Coleção <%= item.colecao_produto %>
+                                                </p>
+                                                <% } %>
+
+                                                    <div class="pedido-detalhes-joia-meta">
+                                                        <span>
+                                                            Quantidade: <%= item.quantidade %>
+                                                        </span>
+                                                    </div>
+
+                                                    <% if (item.produto_id) { %>
+                                                        <a href="/produto/<%= item.produto_id %>"
+                                                            class="pedido-detalhes-ver-joia">
+                                                            VER JOIA
+                                                        </a>
+                                                        <% } %>
+
+                                        </div>
+
+                                        <div class="pedido-detalhes-joia-preco">
+                                            <%= formatarMoeda(item.valor_unitario) %>
+                                        </div>
+
+                                    </div>
+
+                                    <% }); %>
+
+                        </div>
+
+                        <!-- ENDEREÇO E PAGAMENTO -->
+                        <div class="pedido-detalhes-informacoes">
+
+                            <div class="pedido-detalhes-info-card">
+
+                                <div class="pedido-detalhes-info-titulo">
+                                    <i class="bi bi-truck"></i>
+                                    <h2>ENDEREÇO DE ENTREGA</h2>
+                                </div>
+
+                                <div class="pedido-detalhes-info-texto">
+                                    <p>
+                                        <%= pedido.nome_destinatario %>
+                                    </p>
+
+                                    <p>
+                                        <%= pedido.endereco_entrega %>,
+                                            <%= pedido.numero_entrega %>
+                                    </p>
+
+                                    <% if (pedido.complemento_entrega) { %>
+                                        <p>
+                                            <%= pedido.complemento_entrega %>
+                                        </p>
+                                        <% } %>
+
+                                            <p>
+                                                <%= pedido.bairro_entrega %> —
+                                                    <%= pedido.cidade_entrega %>/<%= pedido.estado_entrega %>
+                                            </p>
+
+                                            <p>CEP: <%= pedido.cep_entrega %>
+                                            </p>
+                                </div>
+
+                            </div>
+
+                            <div class="pedido-detalhes-info-card">
+
+                                <div class="pedido-detalhes-info-titulo">
+                                    <i class="bi bi-credit-card"></i>
+                                    <h2>FORMA DE PAGAMENTO</h2>
+                                </div>
+
+                                <div class="pedido-detalhes-info-texto">
+
+                                    <p>
+                                        <%= formaPagamento %>
+                                    </p>
+
+                                    <% if (pedido.pagamento_detalhes) { %>
+                                        <p>
+                                            <%= pedido.pagamento_detalhes %>
+                                        </p>
+                                        <% } %>
+
+                                            <div class="pedido-detalhes-total">
+                                                Total:
+                                                <strong>
+                                                    <%= formatarMoeda(pedido.valor_total) %>
+                                                </strong>
+                                            </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                </div>
+            </main>
+
+            <%- include('partials/footer') %>
+            <%- include('partials/modal-logout') %>
+</body>
+
+</html>

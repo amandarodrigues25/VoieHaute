@@ -4,125 +4,162 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Criar Conta | VoieHaute</title>
 
     <link rel="stylesheet" href="/css/autenticacao.css">
+
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
 <main class="auth-layout auth-layout-cadastro">
 
-    <!-- PAINEL FOTOGRÁFICO -->
-    <section class="auth-visual auth-visual-cadastro">
-        <div class="auth-visual-conteudo">
-            <h2>FAÇA PARTE<br>DESTA HISTÓRIA</h2>
-            <span class="auth-linha"></span>
-            <p>CRIE SUA CONTA E VIVA O UNIVERSO VOIEHAUTE</p>
-        </div>
+    <!-- BANNER ESQUERDO -->
+    <section
+        class="auth-visual auth-visual-cadastro"
+        aria-label="Faça parte desta história — VoieHaute">
     </section>
 
     <!-- FORMULÁRIO -->
     <section class="auth-painel auth-painel-cadastro">
+
         <div class="auth-conteudo">
 
-            <a href="/" class="auth-marca" aria-label="VoieHaute — Página inicial">
-                <span class="auth-pena">✧</span>
-                <span class="auth-nome-marca">VOIEHAUTE</span>
-                <span class="auth-submarca">JOAILLERIE DE LUXE</span>
+            <!-- IDENTIDADE VISUAL -->
+            <a href="/" class="auth-marca"
+               aria-label="VoieHaute — Página inicial">
+
+                <img
+                    src="/uploads/logo.png"
+                    alt="Pavão dourado VoieHaute"
+                    class="auth-logo"
+                >
+
+                <span class="auth-nome-marca">
+                    VOIEHAUTE
+                </span>
+
+                <span class="auth-submarca">
+                    JOAILLERIE DE LUXE
+                </span>
+
+                <div class="auth-ornamento" aria-hidden="true">
+                    <span class="auth-ornamento-linha"></span>
+                    <span class="auth-ornamento-estrela">✦</span>
+                    <span class="auth-ornamento-linha"></span>
+                </div>
+
             </a>
 
-            <div class="auth-introducao">
-                <h1>CRIE SUA CONTA</h1>
-                <p>Faça parte do universo exclusivo VoieHaute.</p>
-            </div>
-
-            <% if (erro) { %>
+            <!-- MENSAGEM DE ERRO -->
+            <% if (typeof erro !== 'undefined' && erro) { %>
                 <div class="auth-erro" role="alert">
                     <%= erro %>
                 </div>
             <% } %>
 
-            <form action="/cliente/cadastro" method="POST" class="auth-formulario">
+            <!-- FORMULÁRIO DE CADASTRO -->
+            <form
+                action="/cliente/cadastro"
+                method="POST"
+                class="auth-formulario"
+                id="formCadastro"
+            >
 
+                <!-- NOME -->
                 <div class="auth-campo">
-                    <label for="nome">NOME COMPLETO</label>
+                    <label for="nome">Nome completo</label>
+
                     <input
                         type="text"
                         id="nome"
                         name="nome"
-                        placeholder="Seu nome completo"
-                        value="<%= dados.nome || '' %>"
+                        placeholder="Digite seu nome completo"
+                        value="<%= typeof dados !== 'undefined' ? (dados.nome || '') : '' %>"
                         autocomplete="name"
                         required
                     >
                 </div>
 
+                <!-- CPF -->
                 <div class="auth-campo">
                     <label for="cpf">CPF</label>
+
                     <input
                         type="text"
                         id="cpf"
                         name="cpf"
                         placeholder="000.000.000-00"
-                        value="<%= dados.cpf || '' %>"
+                        value="<%= typeof dados !== 'undefined' ? (dados.cpf || '') : '' %>"
                         inputmode="numeric"
                         maxlength="14"
                         required
                     >
                 </div>
 
+                <!-- NASCIMENTO -->
                 <div class="auth-campo">
-                    <label for="nascimento">DATA DE NASCIMENTO</label>
+                    <label for="nascimento">Data de nascimento</label>
+
                     <input
                         type="date"
                         id="nascimento"
                         name="nascimento"
-                        value="<%= dados.nascimento || '' %>"
+                        value="<%= typeof dados !== 'undefined' ? (dados.nascimento || '') : '' %>"
                         autocomplete="bday"
                         required
                     >
                 </div>
 
+                <!-- EMAIL -->
                 <div class="auth-campo">
-                    <label for="email">E-MAIL</label>
+                    <label for="email">E-mail</label>
+
                     <input
                         type="email"
                         id="email"
                         name="email"
-                        placeholder="Seu endereço de e-mail"
-                        value="<%= dados.email || '' %>"
+                        placeholder="seu@email.com"
+                        value="<%= typeof dados !== 'undefined' ? (dados.email || '') : '' %>"
                         autocomplete="email"
                         required
                     >
                 </div>
 
+                <!-- TELEFONE -->
                 <div class="auth-campo">
-                    <label for="telefone">TELEFONE COM DDD</label>
+                    <label for="telefone">Telefone com DDD</label>
+
                     <input
                         type="tel"
                         id="telefone"
                         name="telefone"
                         placeholder="(00) 00000-0000"
-                        value="<%= dados.telefone || '' %>"
+                        value="<%= typeof dados !== 'undefined' ? (dados.telefone || '') : '' %>"
                         autocomplete="tel"
                         maxlength="15"
                         required
                     >
                 </div>
 
+                <!-- SENHA -->
                 <div class="auth-campo">
-                    <label for="senha">SENHA</label>
+                    <label for="senha">Senha</label>
+
                     <div class="auth-senha-wrapper">
+
                         <input
                             type="password"
                             id="senha"
                             name="senha"
-                            placeholder="Mínimo de 8 caracteres"
+                            placeholder="Digite sua senha"
                             autocomplete="new-password"
                             minlength="8"
                             required
                         >
+
                         <button
                             type="button"
                             class="auth-mostrar-senha"
@@ -130,17 +167,30 @@
                             aria-label="Mostrar senha"
                             aria-pressed="false"
                         >
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 stroke-width="1.5"
+                                 stroke-linecap="round"
+                                 stroke-linejoin="round"
+                                 aria-hidden="true">
                                 <path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6S2 12 2 12Z"/>
                                 <circle cx="12" cy="12" r="3"/>
+                                <path class="auth-olho-risco" d="M3 3l18 18"/>
                             </svg>
                         </button>
+
                     </div>
                 </div>
 
+                <!-- CONFIRMAR SENHA -->
                 <div class="auth-campo">
-                    <label for="confirmarSenha">CONFIRMAR SENHA</label>
+                    <label for="confirmarSenha">
+                        Confirmar senha
+                    </label>
+
                     <div class="auth-senha-wrapper">
+
                         <input
                             type="password"
                             id="confirmarSenha"
@@ -150,6 +200,7 @@
                             minlength="8"
                             required
                         >
+
                         <button
                             type="button"
                             class="auth-mostrar-senha"
@@ -157,57 +208,97 @@
                             aria-label="Mostrar senha"
                             aria-pressed="false"
                         >
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-                                <path d="M2 12s3.6-6 10-6 10 6-3.6 6-10 6S2 12 2 12Z"/>
+                            <svg viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 stroke-width="1.5"
+                                 stroke-linecap="round"
+                                 stroke-linejoin="round"
+                                 aria-hidden="true">
+                                <path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6S2 12 2 12Z"/>
                                 <circle cx="12" cy="12" r="3"/>
+                                <path class="auth-olho-risco" d="M3 3l18 18"/>
                             </svg>
                         </button>
+
                     </div>
                 </div>
 
+                <!-- TERMOS -->
                 <label class="auth-termos">
-                    <input type="checkbox" name="termos" required>
+                    <input
+                        type="checkbox"
+                        name="termos"
+                        required
+                    >
+
                     <span>
                         Li e concordo com os Termos de Uso e a
                         Política de Privacidade da VoieHaute.
                     </span>
                 </label>
 
-                <button type="submit" class="auth-botao-principal">
-                    CRIAR CONTA <span aria-hidden="true">→</span>
+                <!-- CRIAR CONTA -->
+                <button
+                    type="submit"
+                    class="auth-botao-principal"
+                >
+                    CRIAR CONTA
                 </button>
+
             </form>
 
-            <div class="auth-separador">
-                <span>Já tem uma conta?</span>
-            </div>
-
-            <a href="/cliente/login" class="auth-botao-secundario">
+            <!-- FAZER LOGIN -->
+            <a
+                href="/cliente/login"
+                class="auth-botao-secundario"
+            >
                 FAZER LOGIN
             </a>
 
         </div>
+
     </section>
 
 </main>
 
 <script>
-document.querySelectorAll('.auth-mostrar-senha').forEach(botao => {
-    botao.addEventListener('click', () => {
-        const campo = document.getElementById(botao.dataset.alvo);
-        const visivel = campo.type === 'password';
+/* ============================================
+   MOSTRAR / OCULTAR SENHAS
+   ============================================ */
 
-        campo.type = visivel ? 'text' : 'password';
-        botao.setAttribute('aria-pressed', String(visivel));
+document.querySelectorAll('.auth-mostrar-senha').forEach(botao => {
+    const campo = document.getElementById(botao.dataset.alvo);
+
+    if (!campo) return;
+
+    const atualizarOlho = () => {
+        const senhaOculta = campo.type === 'password';
+
+        botao.classList.toggle('senha-oculta', senhaOculta);
         botao.setAttribute(
             'aria-label',
-            visivel ? 'Ocultar senha' : 'Mostrar senha'
+            senhaOculta ? 'Mostrar senha' : 'Ocultar senha'
         );
+        botao.setAttribute('aria-pressed', String(!senhaOculta));
+    };
+
+    atualizarOlho();
+
+    botao.addEventListener('click', () => {
+        campo.type = campo.type === 'password'
+            ? 'text'
+            : 'password';
+
+        atualizarOlho();
     });
 });
 
+/* ============================================
+   MÁSCARA DE CPF
+   ============================================ */
+
 const cpf = document.getElementById('cpf');
-const telefone = document.getElementById('telefone');
 
 cpf.addEventListener('input', () => {
     let valor = cpf.value.replace(/\D/g, '').slice(0, 11);
@@ -219,27 +310,54 @@ cpf.addEventListener('input', () => {
     cpf.value = valor;
 });
 
-telefone.addEventListener('input', () => {
-    let valor = telefone.value.replace(/\D/g, '').slice(0, 11);
+/* ============================================
+   MÁSCARA DE TELEFONE
+   ============================================ */
 
-    if (valor.length > 2) {
-        valor = '(' + valor.slice(0, 2) + ') ' + valor.slice(2);
+const telefone = document.getElementById('telefone');
+
+telefone.addEventListener('input', () => {
+    const numeros = telefone.value.replace(/\D/g, '').slice(0, 11);
+
+    if (numeros.length <= 2) {
+        telefone.value = numeros.length
+            ? '(' + numeros
+            : '';
+        return;
     }
 
-    if (valor.replace(/\D/g, '').length > 10) {
-        valor = valor.replace(
-            /^(\(\d{2}\) \d{5})(\d{1,4})$/,
-            '$1-$2'
+    const ddd = '(' + numeros.slice(0, 2) + ') ';
+    const restante = numeros.slice(2);
+
+    if (numeros.length <= 10) {
+        telefone.value = ddd +
+            restante.replace(/^(\d{4})(\d+)/, '$1-$2');
+    } else {
+        telefone.value = ddd +
+            restante.replace(/^(\d{5})(\d+)/, '$1-$2');
+    }
+});
+
+/* ============================================
+   CONFERÊNCIA DE SENHAS
+   ============================================ */
+
+const senha = document.getElementById('senha');
+const confirmarSenha = document.getElementById('confirmarSenha');
+
+function validarSenhas() {
+    if (confirmarSenha.value &&
+        senha.value !== confirmarSenha.value) {
+        confirmarSenha.setCustomValidity(
+            'As senhas não coincidem.'
         );
     } else {
-        valor = valor.replace(
-            /^(\(\d{2}\) \d{4})(\d{1,4})$/,
-            '$1-$2'
-        );
+        confirmarSenha.setCustomValidity('');
     }
+}
 
-    telefone.value = valor;
-});
+senha.addEventListener('input', validarSenhas);
+confirmarSenha.addEventListener('input', validarSenhas);
 </script>
 
 </body>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Meus Endereços | VoieHaute</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/perfil.css">
+</head>
+
+<body>
+
+    <%- include('partials/header') %>
+
+        <main class="perfil-pagina">
+
+            <div class="perfil-container">
+
+                <!-- MENU LATERAL -->
+
+                <aside class="perfil-menu">
+
+                    <div class="perfil-menu-topo">
+                        <img src="/uploads/logo.png" alt="VoieHaute">
+                        <h2>MINHA CONTA</h2>
+                    </div>
+
+                    <nav class="perfil-links">
+
+                        <a href="/perfil">
+                            <i class="bi bi-person"></i>
+                            Dados Pessoais
+                        </a>
+
+                        <a href="/perfil/enderecos" class="ativo">
+                            <i class="bi bi-geo-alt"></i>
+                            Endereços
+                        </a>
+
+                        <a href="/perfil/pedidos">
+                            <i class="bi bi-box-seam"></i>
+                            Pedidos
+                        </a>
+
+                        <a href="/favoritos">
+                            <i class="bi bi-heart"></i>
+                            Favoritos
+                        </a>
+
+                    </nav>
+
+
+                    <div class="perfil-menu-inferior">
+                        <img src="/uploads/pena.png" alt="" class="perfil-pena">
+
+                        <div class="perfil-sair-area">
+                            <button type="button" class="perfil-btn-sair" data-abrir-logout>
+                                <i class="bi bi-box-arrow-right"></i>
+                                Sair
+                            </button>
+                        </div>
+                    </div>
+
+
+                </aside>
+
+                <!-- CONTEÚDO -->
+
+                <section class="perfil-conteudo">
+
+                    <div class="perfil-titulo">
+
+                        <p>— ENDEREÇOS —</p>
+
+                        <h1>Cadastre e Gerencie seus Endereços de Entrega</h1>
+
+                        <div class="perfil-divisor">
+                            <span>✦</span>
+                        </div>
+
+                    </div>
+
+                    <!-- NENHUM ENDEREÇO -->
+
+
+                    <!-- ENDEREÇOS CADASTRADOS -->
+
+                    <% if (enderecos && enderecos.length> 0) { %>
+
+                        <div class="enderecos-barra-superior">
+                            <a href="/perfil/enderecos/adicionar" class="enderecos-botao-adicionar">
+                                ADICIONAR ENDEREÇO
+                            </a>
+                        </div>
+
+                        <div class="enderecos-lista">
+
+
+                            <% enderecos.forEach(function(endereco) { %>
+
+                                <div class="enderecos-card">
+
+                                    <!-- ÍCONE -->
+                                    <div class="enderecos-card-icone">
+                                        <i class="bi bi-geo-alt"></i>
+                                    </div>
+
+                                    <!-- INFORMAÇÕES -->
+                                    <div class="enderecos-card-dados">
+
+                                        <h2>
+                                            <%= endereco.nome %>
+                                        </h2>
+
+                                        <p>
+                                            <%= endereco.endereco %>,
+                                                <%= endereco.numero %>
+                                        </p>
+
+                                        <% if (endereco.complemento) { %>
+                                            <p>
+                                                <%= endereco.complemento %>
+                                            </p>
+                                            <% } %>
+
+                                                <p>
+                                                    <%= endereco.bairro %>
+                                                </p>
+
+                                                <p>
+                                                    <%= endereco.cidade %> -
+                                                        <%= endereco.estado %>
+                                                </p>
+
+                                                <p>
+                                                    <%= endereco.cep %>
+                                                </p>
+
+                                    </div>
+
+                                    <!-- LADO DIREITO -->
+                                    <div class="enderecos-card-lateral">
+
+                                        <% if (endereco.principal) { %>
+                                            <span class="enderecos-etiqueta-principal">
+                                                Principal
+                                            </span>
+                                            <% } %>
+
+                                                <div class="enderecos-card-acoes">
+
+                                                    <a href="/perfil/enderecos/<%= endereco.id %>/editar">
+                                                        <i class="bi bi-pencil"></i>
+                                                        Editar
+                                                    </a>
+
+
+                                                    <form action="/perfil/enderecos/<%= endereco.id %>/excluir"
+                                                        method="POST" class="enderecos-form-excluir">
+                                                        <button type="submit" class="enderecos-excluir">
+                                                            <i class="bi bi-trash"></i>
+                                                            Excluir
+                                                        </button>
+                                                    </form>
+
+
+                                                </div>
+
+                                    </div>
+
+                                </div>
+
+                                <% }); %>
+
+
+                        </div>
+
+                        <% } else { %>
+
+                            <!-- NENHUM ENDEREÇO CADASTRADO -->
+
+                            <div class="enderecos-vazio">
+
+                                <i class="bi bi-geo-alt enderecos-vazio-icone"></i>
+
+                                <h2>
+                                    Você ainda não tem nenhum<br>
+                                    endereço cadastrado
+                                </h2>
+
+                                <p>
+                                    Cadastre um endereço para receber nossas incríveis e exclusivas joias
+                                </p>
+
+                                <a href="/perfil/enderecos/adicionar" class="enderecos-botao-adicionar">
+                                    ADICIONAR ENDEREÇO
+                                </a>
+
+                            </div>
+
+                            <% } %>
+
+
+                </section>
+
+            </div>
+
+        </main>
+
+        <%- include('partials/footer') %>
+        <%- include('partials/modal-logout') %>
+
+
+            <!-- MODAL DE CONFIRMAÇÃO DE EXCLUSÃO -->
+
+            <div class="endereco-modal-overlay" id="modalExcluirEndereco" hidden>
+
+                <div class="endereco-modal" role="dialog" aria-modal="true" aria-labelledby="tituloModalExcluir">
+
+                    <div class="endereco-modal-icone">
+                        <i class="bi bi-trash"></i>
+                    </div>
+
+                    <h2 id="tituloModalExcluir">
+                        Excluir Endereço
+                    </h2>
+
+                    <p>
+                        Tem certeza de que deseja excluir este endereço?
+                        Esta ação não poderá ser desfeita.
+                    </p>
+
+                    <div class="endereco-modal-botoes">
+
+                        <button type="button" class="endereco-modal-cancelar" id="cancelarExclusao">
+                            CANCELAR
+                        </button>
+
+                        <button type="button" class="endereco-modal-confirmar" id="confirmarExclusao">
+                            EXCLUIR
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <script>
+                const modalExcluir = document.getElementById('modalExcluirEndereco');
+                const cancelarExclusao = document.getElementById('cancelarExclusao');
+                const confirmarExclusao = document.getElementById('confirmarExclusao');
+
+                let formularioParaExcluir = null;
+
+                document.querySelectorAll('.enderecos-form-excluir').forEach(formulario => {
+
+                    formulario.addEventListener('submit', function (evento) {
+                        evento.preventDefault();
+
+                        formularioParaExcluir = formulario;
+                        modalExcluir.hidden = false;
+                    });
+
+                });
+
+                cancelarExclusao.addEventListener('click', function () {
+                    modalExcluir.hidden = true;
+                    formularioParaExcluir = null;
+                });
+
+                confirmarExclusao.addEventListener('click', function () {
+                    if (formularioParaExcluir) {
+                        confirmarExclusao.disabled = true;
+                        formularioParaExcluir.submit();
+                    }
+                });
+
+                modalExcluir.addEventListener('click', function (evento) {
+                    if (evento.target === modalExcluir) {
+                        modalExcluir.hidden = true;
+                        formularioParaExcluir = null;
+                    }
+                });
+
+                document.addEventListener('keydown', function (evento) {
+                    if (evento.key === 'Escape' && !modalExcluir.hidden) {
+                        modalExcluir.hidden = true;
+                        formularioParaExcluir = null;
+                    }
+                });
+            </script>
+
+
+</body>
+
+</html>
