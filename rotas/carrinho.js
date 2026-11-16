@@ -855,120 +855,276 @@ appCarrinho.get('/revisao', (req, res) => {
     );
 });
 
-// =====================================================
-// FINALIZAR PEDIDO — DEMONSTRAÇÃO
-// =====================================================
 
-appCarrinho.post('/revisao/finalizar', (req, res) => {
-    if (!req.session.clienteId) {
-        return res.redirect('/cliente/login');
-    }
+/* =====================================================
+   FINALIZAR PEDIDO — VOIEHAUTE
+   REGISTRAR COMPRA NO BANCO DE DADOS
+   ===================================================== */
 
-    const carrinho = obterCarrinho(req);
+appCarrinho.post('/revisao/finalizar', exigirLoginEntrega, async (req, res) => {
+    try {
+        if (db.bancoPronto) {
+            await db.bancoPronto;
+        }
 
-    if (!carrinho.length) {
-        return res.redirect('/carrinho');
-    }
+        const carrinho = obterCarrinho(req);
 
-    const pagamento = req.session.pagamento;
+        if (!carrinho.length) {
+            return res.redirect('/carrinho');
+        }
 
-    if (
-        !pagamento ||
-        !['cartao', 'pix'].includes(pagamento.metodo) ||
-        !Number.isInteger(pagamento.parcelas) ||
-        pagamento.parcelas < 1 ||
-        pagamento.parcelas > 10
-    ) {
-        return res.redirect('/carrinho/pagamento');
-    }
+        const pagamento = req.session.pagamento;
 
-    buscarEnderecoCliente(
-        req.session.clienteId,
-        (erroEndereco, endereco) => {
-            if (erroEndereco) {
-                console.error(erroEndereco);
+        if (
+            !pagamento ||
+            !['cartao', 'pix'].includes(pagamento.metodo) ||
+            !Number.isInteger(pagamento.parcelas) ||
+            pagamento.parcelas < 1 ||
+            pagamento.parcelas > 10
+        ) {
+            return res.redirect('/carrinho/pagamento');
+        }
 
-                return res.status(500).send(
-                    'Erro ao verificar o endereço.'
+        const consultar = (sql, parametros = []) =>
+            new Promise((resolve, reject) => {
+                db.get(sql, parametros, (erro, resultado) => {
+                    if (erro) reject(erro);
+                    else resolve(resultado);
+                });
+            });
+
+        const consultarTodos = (sql, parametros = []) =>
+            new Promise((resolve, reject) => {
+                db.all(sql, parametros, (erro, resultados) => {
+                    if (erro) reject(erro);
+                    else resolve(resultados);
+                });
+            });
+
+        const executar = (sql, parametros = []) =>
+            new Promise((resolve, reject) => {
+                db.run(sql, parametros, function (erro) {
+                    if (erro) reject(erro);
+                    else resolve(this.lastID);
+                });
+            });
+
+        const clienteId = req.session.clienteId;
+
+        const endereco = await consultar(
+            `SELECT *
+             FROM enderecos_clientes
+             WHERE cliente_id = ?
+             ORDER BY principal DESC, id DESC
+             LIMIT 1`,
+            [clienteId]
+        );
+
+        if (!enderecoPreenchido(endereco)) {
+            return res.redirect('/carrinho/entrega');
+        }
+
+        const ids = carrinho.map(item => item.id);
+        const marcadores = ids.map(() => '?').join(', ');
+
+        const produtosBanco = await consultarTodos(
+            `SELECT *
+             FROM produtos
+             WHERE id IN (${marcadores})`,
+            ids
+        );
+
+        const itens = montarItens(carrinho, produtosBanco);
+
+        if (
+            itens.length !== carrinho.length ||
+            itens.some(item =>
+                !Number.isInteger(item.quantidade) ||
+                item.quantidade <= 0 ||
+                !Number.isFinite(item.subtotal) ||
+                item.subtotal < 0
+            )
+        ) {
+            return res.status(400).send(
+                'Existem produtos inválidos na Sacola.'
+            );
+        }
+
+        const total = calcularTotal(itens);
+
+        const detalhesPagamento =
+            pagamento.metodo === 'cartao'
+                ? `${pagamento.parcelas} parcela(s) - demonstrativo`
+                : 'Pix - demonstrativo';
+
+        let pedidoId;
+        let transacaoIniciada = false;
+
+        try {
+            await executar('BEGIN IMMEDIATE TRANSACTION');
+            transacaoIniciada = true;
+
+            // Confere novamente o estoque dentro da transação.
+            for (const item of itens) {
+                const produtoAtual = await consultar(
+                    'SELECT estoque FROM produtos WHERE id = ?',
+                    [item.produto.id]
+                );
+
+                if (
+                    !produtoAtual ||
+                    Number(produtoAtual.estoque) < item.quantidade
+                ) {
+                    const erro = new Error(
+                        `Estoque insuficiente para ${item.produto.nome}.`
+                    );
+                    erro.status = 400;
+                    throw erro;
+                }
+            }
+
+            pedidoId = await executar(
+                `INSERT INTO pedidos (
+                    cliente_id,
+                    status,
+                    valor_total,
+                    nome_destinatario,
+                    cep_entrega,
+                    endereco_entrega,
+                    numero_entrega,
+                    complemento_entrega,
+                    bairro_entrega,
+                    cidade_entrega,
+                    estado_entrega,
+                    forma_pagamento,
+                    pagamento_detalhes
+                )
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+                [
+                    clienteId,
+                    'confirmado',
+                    total,
+                    endereco.nome,
+                    endereco.cep,
+                    endereco.endereco,
+                    endereco.numero,
+                    endereco.complemento || '',
+                    endereco.bairro,
+                    endereco.cidade,
+                    endereco.estado,
+                    pagamento.metodo,
+                    detalhesPagamento
+                ]
+            );
+
+            for (const item of itens) {
+                await executar(
+                    `INSERT INTO pedido_itens (
+                        pedido_id,
+                        produto_id,
+                        nome_produto,
+                        colecao_produto,
+                        imagem_produto,
+                        quantidade,
+                        valor_unitario
+                    )
+                    VALUES (?, ?, ?, ?, ?, ?, ?)`,
+                    [
+                        pedidoId,
+                        item.produto.id,
+                        item.produto.nome,
+                        item.produto.colecao,
+                        item.produto.imagem,
+                        item.quantidade,
+                        Number(item.produto.valor)
+                    ]
                 );
             }
 
-            if (!enderecoPreenchido(endereco)) {
-                return res.redirect('/carrinho/entrega');
+            await executar(
+                `INSERT INTO pedido_historico (
+                    pedido_id,
+                    status
+                )
+                VALUES (?, ?)`,
+                [pedidoId, 'confirmado']
+            );
+
+            // Estoque permanece inalterado nesta demonstração.
+            await executar('COMMIT');
+            transacaoIniciada = false;
+
+        } catch (erro) {
+            if (transacaoIniciada) {
+                try {
+                    await executar('ROLLBACK');
+                } catch (erroRollback) {
+                    console.error(erroRollback);
+                }
             }
 
-            buscarProdutos(
-                carrinho.map(item => item.id),
-                (erroProdutos, produtosBanco) => {
-                    if (erroProdutos) {
-                        console.error(erroProdutos);
-
-                        return res.status(500).send(
-                            'Erro ao verificar os produtos.'
-                        );
-                    }
-
-                    const itens = montarItens(
-                        carrinho,
-                        produtosBanco
-                    );
-
-                    if (!itens.length) {
-                        return res.redirect('/carrinho');
-                    }
-
-                    const total = calcularTotal(itens);
-
-                    // Pedido apenas demonstrativo.
-                    // Nenhuma cobrança ou alteração de estoque.
-                    req.session.pedidoDemonstrativo = {
-                        numero: 'VH' + crypto.randomInt(1000000, 10000000),
-                        data: new Date().toISOString(),
-
-
-                        endereco: {
-                            nome: endereco.nome,
-                            endereco: endereco.endereco,
-                            numero: endereco.numero,
-                            complemento: endereco.complemento,
-                            bairro: endereco.bairro,
-                            cidade: endereco.cidade,
-                            estado: endereco.estado,
-                            cep: endereco.cep
-                        },
-                        pagamento: {
-                            metodo: pagamento.metodo,
-                            parcelas: pagamento.parcelas
-                        },
-                        itens: itens.map(item => ({
-                            id: item.produto.id,
-                            nome: item.produto.nome,
-                            quantidade: item.quantidade,
-                            valor: Number(item.produto.valor),
-                            subtotal: item.subtotal
-                        })),
-                        total
-                    };
-
-                    req.session.carrinho = [];
-                    delete req.session.pagamento;
-
-                    req.session.save(erroSessao => {
-                        if (erroSessao) {
-                            console.error(erroSessao);
-
-                            return res.status(500).send(
-                                'Erro ao finalizar a demonstração.'
-                            );
-                        }
-
-                        res.redirect('/carrinho/aprovado');
-                    });
-                }
-            );
+            throw erro;
         }
-    );
+
+        // Mantém a página de confirmação existente.
+        req.session.pedidoDemonstrativo = {
+            id: pedidoId,
+            numero: 'VH' + String(pedidoId).padStart(4, '0'),
+            data: new Date().toISOString(),
+
+            endereco: {
+                nome: endereco.nome,
+                endereco: endereco.endereco,
+                numero: endereco.numero,
+                complemento: endereco.complemento,
+                bairro: endereco.bairro,
+                cidade: endereco.cidade,
+                estado: endereco.estado,
+                cep: endereco.cep
+            },
+
+            pagamento: {
+                metodo: pagamento.metodo,
+                parcelas: pagamento.parcelas
+            },
+
+            itens: itens.map(item => ({
+                id: item.produto.id,
+                nome: item.produto.nome,
+                quantidade: item.quantidade,
+                valor: Number(item.produto.valor),
+                subtotal: item.subtotal
+            })),
+
+            total
+        };
+
+        req.session.carrinho = [];
+        delete req.session.pagamento;
+
+        req.session.save(erroSessao => {
+            if (erroSessao) {
+                console.error(erroSessao);
+
+                return res.status(500).send(
+                    'Pedido registrado, mas houve um erro ao atualizar a sessão. Consulte Meus Pedidos antes de tentar novamente.'
+                );
+            }
+
+            res.redirect('/carrinho/aprovado');
+        });
+
+    } catch (erro) {
+        console.error('Erro ao finalizar pedido:', erro);
+
+        res.status(erro.status || 500).send(
+            erro.status === 400
+                ? erro.message
+                : 'Não foi possível finalizar o pedido.'
+        );
+    }
 });
+
 
 appCarrinho.get('/aprovado', (req, res) => {
 

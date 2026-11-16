@@ -234,6 +234,106 @@ router.get('/login', (req, res) => {
     renderLogin(res);
 });
 
+
+/* =====================================================
+   TELA DE RECUPERAÇÃO DE SENHA
+   ===================================================== */
+
+router.get('/recuperar-senha', (req, res) => {
+    if (req.session.clienteId) {
+        return res.redirect('/');
+    }
+
+    res.render('cliente/recuperar-senha', {
+        erro: null
+    });
+});
+
+
+/* =====================================================
+   ALTERAR SENHA DO CLIENTE
+   ===================================================== */
+
+router.post('/recuperar-senha', (req, res) => {
+    const email = String(req.body.email || '')
+        .trim()
+        .toLowerCase();
+
+    const senha = String(req.body.senha || '');
+    const confirmarSenha = String(req.body.confirmarSenha || '');
+
+    function mostrarErro(mensagem) {
+        return res.render('cliente/recuperar-senha', {
+            erro: mensagem
+        });
+    }
+
+    // Verificar campos obrigatórios
+    if (!email || !senha || !confirmarSenha) {
+        return mostrarErro('Preencha todos os campos.');
+    }
+
+    // Validar e-mail
+    if (!emailValido(email)) {
+        return mostrarErro('Informe um e-mail válido.');
+    }
+
+    // Validar tamanho da senha
+    if (senha.length < 8) {
+        return mostrarErro(
+            'A senha deve ter pelo menos 8 caracteres.'
+        );
+    }
+
+    // Confirmar senha
+    if (senha !== confirmarSenha) {
+        return mostrarErro('As senhas não coincidem.');
+    }
+
+    // Procurar cliente pelo e-mail
+    db.get(
+        'SELECT id FROM clientes WHERE email = ?',
+        [email],
+        (erro, cliente) => {
+
+            if (erro) {
+                console.error(erro);
+                return res.status(500).send(
+                    'Erro ao consultar o banco de dados.'
+                );
+            }
+
+            if (!cliente) {
+                return mostrarErro(
+                    'Nenhuma conta encontrada com este e-mail.'
+                );
+            }
+
+            // Criar hash da nova senha
+            const novaSenhaHash = criarHash(senha);
+
+            // Atualizar senha no banco
+            db.run(
+                'UPDATE clientes SET senha_hash = ? WHERE id = ?',
+                [novaSenhaHash, cliente.id],
+                function (erro) {
+
+                    if (erro) {
+                        console.error(erro);
+                        return res.status(500).send(
+                            'Erro ao atualizar a senha.'
+                        );
+                    }
+
+                    // Voltar para o login
+                    return res.redirect('/cliente/login');
+                }
+            );
+        }
+    );
+});
+
+
 // =====================================================
 // ENTRAR NA CONTA
 // =====================================================
@@ -339,5 +439,114 @@ router.post('/logout', (req, res) => {
         });
     });
 });
+
+
+/* =====================================================
+   MINHA CONTA — DADOS PESSOAIS
+   ===================================================== */
+
+// Exigir que o cliente esteja autenticado
+function exigirClienteLogado(req, res, next) {
+    if (!req.session || !req.session.clienteId) {
+        return res.redirect('/cliente/login');
+    }
+
+    next();
+}
+
+// Consultar os dados do cliente
+router.get('/perfil', exigirClienteLogado, (req, res) => {
+    db.get(
+        `SELECT id, nome, email, telefone, nascimento, cpf
+         FROM clientes
+         WHERE id = ?`,
+        [req.session.clienteId],
+        (erro, cliente) => {
+            if (erro) {
+                console.error(erro);
+                return res.status(500).send('Erro ao carregar o perfil.');
+            }
+
+            if (!cliente) {
+                return res.redirect('/cliente/login');
+            }
+
+            return res.render('cliente/perfil', {
+                cliente,
+                editando: req.query.editar === '1',
+                erro: null,
+                sucesso: req.query.salvo === '1'
+            });
+        }
+    );
+});
+
+// Salvar alterações dos dados pessoais
+router.post('/perfil', exigirClienteLogado, (req, res) => {
+    const nome = String(req.body.nome || '').trim();
+    const email = String(req.body.email || '').trim().toLowerCase();
+    const telefone = String(req.body.telefone || '').replace(/\D/g, '');
+
+    function mostrarErro(mensagem) {
+        db.get(
+            `SELECT id, nome, email, telefone, nascimento, cpf
+             FROM clientes WHERE id = ?`,
+            [req.session.clienteId],
+            (erro, cliente) => {
+                if (erro || !cliente) {
+                    return res.status(500).send('Erro ao consultar cliente.');
+                }
+
+                return res.status(400).render('cliente/perfil', {
+                    cliente: { ...cliente, nome, email, telefone },
+                    editando: true,
+                    erro: mensagem,
+                    sucesso: false
+                });
+            }
+        );
+    }
+
+    if (nome.length < 3) {
+        return mostrarErro('Informe seu nome completo.');
+    }
+
+    if (!emailValido(email)) {
+        return mostrarErro('Informe um e-mail válido.');
+    }
+
+    if (!/^\d{10,11}$/.test(telefone)) {
+        return mostrarErro('Informe um telefone válido com DDD.');
+    }
+
+    db.run(
+        `UPDATE clientes
+         SET nome = ?, email = ?, telefone = ?
+         WHERE id = ?`,
+        [nome, email, telefone, req.session.clienteId],
+        function (erro) {
+            if (erro) {
+                if (erro.code === 'SQLITE_CONSTRAINT') {
+                    return mostrarErro('Este e-mail já está cadastrado.');
+                }
+
+                console.error(erro);
+                return res.status(500).send('Erro ao atualizar os dados.');
+            }
+
+            req.session.clienteNome = nome;
+
+            req.session.save(erroSessao => {
+                if (erroSessao) {
+                    console.error(erroSessao);
+                    return res.status(500).send('Erro ao salvar a sessão.');
+                }
+
+                return res.redirect('/cliente/perfil?salvo=1');
+            });
+        }
+    );
+});
+
 
 module.exports = router;
